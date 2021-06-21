@@ -20,15 +20,13 @@ CREATE TABLE fe_users (
 CREATE TABLE tx_grevman_domain_model_registration (
 	event int(11) unsigned DEFAULT '0' NOT NULL,
 	member int(11) unsigned DEFAULT '0' NOT NULL,
-	status int(11) NOT NULL DEFAULT '0',
-	member int(11) unsigned DEFAULT '0'
+	status int(11) NOT NULL DEFAULT '0'
 );
 
 CREATE TABLE tx_grevman_domain_model_note (
 	event int(11) unsigned DEFAULT '0' NOT NULL,
 	member int(11) unsigned DEFAULT '0' NOT NULL,
-	text text NOT NULL DEFAULT '',
-	member int(11) unsigned DEFAULT '0'
+	text text NOT NULL DEFAULT ''
 );
 
 CREATE TABLE tx_grevman_event_group_mm (
