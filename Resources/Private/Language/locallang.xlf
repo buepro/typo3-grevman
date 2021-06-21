@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:grevman/Resources/Private/Language/locallang" date="2021-06-21T20:48:19Z" product-name="grevman">
+		<header/>
+		<body>
+			<trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event">
+				<source>Event</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_event.title" resname="tx_grevman_domain_model_event.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_event.member_groups" resname="tx_grevman_domain_model_event.member_groups">
+				<source>Member Groups</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_event.registrations" resname="tx_grevman_domain_model_event.registrations">
+				<source>Registrations</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_event.notes" resname="tx_grevman_domain_model_event.notes">
+				<source>Notes</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_group" resname="tx_grevman_domain_model_group">
+				<source>Group</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_group.events" resname="tx_grevman_domain_model_group.events">
+				<source>Events</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_group.members" resname="tx_grevman_domain_model_group.members">
+				<source>Members</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_member" resname="tx_grevman_domain_model_member">
+				<source>Member</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_member.member_groups" resname="tx_grevman_domain_model_member.member_groups">
+				<source>Member Groups</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_member.registrations" resname="tx_grevman_domain_model_member.registrations">
+				<source>Registrations</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_member.notes" resname="tx_grevman_domain_model_member.notes">
+				<source>Notes</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_registration" resname="tx_grevman_domain_model_registration">
+				<source>Registration</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_registration.status" resname="tx_grevman_domain_model_registration.status">
+				<source>Status</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_registration.member" resname="tx_grevman_domain_model_registration.member">
+				<source>Member</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_note" resname="tx_grevman_domain_model_note">
+				<source>Note</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_note.text" resname="tx_grevman_domain_model_note.text">
+				<source>Text</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_note.member" resname="tx_grevman_domain_model_note.member">
+				<source>Member</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
