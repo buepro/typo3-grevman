@@ -95,9 +95,9 @@ return [
                 'minitems' => 0,
                 'maxitems' => 1,
             ],
-            
+
         ],
-    
+
         'event' => [
             'config' => [
                 'type' => 'passthrough',

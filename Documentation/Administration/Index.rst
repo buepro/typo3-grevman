@@ -14,7 +14,8 @@ For the storage folders the static pagesTS configuration
 `Grevman: Page TS config` is available and should be embedded through the page
 properties (resources tab - Page TSconfig).
 
-Further the following individual configurations are needed:
+Further the following individual configurations are needed (replace values as
+needed):
 
 All storage
 ~~~~~~~~~~~
@@ -24,8 +25,6 @@ All storage
    TCEFORM {
      tx_grevman_domain_model_group {
        members {
-         # pid's from members
-         # todo adapt to production environment
          PAGE_TSCONFIG_IDLIST = 225, 226
        }
      }
