@@ -8,6 +8,12 @@ TCEFORM {
       PAGE_TSCONFIG_IDLIST = 225, 226
     }
   }
+  tx_grevman_domain_model_registration {
+    member {
+      # pid's from members
+      PAGE_TSCONFIG_IDLIST = 225, 226
+    }
+  }
 }
 TCAdefaults {
   fe_users {

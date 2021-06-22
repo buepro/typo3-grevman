@@ -28,6 +28,11 @@ All storage
          PAGE_TSCONFIG_IDLIST = 225, 226
        }
      }
+     tx_grevman_domain_model_registration {
+       member {
+         PAGE_TSCONFIG_IDLIST = 225, 226
+       }
+     }
    }
 
 Trainers storage
