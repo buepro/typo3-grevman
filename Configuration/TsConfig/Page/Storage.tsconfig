@@ -1,5 +1,5 @@
 #=========================================================#
-# Configuration for storage folder
+# To be used on top level storage folder
 #=========================================================#
 TCEFORM {
   tx_grevman_domain_model_group {
@@ -7,5 +7,10 @@ TCEFORM {
       # pid's from members
       PAGE_TSCONFIG_IDLIST = 225, 226
     }
+  }
+}
+TCAdefaults {
+  fe_users {
+    tx_extbase_type = Tx_Grevman_Member
   }
 }

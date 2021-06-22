@@ -8,8 +8,8 @@ Introduction
 ============
 
 The extension allows managing group events typically used in sport clubs
-where groups of members participate in events. Members might have different
-roles such as trainer or player. Roles are defined by frontend groups (not
+where groups of members take part in events. Members might have different
+roles such as trainer or participant. Roles are defined by frontend groups (not
 to be confused with member groups).
 
 Events are managed by an administrator in the backend.
