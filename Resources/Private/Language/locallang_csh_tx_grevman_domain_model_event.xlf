@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="EXT:grevman/Resources/Private/Language/locallang_csh" date="2021-06-21T20:48:19Z" product-name="grevman">
+	<file source-language="en" datatype="plaintext" original="EXT:grevman/Resources/Private/Language/locallang_csh" date="2021-06-22T07:39:09Z" product-name="grevman">
 		<header/>
 		<body>
 			<trans-unit id="title.description" resname="title.description">
@@ -14,6 +14,9 @@
 			</trans-unit>
 			<trans-unit id="notes.description" resname="notes.description">
 				<source>notes</source>
+			</trans-unit>
+			<trans-unit id="guests.description" resname="guests.description">
+				<source>guests</source>
 			</trans-unit>
 		</body>
 	</file>

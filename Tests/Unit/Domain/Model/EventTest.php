@@ -241,4 +241,67 @@ class EventTest extends UnitTestCase
 
         $this->subject->removeNote($note);
     }
+
+    /**
+     * @test
+     */
+    public function getGuestsReturnsInitialValueForGuest()
+    {
+        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        self::assertEquals(
+            $newObjectStorage,
+            $this->subject->getGuests()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setGuestsForObjectStorageContainingGuestSetsGuests()
+    {
+        $guest = new \Buepro\Grevman\Domain\Model\Guest();
+        $objectStorageHoldingExactlyOneGuests = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageHoldingExactlyOneGuests->attach($guest);
+        $this->subject->setGuests($objectStorageHoldingExactlyOneGuests);
+
+        self::assertAttributeEquals(
+            $objectStorageHoldingExactlyOneGuests,
+            'guests',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function addGuestToObjectStorageHoldingGuests()
+    {
+        $guest = new \Buepro\Grevman\Domain\Model\Guest();
+        $guestsObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+            ->setMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $guestsObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($guest));
+        $this->inject($this->subject, 'guests', $guestsObjectStorageMock);
+
+        $this->subject->addGuest($guest);
+    }
+
+    /**
+     * @test
+     */
+    public function removeGuestFromObjectStorageHoldingGuests()
+    {
+        $guest = new \Buepro\Grevman\Domain\Model\Guest();
+        $guestsObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+            ->setMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $guestsObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($guest));
+        $this->inject($this->subject, 'guests', $guestsObjectStorageMock);
+
+        $this->subject->removeGuest($guest);
+    }
 }

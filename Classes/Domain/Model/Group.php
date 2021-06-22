@@ -21,6 +21,13 @@ class Group extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
+     * name
+     *
+     * @var string
+     */
+    protected $name = '';
+
+    /**
      * events
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Event>
@@ -142,5 +149,26 @@ class Group extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setMembers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $members)
     {
         $this->members = $members;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return string $name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Sets the name
+     *
+     * @param string $name
+     * @return void
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
     }
 }

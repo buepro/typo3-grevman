@@ -18,7 +18,7 @@ return [
         'iconfile' => 'EXT:grevman/Resources/Public/Icons/tx_grevman_domain_model_event.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, member_groups, registrations, notes'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, member_groups, registrations, notes, guests'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -144,6 +144,32 @@ return [
                 ],
             ],
 
+        ],
+        'guests' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_event.guests',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_grevman_domain_model_guest',
+                'MM' => 'tx_grevman_event_guest_mm',
+                'size' => 10,
+                'autoSizeMax' => 30,
+                'maxitems' => 9999,
+                'multiple' => 0,
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                    ],
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                    'listModule' => [
+                        'disabled' => true,
+                    ],
+                ],
+            ],
+            
         ],
     
     ],

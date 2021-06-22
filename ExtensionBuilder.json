@@ -82,6 +82,17 @@
                             "relationWire": "[wired]",
                             "renderType": "inline",
                             "uid": "46176196497"
+                        },
+                        {
+                            "foreignRelationClass": "",
+                            "lazyLoading": false,
+                            "propertyIsExcludeField": true,
+                            "relationDescription": "",
+                            "relationName": "guests",
+                            "relationType": "manyToMany",
+                            "relationWire": "[wired]",
+                            "renderType": "selectMultipleSideBySide",
+                            "uid": "188881345042"
                         }
                     ]
                 }
@@ -90,8 +101,8 @@
         {
             "config": {
                 "position": [
-                    338,
-                    107
+                    332,
+                    98
                 ]
             },
             "name": "New Model Object",
@@ -120,18 +131,31 @@
                     "uid": "651626021852"
                 },
                 "propertyGroup": {
-                    "properties": []
+                    "properties": [
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "name",
+                            "propertyType": "String",
+                            "uid": "1426197789889"
+                        }
+                    ]
                 },
                 "relationGroup": {
                     "relations": [
                         {
-                            "foreignRelationClass": "",
+                            "foreignRelationClass": "\\Buepro\\Grevman\\Domain\\Model\\Event",
                             "lazyLoading": false,
                             "propertyIsExcludeField": true,
                             "relationDescription": "",
                             "relationName": "events",
                             "relationType": "manyToMany",
-                            "relationWire": "[wired]",
+                            "relationWire": "",
                             "renderType": "selectMultipleSideBySide",
                             "uid": "449708938512"
                         },
@@ -153,8 +177,8 @@
         {
             "config": {
                 "position": [
-                    263,
-                    470
+                    261,
+                    474
                 ]
             },
             "name": "New Model Object",
@@ -188,35 +212,35 @@
                 "relationGroup": {
                     "relations": [
                         {
-                            "foreignRelationClass": "",
+                            "foreignRelationClass": "\\Buepro\\Grevman\\Domain\\Model\\Group",
                             "lazyLoading": false,
                             "propertyIsExcludeField": true,
                             "relationDescription": "",
                             "relationName": "memberGroups",
                             "relationType": "manyToMany",
-                            "relationWire": "[wired]",
+                            "relationWire": "",
                             "renderType": "selectMultipleSideBySide",
                             "uid": "512310797069"
                         },
                         {
-                            "foreignRelationClass": "",
+                            "foreignRelationClass": "\\Buepro\\Grevman\\Domain\\Model\\Registration",
                             "lazyLoading": false,
                             "propertyIsExcludeField": true,
                             "relationDescription": "",
                             "relationName": "registrations",
                             "relationType": "zeroToMany",
-                            "relationWire": "[wired]",
+                            "relationWire": "",
                             "renderType": "inline",
                             "uid": "542782625836"
                         },
                         {
-                            "foreignRelationClass": "",
+                            "foreignRelationClass": "\\Buepro\\Grevman\\Domain\\Model\\Note",
                             "lazyLoading": false,
                             "propertyIsExcludeField": true,
                             "relationDescription": "",
                             "relationName": "notes",
                             "relationType": "zeroToMany",
-                            "relationWire": "[wired]",
+                            "relationWire": "",
                             "renderType": "inline",
                             "uid": "77431614509"
                         }
@@ -227,8 +251,8 @@
         {
             "config": {
                 "position": [
-                    674,
-                    340
+                    660,
+                    326
                 ]
             },
             "name": "New Model Object",
@@ -353,6 +377,95 @@
                     ]
                 }
             }
+        },
+        {
+            "config": {
+                "position": [
+                    1310,
+                    516
+                ]
+            },
+            "name": "New Model Object",
+            "value": {
+                "actionGroup": {
+                    "_default0_index": false,
+                    "_default1_list": false,
+                    "_default2_show": false,
+                    "_default3_new_create": false,
+                    "_default4_edit_update": false,
+                    "_default5_delete": false,
+                    "customActions": []
+                },
+                "name": "Guest",
+                "objectsettings": {
+                    "addDeletedField": true,
+                    "addHiddenField": true,
+                    "addStarttimeEndtimeFields": true,
+                    "aggregateRoot": false,
+                    "categorizable": false,
+                    "description": "",
+                    "mapToTable": "",
+                    "parentClass": "",
+                    "sorting": false,
+                    "type": "Entity",
+                    "uid": "60813720502"
+                },
+                "propertyGroup": {
+                    "properties": [
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "firstName",
+                            "propertyType": "String",
+                            "uid": "618999675677"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "lastName",
+                            "propertyType": "String",
+                            "uid": "1518431189445"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "phone",
+                            "propertyType": "String",
+                            "uid": "561848606538"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "email",
+                            "propertyType": "String",
+                            "uid": "1411876173345"
+                        }
+                    ]
+                },
+                "relationGroup": {
+                    "relations": []
+                }
+            }
         }
     ],
     "properties": {
@@ -401,18 +514,6 @@
         {
             "src": {
                 "moduleId": 1,
-                "terminal": "relationWire_0",
-                "uid": "449708938512"
-            },
-            "tgt": {
-                "moduleId": 0,
-                "terminal": "SOURCES",
-                "uid": "211478759901"
-            }
-        },
-        {
-            "src": {
-                "moduleId": 1,
                 "terminal": "relationWire_1",
                 "uid": "84764460486"
             },
@@ -420,18 +521,6 @@
                 "moduleId": 2,
                 "terminal": "SOURCES",
                 "uid": "1211589714509"
-            }
-        },
-        {
-            "src": {
-                "moduleId": 2,
-                "terminal": "relationWire_0",
-                "uid": "512310797069"
-            },
-            "tgt": {
-                "moduleId": 1,
-                "terminal": "SOURCES",
-                "uid": "651626021852"
             }
         },
         {
@@ -484,32 +573,20 @@
         },
         {
             "src": {
-                "moduleId": 2,
-                "terminal": "relationWire_1",
-                "uid": "542782625836"
+                "moduleId": 0,
+                "terminal": "relationWire_3",
+                "uid": "188881345042"
             },
             "tgt": {
-                "moduleId": 3,
+                "moduleId": 5,
                 "terminal": "SOURCES",
-                "uid": "567709019691"
-            }
-        },
-        {
-            "src": {
-                "moduleId": 2,
-                "terminal": "relationWire_2",
-                "uid": "77431614509"
-            },
-            "tgt": {
-                "moduleId": 4,
-                "terminal": "SOURCES",
-                "uid": "748939003979"
+                "uid": "60813720502"
             }
         }
     ],
     "storagePath": "\/var\/www\/html\/typo3conf\/ext\/",
     "log": {
-        "last_modified": "2021-06-21 08:48",
+        "last_modified": "2021-06-22 07:39",
         "extension_builder_version": "9.11.0",
         "be_user": " (1)"
     }

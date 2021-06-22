@@ -13,4 +13,7 @@ call_user_func(static function() {
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_grevman_domain_model_note', 'EXT:grevman/Resources/Private/Language/locallang_csh_tx_grevman_domain_model_note.xlf');
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_grevman_domain_model_note');
+
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_grevman_domain_model_guest', 'EXT:grevman/Resources/Private/Language/locallang_csh_tx_grevman_domain_model_guest.xlf');
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_grevman_domain_model_guest');
 });

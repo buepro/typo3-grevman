@@ -31,6 +31,31 @@ class GroupTest extends UnitTestCase
     /**
      * @test
      */
+    public function getNameReturnsInitialValueForString()
+    {
+        self::assertSame(
+            '',
+            $this->subject->getName()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setNameForStringSetsName()
+    {
+        $this->subject->setName('Conceived at T3CON10');
+
+        self::assertAttributeEquals(
+            'Conceived at T3CON10',
+            'name',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
     public function getEventsReturnsInitialValueForEvent()
     {
         $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();

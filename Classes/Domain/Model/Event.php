@@ -51,6 +51,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $notes = null;
 
     /**
+     * guests
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Guest>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     */
+    protected $guests = null;
+
+    /**
      * __construct
      */
     public function __construct()
@@ -73,6 +81,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->memberGroups = $this->memberGroups ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->registrations = $this->registrations ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->notes = $this->notes ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->guests = $this->guests ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -223,5 +232,48 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setNotes(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $notes)
     {
         $this->notes = $notes;
+    }
+
+    /**
+     * Adds a Guest
+     *
+     * @param \Buepro\Grevman\Domain\Model\Guest $guest
+     * @return void
+     */
+    public function addGuest(\Buepro\Grevman\Domain\Model\Guest $guest)
+    {
+        $this->guests->attach($guest);
+    }
+
+    /**
+     * Removes a Guest
+     *
+     * @param \Buepro\Grevman\Domain\Model\Guest $guestToRemove The Guest to be removed
+     * @return void
+     */
+    public function removeGuest(\Buepro\Grevman\Domain\Model\Guest $guestToRemove)
+    {
+        $this->guests->detach($guestToRemove);
+    }
+
+    /**
+     * Returns the guests
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Guest> $guests
+     */
+    public function getGuests()
+    {
+        return $this->guests;
+    }
+
+    /**
+     * Sets the guests
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Guest> $guests
+     * @return void
+     */
+    public function setGuests(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $guests)
+    {
+        $this->guests = $guests;
     }
 }

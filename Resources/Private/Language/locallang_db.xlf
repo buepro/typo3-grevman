@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="EXT:grevman/Resources/Private/Language/locallang_db" date="2021-06-21T20:48:19Z" product-name="grevman">
+	<file source-language="en" datatype="plaintext" original="EXT:grevman/Resources/Private/Language/locallang_db" date="2021-06-22T07:39:09Z" product-name="grevman">
 		<header/>
 		<body>
 			<trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event">
@@ -18,8 +18,14 @@
 			<trans-unit id="tx_grevman_domain_model_event.notes" resname="tx_grevman_domain_model_event.notes">
 				<source>Notes</source>
 			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_event.guests" resname="tx_grevman_domain_model_event.guests">
+				<source>Guests</source>
+			</trans-unit>
 			<trans-unit id="tx_grevman_domain_model_group" resname="tx_grevman_domain_model_group">
 				<source>Group</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_group.name" resname="tx_grevman_domain_model_group.name">
+				<source>Name</source>
 			</trans-unit>
 			<trans-unit id="tx_grevman_domain_model_group.events" resname="tx_grevman_domain_model_group.events">
 				<source>Events</source>
@@ -62,6 +68,21 @@
 			</trans-unit>
 			<trans-unit id="tx_grevman_domain_model_note.member" resname="tx_grevman_domain_model_note.member">
 				<source>Member</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_guest" resname="tx_grevman_domain_model_guest">
+				<source>Guest</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_guest.first_name" resname="tx_grevman_domain_model_guest.first_name">
+				<source>First Name</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_guest.last_name" resname="tx_grevman_domain_model_guest.last_name">
+				<source>Last Name</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_guest.phone" resname="tx_grevman_domain_model_guest.phone">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_guest.email" resname="tx_grevman_domain_model_guest.email">
+				<source>Email</source>
 			</trans-unit>
 		</body>
 	</file>
