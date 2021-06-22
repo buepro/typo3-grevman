@@ -1,0 +1,11 @@
+#=========================================================#
+# Configuration for storage folder
+#=========================================================#
+TCEFORM {
+  tx_grevman_domain_model_group {
+    members {
+      # pid's from members
+      PAGE_TSCONFIG_IDLIST = 225, 226
+    }
+  }
+}
