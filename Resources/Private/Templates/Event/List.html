@@ -1,60 +1,29 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:layout name="Default" />
 
-This template is responsible for creating a table of domain objects.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Event:
-          List.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="content">
-    <h1>Listing for Event</h1>
+    <h2>Upcoming events</h2>
 
     <f:flashMessages />
 
-    <table class="tx_grevman">
-        <tr>
-            <th><f:translate key="tx_grevman_domain_model_event.title" /></th>
-            <th><f:translate key="tx_grevman_domain_model_event.slug" /></th>
-            <th><f:translate key="tx_grevman_domain_model_event.startdate" /></th>
-            <th><f:translate key="tx_grevman_domain_model_event.enddate" /></th>
-            <th><f:translate key="tx_grevman_domain_model_event.teaser" /></th>
-            <th><f:translate key="tx_grevman_domain_model_event.description" /></th>
-            <th><f:translate key="tx_grevman_domain_model_event.price" /></th>
-            <th><f:translate key="tx_grevman_domain_model_event.link" /></th>
-            <th><f:translate key="tx_grevman_domain_model_event.program" /></th>
-            <th><f:translate key="tx_grevman_domain_model_event.location" /></th>
-            <th><f:translate key="tx_grevman_domain_model_event.images" /></th>
-            <th><f:translate key="tx_grevman_domain_model_event.files" /></th>
-            <th></th>
-            <th></th>
-        </tr>
+    <div class="gem-event-list">
         <f:for each="{events}" as="event">
-            <tr>
-                <td><f:link.action action="show" arguments="{event : event}">{event.title}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{event : event}">{event.slug}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{event : event}">{event.startdate -> f:format.date()}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{event : event}">{event.enddate -> f:format.date()}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{event : event}">{event.teaser}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{event : event}">{event.description}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{event : event}">{event.price}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{event : event}">{event.link}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{event : event}">{event.program}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{event : event}">{event.location}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{event : event}">{event.images -> f:count()} images</f:link.action></td>
-                <td><f:link.action action="show" arguments="{event : event}">{event.files -> f:count()} files</f:link.action></td>
-                <td><f:link.action action="edit" arguments="{event : event}">Edit</f:link.action></td>
-                <td><f:link.action action="delete" arguments="{event : event}">Delete</f:link.action></td>
-            </tr>
+            <div class="gem-event-listitem">
+                <div class="gemc-section gemc-short">
+                    <ul class="nav">
+                        <li class="nav-item">{event.startdate -> f:format.date()}<f:if condition="{event.enddate}"> -<br />{event.enddate -> f:format.date()}</f:if></li>
+                        <f:if condition="{event.price}"><li class="nav-item">{event.price -> f:format.currency()}</li></f:if>
+                        <f:if condition="{event.link}"><li class="nav-item"><f:link.typolink parameter="{event.link}">Link</f:link.typolink></li></f:if>
+                        <li class="nav-item"><f:link.action class="btn btn-sm btn-primary" action="show" arguments="{event : event}">Details</f:link.action></li>
+                    </ul>
+                </div>
+                <div class="gemc-section gemc-long">
+                    <h4>{event.title}</h4>
+                    <h5>{event.location}</h5>
+                    {event.teaser -> f:format.html()}
+                </div>
+            </div>
         </f:for>
-    </table>
-
-    <f:link.action action="new">New Event</f:link.action>
+    </div>
 </f:section>
 </html>
