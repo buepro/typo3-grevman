@@ -1,5 +1,5 @@
 <?php
-defined('TYPO3_MODE') || die();
+defined('TYPO3') || die('Access denied.');
 
 call_user_func(static function() {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_grevman_domain_model_event', 'EXT:grevman/Resources/Private/Language/locallang_csh_tx_grevman_domain_model_event.xlf');
