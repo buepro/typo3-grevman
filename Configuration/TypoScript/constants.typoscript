@@ -9,6 +9,6 @@ plugin.tx_grevman_events {
     }
     persistence {
         # cat=plugin.tx_grevman_events//a; type=string; label=Default storage PID
-        storagePid =
+        storagePid = 224,225,226
     }
 }

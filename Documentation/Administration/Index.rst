@@ -7,15 +7,30 @@
 Administration
 ==============
 
+Installation
+============
+
+Carry out the following standard installation steps:
+
+#. Add static template to page where the plugin will be used
+#. Add static pagesTS configuration `Grevman: General storage` to the page
+   properties (resources tab - Page TSconfig) from the parent storage folder
+   (for the settings to be applied to the child folders too).
+
+
+Configuration
+=============
+
+TS constants
+------------
+
+*  `storagePid`: List first the `uid` from the folder where the grevman records
+   are stored.
+
 PageTS config
 -------------
 
-For the storage folders the static pagesTS configuration
-`Grevman: Page TS config` is available and should be embedded through the page
-properties (resources tab - Page TSconfig).
-
-Further the following individual configurations are needed (replace values as
-needed):
+The following individual configurations are needed (replace values as needed):
 
 All storage
 ~~~~~~~~~~~
