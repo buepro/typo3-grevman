@@ -1,10 +1,43 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="EXT:grevman/Resources/Private/Language/locallang_csh" date="2021-06-22T07:39:09Z" product-name="grevman">
+	<file source-language="en" datatype="plaintext" original="EXT:grevman/Resources/Private/Language/locallang_csh" date="2021-06-22T16:30:32Z" product-name="grevman">
 		<header/>
 		<body>
 			<trans-unit id="title.description" resname="title.description">
 				<source>title</source>
+			</trans-unit>
+			<trans-unit id="slug.description" resname="slug.description">
+				<source>slug</source>
+			</trans-unit>
+			<trans-unit id="startdate.description" resname="startdate.description">
+				<source>startdate</source>
+			</trans-unit>
+			<trans-unit id="enddate.description" resname="enddate.description">
+				<source>enddate</source>
+			</trans-unit>
+			<trans-unit id="teaser.description" resname="teaser.description">
+				<source>teaser</source>
+			</trans-unit>
+			<trans-unit id="description.description" resname="description.description">
+				<source>description</source>
+			</trans-unit>
+			<trans-unit id="price.description" resname="price.description">
+				<source>price</source>
+			</trans-unit>
+			<trans-unit id="link.description" resname="link.description">
+				<source>link</source>
+			</trans-unit>
+			<trans-unit id="program.description" resname="program.description">
+				<source>program</source>
+			</trans-unit>
+			<trans-unit id="location.description" resname="location.description">
+				<source>location</source>
+			</trans-unit>
+			<trans-unit id="images.description" resname="images.description">
+				<source>images</source>
+			</trans-unit>
+			<trans-unit id="files.description" resname="files.description">
+				<source>files</source>
 			</trans-unit>
 			<trans-unit id="member_groups.description" resname="member_groups.description">
 				<source>memberGroups</source>

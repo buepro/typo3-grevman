@@ -3,20 +3,22 @@
         {
             "config": {
                 "position": [
-                    1007,
-                    98
+                    1117,
+                    76
                 ]
             },
             "name": "New Model Object",
             "value": {
                 "actionGroup": {
                     "_default0_index": false,
-                    "_default1_list": false,
-                    "_default2_show": false,
+                    "_default1_list": true,
+                    "_default2_show": true,
                     "_default3_new_create": false,
                     "_default4_edit_update": false,
                     "_default5_delete": false,
-                    "customActions": []
+                    "customActions": [
+                        "showMatrix"
+                    ]
                 },
                 "name": "Event",
                 "objectsettings": {
@@ -41,10 +43,142 @@
                             "propertyIsExcludeField": true,
                             "propertyIsL10nModeExclude": false,
                             "propertyIsNullable": false,
-                            "propertyIsRequired": false,
+                            "propertyIsRequired": true,
                             "propertyName": "title",
                             "propertyType": "String",
                             "uid": "1553255995921"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "slug",
+                            "propertyType": "String",
+                            "uid": "476983228235"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "startdate",
+                            "propertyType": "DateTime",
+                            "uid": "771593815428"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "enddate",
+                            "propertyType": "DateTime",
+                            "uid": "235376349326"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "teaser",
+                            "propertyType": "RichText",
+                            "uid": "1172838898846"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "description",
+                            "propertyType": "RichText",
+                            "uid": "1033042641857"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "price",
+                            "propertyType": "Float",
+                            "uid": "112808447415"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "link",
+                            "propertyType": "String",
+                            "uid": "1231902139389"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "program",
+                            "propertyType": "RichText",
+                            "uid": "270671196719"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "location",
+                            "propertyType": "String",
+                            "uid": "106544627136"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "10",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "images",
+                            "propertyType": "Image",
+                            "uid": "1015185414454"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "10",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "files",
+                            "propertyType": "File",
+                            "uid": "1290190032297"
                         }
                     ]
                 },
@@ -251,8 +385,8 @@
         {
             "config": {
                 "position": [
-                    660,
-                    326
+                    627,
+                    243
                 ]
             },
             "name": "New Model Object",
@@ -261,8 +395,8 @@
                     "_default0_index": false,
                     "_default1_list": false,
                     "_default2_show": false,
-                    "_default3_new_create": false,
-                    "_default4_edit_update": false,
+                    "_default3_new_create": true,
+                    "_default4_edit_update": true,
                     "_default5_delete": false,
                     "customActions": []
                 },
@@ -271,7 +405,7 @@
                     "addDeletedField": true,
                     "addHiddenField": true,
                     "addStarttimeEndtimeFields": false,
-                    "aggregateRoot": false,
+                    "aggregateRoot": true,
                     "categorizable": false,
                     "description": "",
                     "mapToTable": "",
@@ -316,8 +450,8 @@
         {
             "config": {
                 "position": [
-                    962,
-                    548
+                    846,
+                    644
                 ]
             },
             "name": "New Model Object",
@@ -381,8 +515,8 @@
         {
             "config": {
                 "position": [
-                    1310,
-                    516
+                    1090,
+                    473
                 ]
             },
             "name": "New Model Object",
@@ -457,7 +591,7 @@
                             "propertyIsNullable": false,
                             "propertyIsRequired": true,
                             "propertyName": "email",
-                            "propertyType": "String",
+                            "propertyType": "Email",
                             "uid": "1411876173345"
                         }
                     ]
@@ -495,7 +629,17 @@
                 "role": "Developer"
             }
         ],
-        "plugins": [],
+        "plugins": [
+            {
+                "actions": {
+                    "controllerActionCombinations": "Event => list, show, showMatrix\nRegistration => new, create, edit, update",
+                    "noncacheableActions": "Event => list, show, showMatrix\nRegistration => new, create, edit, update"
+                },
+                "description": "Shows upcoming events with related registration information. Members might change their registration status and trainers can send notification emails.",
+                "key": "events",
+                "name": "Events panel"
+            }
+        ],
         "vendorName": "Buepro"
     },
     "wires": [
@@ -586,7 +730,7 @@
     ],
     "storagePath": "\/var\/www\/html\/typo3conf\/ext\/",
     "log": {
-        "last_modified": "2021-06-22 07:39",
+        "last_modified": "2021-06-22 04:30",
         "extension_builder_version": "9.11.0",
         "be_user": " (1)"
     }

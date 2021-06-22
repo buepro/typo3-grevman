@@ -56,6 +56,361 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
+    public function getSlugReturnsInitialValueForString()
+    {
+        self::assertSame(
+            '',
+            $this->subject->getSlug()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setSlugForStringSetsSlug()
+    {
+        $this->subject->setSlug('Conceived at T3CON10');
+
+        self::assertAttributeEquals(
+            'Conceived at T3CON10',
+            'slug',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getStartdateReturnsInitialValueForDateTime()
+    {
+        self::assertEquals(
+            null,
+            $this->subject->getStartdate()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setStartdateForDateTimeSetsStartdate()
+    {
+        $dateTimeFixture = new \DateTime();
+        $this->subject->setStartdate($dateTimeFixture);
+
+        self::assertAttributeEquals(
+            $dateTimeFixture,
+            'startdate',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getEnddateReturnsInitialValueForDateTime()
+    {
+        self::assertEquals(
+            null,
+            $this->subject->getEnddate()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setEnddateForDateTimeSetsEnddate()
+    {
+        $dateTimeFixture = new \DateTime();
+        $this->subject->setEnddate($dateTimeFixture);
+
+        self::assertAttributeEquals(
+            $dateTimeFixture,
+            'enddate',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getTeaserReturnsInitialValueForString()
+    {
+        self::assertSame(
+            '',
+            $this->subject->getTeaser()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setTeaserForStringSetsTeaser()
+    {
+        $this->subject->setTeaser('Conceived at T3CON10');
+
+        self::assertAttributeEquals(
+            'Conceived at T3CON10',
+            'teaser',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getDescriptionReturnsInitialValueForString()
+    {
+        self::assertSame(
+            '',
+            $this->subject->getDescription()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setDescriptionForStringSetsDescription()
+    {
+        $this->subject->setDescription('Conceived at T3CON10');
+
+        self::assertAttributeEquals(
+            'Conceived at T3CON10',
+            'description',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getPriceReturnsInitialValueForFloat()
+    {
+        self::assertSame(
+            0.0,
+            $this->subject->getPrice()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setPriceForFloatSetsPrice()
+    {
+        $this->subject->setPrice(3.14159265);
+
+        self::assertAttributeEquals(
+            3.14159265,
+            'price',
+            $this->subject,
+            '',
+            0.000000001
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getLinkReturnsInitialValueForString()
+    {
+        self::assertSame(
+            '',
+            $this->subject->getLink()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setLinkForStringSetsLink()
+    {
+        $this->subject->setLink('Conceived at T3CON10');
+
+        self::assertAttributeEquals(
+            'Conceived at T3CON10',
+            'link',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getProgramReturnsInitialValueForString()
+    {
+        self::assertSame(
+            '',
+            $this->subject->getProgram()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setProgramForStringSetsProgram()
+    {
+        $this->subject->setProgram('Conceived at T3CON10');
+
+        self::assertAttributeEquals(
+            'Conceived at T3CON10',
+            'program',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getLocationReturnsInitialValueForString()
+    {
+        self::assertSame(
+            '',
+            $this->subject->getLocation()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setLocationForStringSetsLocation()
+    {
+        $this->subject->setLocation('Conceived at T3CON10');
+
+        self::assertAttributeEquals(
+            'Conceived at T3CON10',
+            'location',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getImagesReturnsInitialValueForFileReference()
+    {
+        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        self::assertEquals(
+            $newObjectStorage,
+            $this->subject->getImages()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setImagesForFileReferenceSetsImages()
+    {
+        $image = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+        $objectStorageHoldingExactlyOneImages = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageHoldingExactlyOneImages->attach($image);
+        $this->subject->setImages($objectStorageHoldingExactlyOneImages);
+
+        self::assertAttributeEquals(
+            $objectStorageHoldingExactlyOneImages,
+            'images',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function addImageToObjectStorageHoldingImages()
+    {
+        $image = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+        $imagesObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+            ->setMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $imagesObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($image));
+        $this->inject($this->subject, 'images', $imagesObjectStorageMock);
+
+        $this->subject->addImage($image);
+    }
+
+    /**
+     * @test
+     */
+    public function removeImageFromObjectStorageHoldingImages()
+    {
+        $image = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+        $imagesObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+            ->setMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $imagesObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($image));
+        $this->inject($this->subject, 'images', $imagesObjectStorageMock);
+
+        $this->subject->removeImage($image);
+    }
+
+    /**
+     * @test
+     */
+    public function getFilesReturnsInitialValueForFileReference()
+    {
+        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        self::assertEquals(
+            $newObjectStorage,
+            $this->subject->getFiles()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setFilesForFileReferenceSetsFiles()
+    {
+        $file = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+        $objectStorageHoldingExactlyOneFiles = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageHoldingExactlyOneFiles->attach($file);
+        $this->subject->setFiles($objectStorageHoldingExactlyOneFiles);
+
+        self::assertAttributeEquals(
+            $objectStorageHoldingExactlyOneFiles,
+            'files',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function addFileToObjectStorageHoldingFiles()
+    {
+        $file = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+        $filesObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+            ->setMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $filesObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($file));
+        $this->inject($this->subject, 'files', $filesObjectStorageMock);
+
+        $this->subject->addFile($file);
+    }
+
+    /**
+     * @test
+     */
+    public function removeFileFromObjectStorageHoldingFiles()
+    {
+        $file = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+        $filesObjectStorageMock = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
+            ->setMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $filesObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($file));
+        $this->inject($this->subject, 'files', $filesObjectStorageMock);
+
+        $this->subject->removeFile($file);
+    }
+
+    /**
+     * @test
+     */
     public function getMemberGroupsReturnsInitialValueForGroup()
     {
         $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();

@@ -1,0 +1,106 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<table class="tx-grevman" >
+	<tr>
+		<td>
+			<f:translate key="tx_grevman_domain_model_event.title" />
+		</td>
+		<td>
+		{event.title}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_grevman_domain_model_event.slug" />
+		</td>
+		<td>
+		{event.slug}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_grevman_domain_model_event.startdate" />
+		</td>
+		<td>
+		{event.startdate -> f:format.date()}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_grevman_domain_model_event.enddate" />
+		</td>
+		<td>
+		{event.enddate -> f:format.date()}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_grevman_domain_model_event.teaser" />
+		</td>
+		<td>
+		{event.teaser}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_grevman_domain_model_event.description" />
+		</td>
+		<td>
+		{event.description}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_grevman_domain_model_event.price" />
+		</td>
+		<td>
+		{event.price}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_grevman_domain_model_event.link" />
+		</td>
+		<td>
+		{event.link}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_grevman_domain_model_event.program" />
+		</td>
+		<td>
+		{event.program}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_grevman_domain_model_event.location" />
+		</td>
+		<td>
+		{event.location}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_grevman_domain_model_event.images" />
+		</td>
+		<td>
+				<f:for each="{event.images}" as="image" >
+					<f:image src="{image.originalResource.publicUrl}" width="200"/>
+				</f:for>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<f:translate key="tx_grevman_domain_model_event.files" />
+		</td>
+		<td>
+				<f:for each="{event.files}" as="file" >
+					<a href="{file.originalResource.publicUrl}">
+						{file.originalResource.name}
+					</a>
+				</f:for>
+		</td>
+	</tr>
+</table>
+</html>

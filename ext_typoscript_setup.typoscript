@@ -1,0 +1,21 @@
+
+config.tx_extbase {
+  persistence {
+    classes {
+
+      TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
+        subclasses {
+          Tx_Grevman_Member = Buepro\Grevman\Domain\Model\Member
+          
+        }
+      }
+      Buepro\Grevman\Domain\Model\Member {
+        mapping {
+          tableName = fe_users
+          recordType = Tx_Grevman_Member
+        }
+      }
+
+    }
+  }
+}

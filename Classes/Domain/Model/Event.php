@@ -24,8 +24,89 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * title
      *
      * @var string
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $title = '';
+
+    /**
+     * slug
+     *
+     * @var string
+     */
+    protected $slug = '';
+
+    /**
+     * startdate
+     *
+     * @var \DateTime
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     */
+    protected $startdate = null;
+
+    /**
+     * enddate
+     *
+     * @var \DateTime
+     */
+    protected $enddate = null;
+
+    /**
+     * teaser
+     *
+     * @var string
+     */
+    protected $teaser = '';
+
+    /**
+     * description
+     *
+     * @var string
+     */
+    protected $description = '';
+
+    /**
+     * price
+     *
+     * @var float
+     */
+    protected $price = 0.0;
+
+    /**
+     * link
+     *
+     * @var string
+     */
+    protected $link = '';
+
+    /**
+     * program
+     *
+     * @var string
+     */
+    protected $program = '';
+
+    /**
+     * location
+     *
+     * @var string
+     */
+    protected $location = '';
+
+    /**
+     * images
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     */
+    protected $images = null;
+
+    /**
+     * files
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     */
+    protected $files = null;
 
     /**
      * memberGroups
@@ -78,6 +159,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function initializeObject()
     {
+        $this->images = $this->images ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->files = $this->files ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->memberGroups = $this->memberGroups ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->registrations = $this->registrations ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->notes = $this->notes ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -275,5 +358,280 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setGuests(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $guests)
     {
         $this->guests = $guests;
+    }
+
+    /**
+     * Returns the slug
+     *
+     * @return string $slug
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Sets the slug
+     *
+     * @param string $slug
+     * @return void
+     */
+    public function setSlug(string $slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * Returns the startdate
+     *
+     * @return \DateTime $startdate
+     */
+    public function getStartdate()
+    {
+        return $this->startdate;
+    }
+
+    /**
+     * Sets the startdate
+     *
+     * @param \DateTime $startdate
+     * @return void
+     */
+    public function setStartdate(\DateTime $startdate)
+    {
+        $this->startdate = $startdate;
+    }
+
+    /**
+     * Returns the enddate
+     *
+     * @return \DateTime $enddate
+     */
+    public function getEnddate()
+    {
+        return $this->enddate;
+    }
+
+    /**
+     * Sets the enddate
+     *
+     * @param \DateTime $enddate
+     * @return void
+     */
+    public function setEnddate(\DateTime $enddate)
+    {
+        $this->enddate = $enddate;
+    }
+
+    /**
+     * Returns the teaser
+     *
+     * @return string $teaser
+     */
+    public function getTeaser()
+    {
+        return $this->teaser;
+    }
+
+    /**
+     * Sets the teaser
+     *
+     * @param string $teaser
+     * @return void
+     */
+    public function setTeaser(string $teaser)
+    {
+        $this->teaser = $teaser;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string $description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Sets the description
+     *
+     * @param string $description
+     * @return void
+     */
+    public function setDescription(string $description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Returns the price
+     *
+     * @return float $price
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Sets the price
+     *
+     * @param float $price
+     * @return void
+     */
+    public function setPrice(float $price)
+    {
+        $this->price = $price;
+    }
+
+    /**
+     * Returns the link
+     *
+     * @return string $link
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * Sets the link
+     *
+     * @param string $link
+     * @return void
+     */
+    public function setLink(string $link)
+    {
+        $this->link = $link;
+    }
+
+    /**
+     * Returns the program
+     *
+     * @return string $program
+     */
+    public function getProgram()
+    {
+        return $this->program;
+    }
+
+    /**
+     * Sets the program
+     *
+     * @param string $program
+     * @return void
+     */
+    public function setProgram(string $program)
+    {
+        $this->program = $program;
+    }
+
+    /**
+     * Returns the location
+     *
+     * @return string $location
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * Sets the location
+     *
+     * @param string $location
+     * @return void
+     */
+    public function setLocation(string $location)
+    {
+        $this->location = $location;
+    }
+
+    /**
+     * Adds a FileReference
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+     * @return void
+     */
+    public function addImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
+    {
+        $this->images->attach($image);
+    }
+
+    /**
+     * Removes a FileReference
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove The FileReference to be removed
+     * @return void
+     */
+    public function removeImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove)
+    {
+        $this->images->detach($imageToRemove);
+    }
+
+    /**
+     * Returns the images
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $images
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * Sets the images
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $images
+     * @return void
+     */
+    public function setImages(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $images)
+    {
+        $this->images = $images;
+    }
+
+    /**
+     * Adds a FileReference
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $file
+     * @return void
+     */
+    public function addFile(\TYPO3\CMS\Extbase\Domain\Model\FileReference $file)
+    {
+        $this->files->attach($file);
+    }
+
+    /**
+     * Removes a FileReference
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $fileToRemove The FileReference to be removed
+     * @return void
+     */
+    public function removeFile(\TYPO3\CMS\Extbase\Domain\Model\FileReference $fileToRemove)
+    {
+        $this->files->detach($fileToRemove);
+    }
+
+    /**
+     * Returns the files
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $files
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    /**
+     * Sets the files
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $files
+     * @return void
+     */
+    public function setFiles(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $files)
+    {
+        $this->files = $files;
     }
 }

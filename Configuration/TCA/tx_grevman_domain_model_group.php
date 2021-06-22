@@ -90,7 +90,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_grevman_domain_model_event',
-                'MM' => 'tx_grevman_group_event_mm',
+                'MM' => 'tx_grevman_event_group_mm',
                 'size' => 10,
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,
