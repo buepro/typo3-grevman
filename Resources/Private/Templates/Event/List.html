@@ -11,7 +11,7 @@
             <div class="gem-event-listitem">
                 <div class="gemc-section gemc-short">
                     <ul class="nav">
-                        <li class="nav-item">{event.startdate -> f:format.date()}<f:if condition="{event.enddate}"> -<br />{event.enddate -> f:format.date()}</f:if></li>
+                        <li class="nav-item">{f:render(partial: 'Format/Period', arguments: {startdate: event.startdate, enddate: event.enddate})}</li>
                         <f:if condition="{event.price}"><li class="nav-item">{event.price -> f:format.currency()}</li></f:if>
                         <f:if condition="{event.link}"><li class="nav-item"><f:link.typolink parameter="{event.link}">Link</f:link.typolink></li></f:if>
                         <li class="nav-item"><f:link.action class="btn btn-sm btn-primary" action="show" arguments="{event : event}">Details</f:link.action></li>

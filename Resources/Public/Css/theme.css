@@ -3,12 +3,10 @@
     flex-direction: column;
     align-items: flex-end;
     padding: 1em;
+    background: #e0e0e0;
 }
 .gem-event-listitem:nth-child(2n+1) {
     background: #f0f0f0;
-}
-.gem-event-listitem:nth-child(2n+1) {
-    background: #e0e0e0;
 }
 .gem-event-listitem .gemc-short {
     margin-bottom: 1em;

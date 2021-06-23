@@ -1,0 +1,23 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+{f:translate(key:'dateTimeFormat') -> f:variable(name: '_dateTimeFormat')}
+{f:translate(key:'dateFormat') -> f:variable(name: '_dateFormat')}
+{f:translate(key:'timeFormat') -> f:variable(name: '_timeFormat')}
+<f:if condition="{startdate.timestamp} != {enddate.timestamp}">
+    {startdate -> f:format.date(format: _dateFormat) -> f:variable(name: '_startdate')}
+    {enddate -> f:format.date(format: _dateFormat) -> f:variable(name: '_enddate')}
+    {enddate -> f:format.date(format: _timeFormat) -> f:variable(name: '_endtime')}
+</f:if>
+
+<time datetime="{f:format.date(date: startdate, format:'Y-m-d')}">
+    <f:if condition="{_enddate} != {_startdate}">
+        <f:then>
+            <span>{startdate -> f:format.date(format: _dateTimeFormat)}{f:if(condition: enddate, then: ' - {enddate -> f:format.date(format: _dateTimeFormat)}')}</span>
+        </f:then>
+        <f:else>
+            <span>{startdate -> f:format.date(format: _dateTimeFormat)}{f:if(condition: enddate, then: '-{_endtime}')}</span>
+        </f:else>
+    </f:if>
+</time>
+
+</html>

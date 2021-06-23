@@ -3,8 +3,14 @@
 	<file source-language="en" datatype="plaintext" original="EXT:grevman/Resources/Private/Language/locallang" date="2021-06-22T16:30:32Z" product-name="grevman">
 		<header/>
 		<body>
-			<trans-unit id="date" resname="date">
-				<source>Date</source>
+			<trans-unit id="dateTimeFormat" resname="dateTimeFormat">
+				<source>j.n.y H.i</source>
+			</trans-unit>
+			<trans-unit id="dateFormat" resname="dateFormat">
+				<source>j.n.y</source>
+			</trans-unit>
+			<trans-unit id="timeFormat" resname="timeFormat">
+				<source>H.i</source>
 			</trans-unit>
 			<trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event">
 				<source>Event</source>
