@@ -40,11 +40,13 @@ All storage
    TCEFORM {
      tx_grevman_domain_model_group {
        members {
+         # pid's from members
          PAGE_TSCONFIG_IDLIST = 225, 226
        }
      }
      tx_grevman_domain_model_registration {
        member {
+         # pid's from members
          PAGE_TSCONFIG_IDLIST = 225, 226
        }
      }
@@ -57,6 +59,7 @@ Trainers storage
 
    TCAdefaults {
      fe_users {
+       # Default user group
        usergroup = 3
      }
    }
@@ -68,6 +71,7 @@ Participants storage
 
    TCAdefaults {
      fe_users {
+       # Default user group
        usergroup = 4
      }
    }
