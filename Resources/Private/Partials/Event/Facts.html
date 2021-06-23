@@ -1,0 +1,8 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<ul class="nav gem-event-facts">
+    <li class="nav-item">{f:render(partial: 'Format/Period', arguments: {startdate: event.startdate, enddate: event.enddate})}</li>
+    <f:if condition="{event.location}"><li class="nav-item">{event.location}</li></f:if>
+    <f:if condition="{event.price}"><li class="nav-item">{f:render(partial: 'Format/Currency', arguments: {number: event.price})}</li></f:if>
+    <f:if condition="{event.link}"><li class="nav-item"><f:link.typolink parameter="{event.link}">Link</f:link.typolink></li></f:if>
+</ul>
+</html>

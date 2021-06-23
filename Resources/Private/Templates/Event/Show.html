@@ -1,24 +1,65 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:layout name="Default" />
 
-This template is responsible for displaying a single view for a domain object
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Event:
-          Show.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="content">
-    <h1>Single View for Event</h1>
-
     <f:flashMessages />
-    <f:render partial="Event/Properties" arguments="{event:event}" />
-    <f:link.action action="list">Back to list</f:link.action><br />
-    <f:link.action action="new">New Event</f:link.action>
+    {settings.detail -> f:variable(name: '_settings')}
+    <div class="gem-event-detail">
+        <section>
+            <header>
+                <h2>{event.title}</h2>
+                <f:render partial="Event/Facts" arguments="{event:event}" />
+            </header>
+            {event.teaser ->f:format.html()}
+        </section>
+        <f:if condition="{event.description} || {event.images} || {event.files}">
+            <section class="gemc-desc">
+                <div class="gemc-text">
+                    <header>
+                        <h3>{f:translate(key: 'tx_grevman_domain_model_event.description')}</h3>
+                    </header>
+                    {event.description ->f:format.html()}
+                </div>
+                <f:if condition="{event.images}">
+                    <div class="gemc-images">
+                        <f:for each="{event.images}" as="image">
+                            <div class="gemc-image">
+                                <figure>
+                                    <f:image image="{image}" width="{_settings.image.width}" height="{_settings.image.height}" />
+                                </figure>
+                                <f:if condition="{image.originalResource.description}">
+                                    <figcaption>{image.originalResource.description}</figcaption>
+                                </f:if>
+                            </div>
+                        </f:for>
+                    </div>
+                </f:if>
+                <f:if condition="{event.files}">
+                    <div class="gemc-files">
+                        <strong>{f:translate(key: 'tx_grevman_domain_model_event.files')}: </strong>
+                        <f:for each="{event.files}" as="file" iteration="iterator">
+                            <span class="news-related-files-link">
+                                <a href="{file.originalResource.publicUrl -> f:format.htmlspecialchars()}" target="_blank">
+                                    {f:if(condition:file.originalResource.title, then:file.originalResource.title, else:file.originalResource.name)}
+                                </a>
+                            </span>
+                        </f:for>
+                    </div>
+                </f:if>
+            </section>
+        </f:if>
+        <f:if condition="{event.program}">
+            <section class="gemc-prog">
+                <header>
+                    <h3>{f:translate(key: 'tx_grevman_domain_model_event.program')}</h3>
+                </header>
+                {event.program ->f:format.html()}
+            </section>
+        </f:if>
+        <section>
+            <h1>Registration states</h1>
+        </section>
+        <f:link.action action="list">Back to list</f:link.action>
+    </div>
 </f:section>
 </html>

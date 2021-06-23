@@ -2,28 +2,24 @@
 <f:layout name="Default" />
 
 <f:section name="content">
-    <h2>Upcoming events</h2>
-
     <f:flashMessages />
-
     <div class="gem-event-list">
-        <f:for each="{events}" as="event">
-            <div class="gem-event-listitem">
-                <div class="gemc-section gemc-short">
-                    <ul class="nav">
-                        <li class="nav-item">{f:render(partial: 'Format/Period', arguments: {startdate: event.startdate, enddate: event.enddate})}</li>
-                        <f:if condition="{event.price}"><li class="nav-item">{event.price -> f:format.currency()}</li></f:if>
-                        <f:if condition="{event.link}"><li class="nav-item"><f:link.typolink parameter="{event.link}">Link</f:link.typolink></li></f:if>
-                        <li class="nav-item"><f:link.action class="btn btn-sm btn-primary" action="show" arguments="{event : event}">Details</f:link.action></li>
-                    </ul>
+        <h2>Upcoming events</h2>
+        <div class="gemc-list">
+            <f:for each="{events}" as="event">
+                <div class="gem-event-listitem">
+                    <div class="gemc-section gemc-facts">
+                        <f:render partial="Event/Facts" arguments="{event: event}" />
+                        <f:link.action class="btn btn-sm btn-primary" action="show" arguments="{event : event}">Details</f:link.action>
+                    </div>
+                    <div class="gemc-section gemc-text">
+                        <h4>{event.title}</h4>
+                        <h5>{event.location}</h5>
+                        {event.teaser -> f:format.html()}
+                    </div>
                 </div>
-                <div class="gemc-section gemc-long">
-                    <h4>{event.title}</h4>
-                    <h5>{event.location}</h5>
-                    {event.teaser -> f:format.html()}
-                </div>
-            </div>
-        </f:for>
+            </f:for>
+        </div>
     </div>
 </f:section>
 </html>

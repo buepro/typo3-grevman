@@ -1,14 +1,24 @@
 plugin.tx_grevman_events {
-    view {
-        # cat=plugin.tx_grevman_events/file; type=string; label=Path to template root (FE)
-        templateRootPath = EXT:grevman/Resources/Private/Templates/
-        # cat=plugin.tx_grevman_events/file; type=string; label=Path to template partials (FE)
-        partialRootPath = EXT:grevman/Resources/Private/Partials/
-        # cat=plugin.tx_grevman_events/file; type=string; label=Path to template layouts (FE)
-        layoutRootPath = EXT:grevman/Resources/Private/Layouts/
+  view {
+    # cat=plugin.tx_grevman_events/file; type=string; label=Path to template root (FE)
+    templateRootPath = EXT:grevman/Resources/Private/Templates/
+    # cat=plugin.tx_grevman_events/file; type=string; label=Path to template partials (FE)
+    partialRootPath = EXT:grevman/Resources/Private/Partials/
+    # cat=plugin.tx_grevman_events/file; type=string; label=Path to template layouts (FE)
+    layoutRootPath = EXT:grevman/Resources/Private/Layouts/
+  }
+  persistence {
+    # cat=plugin.tx_grevman_events//a; type=string; label=Default storage PID
+    storagePid = 224,225,226
+  }
+  settings {
+    detail {
+      image {
+        # cat=plugin.tx_grevman_events/settings; type=string; label=Detail image width
+        width = 680c
+        # cat=plugin.tx_grevman_events/settings; type=string; label=Detail image height
+        height = 400
+      }
     }
-    persistence {
-        # cat=plugin.tx_grevman_events//a; type=string; label=Default storage PID
-        storagePid = 224,225,226
-    }
+  }
 }

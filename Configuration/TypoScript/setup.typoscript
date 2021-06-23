@@ -21,6 +21,14 @@ plugin.tx_grevman_events {
     mvc {
         #callDefaultActionIfActionCantBeResolved = 1
     }
+  settings {
+    detail {
+      image {
+        width = {$plugin.tx_grevman_events.settings.detail.image.width}
+        height = {$plugin.tx_grevman_events.settings.detail.image.height}
+      }
+    }
+  }
 }
 
 page {
