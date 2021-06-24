@@ -19,6 +19,9 @@ namespace Buepro\Grevman\Domain\Model;
  */
 class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
+    public const REGISTRATION_UNDEFINED = 0;
+    public const REGISTRATION_CONFIRMED = 6;
+    public const REGISTRATION_CANCELED = 9;
 
     /**
      * status

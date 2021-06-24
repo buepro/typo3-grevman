@@ -31,4 +31,17 @@ class EventMember
         $this->member = $member;
         $this->registration = $event->getRegistrationForMember($member);
     }
+
+    public function getScreenName(): string
+    {
+        return $this->member->getScreenName();
+    }
+
+    public function getRegistrationState(): int
+    {
+        if (!$this->registration) {
+            return 0;
+        }
+        return $this->registration->getStatus();
+    }
 }

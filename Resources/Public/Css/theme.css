@@ -39,3 +39,29 @@
 .gem-event-detail .gemc-files {
     margin: 1rem 0;
 }
+.gem-event-detail > section {
+    margin-top: 1.5rem;
+    border-top: rgba(0,0,0,0.2) 1px solid;
+    padding-top: 1.5rem;
+}
+.gem-event-detail > footer {
+    margin-top: 2rem;
+    border-top: rgba(0,0,0,0.4) 1px solid;
+    padding-top: 1rem;
+}
+.gem-event-detail .gemc-participants {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -0.3rem;
+}
+.gem-event-detail .gemc-participant {
+    background: lightgrey;
+    padding: 0.5rem 1rem;
+    margin: 0.3rem;
+}
+.gem-event-detail .gemc-participant.gemc-regstate-6 {
+    background: lightgreen;
+}
+.gem-event-detail .gemc-participant.gemc-regstate-9 {
+    background: lightpink;
+}

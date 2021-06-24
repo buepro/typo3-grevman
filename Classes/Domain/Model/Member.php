@@ -196,4 +196,16 @@ class Member extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     {
         $this->notes = $notes;
     }
+
+    public function getScreenName(): string
+    {
+        $parts = [];
+        if ($this->getFirstName()) {
+            $parts[] = $this->getFirstName();
+        }
+        if ($this->getLastName()) {
+            $parts[] = $this->getLastName();
+        }
+        return $parts ? implode(' ', $parts) : '';
+    }
 }

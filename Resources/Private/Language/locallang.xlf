@@ -12,6 +12,10 @@
 			<trans-unit id="timeFormat" resname="timeFormat">
 				<source>H.i</source>
 			</trans-unit>
+			<trans-unit id="participants" resname="participants">
+				<source>Participants</source>
+			</trans-unit>
+
 			<trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event">
 				<source>Event</source>
 			</trans-unit>

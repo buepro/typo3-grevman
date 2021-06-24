@@ -12,6 +12,27 @@ defined('TYPO3') || die('Access denied.');
             '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, status, event, member'],
         ],
         'columns' =>[
+            'status' => [
+                'config' => [
+                    'type' => 'select',
+                    'renderType' => 'selectSingle',
+                    'size' => 1,
+                    'default' => 0,
+                    'items' => [
+                        [
+                            'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_registration.status_undefined',
+                            \Buepro\Grevman\Domain\Model\Registration::REGISTRATION_UNDEFINED
+                        ],
+                        [
+                            'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_registration.status_confirmed',
+                            \Buepro\Grevman\Domain\Model\Registration::REGISTRATION_CONFIRMED
+                        ],
+                        [
+                            'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_registration.status_canceled',
+                            \Buepro\Grevman\Domain\Model\Registration::REGISTRATION_CANCELED],
+                    ],
+                ]
+            ],
             'event' => [
                 'exclude' => true,
                 'label' => 'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_event',

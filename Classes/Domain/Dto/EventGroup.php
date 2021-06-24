@@ -6,6 +6,7 @@ namespace Buepro\Grevman\Domain\Dto;
 
 use Buepro\Grevman\Domain\Model\Event;
 use Buepro\Grevman\Domain\Model\Group;
+use Buepro\Grevman\Domain\Model\Member;
 
 class EventGroup
 {
@@ -29,8 +30,14 @@ class EventGroup
         $this->event = $event;
         $this->group = $group;
         foreach ($group->getMembers() as $member) {
+            /** @var Member $member */
             $this->members[] = new EventMember($event, $member);
         }
+    }
+
+    public function getMembers(): array
+    {
+        return $this->members;
     }
 
     public function getName(): string

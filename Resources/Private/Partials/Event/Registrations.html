@@ -1,0 +1,16 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:for each="{eventGroups}" as="group" iteration="iterator">
+    <div class="gemc-group gemc-{iterator.count}">
+        <h4>{group.name}</h4>
+        <div class="gemc-participants">
+            <f:for each="{group.members}" as="member" iteration="iterator">
+                <div class="gemc-participant gemc-regstate-{member.registrationState}">
+                    {member.screenName}
+                </div>
+            </f:for>
+        </div>
+    </div>
+</f:for>
+
+</html>

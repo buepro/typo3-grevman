@@ -2,23 +2,14 @@
 <f:layout name="Default" />
 
 <f:section name="content">
-    <f:for each="{event.memberGroups}" as="group">
-        <f:for each="{group.members}" as="member">
-            <f:for each="{member.registrations}" as="registration">
-                <f:debug>{registration.uid}</f:debug>
-            </f:for>
-        </f:for>
-    </f:for>
     <f:flashMessages />
     {settings.detail -> f:variable(name: '_settings')}
     <div class="gem-event-detail">
-        <section>
-            <header>
-                <h2>{event.title}</h2>
-                <f:render partial="Event/Facts" arguments="{event:event}" />
-            </header>
+        <header>
+            <h2>{event.title}</h2>
+            <f:render partial="Event/Facts" arguments="{event:event}" />
             {event.teaser ->f:format.html()}
-        </section>
+        </header>
         <f:if condition="{event.description} || {event.images} || {event.files}">
             <section class="gemc-desc">
                 <div class="gemc-text">
@@ -64,9 +55,14 @@
             </section>
         </f:if>
         <section>
-            <h1>Registration states</h1>
+            <header>
+                <h3>{f:translate(key: 'participants')}</h3>
+            </header>
+            <f:render partial="Event/Registrations" arguments="{eventGroups: eventGroups, guests: event.guests}" />
         </section>
-        <f:link.action action="list">Back to list</f:link.action>
+        <footer>
+            <f:link.action class="btn btn-primary" action="list">Back to list</f:link.action>
+        </footer>
     </div>
 </f:section>
 </html>
