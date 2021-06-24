@@ -15,6 +15,18 @@
 			<trans-unit id="participants" resname="participants">
 				<source>Participants</source>
 			</trans-unit>
+			<trans-unit id="register" resname="register">
+				<source>Register</source>
+			</trans-unit>
+			<trans-unit id="unregister" resname="unregister">
+				<source>Unregister</source>
+			</trans-unit>
+			<trans-unit id="registerConfirmation" resname="unregister">
+				<source>You are now registered.</source>
+			</trans-unit>
+			<trans-unit id="unregisterConfirmation" resname="unregister">
+				<source>You are now unregistered.</source>
+			</trans-unit>
 
 			<trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event">
 				<source>Event</source>

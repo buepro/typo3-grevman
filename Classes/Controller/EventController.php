@@ -5,7 +5,12 @@ declare(strict_types=1);
 namespace Buepro\Grevman\Controller;
 
 
+use Buepro\Grevman\Domain\Dto\EventMember;
+use Buepro\Grevman\Domain\Model\Registration;
 use Buepro\Grevman\Utility\DtoUtility;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
@@ -30,11 +35,28 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     protected $eventRepository = null;
 
     /**
+     * memberRepository
+     *
+     * @var \Buepro\Grevman\Domain\Repository\MemberRepository
+     */
+    protected $memberRepository = null;
+
+    /**
      * @param \Buepro\Grevman\Domain\Repository\EventRepository $eventRepository
      */
-    public function injectEventRepository(\Buepro\Grevman\Domain\Repository\EventRepository $eventRepository)
-    {
+    public function injectEventRepository(
+        \Buepro\Grevman\Domain\Repository\EventRepository $eventRepository
+    ) {
         $this->eventRepository = $eventRepository;
+    }
+
+    /**
+     * @param \Buepro\Grevman\Domain\Repository\MemberRepository $memberRepository
+     */
+    public function injectMemberRepository(
+        \Buepro\Grevman\Domain\Repository\MemberRepository $memberRepository
+    ) {
+        $this->memberRepository = $memberRepository;
     }
 
     /**
@@ -56,11 +78,53 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function showAction(\Buepro\Grevman\Domain\Model\Event $event)
     {
-
+        $identifiedEventMember = null;
+        if ($GLOBALS['TSFE']->fe_user && $GLOBALS['TSFE']->fe_user->user['uid']) {
+            $member = $this->memberRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
+            $identifiedEventMember = new EventMember($event, $member);
+        }
         $this->view->assignMultiple([
             'event' => $event,
             'eventGroups' => DtoUtility::getEventGroups($event),
+            'identifiedEventMember' =>  $identifiedEventMember,
         ]);
+    }
+
+    public function registerAction(
+        \Buepro\Grevman\Domain\Model\Event $event,
+        \Buepro\Grevman\Domain\Model\Member $member
+    ) {
+        $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
+        $registration = $event->getRegistrationForMember($member);
+        if (!$registration) {
+            /** @var Registration $registration */
+            $registration = GeneralUtility::makeInstance(Registration::class);
+            $registration->setMember($member);
+            $event->addRegistration($registration);
+        }
+        $registration->setStatus(Registration::REGISTRATION_CONFIRMED);
+        $this->addFlashMessage(
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('registerConfirmation', 'grevman'),
+            '', FlashMessage::INFO);
+
+        $persistenceManager->add($event);
+        $persistenceManager->persistAll();
+        $this->redirect('show', null, null, ['event' => $event]);
+    }
+
+    public function unregisterAction(
+        \Buepro\Grevman\Domain\Model\Event $event,
+        \Buepro\Grevman\Domain\Model\Member $member
+    ) {
+        $registration = $event->getRegistrationForMember($member);
+        $registration->setStatus(Registration::REGISTRATION_CANCELED);
+        $this->addFlashMessage(
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unregisterConfirmation', 'grevman'),
+            '', FlashMessage::INFO);
+        $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
+        $persistenceManager->add($registration);
+        $persistenceManager->persistAll();
+        $this->redirect('show', null, null, ['event' => $event]);
     }
 
     /**

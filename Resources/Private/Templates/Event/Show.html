@@ -62,6 +62,9 @@
         </section>
         <footer>
             <f:link.action class="btn btn-primary" action="list">Back to list</f:link.action>
+            <f:if condition="{identifiedEventMember}">
+                <f:render partial="Event/UserActions" arguments="{event: event, identifiedEventMember: identifiedEventMember, eventGroups: eventGroups}" />
+            </f:if>
         </footer>
     </div>
 </f:section>

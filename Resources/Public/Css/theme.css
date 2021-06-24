@@ -1,3 +1,11 @@
+.typo3-messages {
+    list-style: none;
+    padding: 0;
+}
+.typo3-messages p:last-child {
+    margin-bottom: 0;
+}
+
 .gem-event-facts {
     margin: 0 -0.5rem;
 }
@@ -48,6 +56,9 @@
     margin-top: 2rem;
     border-top: rgba(0,0,0,0.4) 1px solid;
     padding-top: 1rem;
+}
+.gem-event-detail > footer .btn {
+    margin-right: 0.5rem;
 }
 .gem-event-detail .gemc-participants {
     display: flex;

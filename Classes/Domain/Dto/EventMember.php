@@ -32,6 +32,16 @@ class EventMember
         $this->registration = $event->getRegistrationForMember($member);
     }
 
+    public function getEvent(): Event
+    {
+        return $this->event;
+    }
+
+    public function getMember(): Member
+    {
+        return $this->member;
+    }
+
     public function getScreenName(): string
     {
         return $this->member->getScreenName();
@@ -43,5 +53,10 @@ class EventMember
             return 0;
         }
         return $this->registration->getStatus();
+    }
+
+    public function getRegistered(): bool
+    {
+        return $this->registration && $this->registration->getStatus() === Registration::REGISTRATION_CONFIRMED;
     }
 }
