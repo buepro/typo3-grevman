@@ -634,4 +634,20 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->files = $files;
     }
+
+    public function getRegistrationForMember(Member $member): ?Registration
+    {
+        $result = null;
+        if (!$member) {
+            return $result;
+        }
+        $memberUid = $member->getUid();
+        foreach ($this->getRegistrations() as $registration) {
+            /** @var Registration $registration */
+            if ($registration->getMember() && $registration->getMember()->getUid() === $memberUid) {
+                $result = $registration;
+            }
+        }
+        return $result;
+    }
 }

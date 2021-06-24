@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Buepro\Grevman\Controller;
 
 
+use Buepro\Grevman\Utility\DtoUtility;
+
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
  *
@@ -54,7 +56,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function showAction(\Buepro\Grevman\Domain\Model\Event $event)
     {
-        $this->view->assign('event', $event);
+
+        $this->view->assignMultiple([
+            'event' => $event,
+            'eventGroups' => DtoUtility::getEventGroups($event),
+        ]);
     }
 
     /**
