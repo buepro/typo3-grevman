@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Buepro\Grevman\Domain\Repository;
 
 
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
  *
@@ -19,4 +21,17 @@ namespace Buepro\Grevman\Domain\Repository;
  */
 class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
+    /**
+     * Returns all objects of this repository.
+     *
+     * @return QueryResultInterface|array
+     */
+    public function findAll()
+    {
+        $query = $this->createQuery();
+        $query->matching(
+            $query->greaterThanOrEqual('startdate', time())
+        );
+        return $query->execute();
+    }
 }

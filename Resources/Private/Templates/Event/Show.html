@@ -2,6 +2,13 @@
 <f:layout name="Default" />
 
 <f:section name="content">
+    <f:for each="{event.memberGroups}" as="group">
+        <f:for each="{group.members}" as="member">
+            <f:for each="{member.registrations}" as="registration">
+                <f:debug>{registration.uid}</f:debug>
+            </f:for>
+        </f:for>
+    </f:for>
     <f:flashMessages />
     {settings.detail -> f:variable(name: '_settings')}
     <div class="gem-event-detail">
