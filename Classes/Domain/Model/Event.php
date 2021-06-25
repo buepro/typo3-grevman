@@ -650,4 +650,42 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         }
         return $result;
     }
+
+    /**
+     * Returns the group assigned to this event for a given member. In case the member belongs to a group that isn't
+     * assigned to this event null is returned.
+     *
+     * @param Member $member
+     * @return Group|null
+     */
+    public function getEventGroup(Member $member): ?Group
+    {
+        foreach ($this->memberGroups as $memberGroup) {
+            /** @var Group $memberGroup */
+            foreach ($memberGroup->getMembers() as $groupMember) {
+                if ($groupMember === $member) {
+                    return $memberGroup;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets all registrations from members not belonging to an event group being assigned to this event. In other words
+     * the members from the returned registrations might belong to other event groups used for other events.
+     *
+     * @return array|null
+     */
+    public function getSpontaneousRegistrations(): ?array
+    {
+        $result = null;
+        foreach ($this->registrations as $registration) {
+            /** @var Registration $registration */
+            if (!$this->getEventGroup($registration->getMember())) {
+                $result[] = $registration;
+            }
+        }
+        return $result;
+    }
 }

@@ -1,16 +1,34 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 
-<f:for each="{eventGroups}" as="group" iteration="iterator">
-    <div class="gemc-group gemc-{iterator.count}">
-        <h4>{group.name}</h4>
+<f:for each="{eventGroups}" as="_group" iteration="_iterator">
+    <div class="gemc-group gemc-{_iterator.cycle}">
+        <header>
+            <h4>{_group.name}</h4>
+        </header>
         <div class="gemc-participants">
-            <f:for each="{group.members}" as="member" iteration="iterator">
-                <div class="gemc-participant gemc-regstate-{member.registrationState}">
-                    {member.screenName}
+            <f:for each="{_group.members}" as="_member">
+                <div class="gemc-participant gemc-regstate-{_member.registrationState}">
+                    {_member.screenName}
                 </div>
             </f:for>
         </div>
     </div>
 </f:for>
+<f:comment>Cache the spontaneous registrations</f:comment>
+{event.spontaneousRegistrations -> f:variable(name: '_spontaneousRegistrations')}
+<f:if condition="{_spontaneousRegistrations}">
+    <div class="gemc-spontaneous">
+        <header>
+            <h4>{f:translate(key: 'spontaneousRegistrations')}</h4>
+        </header>
+        <div class="gemc-participants">
+            <f:for each="{_spontaneousRegistrations}" as="_registration">
+                <div class="gemc-participant gemc-regstate-{_registration.status}">
+                    {_registration.member.screenName}
+                </div>
+            </f:for>
+        </div>
+    </div>
+</f:if>
 
 </html>

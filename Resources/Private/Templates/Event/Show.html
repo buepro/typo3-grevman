@@ -3,7 +3,6 @@
 
 <f:section name="content">
     <f:flashMessages />
-    <f:debug>{identifiedEventMember.eventGroupMember}</f:debug>
     {settings.detail -> f:variable(name: '_settings')}
     <div class="gem-event-detail">
         <header>
@@ -59,7 +58,7 @@
             <header>
                 <h3>{f:translate(key: 'participants')}</h3>
             </header>
-            <f:render partial="Event/Registrations" arguments="{eventGroups: eventGroups, guests: event.guests}" />
+            <f:render partial="Event/Registrations" arguments="{event: event, eventGroups: eventGroups, guests: event.guests}" />
         </section>
         <footer>
             <f:link.action class="btn btn-primary" action="list">Back to list</f:link.action>

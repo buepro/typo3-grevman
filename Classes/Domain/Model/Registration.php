@@ -28,7 +28,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var int
      */
-    protected $status = 0;
+    protected $status = self::REGISTRATION_UNDEFINED;
 
     /**
      * member

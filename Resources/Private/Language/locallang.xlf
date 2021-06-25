@@ -27,6 +27,9 @@
 			<trans-unit id="unregisterConfirmation" resname="unregister">
 				<source>You are now unregistered.</source>
 			</trans-unit>
+			<trans-unit id="spontaneousRegistrations" resname="spontaneousRegistrations">
+				<source>Spontaneous registrations</source>
+			</trans-unit>
 
 			<trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event">
 				<source>Event</source>
