@@ -60,6 +60,9 @@
 .gem-event-detail > footer .btn {
     margin-right: 0.5rem;
 }
+.gem-event-detail .gemc-group {
+    margin: 1rem 0;
+}
 .gem-event-detail .gemc-participants {
     display: flex;
     flex-wrap: wrap;

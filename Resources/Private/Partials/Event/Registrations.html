@@ -14,10 +14,11 @@
         </div>
     </div>
 </f:for>
+
 <f:comment>Cache the spontaneous registrations</f:comment>
 {event.spontaneousRegistrations -> f:variable(name: '_spontaneousRegistrations')}
 <f:if condition="{_spontaneousRegistrations}">
-    <div class="gemc-spontaneous">
+    <div class="gemc-group gemc-spontaneous">
         <header>
             <h4>{f:translate(key: 'spontaneousRegistrations')}</h4>
         </header>
@@ -25,6 +26,21 @@
             <f:for each="{_spontaneousRegistrations}" as="_registration">
                 <div class="gemc-participant gemc-regstate-{_registration.status}">
                     {_registration.member.screenName}
+                </div>
+            </f:for>
+        </div>
+    </div>
+</f:if>
+
+<f:if condition="{event.guests}">
+    <div class="gemc-group gemc-spontaneous">
+        <header>
+            <h4>{f:translate(key: 'guests')}</h4>
+        </header>
+        <div class="gemc-participants">
+            <f:for each="{event.guests}" as="_guest">
+                <div class="gemc-participant gemc-regstate-6">
+                    {_guest.screenName}
                 </div>
             </f:for>
         </div>
