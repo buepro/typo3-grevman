@@ -25,10 +25,6 @@ plugin.tx_grevman_events {
     general {
       leaderGroups = {$plugin.tx_grevman_events.settings.general.leaderGroups}
     }
-    mail {
-      fromName = {$plugin.tx_grevman_events.settings.mail.fromName}
-      fromEmail = {$plugin.tx_grevman_events.settings.mail.fromEmail}
-    }
     event {
       detail {
         image {

@@ -16,10 +16,6 @@ plugin.tx_grevman_events {
       # cat=plugin.tx_grevman_events/settings; type=string; label=Uid's from leader groups (assigned to trainers, coaches, etc.)
       leaderGroups = 4
     }
-    mail {
-      fromName = Sender
-      fromEmail = sender@sender.ch
-    }
     event {
       detail {
         image {
