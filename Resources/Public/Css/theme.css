@@ -6,6 +6,14 @@
     margin-bottom: 0;
 }
 
+.gem-zebralistitem {
+    padding: 1em;
+    background: #e0e0e0;
+}
+.gem-zebralistitem:nth-child(2n+1) {
+    background: #f0f0f0;
+}
+
 .gem-event-facts {
     margin: 0 -0.5rem;
 }
@@ -14,13 +22,6 @@
     margin: 0 0.5rem;
 }
 
-.gem-event-listitem {
-    padding: 1em;
-    background: #e0e0e0;
-}
-.gem-event-listitem:nth-child(2n+1) {
-    background: #f0f0f0;
-}
 .gem-event-listitem .gemc-facts {
     display: flex;
     align-items: center;

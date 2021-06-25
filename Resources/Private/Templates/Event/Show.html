@@ -54,12 +54,26 @@
                 {event.program ->f:format.html()}
             </section>
         </f:if>
-        <section>
+        <section class="gemc-reg">
             <header>
                 <h3>{f:translate(key: 'participants')}</h3>
             </header>
             <f:render partial="Event/Registrations" arguments="{event: event, eventGroups: eventGroups, guests: event.guests}" />
         </section>
+        <f:if condition="{event.notes}">
+            <section class="gemc-notes">
+                <header>
+                    <h3>{f:translate(key: 'tx_grevman_domain_model_event.notes')}</h3>
+                </header>
+                <div class="gemc-wrap"></div>
+                <f:for each="{event.notes}" as="_note">
+                    <article class="gem-zebralistitem">
+                        {_note.text -> f:format.html()}
+                        <p class="small">{_note.member.screenName}</p>
+                    </article>
+                </f:for>
+            </section>
+        </f:if>
         <footer>
             <f:link.action class="btn btn-primary" action="list">Back to list</f:link.action>
             <f:if condition="({identifiedEventMember} && {identifiedEventMember.eventGroupMember}) ||
