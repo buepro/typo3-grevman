@@ -635,7 +635,7 @@
                     "controllerActionCombinations": "Event => list, show, showMatrix\nRegistration => new, create, edit, update",
                     "noncacheableActions": "Event => list, show, showMatrix\nRegistration => new, create, edit, update"
                 },
-                "description": "Shows upcoming events with related registration information. Members might change their registration status and trainers can send notification emails.",
+                "description": "Shows upcoming events with related registration information. Members might change their registration status and leaders can send notification emails.",
                 "key": "events",
                 "name": "Events panel"
             }

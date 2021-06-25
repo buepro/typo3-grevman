@@ -52,7 +52,7 @@ All storage
      }
    }
 
-Trainers storage
+Leaders storage
 ~~~~~~~~~~~~~~~~
 
 .. code-block:: typoscript

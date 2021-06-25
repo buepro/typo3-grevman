@@ -131,7 +131,7 @@
 				<source>Events panel</source>
 			</trans-unit>
 			<trans-unit id="tx_grevman_events.description" resname="tx_grevman_events.description">
-				<source>Shows upcoming events with related registration information. Members might change their registration status and trainers can send notification emails.</source>
+				<source>Shows upcoming events with related registration information. Members might change their registration status and leaders can send notification emails.</source>
 			</trans-unit>
 		</body>
 	</file>
