@@ -29,13 +29,13 @@ plugin.tx_grevman_events {
       fromName = {$plugin.tx_grevman_events.settings.mail.fromName}
       fromEmail = {$plugin.tx_grevman_events.settings.mail.fromEmail}
     }
-    detail {
-      image {
-        width = {$plugin.tx_grevman_events.settings.detail.image.width}
-        height = {$plugin.tx_grevman_events.settings.detail.image.height}
-      }
-    }
     event {
+      detail {
+        image {
+          width = {$plugin.tx_grevman_events.settings.event.detail.image.width}
+          height = {$plugin.tx_grevman_events.settings.event.detail.image.height}
+        }
+      }
       registration {
         open = {$plugin.tx_grevman_events.settings.event.registration.open}
       }

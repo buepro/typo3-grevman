@@ -20,15 +20,15 @@ plugin.tx_grevman_events {
       fromName = Sender
       fromEmail = sender@sender.ch
     }
-    detail {
-      image {
-        # cat=plugin.tx_grevman_events/settings; type=string; label=Detail image width
-        width = 680c
-        # cat=plugin.tx_grevman_events/settings; type=string; label=Detail image height
-        height = 400
-      }
-    }
     event {
+      detail {
+        image {
+          # cat=plugin.tx_grevman_events/settings; type=string; label=Detail image width
+          width = 680c
+          # cat=plugin.tx_grevman_events/settings; type=string; label=Detail image height
+          height = 400
+        }
+      }
       registration {
         # cat=plugin.tx_grevman_events/settings; type=bool; label=Event registration open:Unset to restrict event registration to members belonging to a group assigned to the event.
         open = 1

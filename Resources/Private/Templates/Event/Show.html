@@ -3,7 +3,7 @@
 
 <f:section name="content">
     <f:flashMessages />
-    {settings.detail -> f:variable(name: '_settings')}
+    {settings.event.detail -> f:variable(name: '_settings')}
     <div class="gem-event-detail">
         <header>
             <h2>{event.title}</h2>
