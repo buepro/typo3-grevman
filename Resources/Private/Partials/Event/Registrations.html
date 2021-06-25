@@ -7,7 +7,8 @@
         </header>
         <div class="gemc-participants">
             <f:for each="{_group.members}" as="_member">
-                <div class="gemc-participant gemc-regstate-{_member.registrationState}">
+                {f:variable(name: '_leaderClass', value: ' gemc-leader') -> f:if(condition: _member.isLeader)}
+                <div class="gemc-participant gemc-regstate-{_member.registrationState}{_leaderClass}">
                     {_member.screenName}
                 </div>
             </f:for>
@@ -24,7 +25,8 @@
         </header>
         <div class="gemc-participants">
             <f:for each="{_spontaneousRegistrations}" as="_registration">
-                <div class="gemc-participant gemc-regstate-{_registration.status}">
+                {f:variable(name: '_leaderClass', value: ' gemc-leader') -> f:if(condition: _member.isLeader)}
+                <div class="gemc-participant gemc-regstate-{_registration.status}{_leaderClass}">
                     {_registration.member.screenName}
                 </div>
             </f:for>

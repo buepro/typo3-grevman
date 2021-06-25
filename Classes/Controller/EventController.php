@@ -6,8 +6,10 @@ namespace Buepro\Grevman\Controller;
 
 
 use Buepro\Grevman\Domain\Dto\EventMember;
+use Buepro\Grevman\Domain\Dto\Mail;
 use Buepro\Grevman\Domain\Model\Registration;
 use Buepro\Grevman\Utility\DtoUtility;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
@@ -125,6 +127,31 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $persistenceManager->add($registration);
         $persistenceManager->persistAll();
         $this->redirect('show', null, null, ['event' => $event]);
+    }
+
+    /**
+     * @param Mail $mailDto
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     */
+    public function sendMailAction(Mail $mailDto)
+    {
+        /** @var MailMessage $mail */
+        $mail = GeneralUtility::makeInstance(MailMessage::class);
+        $mail->from(new \Symfony\Component\Mime\Address($mailDto->getSender()->getEmail(), $mailDto->getSender()->getScreenName()));
+        $mail->to(...$mailDto->getReceivers());
+        $mail->subject($mailDto->getSubject());
+        $mail->text($mailDto->getMessage());
+        if ($mail->send()) {
+            $this->addFlashMessage(
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailConfirmation', 'grevman'),
+                '', FlashMessage::INFO);
+        } else {
+            $this->addFlashMessage(
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailError', 'grevman'),
+                '', FlashMessage::ERROR);
+        }
+
+        $this->redirect('show', null, null, ['event' => $mailDto->getEvent()]);
     }
 
     /**

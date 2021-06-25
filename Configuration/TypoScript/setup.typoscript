@@ -22,6 +22,13 @@ plugin.tx_grevman_events {
         #callDefaultActionIfActionCantBeResolved = 1
     }
   settings {
+    general {
+      leaderGroups = {$plugin.tx_grevman_events.settings.general.leaderGroups}
+    }
+    mail {
+      fromName = {$plugin.tx_grevman_events.settings.mail.fromName}
+      fromEmail = {$plugin.tx_grevman_events.settings.mail.fromEmail}
+    }
     detail {
       image {
         width = {$plugin.tx_grevman_events.settings.detail.image.width}
@@ -38,4 +45,5 @@ plugin.tx_grevman_events {
 
 page {
   includeCSS.grevman = EXT:grevman/Resources/Public/Css/theme.css
+  includeJSFooter.grevman = EXT:grevman/Resources/Public/JavaScript/Src/grevman.js
 }

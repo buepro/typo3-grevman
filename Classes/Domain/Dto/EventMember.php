@@ -43,6 +43,11 @@ class EventMember
         return $this->member;
     }
 
+    public function getEmail(): string
+    {
+        return $this->member->getEmail();
+    }
+
     public function getScreenName(): string
     {
         return $this->member->getScreenName();
@@ -72,5 +77,15 @@ class EventMember
             }
         }
         return false;
+    }
+
+    /**
+     * True if the member belongs to a leader group.
+     *
+     * @return bool
+     */
+    public function getIsLeader(): bool
+    {
+        return $this->member && $this->member->getIsLeader();
     }
 }

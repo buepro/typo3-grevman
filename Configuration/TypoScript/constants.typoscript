@@ -12,6 +12,14 @@ plugin.tx_grevman_events {
     storagePid = 224,225,226
   }
   settings {
+    general {
+      # cat=plugin.tx_grevman_events/settings; type=string; label=Uid's from leader groups (assigned to trainers, coaches, etc.)
+      leaderGroups = 4
+    }
+    mail {
+      fromName = Sender
+      fromEmail = sender@sender.ch
+    }
     detail {
       image {
         # cat=plugin.tx_grevman_events/settings; type=string; label=Detail image width

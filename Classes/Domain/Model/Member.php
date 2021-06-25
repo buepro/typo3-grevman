@@ -5,6 +5,11 @@ declare(strict_types=1);
 namespace Buepro\Grevman\Domain\Model;
 
 
+use Buepro\Grevman\Service\TypoScriptService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
  *
@@ -45,10 +50,13 @@ class Member extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
 
     /**
      * __construct
+     *
+     * @param string $username
+     * @param string $password
      */
-    public function __construct()
+    public function __construct($username = '', $password = '')
     {
-
+        parent::__construct($username = '', $password = '');
         // Do not remove the next line: It would break the functionality
         $this->initializeObject();
     }
@@ -207,5 +215,23 @@ class Member extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
             $parts[] = $this->getLastName();
         }
         return $parts ? implode(' ', $parts) : '';
+    }
+
+    /**
+     * True if the member belongs to a leader group.
+     *
+     * @return bool
+     */
+    public function getIsLeader(): bool
+    {
+        /** @var TypoScriptService $service */
+        $service = GeneralUtility::makeInstance(TypoScriptService::class);
+        $leaderGroups = $service->getLeaderGroups();
+        foreach ($this->getUsergroup() as $usergroup) {
+            if (in_array((string) $usergroup->getUid(), $leaderGroups, true)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

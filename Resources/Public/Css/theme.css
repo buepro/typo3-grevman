@@ -5,12 +5,15 @@
 .typo3-messages p:last-child {
     margin-bottom: 0;
 }
+.f3-form-error {
+    box-shadow: red 0 0 4px 0;
+}
 
-.gem-zebralistitem {
+.gem-zebra {
     padding: 1em;
     background: #e0e0e0;
 }
-.gem-zebralistitem:nth-child(2n+1) {
+.gem-zebra:nth-child(2n+1) {
     background: #f0f0f0;
 }
 
@@ -79,4 +82,12 @@
 }
 .gem-event-detail .gemc-participant.gemc-regstate-9 {
     background: lightpink;
+}
+
+.gem-mail-message {
+    display: none;
+    margin-top: 1.5rem;
+}
+.gem-mail-message.gemc-show {
+    display: block;
 }
