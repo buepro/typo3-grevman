@@ -3,6 +3,7 @@
 
 <f:section name="content">
     <f:flashMessages />
+    <f:debug>{identifiedEventMember.eventGroupMember}</f:debug>
     {settings.detail -> f:variable(name: '_settings')}
     <div class="gem-event-detail">
         <header>
@@ -62,7 +63,8 @@
         </section>
         <footer>
             <f:link.action class="btn btn-primary" action="list">Back to list</f:link.action>
-            <f:if condition="{identifiedEventMember}">
+            <f:if condition="({identifiedEventMember} && {identifiedEventMember.eventGroupMember}) ||
+                             ({identifiedEventMember} && {settings.event.registration.open})">
                 <f:render partial="Event/UserActions" arguments="{event: event, identifiedEventMember: identifiedEventMember, eventGroups: eventGroups}" />
             </f:if>
         </footer>

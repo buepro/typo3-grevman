@@ -5,6 +5,7 @@ namespace Buepro\Grevman\Domain\Dto;
 
 
 use Buepro\Grevman\Domain\Model\Event;
+use Buepro\Grevman\Domain\Model\Group;
 use Buepro\Grevman\Domain\Model\Member;
 use Buepro\Grevman\Domain\Model\Registration;
 
@@ -58,5 +59,18 @@ class EventMember
     public function getRegistered(): bool
     {
         return $this->registration && $this->registration->getStatus() === Registration::REGISTRATION_CONFIRMED;
+    }
+
+    public function isEventGroupMember(): bool
+    {
+        foreach ($this->event->getMemberGroups() as $group) {
+            /** @var Group $group */
+            foreach ($group->getMembers() as $member) {
+                if ($this->member === $member) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

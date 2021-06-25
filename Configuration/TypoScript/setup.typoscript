@@ -28,6 +28,11 @@ plugin.tx_grevman_events {
         height = {$plugin.tx_grevman_events.settings.detail.image.height}
       }
     }
+    event {
+      registration {
+        open = {$plugin.tx_grevman_events.settings.event.registration.open}
+      }
+    }
   }
 }
 

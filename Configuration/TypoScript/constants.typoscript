@@ -20,5 +20,11 @@ plugin.tx_grevman_events {
         height = 400
       }
     }
+    event {
+      registration {
+        # cat=plugin.tx_grevman_events/settings; type=bool; label=Event registration open:Unset to restrict event registration to members belonging to a group assigned to the event.
+        open = 1
+      }
+    }
   }
 }
