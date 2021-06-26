@@ -51,6 +51,15 @@
 			<trans-unit id="mailError" resname="mailError">
 				<source>The mail couldn't be send.</source>
 			</trans-unit>
+			<trans-unit id="createNote" resname="createNote">
+				<source>Create note</source>
+			</trans-unit>
+			<trans-unit id="add" resname="add">
+				<source>Add</source>
+			</trans-unit>
+			<trans-unit id="noteAdded" resname="noteAdded">
+				<source>The note has been added.</source>
+			</trans-unit>
 
 			<trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event">
 				<source>Event</source>

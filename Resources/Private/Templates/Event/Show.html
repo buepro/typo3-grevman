@@ -96,5 +96,17 @@
             </f:form>
         </div>
     </f:if>
+    <f:if condition="{identifiedEventMember}">
+        <div id="gem-note" class="gem-note gem-zebra">
+            <f:form name="noteDto" object="{noteDto}" action="addNote">
+                <div class="form-group">
+                    <f:form.textarea property="text" class="form-control" placeholder="{f:translate(key: 'message')}*" />
+                </div>
+                <f:form.hidden property="event" value="{event}" />
+                <f:form.hidden property="member" value="{identifiedEventMember.member}" />
+                <f:form.submit class="btn btn-primary" value="{f:translate(key: 'add')}" />
+            </f:form>
+        </div>
+    </f:if>
 </f:section>
 </html>

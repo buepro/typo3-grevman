@@ -87,7 +87,7 @@
     }
 }
 
-.gem-mail-message {
+.gem-mail-message, .gem-note {
     display: none;
     margin-top: $gem-gutter-large;
     &.gemc-show {

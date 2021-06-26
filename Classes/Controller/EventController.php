@@ -7,6 +7,7 @@ namespace Buepro\Grevman\Controller;
 
 use Buepro\Grevman\Domain\Dto\EventMember;
 use Buepro\Grevman\Domain\Dto\Mail;
+use Buepro\Grevman\Domain\Dto\Note;
 use Buepro\Grevman\Domain\Model\Registration;
 use Buepro\Grevman\Utility\DtoUtility;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -152,6 +153,22 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
 
         $this->redirect('show', null, null, ['event' => $mailDto->getEvent()]);
+    }
+
+    /**
+     * @param Note $noteDto
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     */
+    public function addNoteAction(Note $noteDto)
+    {
+        $noteDto->getEvent()->addNote($noteDto->createNote());
+        $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
+        $persistenceManager->add($noteDto->getEvent());
+        $persistenceManager->persistAll();
+        $this->addFlashMessage(
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('noteAdded', 'grevman'),
+            '', FlashMessage::INFO);
+        $this->redirect('show', null, null, ['event' => $noteDto->getEvent()]);
     }
 
     /**

@@ -95,11 +95,11 @@
   }
 }
 
-.gem-mail-message {
+.gem-mail-message, .gem-note {
   display: none;
   margin-top: 1.5rem;
 }
-.gem-mail-message.gemc-show {
+.gem-mail-message.gemc-show, .gem-note.gemc-show {
   display: block;
 }
 
