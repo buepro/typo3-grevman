@@ -1,0 +1,28 @@
+//
+// TYPO3 classes
+//
+.typo3-messages {
+    list-style: none;
+    padding: 0;
+    p:last-child {
+        margin-bottom: 0;
+    }
+}
+.f3-form-error {
+    box-shadow: red 0 0 4px 0;
+}
+
+//
+// Grevman
+//
+.tx-grevman {
+    
+}
+.gem-zebra {
+    padding: $gem-gutter-medium;
+    background: $gem-zebra-dark;
+    &:nth-child(2n+1) {
+        background: $gem-zebra-bright;
+    }
+}
+

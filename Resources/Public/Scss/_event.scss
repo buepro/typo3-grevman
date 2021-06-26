@@ -1,28 +1,6 @@
 //
-// TYPO3 classes
+// Components
 //
-.typo3-messages {
-    list-style: none;
-    padding: 0;
-    p:last-child {
-        margin-bottom: 0;
-    }
-}
-.f3-form-error {
-    box-shadow: red 0 0 4px 0;
-}
-
-//
-// General
-//
-.gem-zebra {
-    padding: $gem-gutter-medium;
-    background: $gem-zebra-dark;
-    &:nth-child(2n+1) {
-        background: $gem-zebra-bright;
-    }
-}
-
 .gem-event-facts {
     margin: 0 -$gem-gutter-small;
 }
@@ -67,9 +45,11 @@
         margin-bottom: $gem-gutter-medium;
     }
     .gemc-images {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 0 -$gem-gutter-small;
+        margin: #{$gem-gutter-medium} -#{$gem-gutter-small};
+        img {
+            max-width: 100%;
+            height: auto;
+        }
     }
     .gemc-image {
         display: flex;
@@ -96,6 +76,13 @@
         }
         &.gemc-regstate-9 {
             background: lightpink;
+        }
+    }
+    @media (min-width: 768px) {
+        .gemc-images {
+            float: right;
+            max-width: 50%;
+            margin: 0 -$gem-gutter-small $gem-gutter-small $gem-gutter-small;
         }
     }
 }

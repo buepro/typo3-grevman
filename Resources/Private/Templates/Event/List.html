@@ -4,7 +4,9 @@
 <f:section name="content">
     <f:flashMessages />
     <div class="gem-event-list">
-        <h2>Upcoming events</h2>
+        <header>
+            <h2>Upcoming events</h2>
+        </header>
         <div class="gemc-list">
             <f:for each="{events}" as="event">
                 <div class="gem-event-listitem gem-zebra">
@@ -13,8 +15,10 @@
                         <f:link.action class="btn btn-sm btn-primary" action="show" arguments="{event : event}">Details</f:link.action>
                     </div>
                     <div class="gemc-section gemc-text">
-                        <h4>{event.title}</h4>
-                        <h5>{event.location}</h5>
+                        <header>
+                            <h4>{event.title}</h4>
+                            <h5>{event.location}</h5>
+                        </header>
                         {event.teaser -> f:format.html()}
                     </div>
                 </div>

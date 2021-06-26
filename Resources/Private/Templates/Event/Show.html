@@ -12,26 +12,26 @@
         </header>
         <f:if condition="{event.description} || {event.images} || {event.files}">
             <section class="gemc-desc">
-                <div class="gemc-text">
-                    <header>
-                        <h3>{f:translate(key: 'tx_grevman_domain_model_event.description')}</h3>
-                    </header>
+                <header>
+                    <h3>{f:translate(key: 'tx_grevman_domain_model_event.description')}</h3>
+                </header>
+                <div class="gemc-textimage clearfix">
+                    <f:if condition="{event.images}">
+                        <div class="gemc-images">
+                            <f:for each="{event.images}" as="image">
+                                <div class="gemc-image">
+                                    <figure>
+                                        <f:image image="{image}" width="{_settings.image.width}" height="{_settings.image.height}" />
+                                    </figure>
+                                    <f:if condition="{image.originalResource.description}">
+                                        <figcaption>{image.originalResource.description}</figcaption>
+                                    </f:if>
+                                </div>
+                            </f:for>
+                        </div>
+                    </f:if>
                     {event.description ->f:format.html()}
                 </div>
-                <f:if condition="{event.images}">
-                    <div class="gemc-images">
-                        <f:for each="{event.images}" as="image">
-                            <div class="gemc-image">
-                                <figure>
-                                    <f:image image="{image}" width="{_settings.image.width}" height="{_settings.image.height}" />
-                                </figure>
-                                <f:if condition="{image.originalResource.description}">
-                                    <figcaption>{image.originalResource.description}</figcaption>
-                                </f:if>
-                            </div>
-                        </f:for>
-                    </div>
-                </f:if>
                 <f:if condition="{event.files}">
                     <div class="gemc-files">
                         <strong>{f:translate(key: 'tx_grevman_domain_model_event.files')}: </strong>

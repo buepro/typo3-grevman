@@ -54,9 +54,11 @@
   margin-bottom: 1rem;
 }
 .gem-event-detail .gemc-images {
-  display: flex;
-  flex-wrap: wrap;
-  margin: -0.5rem;
+  margin: 1rem -0.5rem;
+}
+.gem-event-detail .gemc-images img {
+  max-width: 100%;
+  height: auto;
 }
 .gem-event-detail .gemc-image {
   display: flex;
@@ -84,6 +86,13 @@
 }
 .gem-event-detail .gemc-participant.gemc-regstate-9 {
   background: lightpink;
+}
+@media (min-width: 768px) {
+  .gem-event-detail .gemc-images {
+    float: right;
+    max-width: 50%;
+    margin: -0.5rem 0.5rem 0.5rem;
+  }
 }
 
 .gem-mail-message {
