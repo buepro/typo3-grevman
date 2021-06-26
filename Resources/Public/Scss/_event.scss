@@ -1,0 +1,109 @@
+//
+// TYPO3 classes
+//
+.typo3-messages {
+    list-style: none;
+    padding: 0;
+    p:last-child {
+        margin-bottom: 0;
+    }
+}
+.f3-form-error {
+    box-shadow: red 0 0 4px 0;
+}
+
+//
+// General
+//
+.gem-zebra {
+    padding: $gem-gutter-medium;
+    background: $gem-zebra-dark;
+    &:nth-child(2n+1) {
+        background: $gem-zebra-bright;
+    }
+}
+
+.gem-event-facts {
+    margin: 0 -$gem-gutter-small;
+}
+.gem-event-facts li {
+    display: inline-block;
+    margin: 0 $gem-gutter-small;
+}
+
+//
+// Event list
+//
+.gem-event-listitem {
+    .gemc-facts {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: $gem-gutter-medium;
+        > a {
+            margin-left: $gem-gutter-medium;
+        }
+    }
+}
+
+//
+// Event detail
+//
+.gem-event-detail {
+    > section {
+        margin-top: $gem-gutter-large;
+        border-top: rgba(0,0,0,0.2) 1px solid;
+        padding-top: $gem-gutter-large;
+    }
+    > footer {
+        margin-top: 1.5 * $gem-gutter-large;
+        border-top: rgba(0,0,0,0.4) 1px solid;
+        padding-top: $gem-gutter-medium;
+        .btn {
+            margin-right: $gem-gutter-small;
+        }
+    }
+    .gem-event-facts {
+        margin-bottom: $gem-gutter-medium;
+    }
+    .gemc-images {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -$gem-gutter-small;
+    }
+    .gemc-image {
+        display: flex;
+        flex-direction: column;
+        margin: $gem-gutter-small;
+    }
+    .gemc-files {
+        margin: $gem-gutter-medium 0;
+    }
+    .gemc-group {
+        margin: $gem-gutter-medium 0;
+    }
+    .gemc-participants {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -$gem-participant-gutter;
+    }
+    .gemc-participant {
+        background: lightgrey;
+        padding: 0.5rem 1rem;
+        margin: $gem-participant-gutter;
+        &.gemc-regstate-6 {
+            background: lightgreen;
+        }
+        &.gemc-regstate-9 {
+            background: lightpink;
+        }
+    }
+}
+
+.gem-mail-message {
+    display: none;
+    margin-top: $gem-gutter-large;
+    &.gemc-show {
+        display: block;
+    }
+}

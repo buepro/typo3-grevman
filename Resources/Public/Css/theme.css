@@ -1,93 +1,97 @@
 .typo3-messages {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 .typo3-messages p:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
+
 .f3-form-error {
-    box-shadow: red 0 0 4px 0;
+  box-shadow: red 0 0 4px 0;
 }
 
 .gem-zebra {
-    padding: 1em;
-    background: #e0e0e0;
+  padding: 1rem;
+  background: #e0e0e0;
 }
 .gem-zebra:nth-child(2n+1) {
-    background: #f0f0f0;
+  background: #f0f0f0;
 }
 
 .gem-event-facts {
-    margin: 0 -0.5rem;
+  margin: -0.5rem;
 }
+
 .gem-event-facts li {
-    display: inline-block;
-    margin: 0 0.5rem;
+  display: inline-block;
+  margin: 0 0.5rem;
 }
 
 .gem-event-listitem .gemc-facts {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
 }
 .gem-event-listitem .gemc-facts > a {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
 
-.gem-event-detail .gem-event-facts {
-    margin-bottom: 1rem;
-}
-.gem-event-detail .gemc-images {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -1rem;
-}
-.gem-event-detail .gemc-image {
-    display: flex;
-    flex-direction: column;
-    margin: 1rem;
-}
-.gem-event-detail .gemc-files {
-    margin: 1rem 0;
-}
 .gem-event-detail > section {
-    margin-top: 1.5rem;
-    border-top: rgba(0,0,0,0.2) 1px solid;
-    padding-top: 1.5rem;
+  margin-top: 1.5rem;
+  border-top: rgba(0, 0, 0, 0.2) 1px solid;
+  padding-top: 1.5rem;
 }
 .gem-event-detail > footer {
-    margin-top: 2rem;
-    border-top: rgba(0,0,0,0.4) 1px solid;
-    padding-top: 1rem;
+  margin-top: 2.25rem;
+  border-top: rgba(0, 0, 0, 0.4) 1px solid;
+  padding-top: 1rem;
 }
 .gem-event-detail > footer .btn {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
+}
+.gem-event-detail .gem-event-facts {
+  margin-bottom: 1rem;
+}
+.gem-event-detail .gemc-images {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -0.5rem;
+}
+.gem-event-detail .gemc-image {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+}
+.gem-event-detail .gemc-files {
+  margin: 1rem 0;
 }
 .gem-event-detail .gemc-group {
-    margin: 1rem 0;
+  margin: 1rem 0;
 }
 .gem-event-detail .gemc-participants {
-    display: flex;
-    flex-wrap: wrap;
-    margin: -0.3rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: -0.3rem;
 }
 .gem-event-detail .gemc-participant {
-    background: lightgrey;
-    padding: 0.5rem 1rem;
-    margin: 0.3rem;
+  background: lightgrey;
+  padding: 0.5rem 1rem;
+  margin: 0.3rem;
 }
 .gem-event-detail .gemc-participant.gemc-regstate-6 {
-    background: lightgreen;
+  background: lightgreen;
 }
 .gem-event-detail .gemc-participant.gemc-regstate-9 {
-    background: lightpink;
+  background: lightpink;
 }
 
 .gem-mail-message {
-    display: none;
-    margin-top: 1.5rem;
+  display: none;
+  margin-top: 1.5rem;
 }
 .gem-mail-message.gemc-show {
-    display: block;
+  display: block;
 }
+
+/*# sourceMappingURL=theme.css.map */
