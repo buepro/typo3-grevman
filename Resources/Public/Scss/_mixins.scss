@@ -1,0 +1,9 @@
+@keyframes gem-heartbeat {
+    0% { opacity: 0.2 }
+    50% { opacity: 1.0 }
+    100% {opacity: 0.2 }
+}
+
+@mixin gem-make-heartbeat() {
+    animation: gem-heartbeat 2s ease-in-out infinite;
+}

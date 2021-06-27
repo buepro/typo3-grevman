@@ -13,6 +13,7 @@
 // Event list
 //
 .gem-event-listitem {
+    position: relative;
     .gemc-facts {
         display: flex;
         align-items: center;
@@ -20,6 +21,29 @@
         margin-bottom: $gem-gutter-medium;
         > a {
             margin-left: $gem-gutter-medium;
+        }
+    }
+    &.gemc-regstate-6, &.gemc-regstate-9 {
+        &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            border: $gem-gutter-medium transparent solid;
+        }
+    }
+    &.gemc-regstate-6 {
+        &:before {
+            border-top-color: $gem-registered;
+            border-left-color: $gem-registered;
+            @include gem-make-heartbeat();
+        }
+    }
+    &.gemc-regstate-9 {
+        &:before {
+            border-top-color: $gem-unregistered;
+            border-left-color: $gem-unregistered;
+            @include gem-make-heartbeat();
         }
     }
 }
@@ -72,10 +96,10 @@
         padding: 0.5rem 1rem;
         margin: $gem-participant-gutter;
         &.gemc-regstate-6 {
-            background: lightgreen;
+            background: $gem-registered;
         }
         &.gemc-regstate-9 {
-            background: lightpink;
+            background: $gem-unregistered;
         }
     }
     @media (min-width: 768px) {

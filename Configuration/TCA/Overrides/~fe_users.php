@@ -18,6 +18,14 @@ defined('TYPO3') || die('Access denied.');
             ],
 
         ],
+        'notes' => [
+            'config' => [
+                'appearance' => [
+                    'collapseAll' => 1,
+                    'expandSingle' => 1,
+                ],
+            ],
+        ],
     ];
 
     $GLOBALS['TCA']['fe_users']['columns'] =

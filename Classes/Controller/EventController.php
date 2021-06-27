@@ -70,7 +70,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function listAction()
     {
         $events = $this->eventRepository->findAll();
-        $this->view->assign('events', $events);
+        $identifiedMember = null;
+        if ($GLOBALS['TSFE']->fe_user && $GLOBALS['TSFE']->fe_user->user['uid']) {
+            $identifiedMember = $this->memberRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
+        }
+        $this->view->assignMultiple([
+            'events' => $events,
+            'identifiedMember' => $identifiedMember,
+        ]);
     }
 
     /**

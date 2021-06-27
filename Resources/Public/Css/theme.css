@@ -1,3 +1,14 @@
+@keyframes gem-heartbeat {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
 .typo3-messages {
   list-style: none;
   padding: 0;
@@ -27,6 +38,9 @@
   margin: 0 0.5rem;
 }
 
+.gem-event-listitem {
+  position: relative;
+}
 .gem-event-listitem .gemc-facts {
   display: flex;
   align-items: center;
@@ -35,6 +49,23 @@
 }
 .gem-event-listitem .gemc-facts > a {
   margin-left: 1rem;
+}
+.gem-event-listitem.gemc-regstate-6:before, .gem-event-listitem.gemc-regstate-9:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: 1rem transparent solid;
+}
+.gem-event-listitem.gemc-regstate-6:before {
+  border-top-color: lightgreen;
+  border-left-color: lightgreen;
+  animation: gem-heartbeat 2s ease-in-out infinite;
+}
+.gem-event-listitem.gemc-regstate-9:before {
+  border-top-color: lightpink;
+  border-left-color: lightpink;
+  animation: gem-heartbeat 2s ease-in-out infinite;
 }
 
 .gem-event-detail > section {
