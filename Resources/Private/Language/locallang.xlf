@@ -12,6 +12,9 @@
 			<trans-unit id="timeFormat" resname="timeFormat">
 				<source>H.i</source>
 			</trans-unit>
+			<trans-unit id="upcomingEvents" resname="upcomingEvents">
+				<source>Upcoming events</source>
+			</trans-unit>
 			<trans-unit id="participants" resname="participants">
 				<source>Participants</source>
 			</trans-unit>
@@ -59,6 +62,12 @@
 			</trans-unit>
 			<trans-unit id="noteAdded" resname="noteAdded">
 				<source>The note has been added.</source>
+			</trans-unit>
+			<trans-unit id="showMatrix" resname="showMatrix">
+				<source>Show matrix</source>
+			</trans-unit>
+			<trans-unit id="showList" resname="showList">
+				<source>Show list</source>
 			</trans-unit>
 
 			<trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event">

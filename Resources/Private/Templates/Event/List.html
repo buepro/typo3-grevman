@@ -7,11 +7,12 @@
     <f:flashMessages />
     <div class="gem-event-list">
         <header>
-            <h2>Upcoming events</h2>
+            <h2>{f:translate(key: 'upcomingEvents')}</h2>
+            <div class="gemc-control"><f:link.action class="btn btn-primary" action="showMatrix">{f:translate(key: 'showMatrix')}</f:link.action></div>
         </header>
-        <div class="gemc-list">
+        <section class="gemc-list">
             <f:for each="{events}" as="event">
-                <div class="gem-event-listitem gem-zebra gemc-regstate-{gem:registration(event: event, member: identifiedMember, property: 'status')}">
+                <article class="gem-event-listitem gem-zebra gemc-regstate-{gem:registration(event: event, member: identifiedMember, property: 'status')}">
                     <div class="gemc-section gemc-facts">
                         <f:render partial="Event/Facts" arguments="{event: event}" />
                         <f:link.action class="btn btn-sm btn-primary" action="show" arguments="{event : event}">Details</f:link.action>
@@ -23,9 +24,9 @@
                         </header>
                         {event.teaser -> f:format.html()}
                     </div>
-                </div>
+                </article>
             </f:for>
-        </div>
+        </section>
     </div>
 </f:section>
 </html>

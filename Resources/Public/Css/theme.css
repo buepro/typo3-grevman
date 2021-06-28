@@ -38,6 +38,16 @@
   margin: 0 0.5rem;
 }
 
+.gem-event-list > section, .gem-event-matrix > section, .gem-event-detail > section {
+  margin-top: 1.5rem;
+  border-top: rgba(0, 0, 0, 0.2) 1px solid;
+  padding-top: 1.5rem;
+  overflow: hidden;
+}
+.gem-event-list > header > .gemc-control, .gem-event-matrix > header > .gemc-control, .gem-event-detail > header > .gemc-control {
+  margin-top: 1.5rem;
+}
+
 .gem-event-listitem {
   position: relative;
 }
@@ -68,11 +78,68 @@
   animation: gem-heartbeat 2s ease-in-out infinite;
 }
 
-.gem-event-detail > section {
-  margin-top: 1.5rem;
-  border-top: rgba(0, 0, 0, 0.2) 1px solid;
-  padding-top: 1.5rem;
+.gem-event-matrix > section {
+  display: flex;
 }
+.gem-event-matrix .gemc-cell {
+  overflow: hidden;
+  width: 5rem;
+  height: 2rem;
+  line-height: 2rem;
+  padding: 0 0.5rem;
+  background: #e0e0e0;
+}
+.gem-event-matrix .gemc-cell:nth-child(2n+1) {
+  background: #f0f0f0;
+}
+.gem-event-matrix .gemc-col {
+  border: gray 1px solid;
+}
+.gem-event-matrix .gemc-col:nth-child(n+2) {
+  border-left: 0;
+}
+.gem-event-matrix .gemc-col-axis .gemc-cell {
+  width: 10rem;
+  word-break: break-all;
+}
+.gem-event-matrix .gemc-row-axis {
+  position: relative;
+  height: 10rem;
+}
+.gem-event-matrix .gemc-row-axis .gemc-wrap {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 10rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  line-height: 1.2;
+  transform: rotateZ(-90deg);
+  transform-origin: 2.5rem;
+}
+.gem-event-matrix .gemc-row-axis .gemc-content {
+  padding: 0 0.5rem;
+}
+.gem-event-matrix .gemc-col-axis .gemc-row-axis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gem-event-matrix .gemc-cell.gemc-row-header {
+  background: #666;
+  color: white;
+}
+.gem-event-matrix .gemc-col-event .gemc-regstate-6 {
+  background: lightgreen;
+}
+.gem-event-matrix .gemc-col-event .gemc-regstate-9 {
+  background: lightpink;
+}
+.gem-event-matrix .gemc-hidden {
+  display: none;
+}
+
 .gem-event-detail > footer {
   margin-top: 2.25rem;
   border-top: rgba(0, 0, 0, 0.4) 1px solid;

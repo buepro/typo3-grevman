@@ -1,17 +1,73 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:gem="http://typo3.org/ns/Buepro/Grevman/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 <f:layout name="Default" />
 
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Event:
-          ShowMatrix.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="content">
-    <h1>Template for showMatrix action</h1>
+    <f:flashMessages />
+    <div class="gem-event-matrix">
+        <header>
+            <h2>{f:translate(key: 'upcomingEvents')}</h2>
+            <div class="gemc-control"><f:link.action class="btn btn-primary" action="list">{f:translate(key: 'showList')}</f:link.action></div>
+        </header>
+        <section>
+            <div class="gemc-col gemc-col-axis">
+                <f:render section="EventColumn" arguments="{memberAxis: memberAxis}" />
+            </div>
+            <f:for each="{events}" as="event">
+                <div class="gemc-col gemc-col-event">
+                    <f:render section="EventColumn" arguments="{memberAxis: memberAxis, event: event}" />
+                </div>
+            </f:for>
+        </section>
+    </div>
 </f:section>
+
+<f:section name="EventColumn">
+    <f:if condition="{event}"><f:else>{f:variable(name: 'renderAxis', value: 1)}</f:else></f:if>
+    <div class="gemc-cell gemc-row-axis">
+        <f:if condition="{renderAxis}">
+            <nav class="gemc-eventnav">
+                <a id="gem-prev-event" class="btn btn-primary" href="javascript:void(0);">◀</a>
+                <a id="gem-next-event" class="btn btn-primary" href="javascript:void(0);">▶</a>
+            </nav>
+        </f:if>
+        <f:if condition="{event}">
+            <div class="gemc-wrap">
+                <div class="gemc-content">{event.title}<br/>{f:render(partial: 'Format/Period', arguments: {startdate: event.startdate, enddate: event.enddate})}</div>
+            </div>
+        </f:if>
+    </div>
+    <f:for each="{memberAxis.groups}" as="group">
+        <div class="gemc-group">
+            <div class="gemc-cell gemc-row-header">{group.name -> f:if(condition: renderAxis)}</div>
+            <f:for each="{group.members}" as="member">
+                <div class="gemc-cell gemc-regstate-{gem:registration(event: event, member: member, property: 'status')}">
+                    {member.screenName -> f:if(condition: renderAxis)}
+                </div>
+            </f:for>
+        </div>
+    </f:for>
+    <f:if condition="{memberAxis.spontaneousMembers}">
+        <div class="gemc-spontaneous-members">
+            <div class="gemc-cell gemc-row-header">{f:translate(key: 'spontaneousRegistrations') -> f:if(condition: renderAxis)}</div>
+            <f:for each="{memberAxis.spontaneousMembers}" as="member">
+                <div class="gemc-cell gemc-regstate-{gem:registration(event: event, member: member, property: 'status')}">
+                    {member.screenName -> f:if(condition: renderAxis)}
+                </div>
+            </f:for>
+        </div>
+    </f:if>
+    <f:if condition="{memberAxis.guests}">
+        <div class="gemc-guests">
+            <div class="gemc-cell gemc-row-header">{f:translate(key: 'guests') -> f:if(condition: renderAxis)}</div>
+            <f:for each="{memberAxis.guests}" as="guest">
+                <div class="gemc-cell">
+                    {guest.screenName -> f:if(condition: renderAxis)}
+                </div>
+            </f:for>
+        </div>
+    </f:if>
+</f:section>
+
 </html>

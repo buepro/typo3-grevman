@@ -8,6 +8,10 @@ namespace Buepro\Grevman\Controller;
 use Buepro\Grevman\Domain\Dto\EventMember;
 use Buepro\Grevman\Domain\Dto\Mail;
 use Buepro\Grevman\Domain\Dto\Note;
+use Buepro\Grevman\Domain\Model\Event;
+use Buepro\Grevman\Domain\Model\Group;
+use Buepro\Grevman\Domain\Model\Guest;
+use Buepro\Grevman\Domain\Model\Member;
 use Buepro\Grevman\Domain\Model\Registration;
 use Buepro\Grevman\Utility\DtoUtility;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -62,12 +66,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->memberRepository = $memberRepository;
     }
 
-    /**
-     * action list
-     *
-     * @return string|object|null|void
-     */
-    public function listAction()
+    private function listAndMatrixActionProcessing()
     {
         $events = $this->eventRepository->findAll();
         $identifiedMember = null;
@@ -77,6 +76,68 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->view->assignMultiple([
             'events' => $events,
             'identifiedMember' => $identifiedMember,
+        ]);
+        return $events;
+    }
+
+    /**
+     * action list
+     *
+     * @return string|object|null|void
+     */
+    public function listAction()
+    {
+        $this->listAndMatrixActionProcessing();
+    }
+
+    /**
+     * The matrix to be shown comprises of an event and a member axis where the member axis is grouped by the
+     * member group.
+     *
+     * @return string|object|null|void
+     */
+    public function showMatrixAction()
+    {
+        $events = $this->listAndMatrixActionProcessing();
+
+        // Compile member axis
+        $groups = [];
+        $spontaneousMembers = [];
+        $guests = [];
+        foreach ($events as $event) {
+            /** @var Event $event */
+            // Compile groups
+            foreach ($event->getMemberGroups() as $group) {
+                /** @var Group $group */
+                if (!isset($groups[$group->getUid()])) {
+                    $groups[$group->getUid()] = $group;
+                }
+            }
+            // Compile spontaneous registrations
+            foreach ((array) $event->getSpontaneousRegistrations() as $spontaneousRegistration) {
+                /** @var Registration $spontaneousRegistration */
+                /** @var Member $member */
+                $member = $spontaneousRegistration->getMember();
+                if (!isset($spontaneousMembers[$member->getUid()])) {
+                    $spontaneousMembers[$member->getUid()] = $member;
+                }
+            }
+            // Compile guests
+            foreach ($event->getGuests() as $guest) {
+                /** @var Guest $guest */
+                if (!isset($guests[$guest->getUid()])) {
+                    $guests[$guest->getUid()] = $guest;
+                }
+            }
+        }
+        $memberAxis = [
+            'groups' => $groups,
+            'spontaneousMembers' => $spontaneousMembers,
+            'guests' => $guests,
+        ];
+
+        $this->view->assignMultiple([
+            'memberAxis' => $memberAxis,
         ]);
     }
 
@@ -176,14 +237,5 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('noteAdded', 'grevman'),
             '', FlashMessage::INFO);
         $this->redirect('show', null, null, ['event' => $noteDto->getEvent()]);
-    }
-
-    /**
-     * action showMatrix
-     *
-     * @return string|object|null|void
-     */
-    public function showMatrixAction()
-    {
     }
 }

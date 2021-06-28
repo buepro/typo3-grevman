@@ -10,6 +10,21 @@
 }
 
 //
+// List and detail
+//
+.gem-event-list, .gem-event-matrix, .gem-event-detail {
+    > section {
+        margin-top: $gem-gutter-large;
+        border-top: rgba(0, 0, 0, 0.2) 1px solid;
+        padding-top: $gem-gutter-large;
+        overflow: hidden;
+    }
+    > header > .gemc-control {
+        margin-top: $gem-gutter-large;
+    }
+}
+
+//
 // Event list
 //
 .gem-event-listitem {
@@ -49,14 +64,80 @@
 }
 
 //
+// Event matrix
+//
+.gem-event-matrix {
+    > section {
+        display: flex;
+    }
+    .gemc-cell {
+        overflow: hidden;
+        width: $gem-cell-width;
+        height: $gem-cell-height;
+        line-height: $gem-cell-height;
+        padding: 0 $gem-cell-padding-x;
+        background: $gem-zebra-dark;
+        &:nth-child(2n+1) {
+            background: $gem-zebra-bright;
+        }
+    }
+    .gemc-col {
+        border: gray 1px solid;
+        &:nth-child(n+2) {
+            border-left: 0;
+        }
+    }
+    .gemc-col-axis {
+        .gemc-cell {
+            width: $gem-y-axis-width;
+            word-break: break-all;
+        }
+    }
+    .gemc-row-axis {
+        position: relative;
+        height: $gem-x-axis-height;
+        .gemc-wrap {
+            position:absolute;
+            left: 0;
+            bottom: 0;
+            width: $gem-x-axis-height;
+            height: $gem-cell-width;
+            display: flex;
+            align-items: center;
+            line-height: 1.2;
+            transform: rotateZ(-90deg);
+            transform-origin: $gem-cell-width / 2;
+        }
+        .gemc-content {
+            padding: 0 $gem-cell-padding-x;
+        }
+    }
+    .gemc-col-axis .gemc-row-axis {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .gemc-cell.gemc-row-header {
+        background: $gem-row-header;
+        color: $gem-row-header-color;
+    }
+    .gemc-col-event {
+        .gemc-regstate-6 {
+            background:$gem-registered;
+        }
+        .gemc-regstate-9 {
+            background:$gem-unregistered;
+        }
+    }
+    .gemc-hidden {
+        display: none;
+    }
+}
+
+//
 // Event detail
 //
 .gem-event-detail {
-    > section {
-        margin-top: $gem-gutter-large;
-        border-top: rgba(0,0,0,0.2) 1px solid;
-        padding-top: $gem-gutter-large;
-    }
     > footer {
         margin-top: 1.5 * $gem-gutter-large;
         border-top: rgba(0,0,0,0.4) 1px solid;
@@ -118,3 +199,4 @@
         display: block;
     }
 }
+
