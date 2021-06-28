@@ -21,10 +21,15 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
+    protected $defaultOrderings = [
+        'startdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+    ];
+
     /**
      * Returns all objects of this repository.
      *
      * @return QueryResultInterface|array
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function findAll()
     {
