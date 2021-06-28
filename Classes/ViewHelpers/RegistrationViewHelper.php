@@ -11,12 +11,15 @@ namespace Buepro\Grevman\ViewHelpers;
 
 use Buepro\Grevman\Domain\Model\Event;
 use Buepro\Grevman\Domain\Model\Member;
+use Buepro\Grevman\Domain\Model\Registration;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
- * Used to get the registration from an event.
+ * Used to get the registration or a registration property for a member and an event.
+ * In case a registration property is requested and the property doesn't exist null is returned.
+ * In case no registration exists for the event and user and the status is requested 0 is returned.
  *
  * Usage:
  * {gem:registration(event: event, member: member, as: 'registration')}
@@ -35,6 +38,7 @@ class RegistrationViewHelper extends AbstractViewHelper
         $this->registerArgument('as', 'string', 'Name of variable to create.', false);
         $this->registerArgument('event', '\\Buepro\\Grevman\\Domain\\Model\\Event', 'Event', false);
         $this->registerArgument('member', '\\Buepro\\Grevman\\Domain\\Model\\Member', 'Member', false);
+        $this->registerArgument('property', 'string', 'Property to be retrieved from registration.', false);
     }
 
     /**
@@ -50,14 +54,26 @@ class RegistrationViewHelper extends AbstractViewHelper
     ) {
         $event = $arguments['event'];
         $member = $arguments['member'];
-        $registration = null;
+        $result = null;
         if ($event instanceof Event && $member instanceof Member) {
-            $registration = $event->getRegistrationForMember($member);
+            /** @var Registration $result */
+            $result = $event->getRegistrationForMember($member);
+        }
+        if ($arguments['property']) {
+            if ($result instanceof Registration && method_exists($result, 'get' . ucfirst($arguments['property']))) {
+                $method = 'get' . ucfirst($arguments['property']);
+                $result = $result->{$method}();
+            } else {
+                $result = null;
+            }
+            if (!$result && $arguments['property'] === 'status') {
+                $result = 0;
+            }
         }
         if ($arguments['as']) {
-            $renderingContext->getVariableProvider()->add($arguments['as'], $registration);
+            $renderingContext->getVariableProvider()->add($arguments['as'], $result);
         } else {
-            return $registration;
+            return $result;
         }
     }
 }

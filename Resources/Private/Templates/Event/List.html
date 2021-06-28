@@ -11,10 +11,7 @@
         </header>
         <div class="gemc-list">
             <f:for each="{events}" as="event">
-                {gem:registration(event: event, member: identifiedMember, as: '_registration')}
-                {f:variable(name: '_regStateClass', value: ' gemc-regstate-0')}
-                {f:variable(name: '_regStateClass', value: ' gemc-regstate-{_registration.status}') -> f:if(condition: _registration)}
-                <div class="gem-event-listitem gem-zebra{_regStateClass}">
+                <div class="gem-event-listitem gem-zebra gemc-regstate-{gem:registration(event: event, member: identifiedMember, property: 'status')}">
                     <div class="gemc-section gemc-facts">
                         <f:render partial="Event/Facts" arguments="{event: event}" />
                         <f:link.action class="btn btn-sm btn-primary" action="show" arguments="{event : event}">Details</f:link.action>
