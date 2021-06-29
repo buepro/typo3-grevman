@@ -20,3 +20,7 @@ TCAdefaults {
     tx_extbase_type = Tx_Grevman_Member
   }
 }
+TCEMAIN {
+  # Clear the cache for page 223 when saving a record in the storage branch
+  clearCacheCmd = 223
+}
