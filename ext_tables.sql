@@ -33,7 +33,7 @@ CREATE TABLE fe_users (
 CREATE TABLE tx_grevman_domain_model_registration (
 	event int(11) unsigned DEFAULT '0' NOT NULL,
 	member int(11) unsigned DEFAULT '0' NOT NULL,
-	status int(11) NOT NULL DEFAULT '0'
+	state int(11) NOT NULL DEFAULT '0'
 );
 
 CREATE TABLE tx_grevman_domain_model_note (

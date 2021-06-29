@@ -42,7 +42,7 @@
         <div class="gemc-group">
             <div class="gemc-cell gemc-row-header">{group.name -> f:if(condition: renderAxis)}</div>
             <f:for each="{group.members}" as="member">
-                <div class="gemc-cell gemc-regstate-{gem:registration(event: event, member: member, property: 'status')}">
+                <div class="gemc-cell gemc-regstate-{gem:registration(event: event, member: member, property: 'state')}">
                     {member.screenName -> f:if(condition: renderAxis)}
                 </div>
             </f:for>
@@ -52,7 +52,7 @@
         <div class="gemc-spontaneous-members">
             <div class="gemc-cell gemc-row-header">{f:translate(key: 'spontaneousRegistrations') -> f:if(condition: renderAxis)}</div>
             <f:for each="{memberAxis.spontaneousMembers}" as="member">
-                <div class="gemc-cell gemc-regstate-{gem:registration(event: event, member: member, property: 'status')}">
+                <div class="gemc-cell gemc-regstate-{gem:registration(event: event, member: member, property: 'state')}">
                     {member.screenName -> f:if(condition: renderAxis)}
                 </div>
             </f:for>

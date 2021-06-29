@@ -2,7 +2,7 @@
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_registration',
-        'label' => 'status',
+        'label' => 'state',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -18,7 +18,7 @@ return [
         'iconfile' => 'EXT:grevman/Resources/Public/Icons/tx_grevman_domain_model_registration.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, status, member'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, state, member'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -73,9 +73,9 @@ return [
             ],
         ],
 
-        'status' => [
+        'state' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_registration.status',
+            'label' => 'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_registration.state',
             'config' => [
                 'type' => 'input',
                 'size' => 4,
@@ -94,9 +94,9 @@ return [
                 'minitems' => 0,
                 'maxitems' => 1,
             ],
-            
+
         ],
-    
+
         'event' => [
             'config' => [
                 'type' => 'passthrough',

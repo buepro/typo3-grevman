@@ -9,10 +9,10 @@ defined('TYPO3') || die('Access denied.');
             'label_alt_force' => true,
         ],
         'types' => [
-            '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, status, event, member'],
+            '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, state, event, member'],
         ],
         'columns' =>[
-            'status' => [
+            'state' => [
                 'config' => [
                     'type' => 'select',
                     'renderType' => 'selectSingle',
@@ -20,15 +20,15 @@ defined('TYPO3') || die('Access denied.');
                     'default' => 0,
                     'items' => [
                         [
-                            'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_registration.status_undefined',
+                            'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_registration.state_undefined',
                             \Buepro\Grevman\Domain\Model\Registration::REGISTRATION_UNDEFINED
                         ],
                         [
-                            'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_registration.status_confirmed',
+                            'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_registration.state_confirmed',
                             \Buepro\Grevman\Domain\Model\Registration::REGISTRATION_CONFIRMED
                         ],
                         [
-                            'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_registration.status_canceled',
+                            'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_registration.state_canceled',
                             \Buepro\Grevman\Domain\Model\Registration::REGISTRATION_CANCELED],
                     ],
                 ]

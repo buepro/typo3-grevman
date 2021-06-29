@@ -58,12 +58,12 @@ class EventMember
         if (!$this->registration) {
             return 0;
         }
-        return $this->registration->getStatus();
+        return $this->registration->getState();
     }
 
     public function getRegistered(): bool
     {
-        return $this->registration && $this->registration->getStatus() === Registration::REGISTRATION_CONFIRMED;
+        return $this->registration && $this->registration->getState() === Registration::REGISTRATION_CONFIRMED;
     }
 
     public function isEventGroupMember(): bool

@@ -87,19 +87,19 @@
 			<trans-unit id="tx_grevman_domain_model_registration" resname="tx_grevman_domain_model_registration">
 				<source>Registration</source>
 			</trans-unit>
-			<trans-unit id="tx_grevman_domain_model_registration.status" resname="tx_grevman_domain_model_registration.status">
-				<source>Status</source>
+			<trans-unit id="tx_grevman_domain_model_registration.state" resname="tx_grevman_domain_model_registration.state">
+				<source>State</source>
 			</trans-unit>
 			<trans-unit id="tx_grevman_domain_model_registration.member" resname="tx_grevman_domain_model_registration.member">
 				<source>Member</source>
 			</trans-unit>
-			<trans-unit id="tx_grevman_domain_model_registration.status_undefined" resname="tx_grevman_domain_model_registration.status_undefined">
+			<trans-unit id="tx_grevman_domain_model_registration.state_undefined" resname="tx_grevman_domain_model_registration.state_undefined">
 				<source>Undefined</source>
 			</trans-unit>
-			<trans-unit id="tx_grevman_domain_model_registration.status_confirmed" resname="tx_grevman_domain_model_registration.status_confirmed">
+			<trans-unit id="tx_grevman_domain_model_registration.state_confirmed" resname="tx_grevman_domain_model_registration.state_confirmed">
 				<source>Confirmed</source>
 			</trans-unit>
-			<trans-unit id="tx_grevman_domain_model_registration.status_canceled" resname="tx_grevman_domain_model_registration.status_canceled">
+			<trans-unit id="tx_grevman_domain_model_registration.state_canceled" resname="tx_grevman_domain_model_registration.state_canceled">
 				<source>Canceled</source>
 			</trans-unit>
 
@@ -131,7 +131,7 @@
 				<source>Events panel</source>
 			</trans-unit>
 			<trans-unit id="tx_grevman_events.description" resname="tx_grevman_events.description">
-				<source>Shows upcoming events with related registration information. Members might change their registration status and leaders can send notification emails.</source>
+				<source>Shows upcoming events with related registration information. Members might change their registration state and leaders can send notification emails.</source>
 			</trans-unit>
 		</body>
 	</file>

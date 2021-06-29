@@ -26,7 +26,7 @@
         <div class="gemc-participants">
             <f:for each="{_spontaneousRegistrations}" as="_registration">
                 {f:variable(name: '_leaderClass', value: ' gemc-leader') -> f:if(condition: _member.isLeader)}
-                <div class="gemc-participant gemc-regstate-{_registration.status}{_leaderClass}">
+                <div class="gemc-participant gemc-regstate-{_registration.state}{_leaderClass}">
                     {_registration.member.screenName}
                 </div>
             </f:for>

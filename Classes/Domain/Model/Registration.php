@@ -24,11 +24,11 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public const REGISTRATION_CANCELED = 9;
 
     /**
-     * status
+     * state
      *
      * @var int
      */
-    protected $status = self::REGISTRATION_UNDEFINED;
+    protected $state = self::REGISTRATION_UNDEFINED;
 
     /**
      * member
@@ -38,24 +38,24 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $member = null;
 
     /**
-     * Returns the status
+     * Returns the state
      *
-     * @return int $status
+     * @return int $state
      */
-    public function getStatus()
+    public function getState()
     {
-        return $this->status;
+        return $this->state;
     }
 
     /**
-     * Sets the status
+     * Sets the state
      *
-     * @param int $status
+     * @param int $state
      * @return void
      */
-    public function setStatus(int $status)
+    public function setState(int $state)
     {
-        $this->status = $status;
+        $this->state = $state;
     }
 
     /**

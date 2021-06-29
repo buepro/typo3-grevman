@@ -19,7 +19,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 /**
  * Used to get the registration or a registration property for a member and an event.
  * In case a registration property is requested and the property doesn't exist null is returned.
- * In case no registration exists for the event and user and the status is requested 0 is returned.
+ * In case no registration exists for the event and user and the state is requested 0 is returned.
  *
  * Usage:
  * {gem:registration(event: event, member: member, as: 'registration')}
@@ -66,7 +66,7 @@ class RegistrationViewHelper extends AbstractViewHelper
             } else {
                 $result = null;
             }
-            if (!$result && $arguments['property'] === 'status') {
+            if (!$result && $arguments['property'] === 'state') {
                 $result = 0;
             }
         }

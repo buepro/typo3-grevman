@@ -31,24 +31,24 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getStatusReturnsInitialValueForInt()
+    public function getStateReturnsInitialValueForInt()
     {
         self::assertSame(
             0,
-            $this->subject->getStatus()
+            $this->subject->getState()
         );
     }
 
     /**
      * @test
      */
-    public function setStatusForIntSetsStatus()
+    public function setStateForIntSetsState()
     {
-        $this->subject->setStatus(12);
+        $this->subject->setState(12);
 
         self::assertAttributeEquals(
             12,
-            'status',
+            'state',
             $this->subject
         );
     }
