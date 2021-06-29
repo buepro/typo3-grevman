@@ -1,4 +1,12 @@
 <?php
+
+/*
+ * This file is part of the package buepro/grevman.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_group',
@@ -107,7 +115,7 @@ return [
                     ],
                 ],
             ],
-            
+
         ],
         'members' => [
             'exclude' => true,
@@ -133,8 +141,8 @@ return [
                     ],
                 ],
             ],
-            
+
         ],
-    
+
     ],
 ];

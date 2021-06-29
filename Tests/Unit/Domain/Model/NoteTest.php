@@ -1,6 +1,13 @@
 <?php
 declare(strict_types=1);
 
+/*
+ * This file is part of the package buepro/grevman.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Buepro\Grevman\Tests\Unit\Domain\Model;
 
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -8,7 +15,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /**
  * Test case
  *
- * @author Roman Büchler <rb@buechler.pro>
  */
 class NoteTest extends UnitTestCase
 {

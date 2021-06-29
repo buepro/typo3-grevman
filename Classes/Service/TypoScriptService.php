@@ -1,8 +1,13 @@
 <?php
 
+/*
+ * This file is part of the package buepro/grevman.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
 
 namespace Buepro\Grevman\Service;
-
 
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

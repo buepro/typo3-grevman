@@ -1,4 +1,12 @@
 <?php
+
+/*
+ * This file is part of the package buepro/grevman.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_event',
@@ -131,7 +139,7 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
             ],
-            
+
         ],
         'description' => [
             'exclude' => true,
@@ -149,7 +157,7 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
             ],
-            
+
         ],
         'price' => [
             'exclude' => true,
@@ -186,7 +194,7 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
             ],
-            
+
         ],
         'location' => [
             'exclude' => true,
@@ -201,7 +209,7 @@ return [
         'images' => [
             'exclude' => true,
             'label' => 'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_event.images',
-            'config' => 
+            'config' =>
             \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'images',
                 [
@@ -254,7 +262,7 @@ return [
         'files' => [
             'exclude' => true,
             'label' => 'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_event.files',
-            'config' => 
+            'config' =>
             \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'files',
                 [
@@ -327,7 +335,7 @@ return [
                     ],
                 ],
             ],
-            
+
         ],
         'registrations' => [
             'exclude' => true,
@@ -389,8 +397,8 @@ return [
                     ],
                 ],
             ],
-            
+
         ],
-    
+
     ],
 ];

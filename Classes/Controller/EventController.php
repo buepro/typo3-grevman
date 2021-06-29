@@ -2,8 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Buepro\Grevman\Controller;
+/*
+ * This file is part of the package buepro/grevman.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
 
+namespace Buepro\Grevman\Controller;
 
 use Buepro\Grevman\Domain\Dto\EventMember;
 use Buepro\Grevman\Domain\Dto\Mail;
@@ -176,7 +182,9 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $registration->setState(Registration::REGISTRATION_CONFIRMED);
         $this->addFlashMessage(
             \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('registerConfirmation', 'grevman'),
-            '', FlashMessage::INFO);
+            '',
+            FlashMessage::INFO
+        );
 
         $persistenceManager->add($event);
         $persistenceManager->persistAll();
@@ -191,7 +199,9 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $registration->setState(Registration::REGISTRATION_CANCELED);
         $this->addFlashMessage(
             \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unregisterConfirmation', 'grevman'),
-            '', FlashMessage::INFO);
+            '',
+            FlashMessage::INFO
+        );
         $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
         $persistenceManager->add($registration);
         $persistenceManager->persistAll();
@@ -213,11 +223,15 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         if ($mail->send()) {
             $this->addFlashMessage(
                 \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailConfirmation', 'grevman'),
-                '', FlashMessage::INFO);
+                '',
+                FlashMessage::INFO
+            );
         } else {
             $this->addFlashMessage(
                 \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailError', 'grevman'),
-                '', FlashMessage::ERROR);
+                '',
+                FlashMessage::ERROR
+            );
         }
 
         $this->redirect('show', null, null, ['event' => $mailDto->getEvent()]);
@@ -235,7 +249,9 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $persistenceManager->persistAll();
         $this->addFlashMessage(
             \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('noteAdded', 'grevman'),
-            '', FlashMessage::INFO);
+            '',
+            FlashMessage::INFO
+        );
         $this->redirect('show', null, null, ['event' => $noteDto->getEvent()]);
     }
 }

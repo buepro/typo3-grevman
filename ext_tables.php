@@ -1,7 +1,15 @@
 <?php
+
+/*
+ * This file is part of the package buepro/grevman.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 defined('TYPO3') || die('Access denied.');
 
-call_user_func(static function() {
+call_user_func(static function () {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_grevman_domain_model_event', 'EXT:grevman/Resources/Private/Language/locallang_csh_tx_grevman_domain_model_event.xlf');
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_grevman_domain_model_event');
 
