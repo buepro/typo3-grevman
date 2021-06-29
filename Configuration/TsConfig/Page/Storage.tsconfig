@@ -23,4 +23,21 @@ TCAdefaults {
 TCEMAIN {
   # Clear the cache for page 223 when saving a record in the storage branch
   clearCacheCmd = 223
+  preview {
+    tx_grevman_domain_model_event {
+      # Uid from page where plugin is located
+      previewPageId = 223
+      disableButtonForDokType = 199, 254, 255
+      useDefaultLanguageRecord = 0
+      fieldToParameterMap {
+        uid = tx_grevman_events[event]
+      }
+      additionalGetParameters {
+        tx_grevman_events {
+          action = show
+          controller = Event
+        }
+      }
+    }
+  }
 }
