@@ -138,6 +138,11 @@
 // Event detail
 //
 .gem-event-detail {
+    > header {
+        .btn {
+            margin-right: $gem-gutter-small;
+        }
+    }
     > footer {
         margin-top: 1.5 * $gem-gutter-large;
         border-top: rgba(0,0,0,0.4) 1px solid;
@@ -183,6 +188,11 @@
             background: $gem-unregistered;
         }
     }
+    .gemc-notes {
+        footer {
+            margin-top: $gem-gutter-medium;
+        }
+    }
     @media (min-width: 768px) {
         .gemc-images {
             float: right;
@@ -197,6 +207,10 @@
     margin-top: $gem-gutter-large;
     &.gemc-show {
         display: block;
+    }
+    .gemc-hint {
+        background: rgba(white, 0.7);
+        padding: 1rem;
     }
 }
 

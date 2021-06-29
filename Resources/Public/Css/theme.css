@@ -140,6 +140,9 @@
   display: none;
 }
 
+.gem-event-detail > header .btn {
+  margin-right: 0.5rem;
+}
 .gem-event-detail > footer {
   margin-top: 2.25rem;
   border-top: rgba(0, 0, 0, 0.4) 1px solid;
@@ -185,6 +188,9 @@
 .gem-event-detail .gemc-participant.gemc-regstate-9 {
   background: lightpink;
 }
+.gem-event-detail .gemc-notes footer {
+  margin-top: 1rem;
+}
 @media (min-width: 768px) {
   .gem-event-detail .gemc-images {
     float: right;
@@ -199,6 +205,10 @@
 }
 .gem-mail-message.gemc-show, .gem-note.gemc-show {
   display: block;
+}
+.gem-mail-message .gemc-hint, .gem-note .gemc-hint {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1rem;
 }
 
 /*# sourceMappingURL=theme.css.map */

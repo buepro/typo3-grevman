@@ -39,6 +39,9 @@
 			<trans-unit id="createMail" resname="createMail">
 				<source>Create mail</source>
 			</trans-unit>
+			<trans-unit id="mailReceipientsHint" resname="mailReceipientsHint">
+				<source>The mail will be sent to everybody related to this event independent of their registration and member state. This means that all parties listed in the section "Participants" with a valid email address will receive the message.</source>
+			</trans-unit>
 			<trans-unit id="subject" resname="subject">
 				<source>Subject</source>
 			</trans-unit>
