@@ -14,12 +14,12 @@ call_user_func(static function () {
         'Grevman',
         'Events',
         [
-            \Buepro\Grevman\Controller\EventController::class => 'list, showMatrix, show, register, unregister, sendMail, addNote',
+            \Buepro\Grevman\Controller\EventController::class => 'showMatrix, list, show, register, unregister, sendMail, addNote',
             \Buepro\Grevman\Controller\RegistrationController::class => 'new, create, edit, update'
         ],
         // non-cacheable actions
         [
-            \Buepro\Grevman\Controller\EventController::class => 'show, register, unregister, sendMail, addNote',
+            \Buepro\Grevman\Controller\EventController::class => 'list, show, register, unregister, sendMail, addNote',
             \Buepro\Grevman\Controller\RegistrationController::class => 'new, create, edit, update'
         ]
     );
