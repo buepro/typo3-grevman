@@ -43,3 +43,8 @@ Detail view (uncached)
 
 .. figure:: ../Images/DetailView.jpg
    :alt: Detail view from events
+
+Acknowledgement
+===============
+
+This extension has been sponsored by `SAC-Sektion Uto<https://www.sac-uto.ch>`__.

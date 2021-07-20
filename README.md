@@ -15,3 +15,11 @@ easily see who registered for an event.
 
 Members with a leading role might send notifications to event
 participants by email.
+
+## Documentation
+
+Head over to [docs.typo3.org](https://docs.typo3.org/p/buepro/typo3-grevman/master/en-us/).
+
+## Acknowledgement
+
+This extension has been sponsored by [SAC-Sektion Uto](https://www.sac-uto.ch).
