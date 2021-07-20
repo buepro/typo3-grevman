@@ -12,6 +12,12 @@ Installation
 
 Carry out the following standard installation steps:
 
+#. Create page structure. Typically it consists of the following pages:
+   ┡ 🗌 Grevman
+   ┊ ┃ 🗌 Login
+   ┊ ┣ 🖿 Participants
+   ┊ ┣ 🖿 Leaders
+   ┊ ┗ 🖿 Data
 #. Add static template to page where the plugin will be used
 #. Add static pagesTS configuration `Grevman: General storage` to the page
    properties (resources tab - Page TSconfig) from the parent storage folder

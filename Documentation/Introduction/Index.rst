@@ -23,4 +23,23 @@ easily see who registered for an event.
 Members with a leading role might send notifications to event
 participants by email.
 
+Screenshots
+===========
 
+Matrix view (cached)
+--------------------
+
+.. figure:: ../Images/MatrixView.jpg
+   :alt: Matrix view from events
+
+List view (uncached)
+--------------------
+
+.. figure:: ../Images/MListView.jpg
+   :alt: List view from events
+
+Detail view (uncached)
+----------------------
+
+.. figure:: ../Images/DetailView.jpg
+   :alt: Detail view from events
