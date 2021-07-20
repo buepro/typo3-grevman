@@ -9,7 +9,7 @@
 
 defined('TYPO3') || die('Access denied.');
 
-call_user_func(static function () {
+(static function () {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'Grevman',
         'Events',
@@ -45,9 +45,19 @@ call_user_func(static function () {
     );
 
     $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-    $iconRegistry->registerIcon(
+    $icons = [
+        'grevman-event',
+        'grevman-group',
+        'grevman-guest',
+        'grevman-note',
         'grevman-plugin-events',
-        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        ['source' => 'EXT:grevman/Resources/Public/Icons/user_plugin_events.svg']
-    );
-});
+        'grevman-registration'
+    ];
+    foreach ($icons as $icon) {
+        $iconRegistry->registerIcon(
+            $icon,
+            \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+            ['source' => 'EXT:grevman/Resources/Public/Icons/' . $icon . 'svg']
+        );
+    }
+}) ();
