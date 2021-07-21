@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="EXT:grevman/Resources/Private/Language/locallang_csh" date="2021-06-22T16:30:32Z" product-name="grevman" target-language="de">
+    <header/>
+    <body>
+      <trans-unit id="title.description" resname="title.description">
+        <source>title</source>
+        <target state="needs-translation">title</target>
+      </trans-unit>
+      <trans-unit id="slug.description" resname="slug.description">
+        <source>slug</source>
+        <target state="needs-translation">slug</target>
+      </trans-unit>
+      <trans-unit id="startdate.description" resname="startdate.description">
+        <source>startdate</source>
+        <target state="needs-translation">startdate</target>
+      </trans-unit>
+      <trans-unit id="enddate.description" resname="enddate.description">
+        <source>enddate</source>
+        <target state="needs-translation">enddate</target>
+      </trans-unit>
+      <trans-unit id="teaser.description" resname="teaser.description">
+        <source>teaser</source>
+        <target state="needs-translation">teaser</target>
+      </trans-unit>
+      <trans-unit id="description.description" resname="description.description">
+        <source>description</source>
+        <target state="needs-translation">description</target>
+      </trans-unit>
+      <trans-unit id="price.description" resname="price.description">
+        <source>price</source>
+        <target state="needs-translation">price</target>
+      </trans-unit>
+      <trans-unit id="link.description" resname="link.description">
+        <source>link</source>
+        <target state="needs-translation">link</target>
+      </trans-unit>
+      <trans-unit id="program.description" resname="program.description">
+        <source>program</source>
+        <target state="needs-translation">program</target>
+      </trans-unit>
+      <trans-unit id="location.description" resname="location.description">
+        <source>location</source>
+        <target state="needs-translation">location</target>
+      </trans-unit>
+      <trans-unit id="images.description" resname="images.description">
+        <source>images</source>
+        <target state="needs-translation">images</target>
+      </trans-unit>
+      <trans-unit id="files.description" resname="files.description">
+        <source>files</source>
+        <target state="needs-translation">files</target>
+      </trans-unit>
+      <trans-unit id="member_groups.description" resname="member_groups.description">
+        <source>memberGroups</source>
+        <target state="needs-translation">memberGroups</target>
+      </trans-unit>
+      <trans-unit id="registrations.description" resname="registrations.description">
+        <source>registrations</source>
+        <target state="needs-translation">registrations</target>
+      </trans-unit>
+      <trans-unit id="notes.description" resname="notes.description">
+        <source>notes</source>
+        <target state="needs-translation">notes</target>
+      </trans-unit>
+      <trans-unit id="guests.description" resname="guests.description">
+        <source>guests</source>
+        <target state="needs-translation">guests</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
