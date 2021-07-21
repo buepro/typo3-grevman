@@ -26,20 +26,20 @@ participants by email.
 Screenshots
 ===========
 
-Matrix view (cached)
---------------------
+Matrix view
+-----------
 
 .. figure:: ../Images/MatrixView.jpg
    :alt: Matrix view from events
 
-List view (uncached)
---------------------
+List view
+---------
 
 .. figure:: ../Images/MListView.jpg
    :alt: List view from events
 
-Detail view (uncached)
-----------------------
+Detail view
+-----------
 
 .. figure:: ../Images/DetailView.jpg
    :alt: Detail view from events
