@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="EXT:grevman/Resources/Private/Language/locallang_csh" date="2021-06-22T16:30:32Z" product-name="grevman" target-language="no">
+    <header/>
+    <body>
+      <trans-unit id="member_groups.description" resname="member_groups.description">
+        <source>memberGroups</source>
+        <target state="needs-translation">memberGroups</target>
+      </trans-unit>
+      <trans-unit id="registrations.description" resname="registrations.description">
+        <source>registrations</source>
+        <target state="needs-translation">registrations</target>
+      </trans-unit>
+      <trans-unit id="notes.description" resname="notes.description">
+        <source>notes</source>
+        <target state="needs-translation">notes</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
