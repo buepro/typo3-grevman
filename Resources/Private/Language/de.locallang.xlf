@@ -17,43 +17,43 @@
       </trans-unit>
       <trans-unit id="upcomingEvents" resname="upcomingEvents">
         <source>Upcoming events</source>
-        <target state="needs-translation">Upcoming events</target>
+        <target state="translated">Bevorstehende Veranstaltungen</target>
       </trans-unit>
       <trans-unit id="participants" resname="participants">
         <source>Participants</source>
-        <target state="needs-translation">Participants</target>
+        <target state="translated">Teilnehmer</target>
       </trans-unit>
       <trans-unit id="register" resname="register">
         <source>Register</source>
-        <target state="needs-translation">Register</target>
+        <target state="translated">Anmelden</target>
       </trans-unit>
       <trans-unit id="unregister" resname="unregister">
         <source>Unregister</source>
-        <target state="needs-translation">Unregister</target>
+        <target state="translated">Abmelden</target>
       </trans-unit>
       <trans-unit id="i_join" resname="i_join">
         <source>I join</source>
-        <target state="needs-translation">I join</target>
+        <target state="translated">Bin dabei</target>
       </trans-unit>
       <trans-unit id="registerConfirmation" resname="unregister">
         <source>You are now registered.</source>
-        <target state="needs-translation">You are now registered.</target>
+        <target state="translated">Sie sind nun registriert.</target>
       </trans-unit>
       <trans-unit id="unregisterConfirmation" resname="unregister">
         <source>You are now unregistered.</source>
-        <target state="needs-translation">You are now unregistered.</target>
+        <target state="translated">Sie sind nun abgemeldet.</target>
       </trans-unit>
       <trans-unit id="spontaneousRegistrations" resname="spontaneousRegistrations">
         <source>Spontaneous registrations</source>
-        <target state="needs-translation">Spontaneous registrations</target>
+        <target state="translated">Spontane Anmeldungen</target>
       </trans-unit>
       <trans-unit id="guests" resname="guests">
         <source>Guests</source>
-        <target state="needs-translation">Guests</target>
+        <target state="translated">Gäste</target>
       </trans-unit>
       <trans-unit id="createMail" resname="createMail">
         <source>Create mail</source>
-        <target state="needs-translation">Create mail</target>
+        <target state="translated">E-Mail verfassen</target>
       </trans-unit>
       <trans-unit id="mailReceipientsHint" resname="mailReceipientsHint">
         <source>The mail will be sent to everybody related to this event independent of their registration and member state. This means that all parties listed in the section "Participants" with a valid email address will receive the message.</source>
