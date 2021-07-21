@@ -24,6 +24,9 @@
 			<trans-unit id="unregister" resname="unregister">
 				<source>Unregister</source>
 			</trans-unit>
+			<trans-unit id="i_join" resname="i_join">
+				<source>I join</source>
+			</trans-unit>
 			<trans-unit id="registerConfirmation" resname="unregister">
 				<source>You are now registered.</source>
 			</trans-unit>

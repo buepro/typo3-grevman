@@ -196,6 +196,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         \Buepro\Grevman\Domain\Model\Member $member
     ) {
         $registration = $event->getRegistrationForMember($member);
+        if (!$registration) {
+            /** @var Registration $registration */
+            $registration = GeneralUtility::makeInstance(Registration::class);
+            $registration->setMember($member);
+            $event->addRegistration($registration);
+        }
         $registration->setState(Registration::REGISTRATION_CANCELED);
         $this->addFlashMessage(
             \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unregisterConfirmation', 'grevman'),

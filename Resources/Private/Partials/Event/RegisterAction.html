@@ -9,8 +9,13 @@
         </f:then>
         <f:else>
             <f:link.action class="btn btn-primary" action="register" arguments="{event: identifiedEventMember.event, member: identifiedEventMember.member}">
-                {f:translate(key: 'register')}
+                {f:translate(key: 'i_join')}
             </f:link.action>
+            <f:if condition="!{identifiedEventMember.registrationState}">
+                <f:link.action class="btn btn-warning" action="unregister" arguments="{event: identifiedEventMember.event, member: identifiedEventMember.member}">
+                    {f:translate(key: 'unregister')}
+                </f:link.action>
+            </f:if>
         </f:else>
     </f:if>
 </f:if>
