@@ -15,12 +15,10 @@ defined('TYPO3') || die('Access denied.');
         'Events',
         [
             \Buepro\Grevman\Controller\EventController::class => 'showMatrix, list, show, register, unregister, sendMail, addNote',
-            \Buepro\Grevman\Controller\RegistrationController::class => 'new, create, edit, update'
         ],
         // non-cacheable actions
         [
             \Buepro\Grevman\Controller\EventController::class => 'list, show, register, unregister, sendMail, addNote',
-            \Buepro\Grevman\Controller\RegistrationController::class => 'new, create, edit, update'
         ]
     );
 
