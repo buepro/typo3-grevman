@@ -8,7 +8,7 @@ plugin.tx_grevman_events {
     layoutRootPath = EXT:grevman/Resources/Private/Layouts/
   }
   persistence {
-    # cat=plugin.tx_grevman_events//a; type=string; label=Default storage PID
+    # cat=plugin.tx_grevman_events//a; type=string; label=Default storage PID:List of uid's from pages where records are stored. List first the `uid` from the folder where the grevman related records are stored.
     storagePid = 224,225,226
   }
   settings {

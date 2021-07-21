@@ -22,6 +22,7 @@ Carry out the following standard installation steps:
 
    .. note::
       In the above page structure the pages/folders are used as following:
+
       - Page `Grevman` holds the grevman plugin.
       - Page `Login` holds the fe login plugin.
       - Folder `Participants` holds the fe users considered to be participants.
@@ -138,5 +139,4 @@ Leaders storage
 TS constants
 ------------
 
-*  `storagePid`: List first the `uid` from the folder where the grevman records
-   are stored.
+Define the plugin related TS constants with the constant editor.
