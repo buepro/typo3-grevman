@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="EXT:grevman/Resources/Private/Language/locallang_csh" date="2021-06-22T16:30:32Z" product-name="grevman" target-language="sr">
+    <header/>
+    <body>
+      <trans-unit id="first_name.description" resname="first_name.description">
+        <source>firstName</source>
+        <target state="needs-translation">firstName</target>
+      </trans-unit>
+      <trans-unit id="last_name.description" resname="last_name.description">
+        <source>lastName</source>
+        <target state="needs-translation">lastName</target>
+      </trans-unit>
+      <trans-unit id="phone.description" resname="phone.description">
+        <source>phone</source>
+        <target state="needs-translation">phone</target>
+      </trans-unit>
+      <trans-unit id="email.description" resname="email.description">
+        <source>email</source>
+        <target state="needs-translation">email</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
