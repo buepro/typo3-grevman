@@ -1,5 +1,6 @@
+$gem-zebra-darken: 7%;
 $gem-zebra-bright: #f0f0f0;
-$gem-zebra-dark: #e0e0e0;
+$gem-zebra-dark: darken($gem-zebra-bright, $gem-zebra-darken);
 $gem-registered: lightgreen;
 $gem-unregistered: lightpink;
 $gem-gutter-small: 0.5rem;

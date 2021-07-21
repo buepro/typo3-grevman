@@ -77,8 +77,23 @@
         line-height: $gem-cell-height;
         padding: 0 $gem-cell-padding-x;
         background: $gem-zebra-dark;
+        &.gemc-content {
+            text-align: center;
+        }
+        &.gemc-regstate-6 {
+            background: darken($gem-registered, $gem-zebra-darken);
+        }
+        &.gemc-regstate-9 {
+            background: darken($gem-unregistered, $gem-zebra-darken);
+        }
         &:nth-child(2n+1) {
             background: $gem-zebra-bright;
+            &.gemc-regstate-6 {
+                background: $gem-registered;
+            }
+            &.gemc-regstate-9 {
+                background: $gem-unregistered;
+            }
         }
     }
     .gemc-col {
@@ -121,16 +136,14 @@
         background: $gem-row-header;
         color: $gem-row-header-color;
     }
-    .gemc-col-event {
-        .gemc-regstate-6 {
-            background:$gem-registered;
-        }
-        .gemc-regstate-9 {
-            background:$gem-unregistered;
-        }
-    }
+
     .gemc-hidden {
         display: none;
+    }
+    .gemc-notes {
+        &:after {
+            content: "\1F4AC";
+        }
     }
 }
 

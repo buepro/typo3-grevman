@@ -40,6 +40,6 @@ plugin.tx_grevman_events {
 }
 
 page {
-  includeCSS.grevman = EXT:grevman/Resources/Public/Css/theme.css
+  includeCSS.grevman = EXT:grevman/Resources/Public/Scss/theme.scss
   includeJSFooter.grevman = EXT:grevman/Resources/Public/JavaScript/Src/grevman.js
 }

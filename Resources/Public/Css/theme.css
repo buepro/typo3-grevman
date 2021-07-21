@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @keyframes gem-heartbeat {
   0% {
     opacity: 0.2;
@@ -23,7 +24,7 @@
 
 .gem-zebra {
   padding: 1rem;
-  background: #e0e0e0;
+  background: #dedede;
 }
 .gem-zebra:nth-child(2n+1) {
   background: #f0f0f0;
@@ -87,10 +88,25 @@
   height: 2rem;
   line-height: 2rem;
   padding: 0 0.5rem;
-  background: #e0e0e0;
+  background: #dedede;
+}
+.gem-event-matrix .gemc-cell.gemc-content {
+  text-align: center;
+}
+.gem-event-matrix .gemc-cell.gemc-regstate-6 {
+  background: #71e971;
+}
+.gem-event-matrix .gemc-cell.gemc-regstate-9 {
+  background: #ff92a3;
 }
 .gem-event-matrix .gemc-cell:nth-child(2n+1) {
   background: #f0f0f0;
+}
+.gem-event-matrix .gemc-cell:nth-child(2n+1).gemc-regstate-6 {
+  background: lightgreen;
+}
+.gem-event-matrix .gemc-cell:nth-child(2n+1).gemc-regstate-9 {
+  background: lightpink;
 }
 .gem-event-matrix .gemc-col {
   border: gray 1px solid;
@@ -130,14 +146,11 @@
   background: #666;
   color: white;
 }
-.gem-event-matrix .gemc-col-event .gemc-regstate-6 {
-  background: lightgreen;
-}
-.gem-event-matrix .gemc-col-event .gemc-regstate-9 {
-  background: lightpink;
-}
 .gem-event-matrix .gemc-hidden {
   display: none;
+}
+.gem-event-matrix .gemc-notes:after {
+  content: "💬";
 }
 
 .gem-event-detail > header .btn {

@@ -46,9 +46,7 @@
         <div class="gemc-group">
             <div class="gemc-cell gemc-row-header">{group.name -> f:if(condition: renderAxis)}</div>
             <f:for each="{group.members}" as="member">
-                <div class="gemc-cell gemc-regstate-{gem:registration(event: event, member: member, property: 'state')}">
-                    {member.screenName -> f:if(condition: renderAxis)}
-                </div>
+                <f:render section="MemberCell" arguments="{_all}" />
             </f:for>
         </div>
     </f:for>
@@ -56,9 +54,7 @@
         <div class="gemc-spontaneous-members">
             <div class="gemc-cell gemc-row-header">{f:translate(key: 'spontaneousRegistrations') -> f:if(condition: renderAxis)}</div>
             <f:for each="{memberAxis.spontaneousMembers}" as="member">
-                <div class="gemc-cell gemc-regstate-{gem:registration(event: event, member: member, property: 'state')}">
-                    {member.screenName -> f:if(condition: renderAxis)}
-                </div>
+                <f:render section="MemberCell" arguments="{_all}" />
             </f:for>
         </div>
     </f:if>
@@ -66,12 +62,20 @@
         <div class="gemc-guests">
             <div class="gemc-cell gemc-row-header">{f:translate(key: 'guests') -> f:if(condition: renderAxis)}</div>
             <f:for each="{memberAxis.guests}" as="guest">
-                <div class="gemc-cell">
+                <div class="gemc-cell{f:if(condition: event, then: ' gemc-content')}">
                     {guest.screenName -> f:if(condition: renderAxis)}
                 </div>
             </f:for>
         </div>
     </f:if>
+</f:section>
+
+<f:section name="MemberCell">
+    {gem:note(event: event, member: member, as: '_notes', glue: ' * ')}
+    {f:variable(name: '_notesClass', value: ' gemc-has-notes') -> f:if(condition: _notes)}
+    <div class="gemc-cell{f:if(condition: event, then: ' gemc-content')} gemc-regstate-{gem:registration(event: event, member: member, property: 'state')}{_notesClass}">
+        {member.screenName -> f:if(condition: renderAxis)}<f:if condition="{_notes}"><span class="gemc-notes" title="{_notes}"></span></f:if>
+    </div>
 </f:section>
 
 </html>
