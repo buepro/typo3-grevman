@@ -19,17 +19,9 @@
 	"require": {
 		"typo3/cms-core": "^10.4"
 	},
-	"require-dev": {
-		"typo3/testing-framework": "^6.8"
-	},
 	"autoload": {
 		"psr-4": {
 			"Buepro\\Grevman\\": "Classes"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Buepro\\Grevman\\Tests\\": "Tests"
 		}
 	},
 	"replace": {
