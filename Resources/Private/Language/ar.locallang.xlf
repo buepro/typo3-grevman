@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="EXT:grevman/Resources/Private/Language/locallang" date="2021-06-22T16:30:32Z" product-name="grevman" target-language="ar">
+    <header/>
+    <body>
+      <trans-unit id="dateTimeFormat" resname="dateTimeFormat">
+        <source>j.n.y H.i</source>
+        <target state="needs-translation">j.n.y H.i</target>
+      </trans-unit>
+      <trans-unit id="dateFormat" resname="dateFormat">
+        <source>j.n.y</source>
+        <target state="needs-translation">j.n.y</target>
+      </trans-unit>
+      <trans-unit id="timeFormat" resname="timeFormat">
+        <source>H.i</source>
+        <target state="needs-translation">H.i</target>
+      </trans-unit>
+      <trans-unit id="upcomingEvents" resname="upcomingEvents">
+        <source>Upcoming events</source>
+        <target state="needs-translation">Upcoming events</target>
+      </trans-unit>
+      <trans-unit id="participants" resname="participants">
+        <source>Participants</source>
+        <target state="needs-translation">Participants</target>
+      </trans-unit>
+      <trans-unit id="register" resname="register">
+        <source>Register</source>
+        <target state="needs-translation">Register</target>
+      </trans-unit>
+      <trans-unit id="unregister" resname="unregister">
+        <source>Unregister</source>
+        <target state="needs-translation">Unregister</target>
+      </trans-unit>
+      <trans-unit id="i_join" resname="i_join">
+        <source>I join</source>
+        <target state="needs-translation">I join</target>
+      </trans-unit>
+      <trans-unit id="registerConfirmation" resname="unregister">
+        <source>You are now registered.</source>
+        <target state="needs-translation">You are now registered.</target>
+      </trans-unit>
+      <trans-unit id="unregisterConfirmation" resname="unregister">
+        <source>You are now unregistered.</source>
+        <target state="needs-translation">You are now unregistered.</target>
+      </trans-unit>
+      <trans-unit id="spontaneousRegistrations" resname="spontaneousRegistrations">
+        <source>Spontaneous registrations</source>
+        <target state="needs-translation">Spontaneous registrations</target>
+      </trans-unit>
+      <trans-unit id="guests" resname="guests">
+        <source>Guests</source>
+        <target state="needs-translation">Guests</target>
+      </trans-unit>
+      <trans-unit id="createMail" resname="createMail">
+        <source>Create mail</source>
+        <target state="needs-translation">Create mail</target>
+      </trans-unit>
+      <trans-unit id="mailReceipientsHint" resname="mailReceipientsHint">
+        <source>The mail will be sent to everybody related to this event independent of their registration and member state. This means that all parties listed in the section "Participants" with a valid email address will receive the message.</source>
+        <target state="needs-translation">The mail will be sent to everybody related to this event independent of their registration and member state. This means that all parties listed in the section "Participants" with a valid email address will receive the message.</target>
+      </trans-unit>
+      <trans-unit id="subject" resname="subject">
+        <source>Subject</source>
+        <target state="needs-translation">Subject</target>
+      </trans-unit>
+      <trans-unit id="message" resname="message">
+        <source>Message</source>
+        <target state="needs-translation">Message</target>
+      </trans-unit>
+      <trans-unit id="send" resname="send">
+        <source>Send</source>
+        <target state="needs-translation">Send</target>
+      </trans-unit>
+      <trans-unit id="mailConfirmation" resname="mailConfirmation">
+        <source>The mail has been sent.</source>
+        <target state="needs-translation">The mail has been sent.</target>
+      </trans-unit>
+      <trans-unit id="mailError" resname="mailError">
+        <source>The mail couldn't be send.</source>
+        <target state="needs-translation">The mail couldn't be send.</target>
+      </trans-unit>
+      <trans-unit id="createNote" resname="createNote">
+        <source>Create note</source>
+        <target state="needs-translation">Create note</target>
+      </trans-unit>
+      <trans-unit id="add" resname="add">
+        <source>Add</source>
+        <target state="needs-translation">Add</target>
+      </trans-unit>
+      <trans-unit id="noteAdded" resname="noteAdded">
+        <source>The note has been added.</source>
+        <target state="needs-translation">The note has been added.</target>
+      </trans-unit>
+      <trans-unit id="showMatrix" resname="showMatrix">
+        <source>Show matrix</source>
+        <target state="needs-translation">Show matrix</target>
+      </trans-unit>
+      <trans-unit id="showList" resname="showList">
+        <source>Show list</source>
+        <target state="needs-translation">Show list</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event">
+        <source>Event</source>
+        <target state="needs-translation">Event</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.title" resname="tx_grevman_domain_model_event.title">
+        <source>Title</source>
+        <target state="needs-translation">Title</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.slug" resname="tx_grevman_domain_model_event.slug">
+        <source>Slug</source>
+        <target state="needs-translation">Slug</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.startdate" resname="tx_grevman_domain_model_event.startdate">
+        <source>Startdate</source>
+        <target state="needs-translation">Startdate</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.enddate" resname="tx_grevman_domain_model_event.enddate">
+        <source>Enddate</source>
+        <target state="needs-translation">Enddate</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.teaser" resname="tx_grevman_domain_model_event.teaser">
+        <source>Teaser</source>
+        <target state="needs-translation">Teaser</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.description" resname="tx_grevman_domain_model_event.description">
+        <source>Description</source>
+        <target state="needs-translation">Description</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.price" resname="tx_grevman_domain_model_event.price">
+        <source>Price</source>
+        <target state="needs-translation">Price</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.link" resname="tx_grevman_domain_model_event.link">
+        <source>Link</source>
+        <target state="needs-translation">Link</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.program" resname="tx_grevman_domain_model_event.program">
+        <source>Program</source>
+        <target state="needs-translation">Program</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.location" resname="tx_grevman_domain_model_event.location">
+        <source>Location</source>
+        <target state="needs-translation">Location</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.images" resname="tx_grevman_domain_model_event.images">
+        <source>Images</source>
+        <target state="needs-translation">Images</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.files" resname="tx_grevman_domain_model_event.files">
+        <source>Files</source>
+        <target state="needs-translation">Files</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.member_groups" resname="tx_grevman_domain_model_event.member_groups">
+        <source>Member Groups</source>
+        <target state="needs-translation">Member Groups</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.registrations" resname="tx_grevman_domain_model_event.registrations">
+        <source>Registrations</source>
+        <target state="needs-translation">Registrations</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.notes" resname="tx_grevman_domain_model_event.notes">
+        <source>Notes</source>
+        <target state="needs-translation">Notes</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_event.guests" resname="tx_grevman_domain_model_event.guests">
+        <source>Guests</source>
+        <target state="needs-translation">Guests</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_group" resname="tx_grevman_domain_model_group">
+        <source>Group</source>
+        <target state="needs-translation">Group</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_group.name" resname="tx_grevman_domain_model_group.name">
+        <source>Name</source>
+        <target state="needs-translation">Name</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_group.events" resname="tx_grevman_domain_model_group.events">
+        <source>Events</source>
+        <target state="needs-translation">Events</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_group.members" resname="tx_grevman_domain_model_group.members">
+        <source>Members</source>
+        <target state="needs-translation">Members</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_member" resname="tx_grevman_domain_model_member">
+        <source>Member</source>
+        <target state="needs-translation">Member</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_member.member_groups" resname="tx_grevman_domain_model_member.member_groups">
+        <source>Member Groups</source>
+        <target state="needs-translation">Member Groups</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_member.registrations" resname="tx_grevman_domain_model_member.registrations">
+        <source>Registrations</source>
+        <target state="needs-translation">Registrations</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_member.notes" resname="tx_grevman_domain_model_member.notes">
+        <source>Notes</source>
+        <target state="needs-translation">Notes</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_registration" resname="tx_grevman_domain_model_registration">
+        <source>Registration</source>
+        <target state="needs-translation">Registration</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_registration.state" resname="tx_grevman_domain_model_registration.state">
+        <source>State</source>
+        <target state="needs-translation">State</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_registration.member" resname="tx_grevman_domain_model_registration.member">
+        <source>Member</source>
+        <target state="needs-translation">Member</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_note" resname="tx_grevman_domain_model_note">
+        <source>Note</source>
+        <target state="needs-translation">Note</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_note.text" resname="tx_grevman_domain_model_note.text">
+        <source>Text</source>
+        <target state="needs-translation">Text</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_note.member" resname="tx_grevman_domain_model_note.member">
+        <source>Member</source>
+        <target state="needs-translation">Member</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_guest" resname="tx_grevman_domain_model_guest">
+        <source>Guest</source>
+        <target state="needs-translation">Guest</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_guest.first_name" resname="tx_grevman_domain_model_guest.first_name">
+        <source>First Name</source>
+        <target state="needs-translation">First Name</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_guest.last_name" resname="tx_grevman_domain_model_guest.last_name">
+        <source>Last Name</source>
+        <target state="needs-translation">Last Name</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_guest.phone" resname="tx_grevman_domain_model_guest.phone">
+        <source>Phone</source>
+        <target state="needs-translation">Phone</target>
+      </trans-unit>
+      <trans-unit id="tx_grevman_domain_model_guest.email" resname="tx_grevman_domain_model_guest.email">
+        <source>Email</source>
+        <target state="needs-translation">Email</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
