@@ -35,7 +35,7 @@ Matrix view
 List view
 ---------
 
-.. figure:: ../Images/MListView.jpg
+.. figure:: ../Images/ListView.jpg
    :alt: List view from events
 
 Detail view
@@ -47,4 +47,4 @@ Detail view
 Acknowledgement
 ===============
 
-This extension has been sponsored by `SAC-Sektion Uto<https://www.sac-uto.ch>`__.
+This extension has been sponsored by `SAC-Sektion Uto <https://www.sac-uto.ch>`__.

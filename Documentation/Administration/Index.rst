@@ -14,22 +14,22 @@ Carry out the following standard installation steps:
 
 #. Create page structure. Typically it consists of the following pages:
 
-   ┡ 🗌 Grevman
-   ┊ ┃ 🗌 Login
-   ┊ ┣ 🖿 Participants
-   ┊ ┣ 🖿 Leaders
-   ┊ ┗ 🖿 Data
+   |  ┡ 🗌 Grevman
+   |  ┊ ┃ 🗌 Login
+   |  ┊ ┣ 🖿 Participants
+   |  ┊ ┣ 🖿 Leaders
+   |  ┊ ┗ 🖿 Data
 
    .. note::
       In the above page structure the pages/folders are used as following:
-      -  Page `Grevman` holds the grevman plugin.
-      -  Page `Login` holds the fe login plugin.
-      -  Folder `Participants` holds the fe users considered to be participants.
-         The fe user group for the participants might be stored here too.
-      -  Folder `Leaders` holds the fe users considered to be leaders (e.g.
-         trainers). The fe user group for the leaders might be stored here too.
-      -  Folder `Data` holds the remaining grevman records as events, groups,
-         guests, notes and registrations.
+      - Page `Grevman` holds the grevman plugin.
+      - Page `Login` holds the fe login plugin.
+      - Folder `Participants` holds the fe users considered to be participants.
+        The fe user group for the participants might be stored here too.
+      - Folder `Leaders` holds the fe users considered to be leaders (e.g.
+        trainers). The fe user group for the leaders might be stored here too.
+      - Folder `Data` holds the remaining grevman records as events, groups,
+        guests, notes and registrations.
 
 #. Add static template to page where the plugin will be located. In the above
    page structure this would be the page `Grevman`.
@@ -51,12 +51,12 @@ The following individual configurations are needed (replace values as needed):
 Cache and preview
 ~~~~~~~~~~~~~~~~~
 
-The following configuration is needed
+The following configuration is needed for the following:
 
--  to clear the cache from the page where the plugin is located upon changing a
-   grevman related record and
+-  To clear the cache from the page where the plugin is located upon changing a
+   grevman related record.
 
--  to define the page shown upon pressing the view button when editing a grevman
+-  To define the page shown upon pressing the view button when editing a grevman
    record.
 
 .. code-block:: typoscript
