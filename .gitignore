@@ -1,4 +1,6 @@
-.Build/
+.build/
 .idea/
 composer.lock
 .php_cs.cache
+config/
+var/
