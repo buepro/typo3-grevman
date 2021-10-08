@@ -55,7 +55,7 @@ defined('TYPO3') || die('Access denied.');
         $iconRegistry->registerIcon(
             $icon,
             \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-            ['source' => 'EXT:grevman/Resources/Public/Icons/' . $icon . 'svg']
+            ['source' => 'EXT:grevman/Resources/Public/Icons/' . $icon . '.svg']
         );
     }
 }) ();
