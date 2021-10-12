@@ -99,6 +99,10 @@
         <source>Show list</source>
         <target state="final">Liste anzeigen</target>
       </trans-unit>
+      <trans-unit id="noEventAlert" resname="showList">
+        <source>Currently there are no events available.</source>
+        <target state="needs-translation">Currently there are no events available.</target>
+      </trans-unit>
       <trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event" approved="yes">
         <source>Event</source>
         <target state="final">Veranstaltung</target>
