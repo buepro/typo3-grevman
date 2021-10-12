@@ -51,14 +51,12 @@
         &:before {
             border-top-color: $gem-registered;
             border-left-color: $gem-registered;
-            @include gem-make-heartbeat();
         }
     }
     &.gemc-regstate-9 {
         &:before {
             border-top-color: $gem-unregistered;
             border-left-color: $gem-unregistered;
-            @include gem-make-heartbeat();
         }
     }
 }

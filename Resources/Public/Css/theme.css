@@ -71,12 +71,10 @@
 .gem-event-listitem.gemc-regstate-6:before {
   border-top-color: lightgreen;
   border-left-color: lightgreen;
-  animation: gem-heartbeat 2s ease-in-out infinite;
 }
 .gem-event-listitem.gemc-regstate-9:before {
   border-top-color: lightpink;
   border-left-color: lightpink;
-  animation: gem-heartbeat 2s ease-in-out infinite;
 }
 
 .gem-event-matrix > section {
