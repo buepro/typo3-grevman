@@ -58,4 +58,4 @@ defined('TYPO3') || die('Access denied.');
             ['source' => 'EXT:grevman/Resources/Public/Icons/' . $icon . '.svg']
         );
     }
-}) ();
+})();

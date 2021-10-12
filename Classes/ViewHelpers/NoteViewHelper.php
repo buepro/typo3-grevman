@@ -12,7 +12,6 @@ namespace Buepro\Grevman\ViewHelpers;
 use Buepro\Grevman\Domain\Model\Event;
 use Buepro\Grevman\Domain\Model\Member;
 use Buepro\Grevman\Domain\Model\Note;
-use Buepro\Grevman\Domain\Model\Registration;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
