@@ -13,7 +13,7 @@ namespace Buepro\Grevman\Domain\Model;
 
 use Buepro\Grevman\Service\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -28,8 +28,37 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  * Member
  */
-class Member extends FrontendUser
+class Member extends AbstractEntity
 {
+    /**
+     * @var string
+     */
+    protected $username = '';
+
+    /**
+     * @var string
+     */
+    protected $password = '';
+
+    /**
+     * @var ObjectStorage<FrontendUserGroup>
+     */
+    protected $usergroup;
+
+    /**
+     * @var string
+     */
+    protected $firstName = '';
+
+    /**
+     * @var string
+     */
+    protected $lastName = '';
+
+    /**
+     * @var string
+     */
+    protected $email = '';
 
     /**
      * memberGroups
@@ -62,7 +91,8 @@ class Member extends FrontendUser
      */
     public function __construct($username = '', $password = '')
     {
-        parent::__construct($username = '', $password = '');
+        $this->username = $username;
+        $this->password = $password;
         // Do not remove the next line: It would break the functionality
         $this->initializeObject();
     }
@@ -80,6 +110,124 @@ class Member extends FrontendUser
         $this->memberGroups = $this->memberGroups ?: new ObjectStorage();
         $this->registrations = $this->registrations ?: new ObjectStorage();
         $this->notes = $this->notes ?: new ObjectStorage();
+    }
+
+    /**
+     * Sets the username value
+     */
+    public function setUsername(string $username): void
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * Returns the username value
+     */
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * Sets the password value
+     */
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * Returns the password value
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    /**
+     * Sets the usergroups. Keep in mind that the property is called "usergroup"
+     * although it can hold several usergroups.
+     *
+     * @param ObjectStorage<FrontendUserGroup> $usergroup
+     */
+    public function setUsergroup(ObjectStorage $usergroup): void
+    {
+        $this->usergroup = $usergroup;
+    }
+
+    /**
+     * Adds a usergroup to the frontend user
+     */
+    public function addUsergroup(FrontendUserGroup $usergroup): void
+    {
+        $this->usergroup->attach($usergroup);
+    }
+
+    /**
+     * Removes a usergroup from the frontend user
+     */
+    public function removeUsergroup(FrontendUserGroup $usergroup): void
+    {
+        $this->usergroup->detach($usergroup);
+    }
+
+    /**
+     * Returns the usergroups. Keep in mind that the property is called "usergroup"
+     * although it can hold several usergroups.
+     *
+     * @return ObjectStorage<FrontendUserGroup> An object storage containing the usergroup
+     */
+    public function getUsergroup()
+    {
+        return $this->usergroup;
+    }
+
+    /**
+     * Sets the firstName value
+     */
+    public function setFirstName(string $firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * Returns the firstName value
+     */
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Sets the lastName value
+     */
+    public function setLastName(string $lastName): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * Returns the lastName value
+     */
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * Sets the email value
+     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * Returns the email value
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
     }
 
     /**

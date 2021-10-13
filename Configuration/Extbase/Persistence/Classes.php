@@ -11,6 +11,8 @@ declare(strict_types = 1);
 return [
     \Buepro\Grevman\Domain\Model\Member::class => [
         'tableName' => 'fe_users',
-
+    ],
+    \Buepro\Grevman\Domain\Model\FrontendUserGroup::class => [
+        'tableName' => 'fe_groups',
     ],
 ];
