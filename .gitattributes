@@ -1,6 +1,7 @@
 # Folders
 /Documentation export-ignore
 /Tests export-ignore
+/.github export-ignore
 
 # Files
 /.* export-ignore
