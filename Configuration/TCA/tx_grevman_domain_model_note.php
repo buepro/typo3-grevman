@@ -92,19 +92,6 @@ return [
                 'default' => ''
             ]
         ],
-        'member' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_note.member',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'fe_users',
-                'default' => 0,
-                'minitems' => 0,
-                'maxitems' => 1,
-            ],
-
-        ],
 
         'event' => [
             'config' => [

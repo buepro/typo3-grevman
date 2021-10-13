@@ -11,6 +11,9 @@ declare(strict_types=1);
 
 namespace Buepro\Grevman\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
  *
@@ -23,7 +26,7 @@ namespace Buepro\Grevman\Domain\Model;
 /**
  * Group
  */
-class Group extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Group extends AbstractEntity
 {
 
     /**
@@ -36,14 +39,14 @@ class Group extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * events
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Event>
+     * @var ObjectStorage<Event>
      */
     protected $events = null;
 
     /**
      * members
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Member>
+     * @var ObjectStorage<Member>
      */
     protected $members = null;
 
@@ -62,33 +65,25 @@ class Group extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Do not modify this method!
      * It will be rewritten on each save in the extension builder
      * You may modify the constructor of this class instead
-     *
-     * @return void
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
-        $this->events = $this->events ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->members = $this->members ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->events = $this->events ?: new ObjectStorage();
+        $this->members = $this->members ?: new ObjectStorage();
     }
 
     /**
      * Adds a Event
-     *
-     * @param \Buepro\Grevman\Domain\Model\Event $event
-     * @return void
      */
-    public function addEvent(\Buepro\Grevman\Domain\Model\Event $event)
+    public function addEvent(Event $event): void
     {
         $this->events->attach($event);
     }
 
     /**
      * Removes a Event
-     *
-     * @param \Buepro\Grevman\Domain\Model\Event $eventToRemove The Event to be removed
-     * @return void
      */
-    public function removeEvent(\Buepro\Grevman\Domain\Model\Event $eventToRemove)
+    public function removeEvent(Event $eventToRemove): void
     {
         $this->events->detach($eventToRemove);
     }
@@ -96,7 +91,7 @@ class Group extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the events
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Event> $events
+     * @return ObjectStorage<Event> $events
      */
     public function getEvents()
     {
@@ -106,32 +101,25 @@ class Group extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the events
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Event> $events
-     * @return void
+     * @param ObjectStorage<Event> $events
      */
-    public function setEvents(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $events)
+    public function setEvents(ObjectStorage $events): void
     {
         $this->events = $events;
     }
 
     /**
      * Adds a Member
-     *
-     * @param \Buepro\Grevman\Domain\Model\Member $member
-     * @return void
      */
-    public function addMember(\Buepro\Grevman\Domain\Model\Member $member)
+    public function addMember(Member $member): void
     {
         $this->members->attach($member);
     }
 
     /**
      * Removes a Member
-     *
-     * @param \Buepro\Grevman\Domain\Model\Member $memberToRemove The Member to be removed
-     * @return void
      */
-    public function removeMember(\Buepro\Grevman\Domain\Model\Member $memberToRemove)
+    public function removeMember(Member $memberToRemove): void
     {
         $this->members->detach($memberToRemove);
     }
@@ -139,7 +127,7 @@ class Group extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the members
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Member> $members
+     * @return ObjectStorage<Member> $members
      */
     public function getMembers()
     {
@@ -149,31 +137,25 @@ class Group extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the members
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Member> $members
-     * @return void
+     * @param ObjectStorage<Member> $members
      */
-    public function setMembers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $members)
+    public function setMembers(ObjectStorage $members): void
     {
         $this->members = $members;
     }
 
     /**
      * Returns the name
-     *
-     * @return string $name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
      * Sets the name
-     *
-     * @param string $name
-     * @return void
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }

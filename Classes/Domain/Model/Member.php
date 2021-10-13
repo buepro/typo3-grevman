@@ -13,6 +13,8 @@ namespace Buepro\Grevman\Domain\Model;
 
 use Buepro\Grevman\Service\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
@@ -26,20 +28,20 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Member
  */
-class Member extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+class Member extends FrontendUser
 {
 
     /**
      * memberGroups
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Group>
+     * @var ObjectStorage<Group>
      */
     protected $memberGroups = null;
 
     /**
      * registrations
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Registration>
+     * @var ObjectStorage<Registration>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $registrations = null;
@@ -47,7 +49,7 @@ class Member extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     /**
      * notes
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Note>
+     * @var ObjectStorage<Note>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $notes = null;
@@ -75,29 +77,23 @@ class Member extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      */
     public function initializeObject()
     {
-        $this->memberGroups = $this->memberGroups ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->registrations = $this->registrations ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->notes = $this->notes ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->memberGroups = $this->memberGroups ?: new ObjectStorage();
+        $this->registrations = $this->registrations ?: new ObjectStorage();
+        $this->notes = $this->notes ?: new ObjectStorage();
     }
 
     /**
      * Adds a Group
-     *
-     * @param \Buepro\Grevman\Domain\Model\Group $memberGroup
-     * @return void
      */
-    public function addMemberGroup(\Buepro\Grevman\Domain\Model\Group $memberGroup)
+    public function addMemberGroup(Group $memberGroup): void
     {
         $this->memberGroups->attach($memberGroup);
     }
 
     /**
      * Removes a Group
-     *
-     * @param \Buepro\Grevman\Domain\Model\Group $memberGroupToRemove The Group to be removed
-     * @return void
      */
-    public function removeMemberGroup(\Buepro\Grevman\Domain\Model\Group $memberGroupToRemove)
+    public function removeMemberGroup(Group $memberGroupToRemove): void
     {
         $this->memberGroups->detach($memberGroupToRemove);
     }
@@ -105,7 +101,7 @@ class Member extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     /**
      * Returns the memberGroups
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Group> $memberGroups
+     * @return ObjectStorage<Group> $memberGroups
      */
     public function getMemberGroups()
     {
@@ -115,32 +111,25 @@ class Member extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     /**
      * Sets the memberGroups
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Group> $memberGroups
-     * @return void
+     * @param ObjectStorage<Group> $memberGroups
      */
-    public function setMemberGroups(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $memberGroups)
+    public function setMemberGroups(ObjectStorage $memberGroups): void
     {
         $this->memberGroups = $memberGroups;
     }
 
     /**
      * Adds a Registration
-     *
-     * @param \Buepro\Grevman\Domain\Model\Registration $registration
-     * @return void
      */
-    public function addRegistration(\Buepro\Grevman\Domain\Model\Registration $registration)
+    public function addRegistration(Registration $registration): void
     {
         $this->registrations->attach($registration);
     }
 
     /**
      * Removes a Registration
-     *
-     * @param \Buepro\Grevman\Domain\Model\Registration $registrationToRemove The Registration to be removed
-     * @return void
      */
-    public function removeRegistration(\Buepro\Grevman\Domain\Model\Registration $registrationToRemove)
+    public function removeRegistration(Registration $registrationToRemove): void
     {
         $this->registrations->detach($registrationToRemove);
     }
@@ -148,7 +137,7 @@ class Member extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     /**
      * Returns the registrations
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Registration> $registrations
+     * @return ObjectStorage<Registration> $registrations
      */
     public function getRegistrations()
     {
@@ -158,32 +147,25 @@ class Member extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     /**
      * Sets the registrations
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Registration> $registrations
-     * @return void
+     * @param ObjectStorage<Registration> $registrations
      */
-    public function setRegistrations(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations)
+    public function setRegistrations(ObjectStorage $registrations): void
     {
         $this->registrations = $registrations;
     }
 
     /**
      * Adds a Note
-     *
-     * @param \Buepro\Grevman\Domain\Model\Note $note
-     * @return void
      */
-    public function addNote(\Buepro\Grevman\Domain\Model\Note $note)
+    public function addNote(Note $note): void
     {
         $this->notes->attach($note);
     }
 
     /**
      * Removes a Note
-     *
-     * @param \Buepro\Grevman\Domain\Model\Note $noteToRemove The Note to be removed
-     * @return void
      */
-    public function removeNote(\Buepro\Grevman\Domain\Model\Note $noteToRemove)
+    public function removeNote(Note $noteToRemove): void
     {
         $this->notes->detach($noteToRemove);
     }
@@ -191,7 +173,7 @@ class Member extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     /**
      * Returns the notes
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Note> $notes
+     * @return ObjectStorage<Note> $notes
      */
     public function getNotes()
     {
@@ -201,10 +183,9 @@ class Member extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     /**
      * Sets the notes
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Note> $notes
-     * @return void
+     * @param ObjectStorage<Note> $notes
      */
-    public function setNotes(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $notes)
+    public function setNotes(ObjectStorage $notes): void
     {
         $this->notes = $notes;
     }
@@ -212,19 +193,17 @@ class Member extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     public function getScreenName(): string
     {
         $parts = [];
-        if ($this->getFirstName()) {
+        if ($this->getFirstName() !== '') {
             $parts[] = $this->getFirstName();
         }
-        if ($this->getLastName()) {
+        if ($this->getLastName() !== '') {
             $parts[] = $this->getLastName();
         }
-        return $parts ? implode(' ', $parts) : '';
+        return (bool)$parts ? implode(' ', $parts) : '';
     }
 
     /**
      * True if the member belongs to a leader group.
-     *
-     * @return bool
      */
     public function getIsLeader(): bool
     {

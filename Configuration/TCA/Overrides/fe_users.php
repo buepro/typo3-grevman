@@ -7,9 +7,9 @@
  * LICENSE file that was distributed with this source code.
  */
 
-defined('TYPO3') || die('Access denied.');
+defined('TYPO3') or die('Access denied.');
 
-(static function () {
+(static function (): void {
     if (!isset($GLOBALS['TCA']['fe_users']['ctrl']['type'])) {
         // no type field defined, so we define it here. This will only happen the first time the extension is installed!!
         $GLOBALS['TCA']['fe_users']['ctrl']['type'] = 'tx_extbase_type';

@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Buepro\Grevman\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
  *
@@ -23,7 +25,7 @@ namespace Buepro\Grevman\Domain\Model;
 /**
  * Registration
  */
-class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Registration extends AbstractEntity
 {
     public const REGISTRATION_UNDEFINED = 0;
     public const REGISTRATION_CONFIRMED = 6;
@@ -39,48 +41,38 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * member
      *
-     * @var \Buepro\Grevman\Domain\Model\Member
+     * @var Member
      */
     protected $member = null;
 
     /**
      * Returns the state
-     *
-     * @return int $state
      */
-    public function getState()
+    public function getState(): int
     {
         return $this->state;
     }
 
     /**
      * Sets the state
-     *
-     * @param int $state
-     * @return void
      */
-    public function setState(int $state)
+    public function setState(int $state): void
     {
         $this->state = $state;
     }
 
     /**
      * Returns the member
-     *
-     * @return \Buepro\Grevman\Domain\Model\Member $member
      */
-    public function getMember()
+    public function getMember(): Member
     {
         return $this->member;
     }
 
     /**
      * Sets the member
-     *
-     * @param \Buepro\Grevman\Domain\Model\Member $member
-     * @return void
      */
-    public function setMember(\Buepro\Grevman\Domain\Model\Member $member)
+    public function setMember(Member $member): void
     {
         $this->member = $member;
     }

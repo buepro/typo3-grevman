@@ -11,7 +11,10 @@ declare(strict_types=1);
 
 namespace Buepro\Grevman\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
@@ -25,17 +28,17 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 /**
  * The repository for Events
  */
-class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class EventRepository extends Repository
 {
     protected $defaultOrderings = [
-        'startdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+        'startdate' => QueryInterface::ORDER_ASCENDING
     ];
 
     /**
      * Returns all objects of this repository.
      *
      * @return QueryResultInterface|array
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws InvalidQueryException
      */
     public function findAll()
     {

@@ -59,7 +59,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function injectEventRepository(
         \Buepro\Grevman\Domain\Repository\EventRepository $eventRepository
-    ) {
+    ): void {
         $this->eventRepository = $eventRepository;
     }
 
@@ -68,10 +68,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function injectMemberRepository(
         \Buepro\Grevman\Domain\Repository\MemberRepository $memberRepository
-    ) {
+    ): void {
         $this->memberRepository = $memberRepository;
     }
 
+    /**
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
     private function listAndMatrixActionProcessing()
     {
         $events = $this->eventRepository->findAll();
@@ -90,6 +94,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * action list
      *
      * @return string|object|null|void
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function listAction()
     {
@@ -110,8 +115,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $groups = [];
         $spontaneousMembers = [];
         $guests = [];
+        /** @var Event $event */
         foreach ($events as $event) {
-            /** @var Event $event */
             // Compile groups
             foreach ($event->getMemberGroups() as $group) {
                 /** @var Group $group */
@@ -120,7 +125,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 }
             }
             // Compile spontaneous registrations
-            foreach ((array) $event->getSpontaneousRegistrations() as $spontaneousRegistration) {
+            foreach ($event->getSpontaneousRegistrations() as $spontaneousRegistration) {
                 /** @var Registration $spontaneousRegistration */
                 /** @var Member $member */
                 $member = $spontaneousRegistration->getMember();
@@ -157,6 +162,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         $identifiedEventMember = null;
         if ($GLOBALS['TSFE']->fe_user && $GLOBALS['TSFE']->fe_user->user['uid']) {
+            /** @var Member $member */
             $member = $this->memberRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
             $identifiedEventMember = new EventMember($event, $member);
         }
@@ -170,10 +176,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function registerAction(
         \Buepro\Grevman\Domain\Model\Event $event,
         \Buepro\Grevman\Domain\Model\Member $member
-    ) {
+    ): void {
         $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
         $registration = $event->getRegistrationForMember($member);
-        if (!$registration) {
+        if (null === $registration) {
             /** @var Registration $registration */
             $registration = GeneralUtility::makeInstance(Registration::class);
             $registration->setMember($member);
@@ -181,7 +187,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
         $registration->setState(Registration::REGISTRATION_CONFIRMED);
         $this->addFlashMessage(
-            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('registerConfirmation', 'grevman'),
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('registerConfirmation', 'grevman') ?? 'Translation missing at 1634056035253',
             '',
             FlashMessage::INFO
         );
@@ -194,9 +200,9 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function unregisterAction(
         \Buepro\Grevman\Domain\Model\Event $event,
         \Buepro\Grevman\Domain\Model\Member $member
-    ) {
+    ):void {
         $registration = $event->getRegistrationForMember($member);
-        if (!$registration) {
+        if (null === $registration) {
             /** @var Registration $registration */
             $registration = GeneralUtility::makeInstance(Registration::class);
             $registration->setMember($member);
@@ -204,7 +210,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
         $registration->setState(Registration::REGISTRATION_CANCELED);
         $this->addFlashMessage(
-            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unregisterConfirmation', 'grevman'),
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unregisterConfirmation', 'grevman') ?? 'Translation missing at 1634056367543',
             '',
             FlashMessage::INFO
         );
@@ -218,7 +224,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @param Mail $mailDto
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      */
-    public function sendMailAction(Mail $mailDto)
+    public function sendMailAction(Mail $mailDto): void
     {
         /** @var MailMessage $mail */
         $mail = GeneralUtility::makeInstance(MailMessage::class);
@@ -228,13 +234,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $mail->text($mailDto->getMessage());
         if ($mail->send()) {
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailConfirmation', 'grevman'),
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailConfirmation', 'grevman') ?? 'Translation missing at 1634056431706',
                 '',
                 FlashMessage::INFO
             );
         } else {
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailError', 'grevman'),
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailError', 'grevman') ?? 'Translation missing at 1634056449875',
                 '',
                 FlashMessage::ERROR
             );
@@ -247,14 +253,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @param Note $noteDto
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      */
-    public function addNoteAction(Note $noteDto)
+    public function addNoteAction(Note $noteDto): void
     {
         $noteDto->getEvent()->addNote($noteDto->createNote());
         $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
         $persistenceManager->add($noteDto->getEvent());
         $persistenceManager->persistAll();
         $this->addFlashMessage(
-            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('noteAdded', 'grevman'),
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('noteAdded', 'grevman') ?? 'Translation missing at 1634056465800',
             '',
             FlashMessage::INFO
         );

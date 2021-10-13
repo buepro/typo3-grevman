@@ -36,20 +36,19 @@ class NoteViewHelper extends AbstractViewHelper
         $this->registerArgument('as', 'string', 'Name of variable to create.', false);
         $this->registerArgument('event', '\\Buepro\\Grevman\\Domain\\Model\\Event', 'Event', false);
         $this->registerArgument('member', '\\Buepro\\Grevman\\Domain\\Model\\Member', 'Member', false);
-        $this->registerArgument('glue', 'string', 'Glue used to implode notes. If empty array is returned.', false);
+        $this->registerArgument('glue', 'string', 'Glue used to implode notes. If empty array is returned.', false, '<br />');
     }
 
     /**
      * @param array $arguments
      * @param \Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
-     * @return mixed
      */
     public static function renderStatic(
         array $arguments,
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
-    ) {
+    ): string {
         $event = $arguments['event'];
         $member = $arguments['member'];
         $result = [];
@@ -62,13 +61,10 @@ class NoteViewHelper extends AbstractViewHelper
                 }
             }
         }
-        if ($arguments['glue']) {
-            $result = implode($arguments['glue'], $result);
-        }
         if ($arguments['as']) {
             $renderingContext->getVariableProvider()->add($arguments['as'], $result);
-        } else {
-            return $result;
+            return '';
         }
+        return implode($arguments['glue'], $result);
     }
 }

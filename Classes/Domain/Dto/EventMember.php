@@ -27,7 +27,7 @@ class EventMember
     protected $member;
 
     /**
-     * @var Registration
+     * @var Registration|null
      */
     protected $registration;
 
@@ -60,7 +60,7 @@ class EventMember
 
     public function getRegistrationState(): int
     {
-        if (!$this->registration) {
+        if (null === $this->registration) {
             return 0;
         }
         return $this->registration->getState();
@@ -68,13 +68,14 @@ class EventMember
 
     public function getRegistered(): bool
     {
-        return $this->registration && $this->registration->getState() === Registration::REGISTRATION_CONFIRMED;
+        return $this->registration !== null && $this->registration->getState() === Registration::REGISTRATION_CONFIRMED;
     }
 
     public function isEventGroupMember(): bool
     {
+        /** @var Group $group */
         foreach ($this->event->getMemberGroups() as $group) {
-            /** @var Group $group */
+            /** @var Member $member */
             foreach ($group->getMembers() as $member) {
                 if ($this->member === $member) {
                     return true;
@@ -86,11 +87,9 @@ class EventMember
 
     /**
      * True if the member belongs to a leader group.
-     *
-     * @return bool
      */
     public function getIsLeader(): bool
     {
-        return $this->member && $this->member->getIsLeader();
+        return $this->member->getIsLeader();
     }
 }

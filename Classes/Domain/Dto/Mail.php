@@ -79,26 +79,26 @@ class Mail
     {
         $receivers = [];
         // From event groups
+        /** @var Group $memberGroup */
         foreach ($this->event->getMemberGroups() as $memberGroup) {
-            /** @var Group $memberGroup */
+            /** @var Member $member */
             foreach ($memberGroup->getMembers() as $member) {
-                /** @var Member $member */
-                if ($member->getEmail()) {
+                if ($member->getEmail() !== '') {
                     $receivers[] = new \Symfony\Component\Mime\Address($member->getEmail(), $member->getScreenName());
                 }
             }
         }
         // From spontaneous registrations
+        /** @var Registration $registration */
         foreach ($this->event->getSpontaneousRegistrations() as $registration) {
-            /** @var Registration $registration */
-            if ($registration->getMember()->getEmail()) {
+            if ($registration->getMember()->getEmail() !== '') {
                 $receivers[] = new \Symfony\Component\Mime\Address($registration->getMember()->getEmail(), $registration->getMember()->getScreenName());
             }
         }
         // Visitors
         foreach ($this->event->getGuests() as $guest) {
             /** @var Guest $guest */
-            if ($guest->getEmail()) {
+            if ($guest->getEmail() !== '') {
                 $receivers[] = new \Symfony\Component\Mime\Address($guest->getEmail(), $guest->getScreenName());
             }
         }

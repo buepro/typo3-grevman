@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Buepro\Grevman\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
  *
@@ -23,7 +25,7 @@ namespace Buepro\Grevman\Domain\Model;
 /**
  * Guest
  */
-class Guest extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Guest extends AbstractEntity
 {
 
     /**
@@ -60,84 +62,64 @@ class Guest extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Returns the firstName
-     *
-     * @return string $firstName
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
 
     /**
      * Sets the firstName
-     *
-     * @param string $firstName
-     * @return void
      */
-    public function setFirstName(string $firstName)
+    public function setFirstName(string $firstName): void
     {
         $this->firstName = $firstName;
     }
 
     /**
      * Returns the lastName
-     *
-     * @return string $lastName
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
 
     /**
      * Sets the lastName
-     *
-     * @param string $lastName
-     * @return void
      */
-    public function setLastName(string $lastName)
+    public function setLastName(string $lastName): void
     {
         $this->lastName = $lastName;
     }
 
     /**
      * Returns the phone
-     *
-     * @return string $phone
      */
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->phone;
     }
 
     /**
      * Sets the phone
-     *
-     * @param string $phone
-     * @return void
      */
-    public function setPhone(string $phone)
+    public function setPhone(string $phone): void
     {
         $this->phone = $phone;
     }
 
     /**
      * Returns the email
-     *
-     * @return string $email
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
     /**
      * Sets the email
-     *
-     * @param string $email
-     * @return void
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -145,12 +127,12 @@ class Guest extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getScreenName(): string
     {
         $parts = [];
-        if ($this->getFirstName()) {
+        if ($this->getFirstName() !== '') {
             $parts[] = $this->getFirstName();
         }
-        if ($this->getLastName()) {
+        if ($this->getLastName() !== '') {
             $parts[] = $this->getLastName();
         }
-        return $parts ? implode(' ', $parts) : '';
+        return (bool)$parts ? implode(' ', $parts) : '';
     }
 }

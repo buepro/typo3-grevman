@@ -14,7 +14,7 @@ use Buepro\Grevman\Domain\Model\Event;
 
 class DtoUtility
 {
-    public static function getEventGroups(Event $event)
+    public static function getEventGroups(Event $event): array
     {
         $eventGroups = [];
         foreach ($event->getMemberGroups() as $group) {

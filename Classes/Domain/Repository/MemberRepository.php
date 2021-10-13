@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Buepro\Grevman\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
  *
@@ -23,6 +25,6 @@ namespace Buepro\Grevman\Domain\Repository;
 /**
  * The repository for Registrations
  */
-class MemberRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class MemberRepository extends Repository
 {
 }

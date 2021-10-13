@@ -11,6 +11,10 @@ declare(strict_types=1);
 
 namespace Buepro\Grevman\Domain\Model;
 
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
  *
@@ -23,7 +27,7 @@ namespace Buepro\Grevman\Domain\Model;
 /**
  * Event
  */
-class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Event extends AbstractEntity
 {
 
     /**
@@ -44,7 +48,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * startdate
      *
-     * @var \DateTime
+     * @var \DateTime|null
      * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $startdate = null;
@@ -52,7 +56,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * enddate
      *
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $enddate = null;
 
@@ -101,7 +105,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * images
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @var ObjectStorage<FileReference>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $images = null;
@@ -109,7 +113,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * files
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @var ObjectStorage<FileReference>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $files = null;
@@ -117,14 +121,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * memberGroups
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Group>
+     * @var ObjectStorage<Group>
      */
     protected $memberGroups = null;
 
     /**
      * registrations
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Registration>
+     * @var ObjectStorage<Registration>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $registrations = null;
@@ -132,7 +136,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * notes
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Note>
+     * @var ObjectStorage<Note>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $notes = null;
@@ -140,7 +144,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * guests
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Guest>
+     * @var ObjectStorage<Guest>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $guests = null;
@@ -165,31 +169,26 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function initializeObject()
     {
-        $this->images = $this->images ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->files = $this->files ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->memberGroups = $this->memberGroups ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->registrations = $this->registrations ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->notes = $this->notes ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->guests = $this->guests ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->images = $this->images ?: new ObjectStorage();
+        $this->files = $this->files ?: new ObjectStorage();
+        $this->memberGroups = $this->memberGroups ?: new ObjectStorage();
+        $this->registrations = $this->registrations ?: new ObjectStorage();
+        $this->notes = $this->notes ?: new ObjectStorage();
+        $this->guests = $this->guests ?: new ObjectStorage();
     }
 
     /**
      * Returns the title
-     *
-     * @return string $title
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
      * Sets the title
-     *
-     * @param string $title
-     * @return void
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -197,10 +196,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a Group
      *
-     * @param \Buepro\Grevman\Domain\Model\Group $memberGroup
-     * @return void
+     * @param Group $memberGroup
      */
-    public function addMemberGroup(\Buepro\Grevman\Domain\Model\Group $memberGroup)
+    public function addMemberGroup(Group $memberGroup): void
     {
         $this->memberGroups->attach($memberGroup);
     }
@@ -208,10 +206,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a Group
      *
-     * @param \Buepro\Grevman\Domain\Model\Group $memberGroupToRemove The Group to be removed
-     * @return void
+     * @param Group $memberGroupToRemove The Group to be removed
      */
-    public function removeMemberGroup(\Buepro\Grevman\Domain\Model\Group $memberGroupToRemove)
+    public function removeMemberGroup(Group $memberGroupToRemove): void
     {
         $this->memberGroups->detach($memberGroupToRemove);
     }
@@ -219,7 +216,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the memberGroups
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Group> $memberGroups
+     * @return ObjectStorage<Group> $memberGroups
      */
     public function getMemberGroups()
     {
@@ -229,10 +226,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the memberGroups
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Group> $memberGroups
-     * @return void
+     * @param ObjectStorage<Group> $memberGroups
      */
-    public function setMemberGroups(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $memberGroups)
+    public function setMemberGroups(ObjectStorage $memberGroups): void
     {
         $this->memberGroups = $memberGroups;
     }
@@ -240,10 +236,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a Registration
      *
-     * @param \Buepro\Grevman\Domain\Model\Registration $registration
-     * @return void
+     * @param Registration $registration
      */
-    public function addRegistration(\Buepro\Grevman\Domain\Model\Registration $registration)
+    public function addRegistration(Registration $registration): void
     {
         $this->registrations->attach($registration);
     }
@@ -251,10 +246,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a Registration
      *
-     * @param \Buepro\Grevman\Domain\Model\Registration $registrationToRemove The Registration to be removed
-     * @return void
+     * @param Registration $registrationToRemove The Registration to be removed
      */
-    public function removeRegistration(\Buepro\Grevman\Domain\Model\Registration $registrationToRemove)
+    public function removeRegistration(Registration $registrationToRemove): void
     {
         $this->registrations->detach($registrationToRemove);
     }
@@ -262,7 +256,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the registrations
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Registration> $registrations
+     * @return ObjectStorage<Registration> $registrations
      */
     public function getRegistrations()
     {
@@ -272,32 +266,25 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the registrations
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Registration> $registrations
-     * @return void
+     * @param ObjectStorage<Registration> $registrations
      */
-    public function setRegistrations(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations)
+    public function setRegistrations(ObjectStorage $registrations): void
     {
         $this->registrations = $registrations;
     }
 
     /**
      * Adds a Note
-     *
-     * @param \Buepro\Grevman\Domain\Model\Note $note
-     * @return void
      */
-    public function addNote(\Buepro\Grevman\Domain\Model\Note $note)
+    public function addNote(Note $note): void
     {
         $this->notes->attach($note);
     }
 
     /**
      * Removes a Note
-     *
-     * @param \Buepro\Grevman\Domain\Model\Note $noteToRemove The Note to be removed
-     * @return void
      */
-    public function removeNote(\Buepro\Grevman\Domain\Model\Note $noteToRemove)
+    public function removeNote(Note $noteToRemove): void
     {
         $this->notes->detach($noteToRemove);
     }
@@ -305,7 +292,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the notes
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Note> $notes
+     * @return ObjectStorage<Note> $notes
      */
     public function getNotes()
     {
@@ -315,32 +302,25 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the notes
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Note> $notes
-     * @return void
+     * @param ObjectStorage<Note> $notes
      */
-    public function setNotes(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $notes)
+    public function setNotes(ObjectStorage $notes): void
     {
         $this->notes = $notes;
     }
 
     /**
      * Adds a Guest
-     *
-     * @param \Buepro\Grevman\Domain\Model\Guest $guest
-     * @return void
      */
-    public function addGuest(\Buepro\Grevman\Domain\Model\Guest $guest)
+    public function addGuest(Guest $guest): void
     {
         $this->guests->attach($guest);
     }
 
     /**
      * Removes a Guest
-     *
-     * @param \Buepro\Grevman\Domain\Model\Guest $guestToRemove The Guest to be removed
-     * @return void
      */
-    public function removeGuest(\Buepro\Grevman\Domain\Model\Guest $guestToRemove)
+    public function removeGuest(Guest $guestToRemove): void
     {
         $this->guests->detach($guestToRemove);
     }
@@ -348,7 +328,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the guests
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Guest> $guests
+     * @return ObjectStorage<Guest> $guests
      */
     public function getGuests()
     {
@@ -358,41 +338,33 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the guests
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Buepro\Grevman\Domain\Model\Guest> $guests
-     * @return void
+     * @param ObjectStorage<Guest> $guests
      */
-    public function setGuests(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $guests)
+    public function setGuests(ObjectStorage $guests): void
     {
         $this->guests = $guests;
     }
 
     /**
      * Returns the slug
-     *
-     * @return string $slug
      */
-    public function getSlug()
+    public function getSlug(): string
     {
         return $this->slug;
     }
 
     /**
      * Sets the slug
-     *
-     * @param string $slug
-     * @return void
      */
-    public function setSlug(string $slug)
+    public function setSlug(string $slug): void
     {
         $this->slug = $slug;
     }
 
     /**
      * Returns the startdate
-     *
-     * @return \DateTime $startdate
      */
-    public function getStartdate()
+    public function getStartdate(): ?\DateTime
     {
         return $this->startdate;
     }
@@ -410,169 +382,128 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Returns the enddate
-     *
-     * @return \DateTime $enddate
      */
-    public function getEnddate()
+    public function getEnddate(): ?\DateTime
     {
         return $this->enddate;
     }
 
     /**
      * Sets the enddate
-     *
-     * @param \DateTime $enddate
-     * @return void
      */
-    public function setEnddate(\DateTime $enddate)
+    public function setEnddate(\DateTime $enddate): void
     {
         $this->enddate = $enddate;
     }
 
     /**
      * Returns the teaser
-     *
-     * @return string $teaser
      */
-    public function getTeaser()
+    public function getTeaser(): string
     {
         return $this->teaser;
     }
 
     /**
      * Sets the teaser
-     *
-     * @param string $teaser
-     * @return void
      */
-    public function setTeaser(string $teaser)
+    public function setTeaser(string $teaser): void
     {
         $this->teaser = $teaser;
     }
 
     /**
      * Returns the description
-     *
-     * @return string $description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
     /**
      * Sets the description
-     *
-     * @param string $description
-     * @return void
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
 
     /**
      * Returns the price
-     *
-     * @return float $price
      */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
 
     /**
      * Sets the price
-     *
-     * @param float $price
-     * @return void
      */
-    public function setPrice(float $price)
+    public function setPrice(float $price): void
     {
         $this->price = $price;
     }
 
     /**
      * Returns the link
-     *
-     * @return string $link
      */
-    public function getLink()
+    public function getLink(): string
     {
         return $this->link;
     }
 
     /**
      * Sets the link
-     *
-     * @param string $link
-     * @return void
      */
-    public function setLink(string $link)
+    public function setLink(string $link): void
     {
         $this->link = $link;
     }
 
     /**
      * Returns the program
-     *
-     * @return string $program
      */
-    public function getProgram()
+    public function getProgram(): string
     {
         return $this->program;
     }
 
     /**
      * Sets the program
-     *
-     * @param string $program
-     * @return void
      */
-    public function setProgram(string $program)
+    public function setProgram(string $program): void
     {
         $this->program = $program;
     }
 
     /**
      * Returns the location
-     *
-     * @return string $location
      */
-    public function getLocation()
+    public function getLocation(): string
     {
         return $this->location;
     }
 
     /**
      * Sets the location
-     *
-     * @param string $location
-     * @return void
      */
-    public function setLocation(string $location)
+    public function setLocation(string $location): void
     {
         $this->location = $location;
     }
 
     /**
      * Adds a FileReference
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
-     * @return void
      */
-    public function addImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
+    public function addImage(FileReference $image): void
     {
         $this->images->attach($image);
     }
 
     /**
      * Removes a FileReference
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove The FileReference to be removed
-     * @return void
      */
-    public function removeImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove)
+    public function removeImage(FileReference $imageToRemove): void
     {
         $this->images->detach($imageToRemove);
     }
@@ -580,7 +511,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the images
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $images
+     * @return ObjectStorage<FileReference> $images
      */
     public function getImages()
     {
@@ -590,32 +521,25 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the images
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $images
-     * @return void
+     * @param ObjectStorage<FileReference> $images
      */
-    public function setImages(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $images)
+    public function setImages(ObjectStorage $images): void
     {
         $this->images = $images;
     }
 
     /**
      * Adds a FileReference
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $file
-     * @return void
      */
-    public function addFile(\TYPO3\CMS\Extbase\Domain\Model\FileReference $file)
+    public function addFile(FileReference $file): void
     {
         $this->files->attach($file);
     }
 
     /**
      * Removes a FileReference
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $fileToRemove The FileReference to be removed
-     * @return void
      */
-    public function removeFile(\TYPO3\CMS\Extbase\Domain\Model\FileReference $fileToRemove)
+    public function removeFile(FileReference $fileToRemove): void
     {
         $this->files->detach($fileToRemove);
     }
@@ -623,7 +547,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the files
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $files
+     * @return ObjectStorage<FileReference> $files
      */
     public function getFiles()
     {
@@ -633,10 +557,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the files
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $files
-     * @return void
+     * @param ObjectStorage<FileReference> $files
      */
-    public function setFiles(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $files)
+    public function setFiles(ObjectStorage $files): void
     {
         $this->files = $files;
     }
@@ -644,13 +567,10 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getRegistrationForMember(Member $member): ?Registration
     {
         $result = null;
-        if (!$member) {
-            return $result;
-        }
         $memberUid = $member->getUid();
+        /** @var Registration $registration */
         foreach ($this->getRegistrations() as $registration) {
-            /** @var Registration $registration */
-            if ($registration->getMember() && $registration->getMember()->getUid() === $memberUid) {
+            if ($registration->getMember()->getUid() === $memberUid) {
                 $result = $registration;
             }
         }
@@ -660,14 +580,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the group assigned to this event for a given member. In case the member belongs to a group that isn't
      * assigned to this event null is returned.
-     *
-     * @param Member $member
-     * @return Group|null
      */
     public function getEventGroup(Member $member): ?Group
     {
+        /** @var Group $memberGroup */
         foreach ($this->memberGroups as $memberGroup) {
-            /** @var Group $memberGroup */
             foreach ($memberGroup->getMembers() as $groupMember) {
                 if ($groupMember === $member) {
                     return $memberGroup;
@@ -680,15 +597,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Gets all registrations from members not belonging to an event group being assigned to this event. In other words
      * the members from the returned registrations might belong to other event groups used for other events.
-     *
-     * @return array|null
      */
-    public function getSpontaneousRegistrations(): ?array
+    public function getSpontaneousRegistrations(): array
     {
-        $result = null;
+        $result = [];
         foreach ($this->registrations as $registration) {
             /** @var Registration $registration */
-            if (!$this->getEventGroup($registration->getMember())) {
+            if ($this->getEventGroup($registration->getMember()) !== null) {
                 $result[] = $registration;
             }
         }
