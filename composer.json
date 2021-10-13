@@ -26,6 +26,7 @@
 		"friendsofphp/php-cs-fixer": "^3.0.0",
 		"friendsoftypo3/phpstan-typo3": "^0.8.1",
 		"helhum/typo3-console": "^6.6",
+		"overtrue/phplint": "^2.3.5",
 		"phpstan/phpstan": "^0.12.87",
 		"phpstan/phpstan-deprecation-rules": "^0.12.6",
 		"phpstan/phpstan-phpunit": "^0.12.19",
@@ -103,6 +104,9 @@
 		],
 		"phpstan": [
 			"phpstan analyze --configuration Build/phpstan.neon"
+		],
+		"test:php:lint": [
+			"phplint"
 		]
 	},
 	"support": {

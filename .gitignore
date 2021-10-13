@@ -1,6 +1,7 @@
 .build/
 .idea/
 .php-cs-fixer.cache
+.phplint.cache
 composer.lock
 config/
 var/
