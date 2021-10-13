@@ -17,13 +17,19 @@
 		}
 	],
 	"require": {
+		"php": ">=7.2.0",
 		"typo3/cms-core": "^10.4"
 	},
 	"require-dev": {
 		"buepro/typo3-container-elements": "^3.0",
 		"buepro/typo3-pizpalue": "^12.0",
 		"friendsofphp/php-cs-fixer": "^3.0.0",
+		"friendsoftypo3/phpstan-typo3": "^0.8.1",
 		"helhum/typo3-console": "^6.6",
+		"phpstan/phpstan": "^0.12.87",
+		"phpstan/phpstan-deprecation-rules": "^0.12.6",
+		"phpstan/phpstan-phpunit": "^0.12.19",
+		"phpstan/phpstan-strict-rules": "^0.12.9",
 		"typo3/cms-base-distribution": "^10.4",
 		"typo3/cms-lowlevel": "^10.4",
 		"typo3/cms-recycler": "^10.4"
@@ -91,6 +97,12 @@
 		],
 		"cgl": [
 			"php-cs-fixer --diff -v fix"
+		],
+		"cgl:ci": [
+			"php-cs-fixer --diff -v --dry-run fix"
+		],
+		"phpstan": [
+			"phpstan analyze --configuration Build/phpstan.neon"
 		]
 	},
 	"support": {

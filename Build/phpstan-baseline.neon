@@ -1,0 +1,51 @@
+parameters:
+	ignoreErrors:
+		-
+			message:
+				"""
+					#^Short ternary operator is not allowed. Use null coalesce operator if applicable or consider using long ternary.$#
+				"""
+			count: 6
+			path: ../Classes/Domain/Model/Event.php
+		-
+			message:
+				"""
+					#^Ternary operator condition is always true.$#
+				"""
+			count: 6
+			path: ../Classes/Domain/Model/Event.php
+		-
+			message:
+				"""
+					#^Short ternary operator is not allowed. Use null coalesce operator if applicable or consider using long ternary.$#
+				"""
+			count: 2
+			path: ../Classes/Domain/Model/Group.php
+		-
+			message:
+				"""
+					#^Ternary operator condition is always true.$#
+				"""
+			count: 2
+			path: ../Classes/Domain/Model/Group.php
+		-
+			message:
+				"""
+					#^Short ternary operator is not allowed. Use null coalesce operator if applicable or consider using long ternary.$#
+				"""
+			count: 3
+			path: ../Classes/Domain/Model/Member.php
+		-
+			message:
+				"""
+					#^Ternary operator condition is always true.$#
+				"""
+			count: 3
+			path: ../Classes/Domain/Model/Member.php
+		-
+			message:
+				"""
+					#^Variable method call on Buepro\\\\Grevman\\\\Domain\\\\Model\\\\Registration.$#
+				"""
+			count: 1
+			path: ../Classes/ViewHelpers/RegistrationViewHelper.php
