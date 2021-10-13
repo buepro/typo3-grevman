@@ -1,8 +1,7 @@
 .build/
 .idea/
-.php-cs-fixer.cache
-.phplint.cache
 composer.lock
+*.cache
 config/
 var/
 Documentation-GENERATED-temp/

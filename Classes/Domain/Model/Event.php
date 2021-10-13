@@ -198,9 +198,10 @@ class Event extends AbstractEntity
      *
      * @param Group $memberGroup
      */
-    public function addMemberGroup(Group $memberGroup): void
+    public function addMemberGroup(Group $memberGroup): self
     {
         $this->memberGroups->attach($memberGroup);
+        return $this;
     }
 
     /**
@@ -208,9 +209,10 @@ class Event extends AbstractEntity
      *
      * @param Group $memberGroupToRemove The Group to be removed
      */
-    public function removeMemberGroup(Group $memberGroupToRemove): void
+    public function removeMemberGroup(Group $memberGroupToRemove): self
     {
         $this->memberGroups->detach($memberGroupToRemove);
+        return $this;
     }
 
     /**
