@@ -2,7 +2,7 @@ name: grevman
 type: typo3
 docroot: .build/public
 php_version: "7.2"
-webserver_type: nginx-fpm
+webserver_type: apache-fpm
 router_http_port: "80"
 router_https_port: "443"
 xdebug_enabled: false
@@ -11,8 +11,14 @@ additional_fqdns: []
 mariadb_version: "10.3"
 mysql_version: ""
 use_dns_when_possible: true
-composer_version: ""
-web_environment: []
+composer_version: "2"
+web_environment:
+  - PATH=/var/www/html/.build/bin:$PATH
+  - TYPO3_CONTEXT=Development
+  - typo3DatabaseHost=db
+  - typo3DatabaseName=t3func
+  - typo3DatabasePassword=root
+  - typo3DatabaseUsername=root
 
 
 # This config.yaml was created with ddev version v1.17.7

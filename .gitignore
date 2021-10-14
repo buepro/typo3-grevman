@@ -1,7 +1,8 @@
+# Folders
 .build/
 .idea/
+Documentation-GENERATED-temp/
+
+# Files
 composer.lock
 *.cache
-config/
-var/
-Documentation-GENERATED-temp/
