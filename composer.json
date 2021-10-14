@@ -119,6 +119,9 @@
 		"test:php:unit": [
 			"phpunit -c Build/phpunit-unit.xml"
 		],
+		"test:php:functional": [
+			"phpunit -c Build/phpunit-functional.xml"
+		],
 		"test": [
 			"@test:php:lint",
 			"@test:php:unit"

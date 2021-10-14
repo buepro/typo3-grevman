@@ -43,6 +43,7 @@ class NoteViewHelper extends AbstractViewHelper
      * @param array $arguments
      * @param \Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
+     * @throws \Exception
      */
     public static function renderStatic(
         array $arguments,
@@ -51,14 +52,20 @@ class NoteViewHelper extends AbstractViewHelper
     ): string {
         $event = $arguments['event'];
         $member = $arguments['member'];
+
+        if (!($event instanceof Event)) {
+            throw new \Exception('Argument \'event\' must be an instance of ' . Event::class, 1634201039234);
+        }
+        if (!($member instanceof Member)) {
+            throw new \Exception('Argument \'member\' must be an instance of ' . Member::class, 1634201168034);
+        }
+
         $result = [];
-        if ($event instanceof Event && $member instanceof Member) {
-            $notes = $event->getNotes();
-            foreach ($notes as $note) {
-                /** @var Note $note */
-                if ($note->getMember()->getUid() === $member->getUid()) {
-                    $result[] = $note->getText();
-                }
+        $notes = $event->getNotes();
+        foreach ($notes as $note) {
+            /** @var Note $note */
+            if ($note->getMember()->getUid() === $member->getUid()) {
+                $result[] = $note->getText();
             }
         }
         if ($arguments['as']) {
