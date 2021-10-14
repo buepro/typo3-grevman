@@ -18,7 +18,7 @@
 	],
 	"require": {
 		"php": ">=7.2.0",
-		"typo3/cms-core": "^10.4"
+		"typo3/cms-core": "^10.4 || ^11.5.1"
 	},
 	"require-dev": {
 		"buepro/typo3-container-elements": "^3.0",
