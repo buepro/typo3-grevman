@@ -53,29 +53,35 @@ class RegistrationViewHelper extends AbstractViewHelper
     ): string {
         $event = $arguments['event'];
         $member = $arguments['member'];
-        $registration = null;
-        $result = null;
-        // Get the registration
-        if ($event instanceof Event && $member instanceof Member) {
-            /** @var Registration $registration */
-            $registration = $event->getRegistrationForMember($member);
-            $result = $registration;
+
+        if (!($event instanceof Event)) {
+            throw new \Exception('Argument \'event\' must be an instance of ' . Event::class, 1634289538);
         }
+        if (!($member instanceof Member)) {
+            throw new \Exception('Argument \'member\' must be an instance of ' . Member::class, 1634289543);
+        }
+
+        // Get the registration
+        /** @var ?Registration $registration */
+        $registration = $event->getRegistrationForMember($member);
+        $result = $registration;
+
         // Get the registration property
         if ($arguments['property']) {
             if ($arguments['property'] === 'state') {
                 $result = 0;
             }
-            if (null !== $registration && method_exists($registration, 'get' . ucfirst($arguments['property']))) {
+            if (isset($registration) && method_exists($registration, 'get' . ucfirst($arguments['property']))) {
                 $method = 'get' . ucfirst($arguments['property']);
                 $result = $registration->{$method}();
             }
         }
+
         // Assign the result
         if ($arguments['as']) {
             $renderingContext->getVariableProvider()->add($arguments['as'], $result);
             return '';
         }
-        return (string)$result;
+        return is_string($result) || is_numeric($result) ? (string)$result : '';
     }
 }

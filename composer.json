@@ -123,8 +123,11 @@
 			"phpunit -c Build/phpunit-functional.xml"
 		],
 		"test": [
+			"@cgl:ci",
+			"@phpstan",
 			"@test:php:lint",
-			"@test:php:unit"
+			"@test:php:unit",
+			"@test:php:functional"
 		]
 	},
 	"support": {

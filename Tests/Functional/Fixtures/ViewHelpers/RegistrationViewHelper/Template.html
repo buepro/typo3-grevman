@@ -1,0 +1,17 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:gem="http://typo3.org/ns/Buepro/Grevman/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+{f:variable(name: '_as', value: '_result') -> f:if(condition: as)}
+<f:if condition="{property}">
+    <f:then>
+        <gem:registration event="{event}" member="{member}" property="{property}" as="{_as}" />
+        <f:if condition="{as}">{as}.{property}: {_result}</f:if>
+    </f:then>
+    <f:else>
+        <gem:registration event="{event}" member="{member}" as="{_as}" />
+        <f:if condition="{as}">registration.member.email: {_result.member.email}</f:if>
+    </f:else>
+</f:if>
+
+</html>
