@@ -53,9 +53,10 @@ class Note extends AbstractEntity
     /**
      * Sets the text
      */
-    public function setText(string $text): void
+    public function setText(string $text): self
     {
         $this->text = $text;
+        return $this;
     }
 
     /**
@@ -69,8 +70,9 @@ class Note extends AbstractEntity
     /**
      * Sets the member
      */
-    public function setMember(Member $member): void
+    public function setMember(Member $member): self
     {
         $this->member = $member;
+        return $this;
     }
 }

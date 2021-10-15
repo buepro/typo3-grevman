@@ -16,18 +16,6 @@ use Buepro\Grevman\Utility\DtoUtility;
 
 class DtoUtilityTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
 {
-
-    /**
-     * @dataProvider getEventGroupsReturnsEventGroupArrayDataProvider
-     * @test
-     */
-    public function getEventGroupsReturnsEventGroupArray(Event $event, int $groupCount)
-    {
-        $result = DtoUtility::getEventGroups($event);
-        self::assertContainsOnlyInstancesOf(EventGroup::class, $result);
-        self::assertCount($groupCount, $result);
-    }
-
     public function getEventGroupsReturnsEventGroupArrayDataProvider(): array
     {
         $eventWithNoGroup = new Event();
@@ -40,5 +28,16 @@ class DtoUtilityTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
             'one group' => [$eventWithOneGroup, 1],
             'two groups' => [$eventWithTwoGroups, 2],
         ];
+    }
+
+    /**
+     * @dataProvider getEventGroupsReturnsEventGroupArrayDataProvider
+     * @test
+     */
+    public function getEventGroupsReturnsEventGroupArray(Event $event, int $groupCount)
+    {
+        $result = DtoUtility::getEventGroups($event);
+        self::assertContainsOnlyInstancesOf(EventGroup::class, $result);
+        self::assertCount($groupCount, $result);
     }
 }

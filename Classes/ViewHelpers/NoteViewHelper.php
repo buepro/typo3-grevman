@@ -27,16 +27,18 @@ class NoteViewHelper extends AbstractViewHelper
 {
     use CompileWithRenderStatic;
 
+    public const DEFAULT_GLUE = '<br />';
+
     /**
      * @return void
      */
     public function initializeArguments()
     {
         parent::initializeArguments();
+        $this->registerArgument('event', '\\Buepro\\Grevman\\Domain\\Model\\Event', 'Event', true);
+        $this->registerArgument('member', '\\Buepro\\Grevman\\Domain\\Model\\Member', 'Member', true);
+        $this->registerArgument('glue', 'string', 'Glue used to implode notes. If empty array is returned.', false, self::DEFAULT_GLUE);
         $this->registerArgument('as', 'string', 'Name of variable to create.', false);
-        $this->registerArgument('event', '\\Buepro\\Grevman\\Domain\\Model\\Event', 'Event', false);
-        $this->registerArgument('member', '\\Buepro\\Grevman\\Domain\\Model\\Member', 'Member', false);
-        $this->registerArgument('glue', 'string', 'Glue used to implode notes. If empty array is returned.', false, '<br />');
     }
 
     /**
@@ -54,10 +56,10 @@ class NoteViewHelper extends AbstractViewHelper
         $member = $arguments['member'];
 
         if (!($event instanceof Event)) {
-            throw new \Exception('Argument \'event\' must be an instance of ' . Event::class, 1634201039234);
+            throw new \Exception('Argument \'event\' must be an instance of ' . Event::class, 1634276918);
         }
         if (!($member instanceof Member)) {
-            throw new \Exception('Argument \'member\' must be an instance of ' . Member::class, 1634201168034);
+            throw new \Exception('Argument \'member\' must be an instance of ' . Member::class, 1634276924);
         }
 
         $result = [];
@@ -68,10 +70,11 @@ class NoteViewHelper extends AbstractViewHelper
                 $result[] = $note->getText();
             }
         }
+        $result = implode($arguments['glue'], $result);
         if ($arguments['as']) {
             $renderingContext->getVariableProvider()->add($arguments['as'], $result);
             return '';
         }
-        return implode($arguments['glue'], $result);
+        return $result;
     }
 }

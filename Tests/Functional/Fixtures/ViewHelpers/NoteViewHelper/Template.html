@@ -1,4 +1,15 @@
-<html xmlns:gem="http://typo3.org/ns/Buepro/Grevman/ViewHelpers"
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:gem="http://typo3.org/ns/Buepro/Grevman/ViewHelpers"
       data-namespace-typo3-fluid="true">
-<gem:note event="{event}" member="{member}" glue=" * " />
+{f:variable(name: '_as', value: '_result') -> f:if(condition: as)}
+<f:if condition="{glue} || ({glue} === '')">
+    <f:then>
+        <gem:note event="{event}" member="{member}" glue="{glue}" as="{_as}" />
+        <f:if condition="{as}">Notes: {_result}</f:if>
+    </f:then>
+    <f:else>
+        <gem:note event="{event}" member="{member}" as="{_as}" />
+        <f:if condition="{as}">Notes: {_result}</f:if>
+    </f:else>
+</f:if>
 </html>
