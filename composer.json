@@ -101,8 +101,7 @@
 		"ddev:delete": [
 			"ddev composer typo3cms:database:export",
 			"ddev delete",
-			"rm -rf .build/ config/",
-			"echo '\\033[0;33mINFO: Delete ./var manually\\033[0m'"
+			"rm -rf .build/"
 		],
 		"cgl": [
 			"php-cs-fixer --diff -v fix"
