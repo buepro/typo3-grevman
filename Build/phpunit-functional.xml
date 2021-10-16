@@ -23,6 +23,11 @@
     <testsuites>
         <testsuite name="buepro-grevman-functional-tests">
             <directory>../Tests/Functional</directory>
+<!--            <include>-->
+<!--                <file>-->
+<!--                    ../Tests/Functional/ViewHelpers/RegistrationViewHelperTest.php-->
+<!--                </file>-->
+<!--            </include>-->
         </testsuite>
     </testsuites>
 </phpunit>

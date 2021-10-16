@@ -188,9 +188,10 @@ class Event extends AbstractEntity
     /**
      * Sets the title
      */
-    public function setTitle(string $title): void
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+        return $this;
     }
 
     /**
@@ -230,9 +231,10 @@ class Event extends AbstractEntity
      *
      * @param ObjectStorage<Group> $memberGroups
      */
-    public function setMemberGroups(ObjectStorage $memberGroups): void
+    public function setMemberGroups(ObjectStorage $memberGroups): self
     {
         $this->memberGroups = $memberGroups;
+        return $this;
     }
 
     /**
@@ -240,9 +242,10 @@ class Event extends AbstractEntity
      *
      * @param Registration $registration
      */
-    public function addRegistration(Registration $registration): void
+    public function addRegistration(Registration $registration): self
     {
         $this->registrations->attach($registration);
+        return $this;
     }
 
     /**
@@ -270,17 +273,19 @@ class Event extends AbstractEntity
      *
      * @param ObjectStorage<Registration> $registrations
      */
-    public function setRegistrations(ObjectStorage $registrations): void
+    public function setRegistrations(ObjectStorage $registrations): self
     {
         $this->registrations = $registrations;
+        return $this;
     }
 
     /**
      * Adds a Note
      */
-    public function addNote(Note $note): void
+    public function addNote(Note $note): self
     {
         $this->notes->attach($note);
+        return $this;
     }
 
     /**
@@ -306,17 +311,19 @@ class Event extends AbstractEntity
      *
      * @param ObjectStorage<Note> $notes
      */
-    public function setNotes(ObjectStorage $notes): void
+    public function setNotes(ObjectStorage $notes): self
     {
         $this->notes = $notes;
+        return $this;
     }
 
     /**
      * Adds a Guest
      */
-    public function addGuest(Guest $guest): void
+    public function addGuest(Guest $guest): self
     {
         $this->guests->attach($guest);
+        return $this;
     }
 
     /**
@@ -342,9 +349,10 @@ class Event extends AbstractEntity
      *
      * @param ObjectStorage<Guest> $guests
      */
-    public function setGuests(ObjectStorage $guests): void
+    public function setGuests(ObjectStorage $guests): self
     {
         $this->guests = $guests;
+        return $this;
     }
 
     /**
@@ -358,9 +366,10 @@ class Event extends AbstractEntity
     /**
      * Sets the slug
      */
-    public function setSlug(string $slug): void
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+        return $this;
     }
 
     /**
@@ -375,11 +384,11 @@ class Event extends AbstractEntity
      * Sets the startdate
      *
      * @param \DateTime $startdate
-     * @return void
      */
-    public function setStartdate(\DateTime $startdate)
+    public function setStartdate(\DateTime $startdate): self
     {
         $this->startdate = $startdate;
+        return $this;
     }
 
     /**
@@ -393,9 +402,10 @@ class Event extends AbstractEntity
     /**
      * Sets the enddate
      */
-    public function setEnddate(\DateTime $enddate): void
+    public function setEnddate(\DateTime $enddate): self
     {
         $this->enddate = $enddate;
+        return $this;
     }
 
     /**
@@ -409,9 +419,10 @@ class Event extends AbstractEntity
     /**
      * Sets the teaser
      */
-    public function setTeaser(string $teaser): void
+    public function setTeaser(string $teaser): self
     {
         $this->teaser = $teaser;
+        return $this;
     }
 
     /**
@@ -425,9 +436,10 @@ class Event extends AbstractEntity
     /**
      * Sets the description
      */
-    public function setDescription(string $description): void
+    public function setDescription(string $description): self
     {
         $this->description = $description;
+        return $this;
     }
 
     /**
@@ -441,9 +453,10 @@ class Event extends AbstractEntity
     /**
      * Sets the price
      */
-    public function setPrice(float $price): void
+    public function setPrice(float $price): self
     {
         $this->price = $price;
+        return $this;
     }
 
     /**
@@ -457,9 +470,10 @@ class Event extends AbstractEntity
     /**
      * Sets the link
      */
-    public function setLink(string $link): void
+    public function setLink(string $link): self
     {
         $this->link = $link;
+        return $this;
     }
 
     /**
@@ -473,9 +487,10 @@ class Event extends AbstractEntity
     /**
      * Sets the program
      */
-    public function setProgram(string $program): void
+    public function setProgram(string $program): self
     {
         $this->program = $program;
+        return $this;
     }
 
     /**
@@ -489,17 +504,19 @@ class Event extends AbstractEntity
     /**
      * Sets the location
      */
-    public function setLocation(string $location): void
+    public function setLocation(string $location): self
     {
         $this->location = $location;
+        return $this;
     }
 
     /**
      * Adds a FileReference
      */
-    public function addImage(FileReference $image): void
+    public function addImage(FileReference $image): self
     {
         $this->images->attach($image);
+        return $this;
     }
 
     /**
@@ -525,17 +542,19 @@ class Event extends AbstractEntity
      *
      * @param ObjectStorage<FileReference> $images
      */
-    public function setImages(ObjectStorage $images): void
+    public function setImages(ObjectStorage $images): self
     {
         $this->images = $images;
+        return $this;
     }
 
     /**
      * Adds a FileReference
      */
-    public function addFile(FileReference $file): void
+    public function addFile(FileReference $file): self
     {
         $this->files->attach($file);
+        return $this;
     }
 
     /**
@@ -561,9 +580,10 @@ class Event extends AbstractEntity
      *
      * @param ObjectStorage<FileReference> $files
      */
-    public function setFiles(ObjectStorage $files): void
+    public function setFiles(ObjectStorage $files): self
     {
         $this->files = $files;
+        return $this;
     }
 
     public function getRegistrationForMember(Member $member): ?Registration
@@ -580,10 +600,10 @@ class Event extends AbstractEntity
     }
 
     /**
-     * Returns the group assigned to this event for a given member. In case the member belongs to a group that isn't
-     * assigned to this event null is returned.
+     * Returns the first group found being assigned to this event for a given member. In case the member belongs to a
+     * group that isn't assigned to this event null is returned.
      */
-    public function getEventGroup(Member $member): ?Group
+    public function getEventGroupForMember(Member $member): ?Group
     {
         /** @var Group $memberGroup */
         foreach ($this->memberGroups as $memberGroup) {
@@ -605,7 +625,7 @@ class Event extends AbstractEntity
         $result = [];
         foreach ($this->registrations as $registration) {
             /** @var Registration $registration */
-            if ($this->getEventGroup($registration->getMember()) !== null) {
+            if ($this->getEventGroupForMember($registration->getMember()) === null) {
                 $result[] = $registration;
             }
         }
