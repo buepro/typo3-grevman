@@ -1,11 +1,6 @@
-.. include:: ../Includes.txt
-
-
-.. _introduction:
-
-============
-Introduction
-============
+=========================
+TYPO3 extension `grevman`
+=========================
 
 The extension allows managing group events typically used in sport clubs
 where groups of members take part in events. Members might have different
@@ -29,19 +24,19 @@ Screenshots
 Matrix view
 -----------
 
-.. figure:: ../Images/MatrixView.jpg
+.. figure:: Documentation/Images/MatrixView.jpg
    :alt: Matrix view from events
 
 List view
 ---------
 
-.. figure:: ../Images/ListView.jpg
+.. figure:: Documentation/Images/ListView.jpg
    :alt: List view from events
 
 Detail view
 -----------
 
-.. figure:: ../Images/DetailView.jpg
+.. figure:: Documentation/Images/DetailView.jpg
    :alt: Detail view from events
 
 Acknowledgement
@@ -55,3 +50,9 @@ Code quality
 .. image:: https://github.com/buepro/typo3-grevman/workflows/CI/badge.svg
    :alt: Continuous Integration Status
    :target: https://github.com/buepro/typo3-grevman/actions?query=workflow%3ACI
+
+
+Documentation
+=============
+
+Head over to `docs.typo3.org <https://docs.typo3.org/p/buepro/typo3-grevman/master/en-us/>`__.
