@@ -30,6 +30,8 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Member extends AbstractEntity
 {
+    use PersonNameTrait;
+
     /**
      * @var string
      */
@@ -44,16 +46,6 @@ class Member extends AbstractEntity
      * @var ObjectStorage<FrontendUserGroup>
      */
     protected $usergroup;
-
-    /**
-     * @var string
-     */
-    protected $firstName = '';
-
-    /**
-     * @var string
-     */
-    protected $lastName = '';
 
     /**
      * @var string
@@ -115,9 +107,10 @@ class Member extends AbstractEntity
     /**
      * Sets the username value
      */
-    public function setUsername(string $username): void
+    public function setUsername(string $username): self
     {
         $this->username = $username;
+        return $this;
     }
 
     /**
@@ -131,9 +124,10 @@ class Member extends AbstractEntity
     /**
      * Sets the password value
      */
-    public function setPassword(string $password): void
+    public function setPassword(string $password): self
     {
         $this->password = $password;
+        return $this;
     }
 
     /**
@@ -150,25 +144,28 @@ class Member extends AbstractEntity
      *
      * @param ObjectStorage<FrontendUserGroup> $usergroup
      */
-    public function setUsergroup(ObjectStorage $usergroup): void
+    public function setUsergroup(ObjectStorage $usergroup): self
     {
         $this->usergroup = $usergroup;
+        return $this;
     }
 
     /**
      * Adds a usergroup to the frontend user
      */
-    public function addUsergroup(FrontendUserGroup $usergroup): void
+    public function addUsergroup(FrontendUserGroup $usergroup): self
     {
         $this->usergroup->attach($usergroup);
+        return $this;
     }
 
     /**
      * Removes a usergroup from the frontend user
      */
-    public function removeUsergroup(FrontendUserGroup $usergroup): void
+    public function removeUsergroup(FrontendUserGroup $usergroup): self
     {
         $this->usergroup->detach($usergroup);
+        return $this;
     }
 
     /**
@@ -183,43 +180,12 @@ class Member extends AbstractEntity
     }
 
     /**
-     * Sets the firstName value
-     */
-    public function setFirstName(string $firstName): void
-    {
-        $this->firstName = $firstName;
-    }
-
-    /**
-     * Returns the firstName value
-     */
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * Sets the lastName value
-     */
-    public function setLastName(string $lastName): void
-    {
-        $this->lastName = $lastName;
-    }
-
-    /**
-     * Returns the lastName value
-     */
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
-    /**
      * Sets the email value
      */
-    public function setEmail(string $email): void
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+        return $this;
     }
 
     /**
@@ -233,17 +199,19 @@ class Member extends AbstractEntity
     /**
      * Adds a Group
      */
-    public function addMemberGroup(Group $memberGroup): void
+    public function addMemberGroup(Group $memberGroup): self
     {
         $this->memberGroups->attach($memberGroup);
+        return $this;
     }
 
     /**
      * Removes a Group
      */
-    public function removeMemberGroup(Group $memberGroupToRemove): void
+    public function removeMemberGroup(Group $memberGroupToRemove): self
     {
         $this->memberGroups->detach($memberGroupToRemove);
+        return $this;
     }
 
     /**
@@ -261,25 +229,28 @@ class Member extends AbstractEntity
      *
      * @param ObjectStorage<Group> $memberGroups
      */
-    public function setMemberGroups(ObjectStorage $memberGroups): void
+    public function setMemberGroups(ObjectStorage $memberGroups): self
     {
         $this->memberGroups = $memberGroups;
+        return $this;
     }
 
     /**
      * Adds a Registration
      */
-    public function addRegistration(Registration $registration): void
+    public function addRegistration(Registration $registration): self
     {
         $this->registrations->attach($registration);
+        return $this;
     }
 
     /**
      * Removes a Registration
      */
-    public function removeRegistration(Registration $registrationToRemove): void
+    public function removeRegistration(Registration $registrationToRemove): self
     {
         $this->registrations->detach($registrationToRemove);
+        return $this;
     }
 
     /**
@@ -297,25 +268,28 @@ class Member extends AbstractEntity
      *
      * @param ObjectStorage<Registration> $registrations
      */
-    public function setRegistrations(ObjectStorage $registrations): void
+    public function setRegistrations(ObjectStorage $registrations): self
     {
         $this->registrations = $registrations;
+        return $this;
     }
 
     /**
      * Adds a Note
      */
-    public function addNote(Note $note): void
+    public function addNote(Note $note): self
     {
         $this->notes->attach($note);
+        return $this;
     }
 
     /**
      * Removes a Note
      */
-    public function removeNote(Note $noteToRemove): void
+    public function removeNote(Note $noteToRemove): self
     {
         $this->notes->detach($noteToRemove);
+        return $this;
     }
 
     /**
@@ -333,21 +307,10 @@ class Member extends AbstractEntity
      *
      * @param ObjectStorage<Note> $notes
      */
-    public function setNotes(ObjectStorage $notes): void
+    public function setNotes(ObjectStorage $notes): self
     {
         $this->notes = $notes;
-    }
-
-    public function getScreenName(): string
-    {
-        $parts = [];
-        if ($this->getFirstName() !== '') {
-            $parts[] = $this->getFirstName();
-        }
-        if ($this->getLastName() !== '') {
-            $parts[] = $this->getLastName();
-        }
-        return (bool)$parts ? implode(' ', $parts) : '';
+        return $this;
     }
 
     /**

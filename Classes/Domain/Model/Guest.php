@@ -27,6 +27,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Guest extends AbstractEntity
 {
+    use PersonNameTrait;
 
     /**
      * firstName
@@ -61,38 +62,6 @@ class Guest extends AbstractEntity
     protected $email = '';
 
     /**
-     * Returns the firstName
-     */
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * Sets the firstName
-     */
-    public function setFirstName(string $firstName): void
-    {
-        $this->firstName = $firstName;
-    }
-
-    /**
-     * Returns the lastName
-     */
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * Sets the lastName
-     */
-    public function setLastName(string $lastName): void
-    {
-        $this->lastName = $lastName;
-    }
-
-    /**
      * Returns the phone
      */
     public function getPhone(): string
@@ -103,9 +72,10 @@ class Guest extends AbstractEntity
     /**
      * Sets the phone
      */
-    public function setPhone(string $phone): void
+    public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+        return $this;
     }
 
     /**
@@ -119,20 +89,9 @@ class Guest extends AbstractEntity
     /**
      * Sets the email
      */
-    public function setEmail(string $email): void
+    public function setEmail(string $email): self
     {
         $this->email = $email;
-    }
-
-    public function getScreenName(): string
-    {
-        $parts = [];
-        if ($this->getFirstName() !== '') {
-            $parts[] = $this->getFirstName();
-        }
-        if ($this->getLastName() !== '') {
-            $parts[] = $this->getLastName();
-        }
-        return (bool)$parts ? implode(' ', $parts) : '';
+        return $this;
     }
 }
