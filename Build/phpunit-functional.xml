@@ -25,7 +25,7 @@
             <directory>../Tests/Functional</directory>
 <!--            <include>-->
 <!--                <file>-->
-<!--                    ../Tests/Functional/ViewHelpers/RegistrationViewHelperTest.php-->
+<!--                    ../Tests/Functional/Domain/Model/MemberTest.php-->
 <!--                </file>-->
 <!--            </include>-->
         </testsuite>
