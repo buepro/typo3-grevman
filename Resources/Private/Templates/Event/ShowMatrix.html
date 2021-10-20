@@ -27,7 +27,7 @@
     <f:if condition="{event}"><f:else>{f:variable(name: 'renderAxis', value: 1)}</f:else></f:if>
     <div class="gemc-cell gemc-row-axis">
         <f:if condition="{renderAxis}">
-            <nav class="gemc-eventnav">
+            <nav class="gemc-eventnav btn-group" role="group">
                 <a id="gem-prev-event" class="btn btn-primary" href="javascript:void(0);">◀</a>
                 <a id="gem-next-event" class="btn btn-primary" href="javascript:void(0);">▶</a>
             </nav>
