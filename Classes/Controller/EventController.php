@@ -113,7 +113,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         // Compile member axis
         $groups = [];
-        $spontaneousMembers = [];
         $guests = [];
         /** @var Event $event */
         foreach ($events as $event) {
@@ -124,20 +123,36 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                     $groups[$group->getUid()] = $group;
                 }
             }
-            // Compile spontaneous registrations
-            foreach ($event->getSpontaneousRegistrations() as $spontaneousRegistration) {
-                /** @var Registration $spontaneousRegistration */
-                /** @var Member $member */
-                $member = $spontaneousRegistration->getMember();
-                if (!isset($spontaneousMembers[$member->getUid()])) {
-                    $spontaneousMembers[$member->getUid()] = $member;
-                }
-            }
             // Compile guests
             foreach ($event->getGuests() as $guest) {
                 /** @var Guest $guest */
                 if (!isset($guests[$guest->getUid()])) {
                     $guests[$guest->getUid()] = $guest;
+                }
+            }
+        }
+
+        // Create member uid list used to retrieve spontaneous registrations
+        $memberUids = [];
+        /** @var Group $group */
+        foreach ($groups as $group) {
+            /** @var Member $member */
+            foreach ($group->getMembers() as $member) {
+                $memberUids[] = $member->getUid();
+            }
+        }
+        $memberUids = array_unique($memberUids);
+
+        // Compile spontaneous registrations
+        $spontaneousMembers = [];
+        /** @var Event $event */
+        foreach ($events as $event) {
+            /** @var Registration $spontaneousRegistration */
+            foreach ($event->getSpontaneousRegistrations() as $spontaneousRegistration) {
+                /** @var Member $member */
+                $member = $spontaneousRegistration->getMember();
+                if (!isset($spontaneousMembers[$member->getUid()]) && !in_array($member->getUid(), $memberUids, true)) {
+                    $spontaneousMembers[$member->getUid()] = $member;
                 }
             }
         }
