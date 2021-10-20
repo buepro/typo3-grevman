@@ -105,7 +105,7 @@
       </trans-unit>
       <trans-unit id="fe_users.tx_extbase_type.Tx_Grevman_Member" resname="fe_users.tx_extbase_type.Tx_Grevman_Member" approved="yes">
         <source>Group event manager Member</source>
-        <target state="final">Mitglied Gruppenveranschtaltungsverwaltung</target>
+        <target state="final">Mitglied Gruppenveranstaltungsverwaltung</target>
       </trans-unit>
       <trans-unit id="tx_grevman.tx_extbase_type" resname="tx_grevman.tx_extbase_type" approved="yes">
         <source>Record Type</source>
