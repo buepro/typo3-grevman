@@ -33,34 +33,6 @@ class NoteViewHelperTest extends FunctionalTestCase
         'typo3conf/ext/grevman',
     ];
 
-    /**
-     * @test
-     */
-    public function throwExceptionOnMissingEvent(): void
-    {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionCode(1634276918);
-
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
-        $view->assign('member', new Member());
-        $view->render();
-    }
-
-    /**
-     * @test
-     */
-    public function throwExceptionOnMissingMember(): void
-    {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionCode(1634276924);
-
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
-        $view->assign('event', new Event());
-        $view->render();
-    }
-
     public function renderDataProvider(): array
     {
         $note11 = 'Happy to join!';
@@ -83,6 +55,27 @@ class NoteViewHelperTest extends FunctionalTestCase
         ]);
         $event = $eventProphecy->reveal();
         return [
+            'no event no member' => [
+                null,
+                null,
+                null,
+                null,
+                [''],
+            ],
+            'no member' => [
+                $event,
+                null,
+                null,
+                null,
+                [''],
+            ],
+            'no event' => [
+                null,
+                $member1,
+                null,
+                null,
+                [''],
+            ],
             'member1 notes' => [
                 $event,
                 $member1,
@@ -139,7 +132,7 @@ class NoteViewHelperTest extends FunctionalTestCase
      * @dataProvider renderDataProvider
      * @test
      */
-    public function render(Event $event, Member $member, ?string $glue, ?string $as, array $expected): void
+    public function render(?Event $event, ?Member $member, ?string $glue, ?string $as, array $expected): void
     {
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);

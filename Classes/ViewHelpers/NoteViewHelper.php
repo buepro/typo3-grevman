@@ -18,6 +18,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
  * Used to get the notes a member added to an event.
+ * In case notes can not be found '' is returned.
  *
  * Usage:
  * {gem:note(event: event, member: member, as: 'notes', glue: '<br />')}
@@ -55,11 +56,11 @@ class NoteViewHelper extends AbstractViewHelper
         $event = $arguments['event'];
         $member = $arguments['member'];
 
-        if (!($event instanceof Event)) {
-            throw new \Exception('Argument \'event\' must be an instance of ' . Event::class, 1634276918);
-        }
-        if (!($member instanceof Member)) {
-            throw new \Exception('Argument \'member\' must be an instance of ' . Member::class, 1634276924);
+        if (!($event instanceof Event) || !($member instanceof Member)) {
+            if ($arguments['as']) {
+                $renderingContext->getVariableProvider()->add($arguments['as'], '');
+            }
+            return '';
         }
 
         $result = [];

@@ -32,34 +32,6 @@ class RegistrationViewHelperTest extends FunctionalTestCase
         'typo3conf/ext/grevman',
     ];
 
-    /**
-     * @test
-     */
-    public function throwExceptionOnMissingEvent(): void
-    {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionCode(1634289538);
-
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
-        $view->assign('member', new Member());
-        $view->render();
-    }
-
-    /**
-     * @test
-     */
-    public function throwExceptionOnMissingMember(): void
-    {
-        $this->expectException(\Exception::class);
-        $this->expectExceptionCode(1634289543);
-
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
-        $view->assign('event', new Event());
-        $view->render();
-    }
-
     public function renderDataProvider()
     {
         $memberProphecy = $this->prophesize(Member::class);
@@ -74,6 +46,12 @@ class RegistrationViewHelperTest extends FunctionalTestCase
         $eventProphecy->getRegistrationForMember($member)->willReturn($registration);
         $eventProphecy->getRegistrationForMember($altMember)->willReturn(null);
         return [
+            'no event, no member, no property, no as' => [null, null, null, null, ['']],
+            'no event, member, no property, no as' => [null, $member, null, null, ['']],
+            'event, no member, no property, no as' => [$eventProphecy->reveal(), null, null, null, ['']],
+            'no event, no member, no property, as' => [null, null, null, '_reg', ['registration.member.email:']],
+            'no event, no member, state, no as' => [null, null, 'state', null, [(string)Registration::REGISTRATION_UNDEFINED]],
+            'no event, no member, state, as' => [null, null, 'state', '_reg', ['_reg.state: ' . Registration::REGISTRATION_UNDEFINED]],
             'get registration for registered member' => [$eventProphecy->reveal(), $member, null, null, ['']],
             'get registration for unregistered member' => [$eventProphecy->reveal(), $altMember, null, null, ['']],
             'get state for registered member' => [$eventProphecy->reveal(), $member, 'state', null, [Registration::REGISTRATION_CONFIRMED]],
@@ -87,7 +65,7 @@ class RegistrationViewHelperTest extends FunctionalTestCase
      * @dataProvider renderDataProvider
      * @test
      */
-    public function render(Event $event, Member $member, ?string $property, ?string $as, array $expected)
+    public function render(?Event $event, ?Member $member, ?string $property, ?string $as, array $expected)
     {
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
