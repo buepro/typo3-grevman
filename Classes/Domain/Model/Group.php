@@ -75,17 +75,19 @@ class Group extends AbstractEntity
     /**
      * Adds a Event
      */
-    public function addEvent(Event $event): void
+    public function addEvent(Event $event): self
     {
         $this->events->attach($event);
+        return $this;
     }
 
     /**
      * Removes a Event
      */
-    public function removeEvent(Event $eventToRemove): void
+    public function removeEvent(Event $eventToRemove): self
     {
         $this->events->detach($eventToRemove);
+        return $this;
     }
 
     /**
@@ -103,25 +105,28 @@ class Group extends AbstractEntity
      *
      * @param ObjectStorage<Event> $events
      */
-    public function setEvents(ObjectStorage $events): void
+    public function setEvents(ObjectStorage $events): self
     {
         $this->events = $events;
+        return $this;
     }
 
     /**
      * Adds a Member
      */
-    public function addMember(Member $member): void
+    public function addMember(Member $member): self
     {
         $this->members->attach($member);
+        return $this;
     }
 
     /**
      * Removes a Member
      */
-    public function removeMember(Member $memberToRemove): void
+    public function removeMember(Member $memberToRemove): self
     {
         $this->members->detach($memberToRemove);
+        return $this;
     }
 
     /**
@@ -139,9 +144,10 @@ class Group extends AbstractEntity
      *
      * @param ObjectStorage<Member> $members
      */
-    public function setMembers(ObjectStorage $members): void
+    public function setMembers(ObjectStorage $members): self
     {
         $this->members = $members;
+        return $this;
     }
 
     /**
@@ -155,8 +161,9 @@ class Group extends AbstractEntity
     /**
      * Sets the name
      */
-    public function setName(string $name): void
+    public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
     }
 }

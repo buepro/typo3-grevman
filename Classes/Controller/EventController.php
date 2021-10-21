@@ -16,14 +16,15 @@ use Buepro\Grevman\Domain\Dto\Mail;
 use Buepro\Grevman\Domain\Dto\Note;
 use Buepro\Grevman\Domain\Model\Event;
 use Buepro\Grevman\Domain\Model\Group;
-use Buepro\Grevman\Domain\Model\Guest;
 use Buepro\Grevman\Domain\Model\Member;
 use Buepro\Grevman\Domain\Model\Registration;
 use Buepro\Grevman\Utility\DtoUtility;
+use Buepro\Grevman\Utility\MatrixUtility;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
@@ -73,11 +74,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     }
 
     /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    private function listAndMatrixActionProcessing()
+    private function listAndMatrixActionProcessing(): QueryResultInterface
     {
+        /** @var QueryResultInterface $events */
         $events = $this->eventRepository->findAll();
         $identifiedMember = null;
         if ($GLOBALS['TSFE']->fe_user && $GLOBALS['TSFE']->fe_user->user['uid']) {
@@ -93,10 +94,9 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * action list
      *
-     * @return string|object|null|void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listAction()
+    public function listAction(): void
     {
         $this->listAndMatrixActionProcessing();
     }
@@ -104,76 +104,21 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * The matrix to be shown comprises of an event and a member axis where the member axis is grouped by the
      * member group.
-     *
-     * @return string|object|null|void
      */
-    public function showMatrixAction()
+    public function showMatrixAction(): void
     {
         $events = $this->listAndMatrixActionProcessing();
-
-        // Compile member axis
-        $groups = [];
-        $guests = [];
-        /** @var Event $event */
-        foreach ($events as $event) {
-            // Compile groups
-            foreach ($event->getMemberGroups() as $group) {
-                /** @var Group $group */
-                if (!isset($groups[$group->getUid()])) {
-                    $groups[$group->getUid()] = $group;
-                }
-            }
-            // Compile guests
-            foreach ($event->getGuests() as $guest) {
-                /** @var Guest $guest */
-                if (!isset($guests[$guest->getUid()])) {
-                    $guests[$guest->getUid()] = $guest;
-                }
-            }
-        }
-
-        // Create member uid list used to retrieve spontaneous registrations
-        $memberUids = [];
-        /** @var Group $group */
-        foreach ($groups as $group) {
-            /** @var Member $member */
-            foreach ($group->getMembers() as $member) {
-                $memberUids[] = $member->getUid();
-            }
-        }
-        $memberUids = array_unique($memberUids);
-
-        // Compile spontaneous registrations
-        $spontaneousMembers = [];
-        /** @var Event $event */
-        foreach ($events as $event) {
-            /** @var Registration $spontaneousRegistration */
-            foreach ($event->getSpontaneousRegistrations() as $spontaneousRegistration) {
-                /** @var Member $member */
-                $member = $spontaneousRegistration->getMember();
-                if (!isset($spontaneousMembers[$member->getUid()]) && !in_array($member->getUid(), $memberUids, true)) {
-                    $spontaneousMembers[$member->getUid()] = $member;
-                }
-            }
-        }
-        $memberAxis = [
-            'groups' => $groups,
-            'spontaneousMembers' => $spontaneousMembers,
-            'guests' => $guests,
-        ];
-
         $this->view->assignMultiple([
-            'memberAxis' => $memberAxis,
+            'memberAxis' => MatrixUtility::getMemberAxis($events->toArray()),
         ]);
     }
 
     /**
      * action show
      *
-     * @param \Buepro\Grevman\Domain\Model\Event $event
-     * @return string|object|null|void
+     * @param Event $event
      */
-    public function showAction(\Buepro\Grevman\Domain\Model\Event $event)
+    public function showAction(Event $event): void
     {
         $identifiedEventMember = null;
         if ($GLOBALS['TSFE']->fe_user && $GLOBALS['TSFE']->fe_user->user['uid']) {
@@ -189,7 +134,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     }
 
     public function registerAction(
-        \Buepro\Grevman\Domain\Model\Event $event,
+        Event $event,
         \Buepro\Grevman\Domain\Model\Member $member
     ): void {
         $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
@@ -213,7 +158,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     }
 
     public function unregisterAction(
-        \Buepro\Grevman\Domain\Model\Event $event,
+        Event $event,
         \Buepro\Grevman\Domain\Model\Member $member
     ):void {
         $registration = $event->getRegistrationForMember($member);

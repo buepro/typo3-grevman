@@ -56,9 +56,10 @@ class Registration extends AbstractEntity
     /**
      * Sets the state
      */
-    public function setState(int $state): void
+    public function setState(int $state): self
     {
         $this->state = $state;
+        return $this;
     }
 
     /**
@@ -72,8 +73,9 @@ class Registration extends AbstractEntity
     /**
      * Sets the member
      */
-    public function setMember(Member $member): void
+    public function setMember(Member $member): self
     {
         $this->member = $member;
+        return $this;
     }
 }
