@@ -67,7 +67,7 @@ class NoteViewHelper extends AbstractViewHelper
         $notes = $event->getNotes();
         foreach ($notes as $note) {
             /** @var Note $note */
-            if ($note->getMember()->getUid() === $member->getUid()) {
+            if ($note->getMember() !== null && $note->getMember()->getUid() === $member->getUid()) {
                 $result[] = $note->getText();
             }
         }

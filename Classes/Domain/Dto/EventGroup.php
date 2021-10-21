@@ -34,6 +34,7 @@ class EventGroup
     {
         $this->event = $event;
         $this->group = $group;
+        $this->members = [];
         /** @var Member $member */
         foreach ($group->getMembers() as $member) {
             $this->members[] = new EventMember($event, $member);
@@ -48,5 +49,10 @@ class EventGroup
     public function getName(): string
     {
         return isset($this->group) ? $this->group->getName() : 'Group not defined';
+    }
+
+    public function getEvent(): Event
+    {
+        return $this->event;
     }
 }

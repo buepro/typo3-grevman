@@ -91,7 +91,7 @@ class Mail
         // From spontaneous registrations
         /** @var Registration $registration */
         foreach ($this->event->getSpontaneousRegistrations() as $registration) {
-            if ($registration->getMember()->getEmail() !== '') {
+            if ($registration->getMember() !== null && $registration->getMember()->getEmail() !== '') {
                 $receivers[] = new \Symfony\Component\Mime\Address($registration->getMember()->getEmail(), $registration->getMember()->getScreenName());
             }
         }

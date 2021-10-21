@@ -592,7 +592,7 @@ class Event extends AbstractEntity
         $memberUid = $member->getUid();
         /** @var Registration $registration */
         foreach ($this->getRegistrations() as $registration) {
-            if ($registration->getMember()->getUid() === $memberUid) {
+            if ($registration->getMember() !== null && $registration->getMember()->getUid() === $memberUid) {
                 $result = $registration;
             }
         }
@@ -625,7 +625,7 @@ class Event extends AbstractEntity
         $result = [];
         foreach ($this->registrations as $registration) {
             /** @var Registration $registration */
-            if ($this->getEventGroupForMember($registration->getMember()) === null) {
+            if ($registration->getMember() !== null && $this->getEventGroupForMember($registration->getMember()) === null) {
                 $result[] = $registration;
             }
         }

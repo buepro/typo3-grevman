@@ -62,7 +62,7 @@ class Note extends AbstractEntity
     /**
      * Returns the member
      */
-    public function getMember(): Member
+    public function getMember(): ?Member
     {
         return $this->member;
     }
