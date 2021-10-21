@@ -64,7 +64,7 @@ Create test db
 #. Remove the following tags: `lockToDomain`-, `disableIPlock`, `createdbyaction`,
    `usergroup_cached_list`, `t3ver_.*?`, `legacy_overlay_uid`, `sitetitle`
 
-   code-block:: bash
+   .. code-block:: bash
 
    <[TagName]>.*?</[TTagName]>\n\s*
 
