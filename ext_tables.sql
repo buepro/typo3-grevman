@@ -1,4 +1,5 @@
 CREATE TABLE tx_grevman_domain_model_event (
+	parent int(11) unsigned DEFAULT '0',
 	title varchar(255) NOT NULL DEFAULT '',
 	slug varchar(255) NOT NULL DEFAULT '',
 	startdate int(11) NOT NULL DEFAULT '0',

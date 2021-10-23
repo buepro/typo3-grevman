@@ -27,12 +27,22 @@ defined('TYPO3') or die('Access denied.');
                     --div--;Resources,
                         images, files,
                     --div--;Relations,
-                        member_groups, registrations, notes, guests,
+                        member_groups, registrations, notes, guests, parent,
                     --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
                         sys_language_uid, l10n_parent, l10n_diffsource, hidden'
             ],
         ],
         'columns' => [
+            'parent' => [
+                'exclude' => true,
+                'label' => 'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_event.parent',
+                'config' => [
+                    'type' => 'select',
+                    'renderType' => 'selectSingle',
+                    'foreign_table' => 'tx_grevman_domain_model_event',
+                    'readOnly' => 1,
+                ],
+            ],
             'slug' => [
                 'config' => [
                     'type' => 'slug',

@@ -19,12 +19,13 @@ use Buepro\Grevman\Domain\Model\Group;
 use Buepro\Grevman\Domain\Model\Member;
 use Buepro\Grevman\Domain\Model\Registration;
 use Buepro\Grevman\Utility\DtoUtility;
+use Buepro\Grevman\Utility\EventUtility;
 use Buepro\Grevman\Utility\MatrixUtility;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
@@ -74,12 +75,40 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     }
 
     /**
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * In case the request arguments contain the field `eventId` it will be used to define an event with the property
+     * mapper.
+     *
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
      */
-    private function listAndMatrixActionProcessing(): QueryResultInterface
+    public function initializeAction(): void
     {
-        /** @var QueryResultInterface $events */
-        $events = $this->eventRepository->findAll();
+        if (
+            $this->request->hasArgument('eventId') &&
+            is_string($eventId = $this->request->getArgument('eventId')) &&
+            ($parentUid = EventUtility::getParentUidFromId($eventId)) > 0
+        ) {
+            $arguments = $this->request->getArguments();
+            unset($arguments['eventId']);
+            /** @var Event $parentEvent */
+            $parentEvent = $this->eventRepository->findByUid($parentUid);
+            $arguments['event'] = EventUtility::getPropertyMappingArray(Event::createChild($parentEvent));
+            $this->request->setArguments($arguments);
+            $configuration = $this->arguments['event']->getPropertyMappingConfiguration();
+            $configuration->allowAllProperties()->setTypeConverterOption(
+                PersistentObjectConverter::class,
+                (string) PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
+                true
+            );
+        }
+        parent::initializeAction();
+    }
+
+    private function listAndMatrixActionProcessing(): array
+    {
+        /** @var Event[] $events */
+        $events = $this->eventRepository->findAll()->toArray();
+        // @todo Remove this
+        $events[] = Event::createChild($events[0]);
         $identifiedMember = null;
         if ($GLOBALS['TSFE']->fe_user && $GLOBALS['TSFE']->fe_user->user['uid']) {
             $identifiedMember = $this->memberRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
@@ -109,7 +138,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         $events = $this->listAndMatrixActionProcessing();
         $this->view->assignMultiple([
-            'memberAxis' => MatrixUtility::getMemberAxis($events->toArray()),
+            'memberAxis' => MatrixUtility::getMemberAxis($events),
         ]);
     }
 

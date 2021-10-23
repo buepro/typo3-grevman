@@ -54,6 +54,9 @@
 			<trans-unit id="tx_grevman_domain_model_event.guests" resname="tx_grevman_domain_model_event.guests">
 				<source>Guests</source>
 			</trans-unit>
+			<trans-unit id="tx_grevman_domain_model_event.parent" resname="tx_grevman_domain_model_event.parent">
+				<source>Parent event</source>
+			</trans-unit>
 			<trans-unit id="tx_grevman_domain_model_group" resname="tx_grevman_domain_model_group">
 				<source>Group</source>
 			</trans-unit>

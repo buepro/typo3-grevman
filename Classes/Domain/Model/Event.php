@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Buepro\Grevman\Domain\Model;
 
+use Buepro\Grevman\Utility\EventUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -29,6 +30,10 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Event extends AbstractEntity
 {
+    /**
+     * @var Event
+     */
+    protected $parent = null;
 
     /**
      * title
@@ -154,9 +159,18 @@ class Event extends AbstractEntity
      */
     public function __construct()
     {
-
         // Do not remove the next line: It would break the functionality
         $this->initializeObject();
+    }
+
+    public static function createChild(self $parent): self
+    {
+        $event = clone $parent;
+        $event->parent = $parent;
+        $event->startdate = new \DateTime();
+        unset($event->uid, $event->registrations, $event->guests, $event->notes);
+        $event->initializeObject();
+        return $event;
     }
 
     /**
@@ -175,6 +189,23 @@ class Event extends AbstractEntity
         $this->registrations = $this->registrations ?: new ObjectStorage();
         $this->notes = $this->notes ?: new ObjectStorage();
         $this->guests = $this->guests ?: new ObjectStorage();
+    }
+
+    /**
+     * Returns the parentUid
+     */
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Sets the parentUid
+     */
+    public function setParent(self $parent): self
+    {
+        $this->parent = $parent;
+        return $this;
     }
 
     /**
@@ -630,5 +661,13 @@ class Event extends AbstractEntity
             }
         }
         return $result;
+    }
+
+    /**
+     * Returns a string to reconstruct the event.
+     */
+    public function getId(): string
+    {
+        return EventUtility::createId($this);
     }
 }
