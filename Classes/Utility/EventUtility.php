@@ -13,6 +13,8 @@ namespace Buepro\Grevman\Utility;
 
 use Buepro\Grevman\Domain\Model\Event;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class EventUtility
 {
@@ -57,16 +59,21 @@ class EventUtility
     public static function getPropertyMappingArray(Event $event): array
     {
         $result = [];
-        $result['parent'] = $event->getParent() !== null ? $event->getParent()->getUid() : 0;
         $properties = [
-            'title', 'slug', 'startdate', 'enddate', 'teaser', 'description', 'price', 'link', 'program', 'location',
-            'images', 'files', 'memberGroups'
+            'parent', 'title', 'slug', 'startdate', 'enddate', 'teaser', 'description', 'price', 'link', 'program',
+            'location', 'images', 'files', 'memberGroups'
         ];
         foreach ($properties as $property) {
             $method = 'get' . ucfirst($property);
             $value = $event->{$method}();
             if ($value !== null) {
                 $result[$property] = $value;
+                if ($value instanceof AbstractEntity && $value->getUid() !== 0) {
+                    $result[$property] = $value->getUid();
+                }
+                if ($value instanceof ObjectStorage && ($value->count() === 0)) {
+                    unset($result[$property]);
+                }
             }
         }
         return $result;
