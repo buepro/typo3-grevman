@@ -75,8 +75,17 @@
 			<trans-unit id="showList" resname="showList">
 				<source>Show list</source>
 			</trans-unit>
-			<trans-unit id="noEventAlert" resname="showList">
+			<trans-unit id="noEventAlert" resname="noEventAlert">
 				<source>Currently there are no events available.</source>
+			</trans-unit>
+			<trans-unit id="resources" resname="resources">
+				<source>Resources</source>
+			</trans-unit>
+			<trans-unit id="relations" resname="relations">
+				<source>Relations</source>
+			</trans-unit>
+			<trans-unit id="recurrence" resname="recurrence">
+				<source>Recurrence</source>
 			</trans-unit>
 
 			<trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event">

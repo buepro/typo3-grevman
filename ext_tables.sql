@@ -15,7 +15,13 @@ CREATE TABLE tx_grevman_domain_model_event (
 	member_groups int(11) unsigned NOT NULL DEFAULT '0',
 	registrations int(11) unsigned NOT NULL DEFAULT '0',
 	notes int(11) unsigned NOT NULL DEFAULT '0',
-	guests int(11) unsigned NOT NULL DEFAULT '0'
+	guests int(11) unsigned NOT NULL DEFAULT '0',
+	enable_recurrence smallint NOT NULL DEFAULT 0,
+	recurrence_enddate int(11) NOT NULL DEFAULT '0',
+	recurrence_rule varchar(255) NOT NULL DEFAULT '',
+	recurrence_dates text,
+	recurrence_exception_dates text,
+	recurrence_set text
 );
 
 CREATE TABLE tx_grevman_domain_model_group (

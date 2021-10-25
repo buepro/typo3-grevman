@@ -30,10 +30,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Event extends AbstractEntity
 {
-    /**
-     * @var Event
-     */
-    protected $parent = null;
+    use EventRecurrenceTrait;
 
     /**
      * title
@@ -189,23 +186,6 @@ class Event extends AbstractEntity
         $this->registrations = $this->registrations ?: new ObjectStorage();
         $this->notes = $this->notes ?: new ObjectStorage();
         $this->guests = $this->guests ?: new ObjectStorage();
-    }
-
-    /**
-     * Returns the parentUid
-     */
-    public function getParent(): ?self
-    {
-        return $this->parent;
-    }
-
-    /**
-     * Sets the parentUid
-     */
-    public function setParent(self $parent): self
-    {
-        $this->parent = $parent;
-        return $this;
     }
 
     /**
