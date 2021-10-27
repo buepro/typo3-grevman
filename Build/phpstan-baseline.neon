@@ -63,3 +63,17 @@ parameters:
 				"""
 			count: 1
 			path: ../Classes/Utility/EventUtility.php
+		-
+			message:
+				"""
+					#^Call to an undefined method Buepro\\\\Grevman\\\\Domain\\\\Repository\\\\EventRepository::findByEnableRecurrence\\(\\).$#
+				"""
+			count: 1
+			path: ../Classes/Controller/EventController.php
+		-
+			message:
+				"""
+					#^Strict comparison using !== between DateTime and null will always evaluate to true.$#
+				"""
+			count: 1
+			path: ../Classes/Domain/Model/Event.php

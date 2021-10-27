@@ -92,6 +92,16 @@ class EventUtilityTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
     /**
      * @test
      */
+    public function getStartdateFromIdReturnsStartdateOrNull(): void
+    {
+        $this->assertNull(EventUtility::getStartdateFromId(''));
+        $this->assertNull(EventUtility::getStartdateFromId('1'));
+        $this->assertSame(23456, EventUtility::getStartdateFromId('1-23456')->getTimestamp());
+    }
+
+    /**
+     * @test
+     */
     public function getPropertyMappingArrayReturnsArray(): void
     {
         $this->assertIsArray(EventUtility::getPropertyMappingArray(new Event()));

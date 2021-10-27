@@ -39,6 +39,20 @@ defined('TYPO3') or die('Access denied.');
             ],
         ],
         'columns' => [
+            'startdate' => [
+                'config' => [
+                    'size' => 13,
+                    'eval' => 'datetime,int',
+                    'default' => time(),
+                ],
+            ],
+            'enddate' => [
+                'config' => [
+                    'size' => 13,
+                    'eval' => 'datetime,int',
+                    'default' => 0,
+                ],
+            ],
             'parent' => [
                 'exclude' => true,
                 'label' => 'LLL:EXT:grevman/Resources/Private/Language/locallang_db.xlf:tx_grevman_domain_model_event.parent',
@@ -106,9 +120,8 @@ defined('TYPO3') or die('Access denied.');
                 'config' => [
                     'type' => 'input',
                     'renderType' => 'inputDateTime',
-                    'size' => 10,
-                    'eval' => 'datetime',
-                    'default' => time()
+                    'eval' => 'datetime,int',
+                    'default' => 0,
                 ],
             ],
             'recurrence_rule' => [
@@ -154,7 +167,7 @@ defined('TYPO3') or die('Access denied.');
                 'displayCond' => 'FIELD:enable_recurrence:REQ:true',
                 'config' => [
                     'type' => 'text',
-                    'cols' => 10,
+                    'cols' => 15,
                     'rows' => 5,
                     'eval' => 'trim',
                 ],
@@ -166,7 +179,7 @@ defined('TYPO3') or die('Access denied.');
                 'displayCond' => 'FIELD:enable_recurrence:REQ:true',
                 'config' => [
                     'type' => 'text',
-                    'cols' => 10,
+                    'cols' => 15,
                     'rows' => 5,
                     'eval' => 'trim',
                 ],

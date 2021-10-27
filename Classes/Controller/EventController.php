@@ -91,24 +91,39 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             unset($arguments['eventId']);
             /** @var Event $parentEvent */
             $parentEvent = $this->eventRepository->findByUid($parentUid);
-            $arguments['event'] = EventUtility::getPropertyMappingArray(Event::createChild($parentEvent));
-            $this->request->setArguments($arguments);
-            $configuration = $this->arguments['event']->getPropertyMappingConfiguration();
-            $configuration->allowAllProperties()->setTypeConverterOption(
-                PersistentObjectConverter::class,
-                (string) PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
-                true
-            );
+            $child = Event::createChild($parentEvent, EventUtility::getStartdateFromId($eventId));
+            if ($child !== null) {
+                $arguments['event'] = EventUtility::getPropertyMappingArray($child);
+                $this->request->setArguments($arguments);
+                $configuration = $this->arguments['event']->getPropertyMappingConfiguration();
+                $configuration->allowAllProperties()->setTypeConverterOption(
+                    PersistentObjectConverter::class,
+                    (string) PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
+                    true
+                );
+            }
         }
         parent::initializeAction();
     }
 
-    private function listAndMatrixActionProcessing(): array
+    /**
+     * Gets the events and identified member and assignes them to the view.
+     *
+     * @return Event[]
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+    private function listAndMatrixAction(): array
     {
+        $displayDays = (int)$this->settings['event']['list']['displayDays'];
+        $displayDays = $displayDays > 0 ? $displayDays : 720;
+        /** @var Event[] $regularEvents */
+        $regularEvents = $this->eventRepository->findAll($displayDays)->toArray();
+        /** @var Event[] $recurrenceParentEvents */
+        $recurrenceParentEvents = $this->eventRepository->findByEnableRecurrence(1)->toArray();
+        /** @var Event[] $recurrenceEvents */
+        $recurrenceEvents = EventUtility::getEventRecurrences($recurrenceParentEvents, $displayDays);
         /** @var Event[] $events */
-        $events = $this->eventRepository->findAll()->toArray();
-        // @todo Remove this
-        $events[] = Event::createChild($events[0]);
+        $events = EventUtility::mergeEvents($regularEvents, $recurrenceEvents);
         $identifiedMember = null;
         if ($GLOBALS['TSFE']->fe_user && $GLOBALS['TSFE']->fe_user->user['uid']) {
             $identifiedMember = $this->memberRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
@@ -117,7 +132,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             'events' => $events,
             'identifiedMember' => $identifiedMember,
         ]);
-        return $events;
+        return $regularEvents;
     }
 
     /**
@@ -127,7 +142,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function listAction(): void
     {
-        $this->listAndMatrixActionProcessing();
+        $this->listAndMatrixAction();
     }
 
     /**
@@ -136,7 +151,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function showMatrixAction(): void
     {
-        $events = $this->listAndMatrixActionProcessing();
+        $events = $this->listAndMatrixAction();
         $this->view->assignMultiple([
             'memberAxis' => MatrixUtility::getMemberAxis($events),
         ]);

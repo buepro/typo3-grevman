@@ -41,7 +41,7 @@ trait EventRecurrenceTrait
     /**
      * @var string
      */
-    protected $recurrenceExcludeDates = '';
+    protected $recurrenceExceptionDates = '';
 
     /**
      * @var string
@@ -134,19 +134,19 @@ trait EventRecurrenceTrait
     }
 
     /**
-     * Returns the recurrenceExcludeDates
+     * Returns the recurrenceExceptionDates
      */
-    public function getRecurrenceExcludeDates(): string
+    public function getRecurrenceExceptionDates(): string
     {
-        return $this->recurrenceExcludeDates;
+        return $this->recurrenceExceptionDates;
     }
 
     /**
-     * Sets the recurrenceExcludeDates
+     * Sets the recurrenceExceptionDates
      */
-    public function setRecurrenceExcludeDates(string $recurrenceExcludeDates): self
+    public function setRecurrenceExceptionDates(string $recurrenceExceptionDates): self
     {
-        $this->recurrenceExcludeDates = $recurrenceExcludeDates;
+        $this->recurrenceExceptionDates = $recurrenceExceptionDates;
         return $this;
     }
 

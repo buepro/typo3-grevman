@@ -160,12 +160,36 @@ class Event extends AbstractEntity
         $this->initializeObject();
     }
 
-    public static function createChild(self $parent): self
+    public static function createChild(self $parent, ?\DateTime $occurrence): ?self
     {
+        if (
+            $occurrence === null || $parent->getStartdate() === null ||
+            $parent->getStartdate()->getTimestamp() === $occurrence->getTimestamp()
+        ) {
+            return null;
+        }
         $event = clone $parent;
-        $event->parent = $parent;
-        $event->startdate = new \DateTime();
+
+        // Reset
         unset($event->uid, $event->registrations, $event->guests, $event->notes);
+
+        // ID properties
+        $event->parent = $parent;
+        $event->startdate = $occurrence;
+
+        // Duration (enddate)
+        if (
+            $parent->getStartdate() !== null &&
+            $parent->getEnddate() !== null &&
+            $event->getStartdate() !== null
+        ) {
+            $enddate = clone $event->getStartdate();
+            $enddate->setTimestamp($event->getStartdate()->getTimestamp());
+            $duration = $parent->getStartdate()->diff($parent->getEnddate());
+            $enddate->add($duration);
+            $event->setEnddate($enddate);
+        }
+
         $event->initializeObject();
         return $event;
     }
