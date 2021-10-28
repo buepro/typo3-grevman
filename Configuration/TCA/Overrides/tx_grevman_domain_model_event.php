@@ -13,6 +13,7 @@ defined('TYPO3') or die('Access denied.');
     $config = [
         'ctrl' => [
             'iconfile' => 'EXT:grevman/Resources/Public/Icons/grevman-event.svg',
+            'default_sortby' => 'enable_recurrence DESC, tstamp DESC',
         ],
         'palettes' => [
             'dates' => [
