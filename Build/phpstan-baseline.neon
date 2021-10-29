@@ -45,24 +45,10 @@ parameters:
 		-
 			message:
 				"""
-					#^Variable method call on Buepro\\\\Grevman\\\\Domain\\\\Model\\\\Registration.$#
-				"""
-			count: 1
-			path: ../Classes/ViewHelpers/RegistrationViewHelper.php
-		-
-			message:
-				"""
 					#^Cannot call method toArray() on array|TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryResultInterface.$#
 				"""
 			count: 1
 			path: ../Classes/Controller/EventController.php
-		-
-			message:
-				"""
-					#^Variable method call on Buepro\\\\Grevman\\\\Domain\\\\Model\\\\Event.$#
-				"""
-			count: 1
-			path: ../Classes/Utility/EventUtility.php
 		-
 			message:
 				"""

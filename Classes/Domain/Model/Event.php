@@ -176,13 +176,7 @@ class Event extends AbstractEntity
         ) {
             return null;
         }
-        $child = clone $parent;
-
-        // Reset
-        $child->uid = 0;
-        $child->registrations->removeAll($parent->getRegistrations());
-        $child->guests->removeAll($parent->getGuests());
-        $child->notes->removeAll($parent->getNotes());
+        $child = new self();
 
         // ID properties
         $child->parent = $parent;
@@ -201,16 +195,14 @@ class Event extends AbstractEntity
             $child->setEnddate($enddate);
         }
 
-        // Reset recurrence properties
-        $child
-            ->setEnableRecurrence(false)
-            ->setRecurrenceRule('')
-            ->setRecurrenceDates('')
-            ->setRecurrenceExceptionDates('')
-            ->setRecurrenceSet('');
-        $child->recurrenceEnddate = null;
+        // Copy properties
+        foreach (['title', 'slug', 'teaser', 'description', 'price', 'link', 'program', 'location'] as $propertyName) {
+            $child->{$propertyName} = $parent->{'get' . ucfirst($propertyName)}();
+        }
+        $child->getImages()->addAll($parent->getImages());
+        $child->getFiles()->addAll($parent->getFiles());
+        $child->getMemberGroups()->addAll($parent->getMemberGroups());
 
-        $child->initializeObject();
         return $child;
     }
 

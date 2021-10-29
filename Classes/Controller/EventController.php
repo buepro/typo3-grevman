@@ -18,6 +18,8 @@ use Buepro\Grevman\Domain\Model\Event;
 use Buepro\Grevman\Domain\Model\Group;
 use Buepro\Grevman\Domain\Model\Member;
 use Buepro\Grevman\Domain\Model\Registration;
+use Buepro\Grevman\Domain\Repository\EventRepository;
+use Buepro\Grevman\Domain\Repository\MemberRepository;
 use Buepro\Grevman\Utility\DtoUtility;
 use Buepro\Grevman\Utility\EventUtility;
 use Buepro\Grevman\Utility\MatrixUtility;
@@ -41,36 +43,43 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
  */
 class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
+    /**
+     * @var PersistenceManager
+     */
+    protected $persistenceManager;
 
     /**
      * eventRepository
      *
-     * @var \Buepro\Grevman\Domain\Repository\EventRepository
+     * @var EventRepository
      */
     protected $eventRepository = null;
 
     /**
      * memberRepository
      *
-     * @var \Buepro\Grevman\Domain\Repository\MemberRepository
+     * @var MemberRepository
      */
     protected $memberRepository = null;
 
+    public function injectPersistenceManager(PersistenceManager $persistenceManager): void
+    {
+        $this->persistenceManager = $persistenceManager;
+    }
+
     /**
-     * @param \Buepro\Grevman\Domain\Repository\EventRepository $eventRepository
+     * @param EventRepository $eventRepository
      */
-    public function injectEventRepository(
-        \Buepro\Grevman\Domain\Repository\EventRepository $eventRepository
-    ): void {
+    public function injectEventRepository(EventRepository $eventRepository): void
+    {
         $this->eventRepository = $eventRepository;
     }
 
     /**
-     * @param \Buepro\Grevman\Domain\Repository\MemberRepository $memberRepository
+     * @param MemberRepository $memberRepository
      */
-    public function injectMemberRepository(
-        \Buepro\Grevman\Domain\Repository\MemberRepository $memberRepository
-    ): void {
+    public function injectMemberRepository(MemberRepository $memberRepository): void
+    {
         $this->memberRepository = $memberRepository;
     }
 
@@ -82,6 +91,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function initializeAction(): void
     {
+        // Handle not persisted recurrence events
         if (
             $this->request->hasArgument('eventId') &&
             is_string($eventId = $this->request->getArgument('eventId')) &&
@@ -93,14 +103,44 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $parentEvent = $this->eventRepository->findByUid($parentUid);
             $child = Event::createChild($parentEvent, EventUtility::getStartdateFromId($eventId));
             if ($child !== null) {
-                $arguments['event'] = EventUtility::getPropertyMappingArray($child);
-                $this->request->setArguments($arguments);
-                $configuration = $this->arguments['event']->getPropertyMappingConfiguration();
-                $configuration->allowAllProperties()->setTypeConverterOption(
-                    PersistentObjectConverter::class,
-                    (string) PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
-                    true
-                );
+                if (in_array($arguments['action'], ['register', 'unregister', 'addNote'], true)) {
+                    // The action requires the event to be persisted
+                    $this->eventRepository->add($child);
+                    $this->persistenceManager->persistAll();
+                    $actionArgumentMap = [
+                        'register' => ['event' => $child->getUid()],
+                        'unregister' => ['event' => $child->getUid()],
+                        'addNote' => ['noteDto' => ['event' => $child->getUid()]],
+                        'sendMail' => ['mailDto' => ['event' => $child->getUid()]],
+                    ];
+                    $arguments = array_replace_recursive($arguments, $actionArgumentMap[$arguments['action']]);
+                    $this->request->setArguments($arguments);
+                } else {
+                    // Provide the non persisted event
+                    if ($arguments['action'] === 'sendMail') {
+                        $arguments['mailDto']['event'] = EventUtility::getPropertyMappingArray($child);
+                        $this->request->setArguments($arguments);
+                        $configuration = $this->arguments['mailDto']->getPropertyMappingConfiguration();
+                        $configuration->forProperty('event')
+                            ->allowAllProperties()
+                            ->setTypeConverterOption(
+                                PersistentObjectConverter::class,
+                                (string) PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
+                                true
+                            );
+                    } else {
+                        $arguments['event'] = EventUtility::getPropertyMappingArray($child);
+                        $this->request->setArguments($arguments);
+                        $configuration = $this->arguments['event']->getPropertyMappingConfiguration();
+                    }
+                    $configuration
+                        ->allowAllProperties()
+                        ->setTypeConverterOption(
+                            PersistentObjectConverter::class,
+                            (string) PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
+                            true
+                        );
+                }
             }
         }
         parent::initializeAction();
@@ -185,7 +225,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         Event $event,
         \Buepro\Grevman\Domain\Model\Member $member
     ): void {
-        $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
         $registration = $event->getRegistrationForMember($member);
         if (null === $registration) {
             /** @var Registration $registration */
@@ -200,8 +239,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             FlashMessage::INFO
         );
 
-        $persistenceManager->add($event);
-        $persistenceManager->persistAll();
+        $this->eventRepository->update($event);
+        $this->persistenceManager->persistAll();
         $this->redirect('show', null, null, ['event' => $event]);
     }
 
@@ -222,9 +261,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             '',
             FlashMessage::INFO
         );
-        $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
-        $persistenceManager->add($registration);
-        $persistenceManager->persistAll();
+        $this->eventRepository->update($event);
+        $this->persistenceManager->persistAll();
         $this->redirect('show', null, null, ['event' => $event]);
     }
 
@@ -254,7 +292,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             );
         }
 
-        $this->redirect('show', null, null, ['event' => $mailDto->getEvent()]);
+        if ((bool)$mailDto->getEvent()->getUid()) {
+            $this->redirect('show', null, null, ['event' => $mailDto->getEvent()]);
+        }
+        $this->redirect('show', null, null, ['eventId' => $mailDto->getEvent()->getId()]);
     }
 
     /**
@@ -264,9 +305,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function addNoteAction(Note $noteDto): void
     {
         $noteDto->getEvent()->addNote($noteDto->createNote());
-        $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
-        $persistenceManager->add($noteDto->getEvent());
-        $persistenceManager->persistAll();
+        $this->eventRepository->update($noteDto->getEvent());
+        $this->persistenceManager->persistAll();
         $this->addFlashMessage(
             \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('noteAdded', 'grevman') ?? 'Translation missing at 1634056465800',
             '',
