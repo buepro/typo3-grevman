@@ -66,7 +66,7 @@ Create test db
 
    .. code-block:: bash
 
-   <[TagName]>.*?</[TTagName]>\n\s*
+      <[TagName]>.*?</[TTagName]>\n\s*
 
 #. Remove `related`-tag using the following regular expression
 
