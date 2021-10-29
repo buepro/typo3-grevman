@@ -160,7 +160,15 @@ class Event extends AbstractEntity
         $this->initializeObject();
     }
 
-    public static function createChild(self $parent, ?\DateTime $occurrence): ?self
+    public function __clone()
+    {
+        parent::__clone();
+        $this->startdate = $this->startdate !== null ? clone $this->startdate : null;
+        $this->enddate = $this->enddate !== null ? clone $this->enddate : null;
+        $this->recurrenceEnddate = $this->recurrenceEnddate !== null ? clone $this->recurrenceEnddate : null;
+    }
+
+    public static function createChild(self $parent, ?\DateTime $occurrence = null): ?self
     {
         if (
             $occurrence === null || $parent->getStartdate() === null ||
@@ -168,30 +176,42 @@ class Event extends AbstractEntity
         ) {
             return null;
         }
-        $event = clone $parent;
+        $child = clone $parent;
 
         // Reset
-        unset($event->uid, $event->registrations, $event->guests, $event->notes);
+        $child->uid = 0;
+        $child->registrations->removeAll($parent->getRegistrations());
+        $child->guests->removeAll($parent->getGuests());
+        $child->notes->removeAll($parent->getNotes());
 
         // ID properties
-        $event->parent = $parent;
-        $event->startdate = $occurrence;
+        $child->parent = $parent;
+        $child->startdate = $occurrence;
 
         // Duration (enddate)
         if (
             $parent->getStartdate() !== null &&
             $parent->getEnddate() !== null &&
-            $event->getStartdate() !== null
+            $child->getStartdate() !== null
         ) {
-            $enddate = clone $event->getStartdate();
-            $enddate->setTimestamp($event->getStartdate()->getTimestamp());
+            $enddate = clone $child->getStartdate();
+            $enddate->setTimestamp($child->getStartdate()->getTimestamp());
             $duration = $parent->getStartdate()->diff($parent->getEnddate());
             $enddate->add($duration);
-            $event->setEnddate($enddate);
+            $child->setEnddate($enddate);
         }
 
-        $event->initializeObject();
-        return $event;
+        // Reset recurrence properties
+        $child
+            ->setEnableRecurrence(false)
+            ->setRecurrenceRule('')
+            ->setRecurrenceDates('')
+            ->setRecurrenceExceptionDates('')
+            ->setRecurrenceSet('');
+        $child->recurrenceEnddate = null;
+
+        $child->initializeObject();
+        return $child;
     }
 
     /**

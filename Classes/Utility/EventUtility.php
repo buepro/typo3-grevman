@@ -79,7 +79,7 @@ class EventUtility
             $value = $event->{$method}();
             if ($value !== null) {
                 $result[$property] = $value;
-                if ($value instanceof AbstractEntity && $value->getUid() !== 0) {
+                if ($value instanceof AbstractEntity && (bool)$value->getUid()) {
                     $result[$property] = $value->getUid();
                 }
                 if ($value instanceof ObjectStorage && ($value->count() === 0)) {
@@ -90,63 +90,93 @@ class EventUtility
         return $result;
     }
 
-    public static function getDatesFromField(Event $event, string $fieldValue): array
+    /**
+     * Creates an array of \DateTime objects where each object is a copy from the events startdate
+     * with the date from the $fieldValue.
+     *
+     * Note: All date and time formats are as defined for the BE through `TYPO3_CONF_VARS` or the core directly.
+     *
+     * @param Event $event Event with a valid startdate
+     * @param string $fieldValue Line separated dates
+     * @return \DateTime[] Date elements with UTC timezone
+     * @see \TYPO3\CMS\Backend\Form\Element\InputDateTimeElement
+     */
+    public static function getDatesFromField(Event $event, string $fieldValue, \DateTimeZone $timezone): array
     {
         $result = [];
-        if ($event->getStartdate() === null) {
+        if ($fieldValue === '' || $event->getStartdate() === null) {
             return $result;
         }
-        $dates = GeneralUtility::trimExplode("\n", $fieldValue, true);
-        foreach ($dates as $date) {
-            $tempDate = \DateTime::createFromFormat(
+        $fieldDates = GeneralUtility::trimExplode("\n", $fieldValue, true);
+        foreach ($fieldDates as $fieldDate) {
+            // Clone the startdate to get the time details
+            $eventDate = clone $event->getStartdate();
+            $eventDate->setTimezone($timezone);
+            $date = \DateTime::createFromFormat(
                 $GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'],
-                $date,
-                $event->getStartdate()->getTimezone()
+                $fieldDate,
+                $timezone
             );
-            if ($tempDate === false) {
-                $tempDate = \DateTime::createFromFormat(
+            if ($date === false) {
+                $date = \DateTime::createFromFormat(
                     'd-m-Y',
-                    $date,
-                    $event->getStartdate()->getTimezone()
+                    $fieldDate,
+                    $timezone
                 );
             }
-            if ($tempDate === false) {
+            if ($date === false) {
                 continue;
             }
-            $tempDate->setTime(
-                (int)$event->getStartdate()->format('G'),
-                (int)$event->getStartdate()->format('i')
+            $eventDate->setDate(
+                (int)$date->format('Y'),
+                (int)$date->format('m'),
+                (int)$date->format('j')
             );
-            // UTC time is required
-            $tempDate->setTimezone(new \DateTimeZone('UTC'));
-            $result[] = $tempDate;
+            $result[] = $eventDate;
         }
         return $result;
     }
 
     /**
-     * Note: All date and time formats are as defined for the BE through `TYPO3_CONF_VARS` or the core directly.
-     * Note: The frontend timezone is defined by extbase.
+     * Gets upcoming recurrence events from events having `enableRecurrence` set.
      *
-     * @see \TYPO3\CMS\Backend\Form\Element\InputDateTimeElement
+     * Note regarding time zone:
+     * Under most circumstances the timezone is correctly defined for the script (e.g. by `$GLOBALS['TYPO3_CONF_VARS']
+     * ['SYS']['phpTimeZone']`). For the use case where the time zone for the frontend is set to something else we need
+     * to use the general time zone used by `grevman` (set through TS constants).
+     *
+     * @param Event[] $events
+     * @return Event[]
      */
-    public static function getEventRecurrences(array $events, int $displayDays): array
+    public static function getEventRecurrences(array $events, int $displayDays, \DateTimeZone $timezone = null): array
     {
         $result = [];
 
-        /** @var Event $event */
+        // Check preconditions
+        if ($displayDays < 1 || count($events) < 1) {
+            return $result;
+        }
+
+        // In case the timezone isn't set we use the system time zone
+        if ($timezone === null) {
+            $timezone = new \DateTimeZone(date_default_timezone_get());
+        }
+        $utcTimezone = new \DateTimeZone('UTC');
+
         foreach ($events as $event) {
-            if ($event->getStartdate() === null) {
+            if (!$event->getEnableRecurrence() || $event->getStartdate() === null) {
                 continue;
             }
             $properties = [];
 
             // Set start date (DTSTART)
             if (strpos($event->getRecurrenceSet(), 'DTSTART') === false) {
+                $eventStartdate = clone $event->getStartdate();
+                $eventStartdate->setTimezone($timezone);
                 $properties[] = sprintf(
                     'DTSTART;TZID=%s:%s',
-                    date_default_timezone_get(),
-                    $event->getStartdate()->format('Ymd\THis')
+                    $timezone->getName(),
+                    $eventStartdate->format('Ymd\THis')
                 );
             }
 
@@ -155,16 +185,16 @@ class EventUtility
                 $rruleParts = GeneralUtility::trimExplode(';', $event->getRecurrenceRule());
                 // In case the user didn't define a recurrence end we set it here
                 if (strpos($event->getRecurrenceRule(), 'UNTIL') === false) {
-                    $maxEnddate = new \DateTime();
-                    $maxEnddate->setTimestamp($event->getStartdate()->getTimestamp() + $displayDays * 86400);
+                    $maxEnddate = new \DateTime('now', $timezone);
+                    $maxEnddate->add(new \DateInterval('P' . $displayDays . 'D'));
                     if (
                         $event->getRecurrenceEnddate() !== null &&
                         $event->getRecurrenceEnddate()->getTimestamp() < $maxEnddate->getTimestamp()
                     ) {
-                        $maxEnddate = $event->getRecurrenceEnddate();
+                        $maxEnddate = clone $event->getRecurrenceEnddate();
                     }
                     // UTC time is required
-                    $maxEnddate->setTimezone(new \DateTimeZone('UTC'));
+                    $maxEnddate->setTimezone($utcTimezone);
                     $rruleParts[] = sprintf(
                         'UNTIL=%s',
                         $maxEnddate->format('Ymd\THis\Z')
@@ -175,24 +205,24 @@ class EventUtility
 
             // Set including dates
             if ($event->getRecurrenceDates() !== '') {
-                $dates = self::getDatesFromField($event, $event->getRecurrenceDates());
-                /** @var \DateTime $date */
+                $dates = self::getDatesFromField($event, $event->getRecurrenceDates(), $timezone);
                 foreach ($dates as $date) {
                     $properties[] = sprintf(
-                        'RDATE:%s',
-                        $date->format('Ymd\THis\Z')
+                        'RDATE;TZID=%s:%s',
+                        $timezone->getName(),
+                        $date->format('Ymd\THis')
                     );
                 }
             }
 
-            // Set excluding dates
+            // Set exception dates
             if ($event->getRecurrenceExceptionDates() !== '') {
-                $dates = self::getDatesFromField($event, $event->getRecurrenceExceptionDates());
-                /** @var \DateTime $date */
+                $dates = self::getDatesFromField($event, $event->getRecurrenceExceptionDates(), $timezone);
                 foreach ($dates as $date) {
                     $properties[] = sprintf(
-                        'EXDATE:%s',
-                        $date->format('Ymd\THis\Z')
+                        'EXDATE;TZID=%s:%s',
+                        $timezone->getName(),
+                        $date->format('Ymd\THis')
                     );
                 }
             }
@@ -208,18 +238,23 @@ class EventUtility
             $recurrences = new RSet(implode("\n", $properties));
             /** @var \DateTime $occurrence */
             foreach ($recurrences->getOccurrences() as $occurrence) {
-                // Ensure parent and child have same time zone (iCalendar uses UTC in some places)
-                $occurrence->setTimezone($event->getStartdate()->getTimezone());
                 $child = Event::createChild($event, $occurrence);
                 if ($child !== null) {
                     $result[] = $child;
                 }
             }
         }
-        return $result;
+        // Remove past events
+        return array_filter($result, static function (Event $event): bool {
+            if ($event->getStartdate() !== null) {
+                $yesterday = new \DateTime('midnight');
+                return $event->getStartdate()->getTimestamp() > $yesterday->getTimestamp();
+            }
+            return false;
+        });
     }
 
-    public static function mergeEvents(array ...$eventSets): array
+    public static function mergeAndOrderEvents(array ...$eventSets): array
     {
         $events = array_merge(...$eventSets);
 
@@ -230,6 +265,11 @@ class EventUtility
             $id = (string)$event->getUid();
             if ($event->getParent() !== null && $event->getStartdate() !== null) {
                 $id = sprintf('%d-%d', $event->getParent()->getUid(), $event->getStartdate()->getTimestamp());
+            }
+            // Persisted events are always unique
+            if ((bool)$event->getUid()) {
+                $uniqueEvents[$id] = $event;
+                continue;
             }
             if (!isset($uniqueEvents[$id])) {
                 $uniqueEvents[$id] = $event;

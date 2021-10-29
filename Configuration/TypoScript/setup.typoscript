@@ -24,6 +24,7 @@ plugin.tx_grevman_events {
   settings {
     general {
       leaderGroups = {$plugin.tx_grevman_events.settings.general.leaderGroups}
+      timeZone = {$plugin.tx_grevman_events.settings.general.timeZone}
     }
     event {
       detail {

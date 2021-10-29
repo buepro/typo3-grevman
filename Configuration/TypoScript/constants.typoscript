@@ -22,6 +22,8 @@ plugin.tx_grevman_events {
     general {
       # cat=plugin.tx_grevman_events/210/010; type=string; label=Uid's from leader groups (assigned to trainers, coaches, etc.)
       leaderGroups = 4
+      # cat=plugin.tx_grevman_events/210/020; type=string; label=Time zone:The time zone used to obtain event recurrences. Leave empty to use the php setting. Example value: Europe/Zurich
+      timeZone =
     }
     event {
       detail {

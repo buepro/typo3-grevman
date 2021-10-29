@@ -15,6 +15,17 @@ use Buepro\Grevman\Utility\EventUtility;
 class EventUtilityTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
 {
     /**
+     * @var \DateTimeZone
+     */
+    protected $timezone;
+
+    public function __construct($name = null, array $data = [], $dataName = '')
+    {
+        parent::__construct($name, $data, $dataName);
+        $this->timezone = new \DateTimeZone('Europe/Helsinki');
+    }
+
+    /**
      * @test
      */
     public function createIdReturnsString(): void
@@ -138,5 +149,160 @@ class EventUtilityTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
     public function getPropertyMappingArrayReturnsCorrectData(Event $event, array $expected): void
     {
         $this->assertSame($expected, EventUtility::getPropertyMappingArray($event));
+    }
+
+    /**
+     * @test
+     */
+    public function getDatesFromFieldReturnsEmptyArray(): void
+    {
+        $fieldValue = date($GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy']);
+        $wrongFieldValues = ['6. Oct. 2005', '6', '10', '2005'];
+        $startdate = new \DateTime('20211006T080000', $this->timezone);
+        $eventWithStartdate = (new Event())->setStartdate($startdate);
+        $this->assertSame([], EventUtility::getDatesFromField(new Event(), $fieldValue, $this->timezone));
+        $this->assertSame([], EventUtility::getDatesFromField($eventWithStartdate, '', $this->timezone));
+        foreach ($wrongFieldValues as $wrongFieldValue) {
+            $this->assertSame([], EventUtility::getDatesFromField($eventWithStartdate, $wrongFieldValue, $this->timezone));
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function getDatesFromFieldReturnsSameTimeAndTimezone(): void
+    {
+        $summerDate = new \DateTime('20220801T143000', $this->timezone);
+        $winterDate = new \DateTime('20230201T100000', $this->timezone);
+        $fieldValue = sprintf(
+            "%s\n%s",
+            date($GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'], $summerDate->getTimestamp()),
+            date($GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'], $winterDate->getTimestamp())
+        );
+        $startdate = new \DateTime('20211006T080000', $this->timezone);
+        $actualDates = EventUtility::getDatesFromField(
+            (new Event())->setStartdate($startdate),
+            $fieldValue,
+            $this->timezone
+        );
+        foreach ($actualDates as $actual) {
+            $this->assertEquals($startdate->format('H.i.s'), $actual->format('H.i.s'));
+            $this->assertEquals($this->timezone->getName(), $actual->getTimezone()->getName());
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function getEventRecurrencesReturnsEmptyArray(): void
+    {
+        $startdate = new \DateTime('20211006T080000', $this->timezone);
+        $validEvent = (new Event())->setStartdate($startdate)->setEnableRecurrence(true);
+        $this->assertSame([], EventUtility::getEventRecurrences([$validEvent], 0));
+        $this->assertSame([], EventUtility::getEventRecurrences([], 90));
+        $this->assertSame([], EventUtility::getEventRecurrences([new Event()], 90));
+        $this->assertSame([], EventUtility::getEventRecurrences([(new Event())->setStartdate($startdate)], 90));
+        $this->assertSame([], EventUtility::getEventRecurrences([(new Event())->setEnableRecurrence(true)], 90));
+    }
+
+    public function getEventRecurrencesReturnsEventRecurrencesDataProvider(): array
+    {
+        $now = time();
+        $startdate = new \DateTime('now', $this->timezone);
+        $startdate->setTimestamp($now);
+        $baseEvent = (new Event())->setStartdate($startdate);
+
+        // Test RRule
+        $rruleEvent = clone $baseEvent;
+        $rruleEvent->setEnableRecurrence(true)
+            ->setRecurrenceRule('FREQ=MONTHLY;INTERVAL=3');
+        $i = 0;
+        $expectedRRuleEvents = [];
+        while (++$i < 4) {
+            $expectedRRuleEvent = clone $baseEvent;
+            $expectedRRuleEvent->getStartdate()->add(new \DateInterval('P' . $i * 3 . 'M'));
+            $expectedRRuleEvents[] = $expectedRRuleEvent;
+        }
+
+        // Test including dates
+        $testDate = $now + 86400;
+        $datesEvent = clone $baseEvent;
+        $datesEvent->setEnableRecurrence(true)
+            ->setRecurrenceDates(date($GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'], $testDate));
+        $expectedDatesEvent = clone $baseEvent;
+        $expectedDatesEvent->getStartdate()->setTimestamp($testDate);
+
+        // Test exception dates
+        $exDate = clone $baseEvent->getStartdate();
+        $exDate->add(new \DateInterval('P40D'));
+        $exDatesEvent = clone $baseEvent;
+        $exDatesEvent->setEnableRecurrence(true)
+            ->setRecurrenceRule('FREQ=DAILY;INTERVAL=40')
+            ->setRecurrenceExceptionDates(date($GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'], $exDate->getTimestamp()));
+        $expectedExDatesEvent = clone $baseEvent;
+        $expectedExDatesEvent->getStartdate()->add(new \DateInterval('P80D'));
+
+        return [
+            'rrule' => [[$rruleEvent], $expectedRRuleEvents],
+            'including dates' => [[$datesEvent], [$expectedDatesEvent]],
+            'exception dates' => [[$exDatesEvent], [$expectedExDatesEvent]],
+        ];
+    }
+
+    /**
+     * @dataProvider getEventRecurrencesReturnsEventRecurrencesDataProvider
+     * @test
+     * @param Event[] $events
+     * @param Event[] $expectedEvents
+     * @throws \Exception
+     */
+    public function getEventRecurrencesReturnsEventRecurrences(array $events, array $expectedEvents): void
+    {
+        $recurrences = EventUtility::getEventRecurrences($events, 360, $this->timezone);
+        reset($recurrences);
+        foreach ($expectedEvents as $expectedEvent) {
+            $this->assertEquals(
+                $expectedEvent->getStartdate()->format('d.m.Y H.i.s'),
+                current($recurrences)->getStartdate()->format('d.m.Y H.i.s')
+            );
+            next($recurrences);
+        }
+    }
+
+    public function mergeAndOrderEventsMergesAndOrdersDataProvider(): array
+    {
+        $now = time();
+        $testTime = $now + 86400;
+        $startdate = new \DateTime('now', $this->timezone);
+        $startdate->setTimestamp($now);
+        $baseEvent = (new Event())->setStartdate($startdate);
+
+        // Regular event
+        $event = clone $baseEvent;
+        $event->_setProperty('uid', 1);
+        $event->getStartdate()->setTimestamp($testTime);
+
+        // Not persisted recurrence event
+        $recurrenceEvent = $event::createChild($event, clone $startdate);
+        $recurrenceEvent->getStartdate()->setTimestamp($testTime + 1);
+
+        // Persisted event from recurrence
+        $persistedEvent = clone $recurrenceEvent;
+        $persistedEvent->_setProperty('uid', 2);
+
+        return [
+            'merge' => [[$event, $recurrenceEvent], [[$event], [$recurrenceEvent]]],
+            'merge unordered' => [[$event, $recurrenceEvent], [[$recurrenceEvent], [$event]]],
+            'merge with duplicate' => [[$event, $persistedEvent], [[$recurrenceEvent], [$event, $persistedEvent]]],
+        ];
+    }
+
+    /**
+     * @dataProvider mergeAndOrderEventsMergesAndOrdersDataProvider
+     * @test
+     */
+    public function mergeAndOrderEventsMergesAndOrders(array $expectedEvents, array $eventSets): void
+    {
+        $this->assertSame($expectedEvents, EventUtility::mergeAndOrderEvents(...$eventSets));
     }
 }

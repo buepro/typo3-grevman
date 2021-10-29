@@ -121,9 +121,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         /** @var Event[] $recurrenceParentEvents */
         $recurrenceParentEvents = $this->eventRepository->findByEnableRecurrence(1)->toArray();
         /** @var Event[] $recurrenceEvents */
-        $recurrenceEvents = EventUtility::getEventRecurrences($recurrenceParentEvents, $displayDays);
+        $recurrenceEvents = EventUtility::getEventRecurrences(
+            $recurrenceParentEvents,
+            $displayDays,
+            $this->settings['general']['timeZone'] ? new \DateTimeZone($this->settings['general']['timeZone']) : null
+        );
         /** @var Event[] $events */
-        $events = EventUtility::mergeEvents($regularEvents, $recurrenceEvents);
+        $events = EventUtility::mergeAndOrderEvents($regularEvents, $recurrenceEvents);
         $identifiedMember = null;
         if ($GLOBALS['TSFE']->fe_user && $GLOBALS['TSFE']->fe_user->user['uid']) {
             $identifiedMember = $this->memberRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
