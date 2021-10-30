@@ -99,9 +99,21 @@
         <source>Show list</source>
         <target state="needs-translation">Show list</target>
       </trans-unit>
-      <trans-unit id="noEventAlert" resname="showList">
+      <trans-unit id="noEventAlert" resname="noEventAlert">
         <source>Currently there are no events available.</source>
         <target state="needs-translation">Currently there are no events available.</target>
+      </trans-unit>
+      <trans-unit id="resources" resname="resources">
+        <source>Resources</source>
+        <target state="needs-translation">Resources</target>
+      </trans-unit>
+      <trans-unit id="relations" resname="relations">
+        <source>Relations</source>
+        <target state="needs-translation">Relations</target>
+      </trans-unit>
+      <trans-unit id="recurrence" resname="recurrence">
+        <source>Recurrence</source>
+        <target state="needs-translation">Recurrence</target>
       </trans-unit>
       <trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event">
         <source>Event</source>
