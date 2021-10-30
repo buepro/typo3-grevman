@@ -199,8 +199,8 @@ class Event extends AbstractEntity
         foreach (['title', 'slug', 'teaser', 'description', 'price', 'link', 'program', 'location'] as $propertyName) {
             $child->{$propertyName} = $parent->{'get' . ucfirst($propertyName)}();
         }
-        $child->getImages()->addAll($parent->getImages());
-        $child->getFiles()->addAll($parent->getFiles());
+        self::cloneFilesProperty($parent, $child, 'getImages', 'addImage');
+        self::cloneFilesProperty($parent, $child, 'getFiles', 'addFile');
         $child->getMemberGroups()->addAll($parent->getMemberGroups());
 
         return $child;
@@ -222,6 +222,18 @@ class Event extends AbstractEntity
         $this->registrations = $this->registrations ?: new ObjectStorage();
         $this->notes = $this->notes ?: new ObjectStorage();
         $this->guests = $this->guests ?: new ObjectStorage();
+    }
+
+    private static function cloneFilesProperty(self $parent, self $child, string $getter, string $adder): void
+    {
+        /** @var FileReference $fileReference */
+        foreach ($parent->{$getter}() as $fileReference) {
+            $fileUid = $fileReference->getOriginalResource()->getOriginalFile()->getUid();
+            $originalImageReference = new \TYPO3\CMS\Core\Resource\FileReference(['uid_local' => $fileUid]);
+            $imageReference = new FileReference();
+            $imageReference->setOriginalResource($originalImageReference);
+            $child->{$adder}($imageReference);
+        }
     }
 
     /**
