@@ -225,12 +225,11 @@ class EventUtilityTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
         }
 
         // Test including dates
-        $testDate = $now + 86400;
         $datesEvent = clone $baseEvent;
         $datesEvent->setEnableRecurrence(true)
-            ->setRecurrenceDates(date($GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'], $testDate));
+            ->setRecurrenceDates(date($GLOBALS['TYPO3_CONF_VARS']['SYS']['ddmmyy'], time() + 86400));
         $expectedDatesEvent = clone $baseEvent;
-        $expectedDatesEvent->getStartdate()->setTimestamp($testDate);
+        $expectedDatesEvent->getStartdate()->add(new \DateInterval('P1D'));
 
         // Test exception dates
         $exDate = clone $baseEvent->getStartdate();
