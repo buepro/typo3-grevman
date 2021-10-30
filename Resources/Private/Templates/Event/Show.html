@@ -65,8 +65,8 @@
             </header>
             <f:render partial="Event/Registrations" arguments="{event: event, eventGroups: eventGroups, guests: event.guests}" />
         </section>
-        <section class="gemc-notes">
-            <f:if condition="{identifiedEventMember}">
+        <f:if condition="{identifiedEventMember}">
+            <section class="gemc-notes">
                 <header>
                     <h3>{f:translate(key: 'tx_grevman_domain_model_event.notes')}</h3>
                 </header>
@@ -83,7 +83,7 @@
                 <footer>
                     <a id="gem-create-note" class="btn btn-primary" href="javascript:void(0);">{f:translate(key: 'createNote')}</a>
                     <div id="gem-note" class="gem-note gem-zebra">
-                        <f:form name="noteDto" object="{noteDto}" action="addNote">
+                        <f:form name="noteDto" object="{noteDto}" action="addNote" arguments="{eventId: event.id}">
                             <div class="form-group">
                                 <f:form.textarea property="text" class="form-control" placeholder="{f:translate(key: 'message')}*" />
                             </div>
@@ -93,8 +93,8 @@
                         </f:form>
                     </div>
                 </footer>
-            </f:if>
-        </section>
+            </section>
+        </f:if>
         <footer>
             <f:link.action class="btn btn-primary" action="list">{f:translate(key: 'showList')}</f:link.action>
             <f:link.action class="btn btn-primary" action="showMatrix">{f:translate(key: 'showMatrix')}</f:link.action>
@@ -105,7 +105,7 @@
     <f:if condition="{identifiedEventMember.isLeader} && {identifiedEventMember.email}">
         <div id="gem-mail-message" class="gem-mail-message gem-zebra">
             <p class="gemc-hint">{f:translate(key: 'mailReceipientsHint')}</p>
-            <f:form name="mailDto" object="{mailDto}" action="sendMail">
+            <f:form name="mailDto" object="{mailDto}" action="sendMail" arguments="{eventId: event.id}">
                 <div class="form-group">
                     <f:form.textfield property="subject" class="form-control" placeholder="{f:translate(key: 'subject')}*" />
                 </div>

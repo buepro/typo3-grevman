@@ -18,13 +18,16 @@ use Buepro\Grevman\Domain\Model\Event;
 use Buepro\Grevman\Domain\Model\Group;
 use Buepro\Grevman\Domain\Model\Member;
 use Buepro\Grevman\Domain\Model\Registration;
+use Buepro\Grevman\Domain\Repository\EventRepository;
+use Buepro\Grevman\Domain\Repository\MemberRepository;
 use Buepro\Grevman\Utility\DtoUtility;
+use Buepro\Grevman\Utility\EventUtility;
 use Buepro\Grevman\Utility\MatrixUtility;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
@@ -40,46 +43,131 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
+    /**
+     * @var PersistenceManager
+     */
+    protected $persistenceManager;
 
     /**
      * eventRepository
      *
-     * @var \Buepro\Grevman\Domain\Repository\EventRepository
+     * @var EventRepository
      */
     protected $eventRepository = null;
 
     /**
      * memberRepository
      *
-     * @var \Buepro\Grevman\Domain\Repository\MemberRepository
+     * @var MemberRepository
      */
     protected $memberRepository = null;
 
+    public function injectPersistenceManager(PersistenceManager $persistenceManager): void
+    {
+        $this->persistenceManager = $persistenceManager;
+    }
+
     /**
-     * @param \Buepro\Grevman\Domain\Repository\EventRepository $eventRepository
+     * @param EventRepository $eventRepository
      */
-    public function injectEventRepository(
-        \Buepro\Grevman\Domain\Repository\EventRepository $eventRepository
-    ): void {
+    public function injectEventRepository(EventRepository $eventRepository): void
+    {
         $this->eventRepository = $eventRepository;
     }
 
     /**
-     * @param \Buepro\Grevman\Domain\Repository\MemberRepository $memberRepository
+     * @param MemberRepository $memberRepository
      */
-    public function injectMemberRepository(
-        \Buepro\Grevman\Domain\Repository\MemberRepository $memberRepository
-    ): void {
+    public function injectMemberRepository(MemberRepository $memberRepository): void
+    {
         $this->memberRepository = $memberRepository;
     }
 
     /**
+     * In case the request arguments contain the field `eventId` it will be used to define an event with the property
+     * mapper.
+     *
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException
+     */
+    public function initializeAction(): void
+    {
+        // Handle not persisted recurrence events
+        if (
+            $this->request->hasArgument('eventId') &&
+            is_string($eventId = $this->request->getArgument('eventId')) &&
+            ($parentUid = EventUtility::getParentUidFromId($eventId)) > 0
+        ) {
+            $arguments = $this->request->getArguments();
+            unset($arguments['eventId']);
+            /** @var Event $parentEvent */
+            $parentEvent = $this->eventRepository->findByUid($parentUid);
+            $child = Event::createChild($parentEvent, EventUtility::getStartdateFromId($eventId));
+            if ($child !== null) {
+                if (in_array($arguments['action'], ['register', 'unregister', 'addNote'], true)) {
+                    // The action requires the event to be persisted
+                    $this->eventRepository->add($child);
+                    $this->persistenceManager->persistAll();
+                    $actionArgumentMap = [
+                        'register' => ['event' => $child->getUid()],
+                        'unregister' => ['event' => $child->getUid()],
+                        'addNote' => ['noteDto' => ['event' => $child->getUid()]],
+                        'sendMail' => ['mailDto' => ['event' => $child->getUid()]],
+                    ];
+                    $arguments = array_replace_recursive($arguments, $actionArgumentMap[$arguments['action']]);
+                    $this->request->setArguments($arguments);
+                } else {
+                    // Provide the non persisted event
+                    if ($arguments['action'] === 'sendMail') {
+                        $arguments['mailDto']['event'] = EventUtility::getPropertyMappingArray($child);
+                        $this->request->setArguments($arguments);
+                        $configuration = $this->arguments['mailDto']->getPropertyMappingConfiguration();
+                        $configuration->forProperty('event')
+                            ->allowAllProperties()
+                            ->setTypeConverterOption(
+                                PersistentObjectConverter::class,
+                                (string) PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
+                                true
+                            );
+                    } else {
+                        $arguments['event'] = EventUtility::getPropertyMappingArray($child);
+                        $this->request->setArguments($arguments);
+                        $configuration = $this->arguments['event']->getPropertyMappingConfiguration();
+                    }
+                    $configuration
+                        ->allowAllProperties()
+                        ->setTypeConverterOption(
+                            PersistentObjectConverter::class,
+                            (string) PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
+                            true
+                        );
+                }
+            }
+        }
+        parent::initializeAction();
+    }
+
+    /**
+     * Gets the events and identified member and assignes them to the view.
+     *
+     * @return Event[]
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    private function listAndMatrixActionProcessing(): QueryResultInterface
+    private function listAndMatrixAction(): array
     {
-        /** @var QueryResultInterface $events */
-        $events = $this->eventRepository->findAll();
+        $displayDays = (int)$this->settings['event']['list']['displayDays'];
+        $displayDays = $displayDays > 0 ? $displayDays : 720;
+        /** @var Event[] $regularEvents */
+        $regularEvents = $this->eventRepository->findAll($displayDays)->toArray();
+        /** @var Event[] $recurrenceParentEvents */
+        $recurrenceParentEvents = $this->eventRepository->findByEnableRecurrence(1)->toArray();
+        /** @var Event[] $recurrenceEvents */
+        $recurrenceEvents = EventUtility::getEventRecurrences(
+            $recurrenceParentEvents,
+            $displayDays,
+            $this->settings['general']['timeZone'] ? new \DateTimeZone($this->settings['general']['timeZone']) : null
+        );
+        /** @var Event[] $events */
+        $events = EventUtility::mergeAndOrderEvents($regularEvents, $recurrenceEvents);
         $identifiedMember = null;
         if ($GLOBALS['TSFE']->fe_user && $GLOBALS['TSFE']->fe_user->user['uid']) {
             $identifiedMember = $this->memberRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
@@ -88,7 +176,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             'events' => $events,
             'identifiedMember' => $identifiedMember,
         ]);
-        return $events;
+        return $regularEvents;
     }
 
     /**
@@ -98,7 +186,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function listAction(): void
     {
-        $this->listAndMatrixActionProcessing();
+        $this->listAndMatrixAction();
     }
 
     /**
@@ -107,9 +195,9 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function showMatrixAction(): void
     {
-        $events = $this->listAndMatrixActionProcessing();
+        $events = $this->listAndMatrixAction();
         $this->view->assignMultiple([
-            'memberAxis' => MatrixUtility::getMemberAxis($events->toArray()),
+            'memberAxis' => MatrixUtility::getMemberAxis($events),
         ]);
     }
 
@@ -137,7 +225,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         Event $event,
         \Buepro\Grevman\Domain\Model\Member $member
     ): void {
-        $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
         $registration = $event->getRegistrationForMember($member);
         if (null === $registration) {
             /** @var Registration $registration */
@@ -152,8 +239,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             FlashMessage::INFO
         );
 
-        $persistenceManager->add($event);
-        $persistenceManager->persistAll();
+        $this->eventRepository->update($event);
+        $this->persistenceManager->persistAll();
         $this->redirect('show', null, null, ['event' => $event]);
     }
 
@@ -174,9 +261,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             '',
             FlashMessage::INFO
         );
-        $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
-        $persistenceManager->add($registration);
-        $persistenceManager->persistAll();
+        $this->eventRepository->update($event);
+        $this->persistenceManager->persistAll();
         $this->redirect('show', null, null, ['event' => $event]);
     }
 
@@ -206,7 +292,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             );
         }
 
-        $this->redirect('show', null, null, ['event' => $mailDto->getEvent()]);
+        if ((bool)$mailDto->getEvent()->getUid()) {
+            $this->redirect('show', null, null, ['event' => $mailDto->getEvent()]);
+        }
+        $this->redirect('show', null, null, ['eventId' => $mailDto->getEvent()->getId()]);
     }
 
     /**
@@ -216,9 +305,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function addNoteAction(Note $noteDto): void
     {
         $noteDto->getEvent()->addNote($noteDto->createNote());
-        $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
-        $persistenceManager->add($noteDto->getEvent());
-        $persistenceManager->persistAll();
+        $this->eventRepository->update($noteDto->getEvent());
+        $this->persistenceManager->persistAll();
         $this->addFlashMessage(
             \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('noteAdded', 'grevman') ?? 'Translation missing at 1634056465800',
             '',

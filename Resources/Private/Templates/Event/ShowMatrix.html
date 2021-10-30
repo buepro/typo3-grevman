@@ -35,9 +35,9 @@
         <f:if condition="{event}">
             <div class="gemc-wrap">
                 <div class="gemc-content">
-                    <f:link.action action="show" arguments="{event: event}">
+                    <gem:link.eventAction action="show" arguments="{event: event}">
                         {event.title}<br/>{f:render(partial: 'Format/Period', arguments: {startdate: event.startdate, enddate: event.enddate})}
-                    </f:link.action>
+                    </gem:link.eventAction>
                 </div>
             </div>
         </f:if>

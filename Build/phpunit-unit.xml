@@ -26,7 +26,7 @@
             <directory>../Tests/Unit</directory>
 <!--            <include>-->
 <!--                <file>-->
-<!--                    ../Tests/Unit/Domain/Model/EventTest.php-->
+<!--                    ../Tests/Unit/Utility/EventUtilityTest.php-->
 <!--                </file>-->
 <!--            </include>-->
         </testsuite>

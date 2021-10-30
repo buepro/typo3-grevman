@@ -5,7 +5,7 @@ languages:
     enabled: true
     languageId: 0
     base: /
-    typo3Language: en
+    typo3Language: default
     locale: en_GB.utf8
     iso-639-1: en
     navigationTitle: English
@@ -14,3 +14,4 @@ languages:
     flag: gb
     websiteTitle: ''
 rootPageId: 1
+websiteTitle: ''

@@ -15,7 +15,7 @@
                 <article class="gem-event-listitem gem-zebra gemc-regstate-{gem:registration(event: event, member: identifiedMember, property: 'state')}">
                     <div class="gemc-section gemc-facts">
                         <f:render partial="Event/Facts" arguments="{event: event}" />
-                        <f:link.action class="btn btn-sm btn-primary" action="show" arguments="{event : event}">Details</f:link.action>
+                        <gem:link.eventAction class="btn btn-sm btn-primary" action="show" arguments="{event : event}">Details</gem:link.eventAction>
                     </div>
                     <div class="gemc-section gemc-text">
                         <header>

@@ -24,6 +24,7 @@ plugin.tx_grevman_events {
   settings {
     general {
       leaderGroups = {$plugin.tx_grevman_events.settings.general.leaderGroups}
+      timeZone = {$plugin.tx_grevman_events.settings.general.timeZone}
     }
     event {
       detail {
@@ -34,6 +35,9 @@ plugin.tx_grevman_events {
       }
       registration {
         open = {$plugin.tx_grevman_events.settings.event.registration.open}
+      }
+      list {
+        displayDays = {$plugin.tx_grevman_events.settings.event.list.displayDays}
       }
     }
   }

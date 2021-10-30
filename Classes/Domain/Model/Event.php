@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Buepro\Grevman\Domain\Model;
 
+use Buepro\Grevman\Utility\EventUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -29,6 +30,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Event extends AbstractEntity
 {
+    use EventRecurrenceTrait;
 
     /**
      * title
@@ -154,9 +156,54 @@ class Event extends AbstractEntity
      */
     public function __construct()
     {
-
         // Do not remove the next line: It would break the functionality
         $this->initializeObject();
+    }
+
+    public function __clone()
+    {
+        parent::__clone();
+        $this->startdate = $this->startdate !== null ? clone $this->startdate : null;
+        $this->enddate = $this->enddate !== null ? clone $this->enddate : null;
+        $this->recurrenceEnddate = $this->recurrenceEnddate !== null ? clone $this->recurrenceEnddate : null;
+    }
+
+    public static function createChild(self $parent, ?\DateTime $occurrence = null): ?self
+    {
+        if (
+            $occurrence === null || $parent->getStartdate() === null ||
+            $parent->getStartdate()->getTimestamp() === $occurrence->getTimestamp()
+        ) {
+            return null;
+        }
+        $child = new self();
+
+        // ID properties
+        $child->parent = $parent;
+        $child->startdate = $occurrence;
+
+        // Duration (enddate)
+        if (
+            $parent->getStartdate() !== null &&
+            $parent->getEnddate() !== null &&
+            $child->getStartdate() !== null
+        ) {
+            $enddate = clone $child->getStartdate();
+            $enddate->setTimestamp($child->getStartdate()->getTimestamp());
+            $duration = $parent->getStartdate()->diff($parent->getEnddate());
+            $enddate->add($duration);
+            $child->setEnddate($enddate);
+        }
+
+        // Copy properties
+        foreach (['title', 'slug', 'teaser', 'description', 'price', 'link', 'program', 'location'] as $propertyName) {
+            $child->{$propertyName} = $parent->{'get' . ucfirst($propertyName)}();
+        }
+        self::cloneFilesProperty($parent, $child, 'getImages', 'addImage');
+        self::cloneFilesProperty($parent, $child, 'getFiles', 'addFile');
+        $child->getMemberGroups()->addAll($parent->getMemberGroups());
+
+        return $child;
     }
 
     /**
@@ -175,6 +222,18 @@ class Event extends AbstractEntity
         $this->registrations = $this->registrations ?: new ObjectStorage();
         $this->notes = $this->notes ?: new ObjectStorage();
         $this->guests = $this->guests ?: new ObjectStorage();
+    }
+
+    private static function cloneFilesProperty(self $parent, self $child, string $getter, string $adder): void
+    {
+        /** @var FileReference $fileReference */
+        foreach ($parent->{$getter}() as $fileReference) {
+            $fileUid = $fileReference->getOriginalResource()->getOriginalFile()->getUid();
+            $originalImageReference = new \TYPO3\CMS\Core\Resource\FileReference(['uid_local' => $fileUid]);
+            $imageReference = new FileReference();
+            $imageReference->setOriginalResource($originalImageReference);
+            $child->{$adder}($imageReference);
+        }
     }
 
     /**
@@ -630,5 +689,13 @@ class Event extends AbstractEntity
             }
         }
         return $result;
+    }
+
+    /**
+     * Returns a string to reconstruct the event.
+     */
+    public function getId(): string
+    {
+        return EventUtility::createId($this);
     }
 }
