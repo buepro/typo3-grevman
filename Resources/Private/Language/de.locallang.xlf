@@ -99,21 +99,21 @@
         <source>Show list</source>
         <target state="final">Liste anzeigen</target>
       </trans-unit>
-      <trans-unit id="noEventAlert" resname="noEventAlert">
+      <trans-unit id="noEventAlert" resname="noEventAlert" approved="yes">
         <source>Currently there are no events available.</source>
-        <target state="translated">Zur Zeit sind keine Ereignisse verfügbar.</target>
+        <target state="final">Zur Zeit sind keine Ereignisse verfügbar.</target>
       </trans-unit>
-      <trans-unit id="resources" resname="resources">
+      <trans-unit id="resources" resname="resources" approved="yes">
         <source>Resources</source>
-        <target state="translated">Ressourcen</target>
+        <target state="final">Ressourcen</target>
       </trans-unit>
-      <trans-unit id="relations" resname="relations">
+      <trans-unit id="relations" resname="relations" approved="yes">
         <source>Relations</source>
-        <target state="translated">Relationen</target>
+        <target state="final">Relationen</target>
       </trans-unit>
-      <trans-unit id="recurrence" resname="recurrence">
+      <trans-unit id="recurrence" resname="recurrence" approved="yes">
         <source>Recurrence</source>
-        <target state="translated">Wiederholung</target>
+        <target state="final">Wiederholung</target>
       </trans-unit>
       <trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event" approved="yes">
         <source>Event</source>
