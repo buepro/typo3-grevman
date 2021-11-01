@@ -1,10 +1,11 @@
 # Folders
-/Documentation export-ignore
+/Build export-ignore
 /Tests export-ignore
-/.github export-ignore
+
+# Hidden elements
+/.* export-ignore
 
 # Files
-/.* export-ignore
 /ExtensionBuilder.json export-ignore
 
 # Enforce checkout with linux lf consistent over all plattforms
