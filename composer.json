@@ -131,8 +131,8 @@
 		]
 	},
 	"support": {
-		"issues": "https://github.com/buepro/grevman/issues",
-		"source": "https://github.com/buepro/grevman",
+		"issues": "https://github.com/buepro/typo3-grevman/issues",
+		"source": "https://github.com/buepro/typo3-grevman",
 		"docs": "https://docs.typo3.org/p/buepro/typo3-grevman/master/en-us/"
 	}
 }
