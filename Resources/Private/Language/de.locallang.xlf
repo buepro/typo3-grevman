@@ -101,19 +101,19 @@
       </trans-unit>
       <trans-unit id="noEventAlert" resname="noEventAlert">
         <source>Currently there are no events available.</source>
-        <target state="needs-translation">Currently there are no events available.</target>
+        <target state="translated">Zur Zeit sind keine Ereignisse verfügbar.</target>
       </trans-unit>
       <trans-unit id="resources" resname="resources">
         <source>Resources</source>
-        <target state="needs-translation">Resources</target>
+        <target state="translated">Ressourcen</target>
       </trans-unit>
       <trans-unit id="relations" resname="relations">
         <source>Relations</source>
-        <target state="needs-translation">Relations</target>
+        <target state="translated">Relationen</target>
       </trans-unit>
       <trans-unit id="recurrence" resname="recurrence">
         <source>Recurrence</source>
-        <target state="needs-translation">Recurrence</target>
+        <target state="translated">Wiederholung</target>
       </trans-unit>
       <trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event" approved="yes">
         <source>Event</source>
