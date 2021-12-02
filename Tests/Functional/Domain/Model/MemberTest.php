@@ -25,7 +25,6 @@ class MemberTest extends FunctionalFrontendTestCase
     ];
 
     protected $testExtensionsToLoad = [
-        'typo3conf/ext/vhs',
         'typo3conf/ext/bootstrap_package',
         'typo3conf/ext/container',
         'typo3conf/ext/container_elements',
