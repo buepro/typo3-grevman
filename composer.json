@@ -19,7 +19,7 @@
 		}
 	],
 	"require": {
-		"php": ">=7.2.0",
+		"php": ">=7.3.0",
 		"buepro/typo3-auxlibs": "^1.4.0",
 		"typo3/cms-core": "^10.4 || ^11.5.1"
 	},
