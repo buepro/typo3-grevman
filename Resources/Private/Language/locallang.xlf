@@ -87,6 +87,9 @@
 			<trans-unit id="recurrence" resname="recurrence">
 				<source>Recurrence</source>
 			</trans-unit>
+			<trans-unit id="notAssigned" resname="notAssigned">
+				<source>Not assigned</source>
+			</trans-unit>
 
 			<trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event">
 				<source>Event</source>

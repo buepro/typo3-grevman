@@ -62,6 +62,10 @@ defined('TYPO3') or die('Access denied.');
                     'renderType' => 'selectSingle',
                     'foreign_table' => 'tx_grevman_domain_model_event',
                     'readOnly' => 1,
+                    'default' => 0,
+                    'items' => [
+                        ['LLL:EXT:grevman/Resources/Private/Language/locallang.xlf:notAssigned', 0],
+                    ],
                 ],
             ],
             'slug' => [
