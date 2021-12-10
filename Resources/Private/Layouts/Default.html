@@ -12,5 +12,7 @@
         </f:else>
     </f:if>
 </div>
+{f:asset.css(identifier: 'tx-grevman', href: settings.general.css) -> f:if(condition: settings.general.css)}
+{f:asset.script(identifier: 'tx-grevman-events', src: settings.general.js) -> f:if(condition: settings.general.js)}
 
 </f:spaceless></html>

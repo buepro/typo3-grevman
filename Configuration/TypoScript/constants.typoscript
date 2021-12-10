@@ -24,6 +24,10 @@ plugin.tx_grevman_events {
       leaderGroups = 4
       # cat=plugin.tx_grevman_events/210/020; type=string; label=Time zone:The time zone used to obtain event recurrences. Leave empty to use the php setting. Example value: Europe/Zurich
       timeZone =
+      # cat=plugin.tx_grevman_events/210/030; type=string; label=CSS file
+      css = EXT:grevman/Resources/Public/Css/theme.css
+      # cat=plugin.tx_grevman_events/210/040; type=string; label=Events JS file
+      js = EXT:grevman/Resources/Public/JavaScript/Src/events.js
     }
     event {
       detail {

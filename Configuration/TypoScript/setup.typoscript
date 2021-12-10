@@ -25,6 +25,8 @@ plugin.tx_grevman_events {
     general {
       leaderGroups = {$plugin.tx_grevman_events.settings.general.leaderGroups}
       timeZone = {$plugin.tx_grevman_events.settings.general.timeZone}
+      css = {$plugin.tx_grevman_events.settings.general.css}
+      js = {$plugin.tx_grevman_events.settings.general.js}
     }
     event {
       detail {
@@ -42,9 +44,4 @@ plugin.tx_grevman_events {
       }
     }
   }
-}
-
-page {
-  includeCSS.grevman = EXT:grevman/Resources/Public/Scss/theme.scss
-  includeJSFooter.grevman = EXT:grevman/Resources/Public/JavaScript/Src/grevman.js
 }
