@@ -156,8 +156,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         $displayDays = (int)$this->settings['event']['list']['displayDays'];
         $displayDays = $displayDays > 0 ? $displayDays : 720;
+        $startDate = new \DateTime(sprintf(
+            'midnight - %d day',
+            (int)($this->settings['event']['list']['startDatePastDays'] ?? 0)
+        ));
         /** @var Event[] $regularEvents */
-        $regularEvents = $this->eventRepository->findAll($displayDays)->toArray();
+        $regularEvents = $this->eventRepository->findAll($displayDays, $startDate)->toArray();
         /** @var Event[] $recurrenceParentEvents */
         $recurrenceParentEvents = $this->eventRepository->findByEnableRecurrence(1)->toArray();
         /** @var Event[] $recurrenceEvents */

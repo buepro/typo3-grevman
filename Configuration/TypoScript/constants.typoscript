@@ -41,6 +41,8 @@ plugin.tx_grevman_events {
       list {
         # cat=plugin.tx_grevman_events/510/010; type=int; label=Display days:Number of days events are displayed for.
         displayDays = 90
+        # cat=plugin.tx_grevman_events/510/010; type=int; label=Start date past days:The event list start date will be calculated by subtracting "past days" from the current day's midnight.
+        startDatePastDays = 1
       }
     }
   }

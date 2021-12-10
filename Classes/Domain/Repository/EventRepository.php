@@ -40,14 +40,15 @@ class EventRepository extends Repository
      * @return QueryResultInterface|array
      * @throws InvalidQueryException
      */
-    public function findAll(int $displayDays = 0)
+    public function findAll(int $displayDays = 0, \DateTime $startDate = null)
     {
+        $startDate = $startDate ?? new \DateTime('midnight');
         $query = $this->createQuery();
         $constraints = [];
-        $constraints[] = $query->greaterThanOrEqual('startdate', time());
+        $constraints[] = $query->greaterThanOrEqual('startdate', $startDate->getTimestamp());
         if ($displayDays > 0) {
-            $maxStartdate = time() + $displayDays * 86400;
-            $constraints[] = $query->lessThanOrEqual('startdate', $maxStartdate);
+            $maxStartDate = new \DateTime(sprintf('midnight + %d day', $displayDays));
+            $constraints[] = $query->lessThanOrEqual('startdate', $maxStartDate->getTimestamp());
         }
         $query->matching(
             $query->logicalAnd($constraints)
