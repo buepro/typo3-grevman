@@ -15,14 +15,13 @@ use Buepro\Grevman\Domain\Dto\EventMember;
 use Buepro\Grevman\Domain\Dto\Mail;
 use Buepro\Grevman\Domain\Dto\Note;
 use Buepro\Grevman\Domain\Model\Event;
-use Buepro\Grevman\Domain\Model\Group;
 use Buepro\Grevman\Domain\Model\Member;
 use Buepro\Grevman\Domain\Model\Registration;
 use Buepro\Grevman\Domain\Repository\EventRepository;
 use Buepro\Grevman\Domain\Repository\MemberRepository;
 use Buepro\Grevman\Utility\DtoUtility;
 use Buepro\Grevman\Utility\EventUtility;
-use Buepro\Grevman\Utility\MatrixUtility;
+use Buepro\Grevman\Utility\TableUtility;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -152,7 +151,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @return Event[]
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    private function listAndMatrixAction(): array
+    private function listAndTableAction(): array
     {
         $displayDays = (int)$this->settings['event']['list']['displayDays'];
         $displayDays = $displayDays > 0 ? $displayDays : 720;
@@ -190,18 +189,18 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function listAction(): void
     {
-        $this->listAndMatrixAction();
+        $this->listAndTableAction();
     }
 
     /**
-     * The matrix to be shown comprises of an event and a member axis where the member axis is grouped by the
+     * The table to be shown comprises of an event and a member axis where the member axis is grouped by the
      * member group.
      */
-    public function showMatrixAction(): void
+    public function tableAction(): void
     {
-        $events = $this->listAndMatrixAction();
+        $events = $this->listAndTableAction();
         $this->view->assignMultiple([
-            'memberAxis' => MatrixUtility::getMemberAxis($events),
+            'memberAxis' => TableUtility::getMemberAxis($events),
         ]);
     }
 

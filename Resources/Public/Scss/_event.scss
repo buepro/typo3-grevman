@@ -12,7 +12,7 @@
 //
 // List and detail
 //
-.gem-event-list, .gem-event-matrix, .gem-event-detail {
+.gem-event-list, .gem-event-table, .gem-event-detail {
     > section {
         margin-top: $gem-gutter-large;
         border-top: rgba(0, 0, 0, 0.2) 1px solid;
@@ -62,9 +62,9 @@
 }
 
 //
-// Event matrix
+// Event table
 //
-.gem-event-matrix {
+.gem-event-table {
     > section {
         display: flex;
     }

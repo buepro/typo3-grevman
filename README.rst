@@ -13,7 +13,7 @@ can easily be set up.
 Group members can register them self through the web site to participate on
 events.
 
-Events and their participants can be presented in a matrix where one can
+Events and their participants can be presented in a table where one can
 easily see who registered for an event.
 
 Members with a leading role might send notifications to event
@@ -22,11 +22,11 @@ participants by email.
 Screenshots
 ===========
 
-Matrix view
------------
+Table view
+----------
 
-.. figure:: Documentation/Images/MatrixView.jpg
-   :alt: Matrix view from events
+.. figure:: Documentation/Images/TableView.jpg
+   :alt: Table view from events
 
 List view
 ---------

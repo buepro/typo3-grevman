@@ -17,7 +17,7 @@ use Buepro\Grevman\Domain\Model\Guest;
 use Buepro\Grevman\Domain\Model\Member;
 use Buepro\Grevman\Domain\Model\Registration;
 
-class MatrixUtility
+class TableUtility
 {
     /**
      * Returns an array containing all event participants in the form:

@@ -69,8 +69,8 @@
 			<trans-unit id="noteAdded" resname="noteAdded">
 				<source>The note has been added.</source>
 			</trans-unit>
-			<trans-unit id="showMatrix" resname="showMatrix">
-				<source>Show matrix</source>
+			<trans-unit id="showTable" resname="showTable">
+				<source>Show table</source>
 			</trans-unit>
 			<trans-unit id="showList" resname="showList">
 				<source>Show list</source>

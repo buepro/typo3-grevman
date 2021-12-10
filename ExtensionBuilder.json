@@ -17,7 +17,7 @@
                     "_default4_edit_update": false,
                     "_default5_delete": false,
                     "customActions": [
-                        "showMatrix"
+                        "table"
                     ]
                 },
                 "name": "Event",
@@ -632,8 +632,8 @@
         "plugins": [
             {
                 "actions": {
-                    "controllerActionCombinations": "Event => list, show, showMatrix\nRegistration => new, create, edit, update",
-                    "noncacheableActions": "Event => list, show, showMatrix\nRegistration => new, create, edit, update"
+                    "controllerActionCombinations": "Event => list, detail, table\nRegistration => new, create, edit, update",
+                    "noncacheableActions": "Event => list, detail, table\nRegistration => new, create, edit, update"
                 },
                 "description": "Shows upcoming events with related registration information. Members might change their registration state and leaders can send notification emails.",
                 "key": "events",

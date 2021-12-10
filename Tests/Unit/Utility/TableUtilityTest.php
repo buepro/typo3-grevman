@@ -13,16 +13,16 @@ use Buepro\Grevman\Domain\Model\Event;
 use Buepro\Grevman\Domain\Model\Group;
 use Buepro\Grevman\Domain\Model\Member;
 use Buepro\Grevman\Domain\Model\Registration;
-use Buepro\Grevman\Utility\MatrixUtility;
+use Buepro\Grevman\Utility\TableUtility;
 
-class MatrixUtilityTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
+class TableUtilityTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
 {
     /**
      * @test
      */
     public function getMemberAxisReturnsCorrectArray(): void
     {
-        $result = MatrixUtility::getMemberAxis([]);
+        $result = TableUtility::getMemberAxis([]);
         $this->assertIsArray($result);
         $this->assertArrayHasKey('groups', $result);
         $this->assertArrayHasKey('spontaneousMembers', $result);
@@ -63,7 +63,7 @@ class MatrixUtilityTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
         $event1->addRegistration((new Registration())->setMember($members[2]));
         $event1->addRegistration((new Registration())->setMember($members[3]));
 
-        $result = MatrixUtility::getMemberAxis([$event1, $event2]);
+        $result = TableUtility::getMemberAxis([$event1, $event2]);
         $this->assertCount(1, $result['spontaneousMembers']);
         $this->assertEquals(3, array_values($result['spontaneousMembers'])[0]->getUid());
     }

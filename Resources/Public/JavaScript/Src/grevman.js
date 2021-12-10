@@ -18,12 +18,12 @@ $(function () {
     }
   }) ();
 
-  (function matrixView () {
+  (function tableView () {
     $('#gem-prev-event').click(function () {
-      $('.gem-event-matrix .gemc-col-event.gemc-hidden').last().removeClass('gemc-hidden');
+      $('.gem-event-table .gemc-col-event.gemc-hidden').last().removeClass('gemc-hidden');
     });
     $('#gem-next-event').click(function () {
-      $('.gem-event-matrix .gemc-col-event:not(.gemc-hidden)').first().addClass('gemc-hidden');
+      $('.gem-event-table .gemc-col-event:not(.gemc-hidden)').first().addClass('gemc-hidden');
     });
   }) ();
 });
