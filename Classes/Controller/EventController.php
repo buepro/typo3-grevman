@@ -146,15 +146,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     }
 
     /**
-     * Gets the events and identified member and assignes them to the view.
-     *
      * @return Event[]
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    private function listAndTableAction(): array
+    private function getListEvents(): array
     {
-        $displayDays = (int)$this->settings['event']['list']['displayDays'];
-        $displayDays = $displayDays > 0 ? $displayDays : 720;
+        $displayDays = (int)($this->settings['event']['list']['displayDays'] ?? 720);
         $startDate = new \DateTime(sprintf(
             'midnight - %d day',
             (int)($this->settings['event']['list']['startDatePastDays'] ?? 0)
@@ -163,23 +160,21 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $regularEvents = $this->eventRepository->findAll($displayDays, $startDate)->toArray();
         /** @var Event[] $recurrenceParentEvents */
         $recurrenceParentEvents = $this->eventRepository->findByEnableRecurrence(1)->toArray();
-        /** @var Event[] $recurrenceEvents */
         $recurrenceEvents = EventUtility::getEventRecurrences(
             $recurrenceParentEvents,
             $displayDays,
             $this->settings['general']['timeZone'] ? new \DateTimeZone($this->settings['general']['timeZone']) : null
         );
-        /** @var Event[] $events */
-        $events = EventUtility::mergeAndOrderEvents($regularEvents, $recurrenceEvents);
+        return EventUtility::mergeAndOrderEvents($regularEvents, $recurrenceEvents);
+    }
+
+    private function getIdentifiedMember(): ?object
+    {
         $identifiedMember = null;
         if ($GLOBALS['TSFE']->fe_user && $GLOBALS['TSFE']->fe_user->user['uid']) {
             $identifiedMember = $this->memberRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
         }
-        $this->view->assignMultiple([
-            'events' => $events,
-            'identifiedMember' => $identifiedMember,
-        ]);
-        return $regularEvents;
+        return $identifiedMember;
     }
 
     /**
@@ -189,7 +184,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function listAction(): void
     {
-        $this->listAndTableAction();
+        $this->view->assignMultiple([
+            'events' => $this->getListEvents(),
+            'identifiedMember' => $this->getIdentifiedMember(),
+        ]);
     }
 
     /**
@@ -198,8 +196,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function tableAction(): void
     {
-        $events = $this->listAndTableAction();
+        $events = $this->getListEvents();
         $this->view->assignMultiple([
+            'events' => $events,
+            'identifiedMember' => $this->getIdentifiedMember(),
             'memberAxis' => TableUtility::getMemberAxis($events),
         ]);
     }
@@ -237,7 +237,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
         $registration->setState(Registration::REGISTRATION_CONFIRMED);
         $this->addFlashMessage(
-            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('registerConfirmation', 'grevman') ?? 'Translation missing at 1634056035253',
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('registerConfirmation', 'grevman') ?? 'Translation missing at 1639137804',
             '',
             FlashMessage::INFO
         );
@@ -260,7 +260,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
         $registration->setState(Registration::REGISTRATION_CANCELED);
         $this->addFlashMessage(
-            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unregisterConfirmation', 'grevman') ?? 'Translation missing at 1634056367543',
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unregisterConfirmation', 'grevman') ?? 'Translation missing at 1639137847',
             '',
             FlashMessage::INFO
         );
@@ -283,13 +283,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $mail->text($mailDto->getMessage());
         if ($mail->send()) {
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailConfirmation', 'grevman') ?? 'Translation missing at 1634056431706',
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailConfirmation', 'grevman') ?? 'Translation missing at 1639137855',
                 '',
                 FlashMessage::INFO
             );
         } else {
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailError', 'grevman') ?? 'Translation missing at 1634056449875',
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailError', 'grevman') ?? 'Translation missing at 1639137860',
                 '',
                 FlashMessage::ERROR
             );
@@ -311,7 +311,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->eventRepository->update($noteDto->getEvent());
         $this->persistenceManager->persistAll();
         $this->addFlashMessage(
-            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('noteAdded', 'grevman') ?? 'Translation missing at 1634056465800',
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('noteAdded', 'grevman') ?? 'Translation missing at 1639137866',
             '',
             FlashMessage::INFO
         );
