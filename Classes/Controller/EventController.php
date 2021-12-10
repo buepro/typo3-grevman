@@ -206,11 +206,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     }
 
     /**
-     * action show
+     * action detail
      *
      * @param Event $event
      */
-    public function showAction(Event $event): void
+    public function detailAction(Event $event): void
     {
         $identifiedEventMember = null;
         if ($GLOBALS['TSFE']->fe_user && $GLOBALS['TSFE']->fe_user->user['uid']) {

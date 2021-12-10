@@ -34,7 +34,7 @@ TCEMAIN {
       }
       additionalGetParameters {
         tx_grevman_events {
-          action = show
+          action = detail
           controller = Event
         }
       }
