@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-  <file source-language="en" datatype="plaintext" original="EXT:grevman/Resources/Private/Language/locallang" date="2021-06-22T16:30:32Z" product-name="grevman" target-language="pt-BR">
+  <file source-language="en" datatype="plaintext" original="EXT:grevman/Resources/Private/Language/locallang" date="2021-06-22T16:30:32Z" product-name="grevman" target-language="pt-PT">
     <header/>
     <body>
       <trans-unit id="dateTimeFormat" resname="dateTimeFormat">
@@ -91,9 +91,9 @@
         <source>The note has been added.</source>
         <target state="needs-translation">The note has been added.</target>
       </trans-unit>
-      <trans-unit id="showMatrix" resname="showMatrix">
-        <source>Show matrix</source>
-        <target state="needs-translation">Show matrix</target>
+      <trans-unit id="showTable" resname="showTable">
+        <source>Show table</source>
+        <target state="needs-translation">Show table</target>
       </trans-unit>
       <trans-unit id="showList" resname="showList">
         <source>Show list</source>
@@ -114,6 +114,10 @@
       <trans-unit id="recurrence" resname="recurrence">
         <source>Recurrence</source>
         <target state="needs-translation">Recurrence</target>
+      </trans-unit>
+      <trans-unit id="notAssigned" resname="notAssigned">
+        <source>Not assigned</source>
+        <target state="needs-translation">Not assigned</target>
       </trans-unit>
       <trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event">
         <source>Event</source>
