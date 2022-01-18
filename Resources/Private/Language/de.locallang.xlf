@@ -91,9 +91,9 @@
         <source>The note has been added.</source>
         <target state="final">Die Notiz wurde hinzugefügt.</target>
       </trans-unit>
-      <trans-unit id="showMatrix" resname="showMatrix" approved="yes">
-        <source>Show matrix</source>
-        <target state="final">Matrix anzeigen</target>
+      <trans-unit id="showTable" resname="showTable">
+        <source>Show table</source>
+        <target state="needs-translation">Show table</target>
       </trans-unit>
       <trans-unit id="showList" resname="showList" approved="yes">
         <source>Show list</source>
@@ -114,6 +114,10 @@
       <trans-unit id="recurrence" resname="recurrence" approved="yes">
         <source>Recurrence</source>
         <target state="final">Wiederholung</target>
+      </trans-unit>
+      <trans-unit id="notAssigned" resname="notAssigned">
+        <source>Not assigned</source>
+        <target state="needs-translation">Not assigned</target>
       </trans-unit>
       <trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event" approved="yes">
         <source>Event</source>
