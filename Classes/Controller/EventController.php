@@ -244,7 +244,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         $this->eventRepository->update($event);
         $this->persistenceManager->persistAll();
-        $this->redirect('show', null, null, ['event' => $event]);
+        $this->redirect('detail', null, null, ['event' => $event]);
     }
 
     public function unregisterAction(
@@ -266,7 +266,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         );
         $this->eventRepository->update($event);
         $this->persistenceManager->persistAll();
-        $this->redirect('show', null, null, ['event' => $event]);
+        $this->redirect('detail', null, null, ['event' => $event]);
     }
 
     /**
@@ -296,9 +296,9 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
 
         if ((bool)$mailDto->getEvent()->getUid()) {
-            $this->redirect('show', null, null, ['event' => $mailDto->getEvent()]);
+            $this->redirect('detail', null, null, ['event' => $mailDto->getEvent()]);
         }
-        $this->redirect('show', null, null, ['eventId' => $mailDto->getEvent()->getId()]);
+        $this->redirect('detail', null, null, ['eventId' => $mailDto->getEvent()->getId()]);
     }
 
     /**
@@ -315,6 +315,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             '',
             FlashMessage::INFO
         );
-        $this->redirect('show', null, null, ['event' => $noteDto->getEvent()]);
+        $this->redirect('detail', null, null, ['event' => $noteDto->getEvent()]);
     }
 }
