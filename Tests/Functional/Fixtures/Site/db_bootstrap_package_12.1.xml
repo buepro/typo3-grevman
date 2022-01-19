@@ -991,6 +991,7 @@
                 sm: 0,
                 xs: 0</tx_pizpalue_image_aspect_ratio>
             <frame_layout>default</frame_layout>
+            <frame_options></frame_options>
         </tt_content>
     <tt_content>
             <uid>344</uid>
@@ -1123,6 +1124,7 @@
             <tx_pizpalue_subheader_class>none</tx_pizpalue_subheader_class>
             <tx_pizpalue_image_aspect_ratio>0</tx_pizpalue_image_aspect_ratio>
             <frame_layout>default</frame_layout>
+            <frame_options></frame_options>
         </tt_content>
     <pages>
             <uid>223</uid>
@@ -1365,6 +1367,7 @@
                 sm: 0,
                 xs: 0</tx_pizpalue_image_aspect_ratio>
             <frame_layout>default</frame_layout>
+            <frame_options></frame_options>
         </tt_content>
     <pages>
             <uid>224</uid>
@@ -2290,5 +2293,6 @@
                 sm: 0,
                 xs: 0</tx_pizpalue_image_aspect_ratio>
             <frame_layout>default</frame_layout>
+            <frame_options></frame_options>
         </tt_content>
 </dataset>
