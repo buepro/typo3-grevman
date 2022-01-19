@@ -12,6 +12,8 @@ defined('TYPO3') or die('Access denied.');
 (static function (): void {
     $config = [
         'ctrl' => [
+            'label_alt' => 'startdate',
+            'label_alt_force' => true,
             'iconfile' => 'EXT:grevman/Resources/Public/Icons/grevman-event.svg',
             'default_sortby' => 'enable_recurrence DESC, tstamp DESC',
         ],
