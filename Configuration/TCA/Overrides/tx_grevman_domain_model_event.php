@@ -14,7 +14,12 @@ defined('TYPO3') or die('Access denied.');
         'ctrl' => [
             'label_alt' => 'startdate',
             'label_alt_force' => true,
-            'iconfile' => 'EXT:grevman/Resources/Public/Icons/grevman-event.svg',
+            'iconfile' => 'grevman-event',
+            'typeicon_column' => 'enable_recurrence',
+            'typeicon_classes' => [
+                0 => 'grevman-event',
+                1 => 'grevman-event-repeat',
+            ],
             'default_sortby' => 'enable_recurrence DESC, tstamp DESC',
         ],
         'palettes' => [

@@ -45,6 +45,7 @@ defined('TYPO3') || die('Access denied.');
     $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
     $icons = [
         'grevman-event',
+        'grevman-event-repeat',
         'grevman-group',
         'grevman-guest',
         'grevman-note',
