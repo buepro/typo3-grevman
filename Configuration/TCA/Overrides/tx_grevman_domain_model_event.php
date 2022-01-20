@@ -96,10 +96,23 @@ defined('TYPO3') or die('Access denied.');
             ],
             'registrations' => [
                 'config' => [
-                    'appearance' => [
-                        'collapseAll' => 1,
-                        'expandSingle' => 1,
+                    'type' => 'group',
+                    'internal_type' => 'db',
+                    'allowed' => 'tx_grevman_domain_model_registration',
+                    'foreign_table' => 'tx_grevman_domain_model_registration',
+                    'foreign_field' => 'event',
+                    'fieldControl' => [
+                        'editPopup' => [
+                            'disabled' => false,
+                        ],
+                        'addRecord' => [
+                            'disabled' => false,
+                        ],
+                        'listModule' => [
+                            'disabled' => false,
+                        ],
                     ],
+                    'appearance' => [],
                 ],
             ],
             'notes' => [
