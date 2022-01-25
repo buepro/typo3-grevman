@@ -277,7 +277,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         /** @var MailMessage $mail */
         $mail = GeneralUtility::makeInstance(MailMessage::class);
-        $mail->from(new \Symfony\Component\Mime\Address($mailDto->getSender()->getEmail(), $mailDto->getSender()->getScreenName()));
+        $mail->from(new \Symfony\Component\Mime\Address($GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'], $mailDto->getSender()->getScreenName()));
+        $mail->replyTo(new \Symfony\Component\Mime\Address($mailDto->getSender()->getEmail(), $mailDto->getSender()->getScreenName()));
         $mail->to(...$mailDto->getReceivers());
         $mail->subject($mailDto->getSubject());
         $mail->text($mailDto->getMessage());
