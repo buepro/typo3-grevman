@@ -16,6 +16,7 @@ defined('TYPO3') or die('Access denied.');
             'label_alt' => 'event',
             'label_alt_force' => true,
             'iconfile' => 'EXT:grevman/Resources/Public/Icons/grevman-registration.svg',
+            'default_sortby' => 'tstamp DESC',
         ],
         'types' => [
             '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, state, event, member'],

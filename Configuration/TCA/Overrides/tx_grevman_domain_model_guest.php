@@ -13,6 +13,7 @@ defined('TYPO3') or die('Access denied.');
     $config = [
         'ctrl' => [
             'iconfile' => 'EXT:grevman/Resources/Public/Icons/grevman-guest.svg',
+            'default_sortby' => 'tstamp DESC',
         ],
     ];
 
