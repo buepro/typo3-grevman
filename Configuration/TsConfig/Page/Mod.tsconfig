@@ -1,0 +1,12 @@
+mod.web_list {
+  tableDisplayOrder {
+    tx_grevman_domain_model_registration {
+      before = tx_grevman_domain_model_group
+      after = tx_grevman_domain_model_event
+    }
+    tx_grevman_domain_model_note {
+      before = tx_grevman_domain_model_group, tx_grevman_domain_model_guest
+      after = tx_grevman_domain_model_registration
+    }
+  }
+}

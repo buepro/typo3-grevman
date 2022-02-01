@@ -42,6 +42,10 @@ defined('TYPO3') || die('Access denied.');
        }'
     );
 
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+        '@import "EXT:grevman/Configuration/TsConfig/Page/Mod.tsconfig"'
+    );
+
     $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
     $icons = [
         'grevman-event',
