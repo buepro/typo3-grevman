@@ -50,7 +50,9 @@ defined('TYPO3') || die('Access denied.');
         'grevman-guest',
         'grevman-note',
         'grevman-plugin-events',
-        'grevman-registration'
+        'grevman-registration',
+        'grevman-registration-undefined',
+        'grevman-registration-cancelled'
     ];
     foreach ($icons as $icon) {
         $iconRegistry->registerIcon(
