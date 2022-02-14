@@ -10,7 +10,7 @@
 }
 
 //
-// List and detail
+// List, table and detail
 //
 .gem-event-list, .gem-event-table, .gem-event-detail {
     > section {
@@ -21,6 +21,11 @@
     }
     > header > .gemc-control {
         margin-top: $gem-gutter-large;
+    }
+    .gemc-col-event {
+        .gemc-row-header {
+            text-align: center;
+        }
     }
 }
 

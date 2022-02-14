@@ -48,6 +48,9 @@
 .gem-event-list > header > .gemc-control, .gem-event-table > header > .gemc-control, .gem-event-detail > header > .gemc-control {
   margin-top: 1.5rem;
 }
+.gem-event-list .gemc-col-event .gemc-row-header, .gem-event-table .gemc-col-event .gemc-row-header, .gem-event-detail .gemc-col-event .gemc-row-header {
+  text-align: center;
+}
 
 .gem-event-listitem {
   position: relative;

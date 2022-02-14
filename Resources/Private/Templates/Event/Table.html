@@ -44,7 +44,10 @@
     </div>
     <f:for each="{memberAxis.groups}" as="group">
         <div class="gemc-group">
-            <div class="gemc-cell gemc-row-header">{group.name -> f:if(condition: renderAxis)}</div>
+            <div class="gemc-cell gemc-row-header"><f:if condition="{renderAxis}">
+                <f:then>{group.name -> f:if(condition: renderAxis)}</f:then>
+                <f:else>{f:render(partial: 'Event/Participation', arguments: {event: event, group: group})}</f:else>
+            </f:if></div>
             <f:for each="{group.members}" as="member">
                 <f:render section="MemberCell" arguments="{_all}" />
             </f:for>

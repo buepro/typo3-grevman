@@ -678,6 +678,8 @@ class Event extends AbstractEntity
     /**
      * Gets all registrations from members not belonging to an event group being assigned to this event. In other words
      * the members from the returned registrations might belong to other event groups used for other events.
+     *
+     * @return Registration[]
      */
     public function getSpontaneousRegistrations(): array
     {
@@ -689,6 +691,60 @@ class Event extends AbstractEntity
             }
         }
         return $result;
+    }
+
+    /**
+     * @return Registration[]
+     */
+    public function getConfirmedRegistrations(?Group $group = null): array
+    {
+        $candidates = [];
+        foreach ($this->getRegistrations() as $registration) {
+            /** @var Registration $registration */
+            if (
+                $registration->getMember() !== null &&
+                $registration->getState() === Registration::REGISTRATION_CONFIRMED
+            ) {
+                $candidates[$registration->getMember()->getUid()] = $registration;
+            }
+        }
+        $result = $candidates;
+        if ($group instanceof Group) {
+            $result = [];
+            foreach ($group->getMembers() as $member) {
+                /** @var Member $member */
+                if (isset($candidates[$member->getUid()])) {
+                    $result[$member->getUid()] = $candidates[$member->getUid()];
+                }
+            }
+        }
+        return array_values($result);
+    }
+
+    /**
+     * Involved members include members from an event group and members with a spontaneous registration for the event.
+     *
+     * @return Member[]
+     */
+    public function getInvolvedMembers(): array
+    {
+        $members = [];
+        /** @var Group $memberGroup */
+        foreach ($this->getMemberGroups() as $memberGroup) {
+            /** @var Member $member */
+            foreach ($memberGroup->getMembers() as $member) {
+                if (!isset($members[$member->getUid()])) {
+                    $members[$member->getUid()] = $member;
+                }
+            }
+        }
+        foreach ($this->getSpontaneousRegistrations() as $registration) {
+            $member = $registration->getMember();
+            if ($member instanceof Member && !isset($members[$member->getUid()])) {
+                $members[$member->getUid()] = $member;
+            }
+        }
+        return array_values($members);
     }
 
     /**

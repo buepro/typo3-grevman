@@ -4,5 +4,6 @@
     <f:if condition="{event.location}"><li class="nav-item">{event.location}</li></f:if>
     <f:if condition="{event.price}"><li class="nav-item">{f:render(partial: 'Format/Currency', arguments: {number: event.price})}</li></f:if>
     <f:if condition="{event.link}"><li class="nav-item"><f:link.typolink parameter="{event.link}">Link</f:link.typolink></li></f:if>
+    <li class="nav-item">{f:render(partial: 'Event/Participation', arguments: {event: event})}</li>
 </ul>
 </html>

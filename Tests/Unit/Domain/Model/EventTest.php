@@ -160,4 +160,76 @@ class EventTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
             }
         }
     }
+
+    public function getConfirmedRegistrationsTestDataProvider(): array
+    {
+        $event = new Event();
+        $group = new Group();
+        $event->addMemberGroup($group);
+
+        $memberProphecy1 = $this->prophesize(Member::class);
+        $memberProphecy1->getUid()->willReturn(1);
+        $member1 = $memberProphecy1->reveal();
+        $memberProphecy2 = $this->prophesize(Member::class);
+        $memberProphecy2->getUid()->willReturn(2);
+        $member2 = $memberProphecy2->reveal();
+        $memberProphecy3 = $this->prophesize(Member::class);
+        $memberProphecy3->getUid()->willReturn(3);
+        $member3 = $memberProphecy3->reveal();
+        $group->addMember($member1)->addMember($member2)->addMember($member3);
+        $registration1 = (new Registration())->setMember($member1)->setState(Registration::REGISTRATION_CONFIRMED);
+        $registration2 = (new Registration())->setMember($member2)->setState(Registration::REGISTRATION_CANCELED);
+        $registration3 = (new Registration())->setMember($member3);
+        $event->addRegistration($registration1)->addRegistration($registration2)->addRegistration($registration3);
+
+        $memberProphecy4 = $this->prophesize(Member::class);
+        $memberProphecy4->getUid()->willReturn(4);
+        $member4 = $memberProphecy4->reveal();
+        $memberProphecy5 = $this->prophesize(Member::class);
+        $memberProphecy5->getUid()->willReturn(5);
+        $member5 = $memberProphecy5->reveal();
+        $memberProphecy6 = $this->prophesize(Member::class);
+        $memberProphecy6->getUid()->willReturn(6);
+        $member6 = $memberProphecy6->reveal();
+        $registration4 = (new Registration())->setMember($member4)
+            ->setState(Registration::REGISTRATION_CONFIRMED);
+        $registration5 = (new Registration())->setMember($member5)
+            ->setState(Registration::REGISTRATION_CANCELED);
+        $registration6 = (new Registration())->setMember($member6);
+        $event->addRegistration($registration4)->addRegistration($registration5)->addRegistration($registration6);
+
+        $involvedMembers = [$member1, $member2, $member3, $member4, $member5, $member6];
+
+        return [
+            'registrations for event' => [$event, null, [$registration1, $registration4], $involvedMembers],
+            'registrations for group' => [$event, $group, [$registration1], $involvedMembers],
+        ];
+    }
+
+    /**
+     * @param Event $event
+     * @param Group|null $group
+     * @param Registration[] $expectedRegistrations
+     * @return void
+     * @test
+     * @dataProvider getConfirmedRegistrationsTestDataProvider
+     */
+    public function getConfirmedRegistrationsTest(Event $event, ?Group $group, array $expectedRegistrations): void
+    {
+        $this->assertSame($expectedRegistrations, $event->getConfirmedRegistrations($group));
+    }
+
+    /**
+     * @param Event $event
+     * @param Group|null $unused1
+     * @param Registration[] $unused2
+     * @param Member[] $expectedMembers
+     * @return void
+     * @test
+     * @dataProvider getConfirmedRegistrationsTestDataProvider
+     */
+    public function getInvolvedMembersTest(Event $event, ?Group $unused1, array $unused2, array $expectedMembers): void
+    {
+        $this->assertSame($expectedMembers, $event->getInvolvedMembers());
+    }
 }

@@ -24,11 +24,9 @@
     <testsuites>
         <testsuite name="buepro-grevman-unit-tests">
             <directory>../Tests/Unit</directory>
-<!--            <include>-->
-<!--                <file>-->
-<!--                    ../Tests/Unit/Utility/EventUtilityTest.php-->
-<!--                </file>-->
-<!--            </include>-->
+<!--            <file>-->
+<!--                ../Tests/Unit/Domain/Model/EventTest.php-->
+<!--            </file>-->
         </testsuite>
     </testsuites>
 </phpunit>

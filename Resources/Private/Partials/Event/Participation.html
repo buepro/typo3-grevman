@@ -1,0 +1,7 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:gem="http://typo3.org/ns/Buepro/Grevman/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+{gem:event.participation(event: event, group: group, as: '_participation')}
+{f:translate(key: 'participationHint') -> f:format.printf(arguments: _participation) -> f:variable(name: '_title')}
+<span title="{_title}">({_participation.confirmed}/{_participation.total})</span>
+</html>
