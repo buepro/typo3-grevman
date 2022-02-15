@@ -123,6 +123,10 @@
         <source>%s out of %d members join</source>
         <target state="needs-translation">%s out of %d members join</target>
       </trans-unit>
+      <trans-unit id="changeRegistration" resname="changeRegistration">
+        <source>Change your registration status</source>
+        <target state="needs-translation">Change your registration status</target>
+      </trans-unit>
       <trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event">
         <source>Event</source>
         <target state="needs-translation">Event</target>
