@@ -16,10 +16,10 @@
 // Grevman
 //
 .gem-zebra {
-    padding: $gem-gutter-medium;
-    background: $gem-zebra-dark;
+    padding: var(--gem-gutter-medium);
+    background: var(--gem-zebra-dark);
     &:nth-child(2n+1) {
-        background: $gem-zebra-bright;
+        background: var(--gem-zebra-bright);
     }
 }
 

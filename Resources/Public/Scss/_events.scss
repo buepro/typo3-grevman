@@ -2,11 +2,11 @@
 // Components
 //
 .gem-event-facts {
-    margin: 0 -$gem-gutter-small;
+    margin: 0 calc(-1 * var(--gem-gutter-small));
 }
 .gem-event-facts li {
     display: inline-block;
-    margin: 0 $gem-gutter-small;
+    margin: 0 var(--gem-gutter-small);
 }
 
 //
@@ -14,13 +14,13 @@
 //
 .gem-event-list, .gem-event-table, .gem-event-detail {
     > section {
-        margin-top: $gem-gutter-large;
+        margin-top: var(--gem-gutter-large);
         border-top: rgba(0, 0, 0, 0.2) 1px solid;
-        padding-top: $gem-gutter-large;
+        padding-top: var(--gem-gutter-large);
         overflow: hidden;
     }
     > header > .gemc-control {
-        margin-top: $gem-gutter-large;
+        margin-top: var(--gem-gutter-large);
     }
     .gemc-col-event {
         .gemc-row-header {
@@ -38,9 +38,9 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        margin-bottom: $gem-gutter-medium;
+        margin-bottom: var(--gem-gutter-medium);
         > a {
-            margin-left: $gem-gutter-medium;
+            margin-left: var(--gem-gutter-medium);
         }
     }
     &.gemc-regstate-6, &.gemc-regstate-9 {
@@ -49,19 +49,19 @@
             position: absolute;
             left: 0;
             top: 0;
-            border: $gem-gutter-medium transparent solid;
+            border: var(--gem-gutter-medium) transparent solid;
         }
     }
     &.gemc-regstate-6 {
         &:before {
-            border-top-color: $gem-registered;
-            border-left-color: $gem-registered;
+            border-top-color: var(--gem-registered-bright);
+            border-left-color: var(--gem-registered-bright);
         }
     }
     &.gemc-regstate-9 {
         &:before {
-            border-top-color: $gem-unregistered;
-            border-left-color: $gem-unregistered;
+            border-top-color: var(--gem-unregistered-bright);
+            border-left-color: var(--gem-unregistered-bright);
         }
     }
 }
@@ -75,32 +75,32 @@
     }
     .gem-event-wrap {
         display: flex;
-        width: calc(100% - #{$gem-y-axis-width});
+        width: calc(100% - var(--gem-y-axis-width));
         overflow-x: auto;
     }
     .gemc-cell {
         overflow: hidden;
-        width: $gem-cell-width;
-        height: $gem-cell-height;
-        line-height: $gem-cell-height;
-        padding: 0 $gem-cell-padding-x;
-        background: $gem-zebra-dark;
+        width: var(--gem-cell-width);
+        height: var(--gem-cell-height);
+        line-height: var(--gem-cell-height);
+        padding: 0 var(--gem-cell-padding-x);
+        background: var(--gem-zebra-dark);
         &.gemc-content {
             text-align: center;
         }
         &.gemc-regstate-6 {
-            background: darken($gem-registered, $gem-zebra-darken);
+            background: var(--gem-registered-dark);
         }
         &.gemc-regstate-9 {
-            background: darken($gem-unregistered, $gem-zebra-darken);
+            background: var(--gem-unregistered-dark);
         }
         &:nth-child(2n+1) {
-            background: $gem-zebra-bright;
+            background: var(--gem-zebra-bright);
             &.gemc-regstate-6 {
-                background: $gem-registered;
+                background: var(--gem-registered-bright);
             }
             &.gemc-regstate-9 {
-                background: $gem-unregistered;
+                background: var(--gem-unregistered-bright);
             }
         }
     }
@@ -112,27 +112,27 @@
     }
     .gemc-col-axis {
         .gemc-cell {
-            width: $gem-y-axis-width;
+            width: var(--gem-y-axis-width);
             word-break: break-all;
         }
     }
     .gemc-row-axis {
         position: relative;
-        height: $gem-x-axis-height;
+        height: var(--gem-x-axis-height);
         .gemc-wrap {
             position:absolute;
             left: 0;
             bottom: 0;
-            width: $gem-x-axis-height;
-            height: $gem-cell-width;
+            width: var(--gem-x-axis-height);
+            height: var(--gem-cell-width);
             display: flex;
             align-items: center;
             line-height: 1.2;
             transform: rotateZ(-90deg);
-            transform-origin: $gem-cell-width / 2;
+            transform-origin: calc(var(--gem-cell-width) / 2);
         }
         .gemc-content {
-            padding: 0 $gem-cell-padding-x;
+            padding: 0 var(--gem-cell-padding-x);
         }
     }
     .gemc-col-axis .gemc-row-axis {
@@ -141,8 +141,8 @@
         justify-content: center;
     }
     .gemc-cell.gemc-row-header {
-        background: $gem-row-header;
-        color: $gem-row-header-color;
+        background: var(--gem-row-header);
+        color: var(--gem-row-header-color);
     }
 
     .gemc-hidden {
@@ -161,22 +161,22 @@
 .gem-event-detail {
     > header {
         .btn {
-            margin-right: $gem-gutter-small;
+            margin-right: var(--gem-gutter-small);
         }
     }
     > footer {
-        margin-top: 1.5 * $gem-gutter-large;
+        margin-top: calc(1.5 * var(--gem-gutter-large));
         border-top: rgba(0,0,0,0.4) 1px solid;
-        padding-top: $gem-gutter-medium;
+        padding-top: var(--gem-gutter-medium);
         .btn {
-            margin-right: $gem-gutter-small;
+            margin-right: var(--gem-gutter-small);
         }
     }
     .gem-event-facts {
-        margin-bottom: $gem-gutter-medium;
+        margin-bottom: var(--gem-gutter-medium);
     }
     .gemc-images {
-        margin: #{$gem-gutter-medium} -#{$gem-gutter-small};
+        margin: var(--gem-gutter-medium) calc(-1 * var(--gem-gutter-small));
         img {
             max-width: 100%;
             height: auto;
@@ -185,47 +185,47 @@
     .gemc-image {
         display: flex;
         flex-direction: column;
-        margin: $gem-gutter-small;
+        margin: var(--gem-gutter-small);
     }
     .gemc-files {
-        margin: $gem-gutter-medium 0;
+        margin: var(--gem-gutter-medium) 0;
     }
     .gemc-group {
-        margin: $gem-gutter-medium 0;
+        margin: var(--gem-gutter-medium) 0;
     }
     .gemc-participants {
         display: flex;
         flex-wrap: wrap;
-        margin: -$gem-participant-gutter;
+        margin: calc(-1 * var(--gem-participant-gutter));
     }
     .gemc-participant {
         background: lightgrey;
         padding: 0.5rem 1rem;
-        margin: $gem-participant-gutter;
+        margin: var(--gem-participant-gutter);
         &.gemc-regstate-6 {
-            background: $gem-registered;
+            background: var(--gem-registered-bright);
         }
         &.gemc-regstate-9 {
-            background: $gem-unregistered;
+            background: var(--gem-unregistered-bright);
         }
     }
     .gemc-notes {
         footer {
-            margin-top: $gem-gutter-medium;
+            margin-top: var(--gem-gutter-medium);
         }
     }
     @media (min-width: 768px) {
         .gemc-images {
             float: right;
             max-width: 50%;
-            margin: 0 -$gem-gutter-small $gem-gutter-small $gem-gutter-small;
+            margin: 0 calc(-1 * var(--gem-gutter-small)) var(--gem-gutter-small) var(--gem-gutter-small);
         }
     }
 }
 
 .gem-mail-message, .gem-note {
     display: none;
-    margin-top: $gem-gutter-large;
+    margin-top: var(--gem-gutter-large);
     &.gemc-show {
         display: block;
     }

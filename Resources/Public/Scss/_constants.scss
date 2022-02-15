@@ -1,20 +1,31 @@
 $gem-zebra-darken: 7%;
 $gem-zebra-bright: #f0f0f0;
 $gem-zebra-dark: darken($gem-zebra-bright, $gem-zebra-darken);
-$gem-registered: lightgreen;
-$gem-unregistered: lightpink;
-$gem-gutter-small: 0.5rem;
-$gem-gutter-medium: 1rem;
-$gem-gutter-large: 1.5rem;
-$gem-participant-gutter: 0.3rem;
+$gem-registered-bright: lightgreen;
+$gem-unregistered-bright: lightpink;
+$gem-registered-dark: darken($gem-registered-bright, $gem-zebra-darken);
+$gem-unregistered-dark: darken($gem-unregistered-bright, $gem-zebra-darken);
 
-//
-// Used in event table view
-//
-$gem-row-header: #666;
-$gem-row-header-color: white;
-$gem-cell-padding-x: 0.5rem;
-$gem-cell-width: 5rem;
-$gem-cell-height: 2rem;
-$gem-x-axis-height: 10rem;
-$gem-y-axis-width: 12rem;
+.tx-grevman {
+    --gem-zebra-bright: #{$gem-zebra-bright};
+    --gem-zebra-dark: #{$gem-zebra-dark};
+    --gem-registered-bright: #{$gem-registered-bright};
+    --gem-unregistered-bright: #{$gem-unregistered-bright};
+    --gem-registered-dark: #{$gem-registered-dark};
+    --gem-unregistered-dark: #{$gem-unregistered-dark};
+    --gem-gutter-small: 0.5rem;
+    --gem-gutter-medium: 1rem;
+    --gem-gutter-large: 1.5rem;
+    --gem-participant-gutter: 0.3rem;
+
+    //
+    // Used in event table view
+    //
+    --gem-row-header: #666;
+    --gem-row-header-color: white;
+    --gem-cell-padding-x: 0.5rem;
+    --gem-cell-width: 5rem;
+    --gem-cell-height: 2rem;
+    --gem-x-axis-height: 10rem;
+    --gem-y-axis-width: 12rem;
+}
