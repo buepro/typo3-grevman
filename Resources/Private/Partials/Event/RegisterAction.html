@@ -8,20 +8,20 @@
         <f:if condition="{_identifiedEventMember.registered}">
             <f:then>
                 <gem:link.eventAction
-                    class="btn btn-warning gemc-unregister"
+                    class="btn btn-danger gemc-unregister"
                     action="unregister"
                     arguments="{event: event, member: member}"
                 >{f:translate(key: 'unregister')}</gem:link.eventAction>
             </f:then>
             <f:else>
                 <gem:link.eventAction
-                    class="btn btn-primary gemc-register"
+                    class="btn btn-success gemc-register"
                     action="register"
                     arguments="{event: event, member: member}"
                 >{f:translate(key: 'i_join')}</gem:link.eventAction>
                 <f:if condition="!{_identifiedEventMember.registrationState}">
                     <gem:link.eventAction
-                        class="btn btn-warning gemc-unregister"
+                        class="btn btn-danger gemc-unregister"
                         action="unregister"
                         arguments="{event: event, member: member}"
                     >{f:translate(key: 'unregister')}</gem:link.eventAction>

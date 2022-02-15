@@ -1,16 +1,14 @@
 @charset "UTF-8";
 .tx-grevman {
-  --gem-zebra-bright: #f0f0f0;
-  --gem-zebra-dark: #dedede;
-  --gem-registered-bright: lightgreen;
-  --gem-unregistered-bright: lightpink;
-  --gem-registered-dark: #71e971;
-  --gem-unregistered-dark: #ff92a3;
+  --gem-darken-alpha: 0.08;
+  --gem-zebra: var(--bs-gray-200, #f0f0f0);
+  --gem-registered: var(--bs-success, #5cb85c);
+  --gem-unregistered: var(--bs-danger, #d9534f);
   --gem-gutter-small: 0.5rem;
   --gem-gutter-medium: 1rem;
   --gem-gutter-large: 1.5rem;
   --gem-participant-gutter: 0.3rem;
-  --gem-row-header: #666;
+  --gem-row-header: var(--bs-gray-600, #6c6c6c);
   --gem-row-header-color: white;
   --gem-cell-padding-x: 0.5rem;
   --gem-cell-width: 5rem;
@@ -44,10 +42,10 @@
 
 .gem-zebra {
   padding: var(--gem-gutter-medium);
-  background: var(--gem-zebra-dark);
+  background: var(--gem-zebra) linear-gradient(rgba(0, 0, 0, var(--gem-darken-alpha)), rgba(0, 0, 0, var(--gem-darken-alpha)));
 }
 .gem-zebra:nth-child(2n+1) {
-  background: var(--gem-zebra-bright);
+  background: var(--gem-zebra);
 }
 
 .gem-event-facts {
@@ -92,12 +90,12 @@
   border: var(--gem-gutter-medium) transparent solid;
 }
 .gem-event-listitem.gemc-regstate-6:before {
-  border-top-color: var(--gem-registered-bright);
-  border-left-color: var(--gem-registered-bright);
+  border-top-color: var(--gem-registered);
+  border-left-color: var(--gem-registered);
 }
 .gem-event-listitem.gemc-regstate-9:before {
-  border-top-color: var(--gem-unregistered-bright);
-  border-left-color: var(--gem-unregistered-bright);
+  border-top-color: var(--gem-unregistered);
+  border-left-color: var(--gem-unregistered);
 }
 
 .gem-event-table > section {
@@ -114,25 +112,25 @@
   height: var(--gem-cell-height);
   line-height: var(--gem-cell-height);
   padding: 0 var(--gem-cell-padding-x);
-  background: var(--gem-zebra-dark);
+  background: var(--gem-zebra) linear-gradient(rgba(0, 0, 0, var(--gem-darken-alpha)), rgba(0, 0, 0, var(--gem-darken-alpha)));
 }
 .gem-event-table .gemc-cell.gemc-content {
   text-align: center;
 }
 .gem-event-table .gemc-cell.gemc-regstate-6 {
-  background: var(--gem-registered-dark);
+  background: var(--gem-registered) linear-gradient(rgba(0, 0, 0, var(--gem-darken-alpha)), rgba(0, 0, 0, var(--gem-darken-alpha)));
 }
 .gem-event-table .gemc-cell.gemc-regstate-9 {
-  background: var(--gem-unregistered-dark);
+  background: var(--gem-unregistered) linear-gradient(rgba(0, 0, 0, var(--gem-darken-alpha)), rgba(0, 0, 0, var(--gem-darken-alpha)));
 }
 .gem-event-table .gemc-cell:nth-child(2n+1) {
-  background: var(--gem-zebra-bright);
+  background: var(--gem-zebra);
 }
 .gem-event-table .gemc-cell:nth-child(2n+1).gemc-regstate-6 {
-  background: var(--gem-registered-bright);
+  background: var(--gem-registered);
 }
 .gem-event-table .gemc-cell:nth-child(2n+1).gemc-regstate-9 {
-  background: var(--gem-unregistered-bright);
+  background: var(--gem-unregistered);
 }
 .gem-event-table .gemc-col {
   border: gray 1px solid;
@@ -222,10 +220,10 @@
   margin: var(--gem-participant-gutter);
 }
 .gem-event-detail .gemc-participant.gemc-regstate-6 {
-  background: var(--gem-registered-bright);
+  background: var(--gem-registered);
 }
 .gem-event-detail .gemc-participant.gemc-regstate-9 {
-  background: var(--gem-unregistered-bright);
+  background: var(--gem-unregistered);
 }
 .gem-event-detail .gemc-notes footer {
   margin-top: var(--gem-gutter-medium);

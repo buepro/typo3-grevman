@@ -17,9 +17,9 @@
 //
 .gem-zebra {
     padding: var(--gem-gutter-medium);
-    background: var(--gem-zebra-dark);
+    background: var(--gem-zebra) $gem-linear-gradient-darken;
     &:nth-child(2n+1) {
-        background: var(--gem-zebra-bright);
+        background: var(--gem-zebra);
     }
 }
 

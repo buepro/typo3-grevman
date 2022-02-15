@@ -54,14 +54,14 @@
     }
     &.gemc-regstate-6 {
         &:before {
-            border-top-color: var(--gem-registered-bright);
-            border-left-color: var(--gem-registered-bright);
+            border-top-color: var(--gem-registered);
+            border-left-color: var(--gem-registered);
         }
     }
     &.gemc-regstate-9 {
         &:before {
-            border-top-color: var(--gem-unregistered-bright);
-            border-left-color: var(--gem-unregistered-bright);
+            border-top-color: var(--gem-unregistered);
+            border-left-color: var(--gem-unregistered);
         }
     }
 }
@@ -84,23 +84,23 @@
         height: var(--gem-cell-height);
         line-height: var(--gem-cell-height);
         padding: 0 var(--gem-cell-padding-x);
-        background: var(--gem-zebra-dark);
+        background: var(--gem-zebra) $gem-linear-gradient-darken;
         &.gemc-content {
             text-align: center;
         }
         &.gemc-regstate-6 {
-            background: var(--gem-registered-dark);
+            background: var(--gem-registered) $gem-linear-gradient-darken;
         }
         &.gemc-regstate-9 {
-            background: var(--gem-unregistered-dark);
+            background: var(--gem-unregistered) $gem-linear-gradient-darken;
         }
         &:nth-child(2n+1) {
-            background: var(--gem-zebra-bright);
+            background: var(--gem-zebra);
             &.gemc-regstate-6 {
-                background: var(--gem-registered-bright);
+                background: var(--gem-registered);
             }
             &.gemc-regstate-9 {
-                background: var(--gem-unregistered-bright);
+                background: var(--gem-unregistered);
             }
         }
     }
@@ -203,10 +203,10 @@
         padding: 0.5rem 1rem;
         margin: var(--gem-participant-gutter);
         &.gemc-regstate-6 {
-            background: var(--gem-registered-bright);
+            background: var(--gem-registered);
         }
         &.gemc-regstate-9 {
-            background: var(--gem-unregistered-bright);
+            background: var(--gem-unregistered);
         }
     }
     .gemc-notes {
