@@ -73,6 +73,11 @@
     > section {
         display: flex;
     }
+    .gem-event-wrap {
+        display: flex;
+        width: calc(100% - #{$gem-y-axis-width});
+        overflow-x: auto;
+    }
     .gemc-cell {
         overflow: hidden;
         width: $gem-cell-width;

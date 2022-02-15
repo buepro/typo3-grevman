@@ -83,6 +83,11 @@
 .gem-event-table > section {
   display: flex;
 }
+.gem-event-table .gem-event-wrap {
+  display: flex;
+  width: calc(100% - 12rem);
+  overflow-x: auto;
+}
 .gem-event-table .gemc-cell {
   overflow: hidden;
   width: 5rem;

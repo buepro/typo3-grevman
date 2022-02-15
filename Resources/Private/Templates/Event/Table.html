@@ -14,11 +14,13 @@
             <div class="gemc-col gemc-col-axis">
                 <f:render section="EventColumn" arguments="{memberAxis: memberAxis}" />
             </div>
-            <f:for each="{events}" as="event">
-                <div class="gemc-col gemc-col-event">
-                    <f:render section="EventColumn" arguments="{memberAxis: memberAxis, event: event}" />
-                </div>
-            </f:for>
+            <div class="gem-event-wrap">
+                <f:for each="{events}" as="event">
+                    <div class="gemc-col gemc-col-event">
+                        <f:render section="EventColumn" arguments="{memberAxis: memberAxis, event: event}" />
+                    </div>
+                </f:for>
+            </div>
         </section>
     </div>
 </f:section>
