@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Buepro\Grevman\Controller;
 
-use Buepro\Grevman\Domain\Dto\EventMember;
 use Buepro\Grevman\Domain\Dto\Mail;
 use Buepro\Grevman\Domain\Dto\Note;
 use Buepro\Grevman\Domain\Model\Event;
@@ -168,15 +167,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         return EventUtility::mergeAndOrderEvents($regularEvents, $recurrenceEvents);
     }
 
-    private function getIdentifiedMember(): ?object
-    {
-        $identifiedMember = null;
-        if ($GLOBALS['TSFE']->fe_user && $GLOBALS['TSFE']->fe_user->user['uid']) {
-            $identifiedMember = $this->memberRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
-        }
-        return $identifiedMember;
-    }
-
     /**
      * action list
      *
@@ -186,7 +176,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         $this->view->assignMultiple([
             'events' => $this->getListEvents(),
-            'identifiedMember' => $this->getIdentifiedMember(),
+            'identifiedMember' => $this->memberRepository->getIdentified(),
         ]);
     }
 
@@ -199,7 +189,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $events = $this->getListEvents();
         $this->view->assignMultiple([
             'events' => $events,
-            'identifiedMember' => $this->getIdentifiedMember(),
+            'identifiedMember' => $this->memberRepository->getIdentified(),
             'memberAxis' => TableUtility::getMemberAxis($events),
         ]);
     }
@@ -211,16 +201,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function detailAction(Event $event): void
     {
-        $identifiedEventMember = null;
-        if ($GLOBALS['TSFE']->fe_user && $GLOBALS['TSFE']->fe_user->user['uid']) {
-            /** @var Member $member */
-            $member = $this->memberRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
-            $identifiedEventMember = new EventMember($event, $member);
-        }
         $this->view->assignMultiple([
             'event' => $event,
             'eventGroups' => DtoUtility::getEventGroups($event),
-            'identifiedEventMember' =>  $identifiedEventMember,
+            'identifiedMember' =>  $this->memberRepository->getIdentified(),
         ]);
     }
 

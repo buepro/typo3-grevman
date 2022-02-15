@@ -34,14 +34,14 @@
 //
 .gem-event-listitem {
     position: relative;
-    .gemc-facts {
+    .gemc-header {
         display: flex;
         align-items: center;
         justify-content: flex-end;
         margin-bottom: var(--gem-gutter-medium);
-        > a {
-            margin-left: var(--gem-gutter-medium);
-        }
+    }
+    .gemc-action {
+        margin: 0 calc(2 * var(--gem-gutter-small));
     }
     &.gemc-regstate-6, &.gemc-regstate-9 {
         &:before {

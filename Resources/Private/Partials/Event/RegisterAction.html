@@ -2,24 +2,33 @@
       xmlns:gem="http://typo3.org/ns/Buepro/Grevman/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<f:if condition="{identifiedEventMember} && ({identifiedEventMember.eventGroupMember} || {settings.event.registration.open})">
-    <f:if condition="{identifiedEventMember.registered}">
-        <f:then>
-            <gem:link.eventAction class="btn btn-warning" action="unregister" arguments="{event: identifiedEventMember.event, member: identifiedEventMember.member}">
-                {f:translate(key: 'unregister')}
-            </gem:link.eventAction>
-        </f:then>
-        <f:else>
-            <gem:link.eventAction class="btn btn-primary" action="register" arguments="{event: identifiedEventMember.event, member: identifiedEventMember.member}">
-                {f:translate(key: 'i_join')}
-            </gem:link.eventAction>
-            <f:if condition="!{identifiedEventMember.registrationState}">
-                <gem:link.eventAction class="btn btn-warning" action="unregister" arguments="{event: identifiedEventMember.event, member: identifiedEventMember.member}">
-                    {f:translate(key: 'unregister')}
-                </gem:link.eventAction>
-            </f:if>
-        </f:else>
-    </f:if>
+{gem:get.eventMember(event: event, member: member, as: '_identifiedEventMember')}
+<f:if condition="{_identifiedEventMember} && ({_identifiedEventMember.eventGroupMember} || {settings.event.registration.open})">
+    <div class="btn-group gemc-action{f:if(condition: 'btnGroupClass', then: ' {btnGroupClass}')}" role="group" aria-label="{f:translate(key: 'changeRegistration')}">
+        <f:if condition="{_identifiedEventMember.registered}">
+            <f:then>
+                <gem:link.eventAction
+                    class="btn btn-warning gemc-unregister"
+                    action="unregister"
+                    arguments="{event: event, member: member}"
+                >{f:translate(key: 'unregister')}</gem:link.eventAction>
+            </f:then>
+            <f:else>
+                <gem:link.eventAction
+                    class="btn btn-primary gemc-register"
+                    action="register"
+                    arguments="{event: event, member: member}"
+                >{f:translate(key: 'i_join')}</gem:link.eventAction>
+                <f:if condition="!{_identifiedEventMember.registrationState}">
+                    <gem:link.eventAction
+                        class="btn btn-warning gemc-unregister"
+                        action="unregister"
+                        arguments="{event: event, member: member}"
+                    >{f:translate(key: 'unregister')}</gem:link.eventAction>
+                </f:if>
+            </f:else>
+        </f:if>
+    </div>
 </f:if>
 
 </html>
