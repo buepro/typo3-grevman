@@ -7,7 +7,7 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Buepro\Grevman\Tests\Functional\ViewHelpers;
+namespace Buepro\Grevman\Tests\Functional\ViewHelpers\Event;
 
 use Buepro\Grevman\Domain\Model\Event;
 use Buepro\Grevman\Domain\Model\Member;
