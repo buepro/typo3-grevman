@@ -36,23 +36,18 @@ jobs:
           tools: composer:v2
       - name: Install
         run: |
-          composer require typo3/cms-core:${{ matrix.typo3 }} --no-progress
+          composer require typo3/cms-core:${{ matrix.typo3 }} --no-update
+          composer u --no-progress
           git checkout composer.json
-      - name: Lint
+      - name: Static tests
         run: |
-          composer test:php:lint
-      - name: CGL
+          composer ci:static
+      - name: Unit tests
         run: |
-          composer cgl:ci
-      - name: PHPStan
+          composer ci:tests:unit
+      - name: Functional tests
         run: |
-          composer phpstan -- --error-format=github
-      - name: Unit Tests
-        run: |
-          composer test:php:unit
-      - name: Functional Tests
-        run: |
-          composer test:php:functional
+          composer ci:test:functional
         env:
           COMPOSER_PROCESS_TIMEOUT: 1200
           typo3DatabaseHost: 127.0.0.1
