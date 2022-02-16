@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Buepro\Grevman\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -32,6 +33,7 @@ class Note extends AbstractEntity
      * text
      *
      * @var string
+     * @Extbase\Validate("NotEmpty")
      */
     protected $text = '';
 

@@ -13,6 +13,7 @@ parameters:
 	ignoreErrors:
 	- "#^Variable method call on [\\w\\\\]+.$#"
 	- "#^Variable property access on [\\w\\\\]+.$#"
+	- "#^Parameter \\#1 \\$messageBody of method TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Controller\\\\ActionController::addFlashMessage\\(\\) expects string, string\\|null given\\.$#"
 
 	paths:
 	- %currentWorkingDirectory%/Classes/

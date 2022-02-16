@@ -14,11 +14,13 @@ defined('TYPO3') || die('Access denied.');
         'Grevman',
         'Events',
         [
-            \Buepro\Grevman\Controller\EventController::class => 'table, list, detail, register, unregister, sendMail, addNote',
+            \Buepro\Grevman\Controller\EventController::class => 'table, list, detail, register, unregister, sendMail',
+            \Buepro\Grevman\Controller\NoteController::class => 'add, delete, edit, update',
         ],
         // non-cacheable actions
         [
-            \Buepro\Grevman\Controller\EventController::class => 'register, unregister, sendMail, addNote',
+            \Buepro\Grevman\Controller\EventController::class => 'register, unregister, sendMail',
+            \Buepro\Grevman\Controller\NoteController::class => 'add, delete, edit, update',
         ]
     );
 

@@ -1,20 +1,3 @@
-//
-// TYPO3 classes
-//
-.typo3-messages {
-    list-style: none;
-    padding: 0;
-    p:last-child {
-        margin-bottom: 0;
-    }
-}
-.f3-form-error {
-    box-shadow: red 0 0 4px 0;
-}
-
-//
-// Grevman
-//
 .gem-zebra {
     padding: var(--gem-gutter-medium);
     background: var(--gem-zebra) $gem-linear-gradient-darken;
@@ -22,4 +5,16 @@
         background: var(--gem-zebra);
     }
 }
-
+.gem-icon-edit:after {
+    content: '✎';
+}
+.gem-icon-delete:after {
+    content: '✕';
+}
+.tx-grevman {
+    footer {
+        .btn {
+            margin-right: var(--gem-gutter-small);
+        }
+    }
+}

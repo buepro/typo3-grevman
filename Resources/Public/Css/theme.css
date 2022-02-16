@@ -29,6 +29,7 @@
   }
 }
 .typo3-messages {
+  margin-bottom: calc(2 * var(--gem-gutter-medium));
   list-style: none;
   padding: 0;
 }
@@ -48,6 +49,18 @@
   background: var(--gem-zebra);
 }
 
+.gem-icon-edit:after {
+  content: "✎";
+}
+
+.gem-icon-delete:after {
+  content: "✕";
+}
+
+.tx-grevman footer .btn {
+  margin-right: var(--gem-gutter-small);
+}
+
 .gem-event-facts {
   margin: 0 calc(-1 * var(--gem-gutter-small));
 }
@@ -55,10 +68,6 @@
 .gem-event-facts li {
   display: inline-block;
   margin: 0 var(--gem-gutter-small);
-}
-
-.tx-grevman footer .btn {
-  margin-right: var(--gem-gutter-small);
 }
 
 .gem-event-list > section, .gem-event-table > section, .gem-event-detail > section {
@@ -247,6 +256,10 @@
 .gem-mail-message .gemc-hint, .gem-note .gemc-hint {
   background: rgba(255, 255, 255, 0.7);
   padding: 1rem;
+}
+
+.gem-note-edit > section {
+  margin-top: var(--gem-gutter-large);
 }
 
 /*# sourceMappingURL=theme.css.map */

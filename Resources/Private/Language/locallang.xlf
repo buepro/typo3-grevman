@@ -66,11 +66,29 @@
 			<trans-unit id="createNote" resname="createNote">
 				<source>Create note</source>
 			</trans-unit>
+			<trans-unit id="changeNote" resname="changeNote">
+				<source>Change your note</source>
+			</trans-unit>
+			<trans-unit id="editNote" resname="editNote">
+				<source>Edit note</source>
+			</trans-unit>
+			<trans-unit id="deleteNote" resname="deleteNote">
+				<source>Delete note</source>
+			</trans-unit>
 			<trans-unit id="add" resname="add">
 				<source>Add</source>
 			</trans-unit>
+			<trans-unit id="save" resname="save">
+				<source>Save</source>
+			</trans-unit>
 			<trans-unit id="noteAdded" resname="noteAdded">
 				<source>The note has been added.</source>
+			</trans-unit>
+			<trans-unit id="noteUpdated" resname="noteUpdated">
+				<source>The note has been updated.</source>
+			</trans-unit>
+			<trans-unit id="noteDeleted" resname="noteDeleted">
+				<source>The note has been deleted.</source>
 			</trans-unit>
 			<trans-unit id="showTable" resname="showTable">
 				<source>Show table</source>

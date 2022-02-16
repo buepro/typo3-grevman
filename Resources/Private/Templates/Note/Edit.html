@@ -1,0 +1,22 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+<f:section name="content">
+    <f:flashMessages />
+    <div class="gem-note-edit">
+        <header>
+            <h2>{f:translate(key: 'editNote')}</h2>
+        </header>
+        <section>
+            <f:form action="update" arguments="{event: event}" name="note" object="{note}" method="POST">
+                <div class="form-group">
+                    <f:form.textarea class="form-control" property="text" rows="6">{note.text}</f:form.textarea>
+                </div>
+                <footer>
+                    <f:form.submit class="btn btn-primary" value="{f:translate(key: 'save')}" />
+                    <f:link.action action="detail" class="btn btn-default" controller="Event" arguments="{event: event}">{f:translate(key: 'cancel')}</f:link.action>
+                </footer>
+            </f:form>
+        </section>
+    </div>
+</f:section>
+</html>

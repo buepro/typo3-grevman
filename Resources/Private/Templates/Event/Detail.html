@@ -1,5 +1,5 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:layout name="Default" />
+<f:layout name="Event" />
 
 <f:section name="content">
     <f:flashMessages />
@@ -76,6 +76,12 @@
                             <article class="gem-zebra">
                                 {_note.text -> f:format.html()}
                                 <p class="small">{_note.member.screenName}</p>
+                                <f:if condition="{_note.member.uid} == {identifiedMember.uid}">
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="{f:translate(key: 'changeNote')}">
+                                        <f:link.action action="edit" arguments="{note: _note, event: event}" class="btn btn-primary" controller="Note" title="{f:translate(key: 'editNote')}"><span class="gem-icon-edit"></span></f:link.action>
+                                        <f:link.action action="delete" arguments="{note: _note, event: event}" class="btn btn-danger" controller="Note" title="{f:translate(key: 'deleteNote')}"><span class="gem-icon-delete"></span></f:link.action>
+                                    </div>
+                                </f:if>
                             </article>
                         </f:for>
                     </div>
@@ -83,7 +89,7 @@
                 <footer>
                     <a id="gem-create-note" class="btn btn-primary" href="javascript:void(0);">{f:translate(key: 'createNote')}</a>
                     <div id="gem-note" class="gem-note gem-zebra">
-                        <f:form name="noteDTO" object="{noteDTO}" action="addNote" arguments="{eventId: event.id}">
+                        <f:form name="noteDTO" object="{noteDTO}" action="add" arguments="{eventId: event.id}" controller="Note">
                             <div class="form-group">
                                 <f:form.textarea property="text" class="form-control" placeholder="{f:translate(key: 'message')}*" />
                             </div>

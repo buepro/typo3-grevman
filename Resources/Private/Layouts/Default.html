@@ -1,18 +1,6 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true"><f:spaceless>
-
 <div class="tx-grevman">
-    <f:if condition="{events} || {event}">
-        <f:then>
-            <f:render section="content" />
-        </f:then>
-        <f:else>
-            <div class="alert alert-info text-center" role="alert">
-                {f:translate(key: 'noEventAlert')}
-            </div>
-        </f:else>
-    </f:if>
+    <f:render section="content" />
 </div>
 {f:asset.css(identifier: 'tx-grevman', href: settings.general.css) -> f:if(condition: settings.general.css)}
-{f:asset.script(identifier: 'tx-grevman-events', src: settings.general.js) -> f:if(condition: settings.general.js)}
-
 </f:spaceless></html>

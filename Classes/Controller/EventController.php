@@ -12,9 +12,7 @@ declare(strict_types=1);
 namespace Buepro\Grevman\Controller;
 
 use Buepro\Grevman\Domain\DTO\Mail;
-use Buepro\Grevman\Domain\DTO\Note;
 use Buepro\Grevman\Domain\Model\Event;
-use Buepro\Grevman\Domain\Model\Member;
 use Buepro\Grevman\Domain\Model\Registration;
 use Buepro\Grevman\Domain\Repository\EventRepository;
 use Buepro\Grevman\Domain\Repository\MemberRepository;
@@ -24,23 +22,12 @@ use Buepro\Grevman\Utility\TableUtility;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
-/**
- * This file is part of the "Group event manager" Extension for TYPO3 CMS.
- *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * (c) 2021 Roman Büchler <rb@buechler.pro>, buechler.pro gmbh
- */
-
-/**
- * EventController
- */
-class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class EventController extends ActionController
 {
     /**
      * @var PersistenceManager
@@ -48,15 +35,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     protected $persistenceManager;
 
     /**
-     * eventRepository
-     *
      * @var EventRepository
      */
     protected $eventRepository = null;
 
     /**
-     * memberRepository
-     *
      * @var MemberRepository
      */
     protected $memberRepository = null;
@@ -66,17 +49,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->persistenceManager = $persistenceManager;
     }
 
-    /**
-     * @param EventRepository $eventRepository
-     */
     public function injectEventRepository(EventRepository $eventRepository): void
     {
         $this->eventRepository = $eventRepository;
     }
 
-    /**
-     * @param MemberRepository $memberRepository
-     */
     public function injectMemberRepository(MemberRepository $memberRepository): void
     {
         $this->memberRepository = $memberRepository;
@@ -168,11 +145,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         return EventUtility::mergeAndOrderEvents($regularEvents, $recurrenceEvents);
     }
 
-    /**
-     * action list
-     *
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     */
     public function listAction(): void
     {
         $this->view->assignMultiple([
@@ -195,11 +167,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         ]);
     }
 
-    /**
-     * action detail
-     *
-     * @param Event $event
-     */
     public function detailAction(Event $event): void
     {
         $this->view->assignMultiple([
@@ -223,7 +190,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
         $registration->setState(Registration::REGISTRATION_CONFIRMED);
         $this->addFlashMessage(
-            LocalizationUtility::translate('registerConfirmation', 'grevman') ?? 'Translation missing at 1639137804',
+            LocalizationUtility::translate('registerConfirmation', 'grevman'),
             '',
             FlashMessage::INFO
         );
@@ -247,7 +214,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
         $registration->setState(Registration::REGISTRATION_CANCELED);
         $this->addFlashMessage(
-            LocalizationUtility::translate('unregisterConfirmation', 'grevman') ?? 'Translation missing at 1639137847',
+            LocalizationUtility::translate('unregisterConfirmation', 'grevman'),
             '',
             FlashMessage::INFO
         );
@@ -256,10 +223,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->redirect($targetAction, null, null, ['event' => $event]);
     }
 
-    /**
-     * @param Mail $mailDTO
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     */
     public function sendMailAction(Mail $mailDTO): void
     {
         try {
@@ -292,22 +255,5 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $this->redirect('detail', null, null, ['event' => $mailDTO->getEvent()]);
         }
         $this->redirect('detail', null, null, ['eventId' => $mailDTO->getEvent()->getId()]);
-    }
-
-    /**
-     * @param Note $noteDTO
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     */
-    public function addNoteAction(Note $noteDTO): void
-    {
-        $noteDTO->getEvent()->addNote($noteDTO->createNote());
-        $this->eventRepository->update($noteDTO->getEvent());
-        $this->persistenceManager->persistAll();
-        $this->addFlashMessage(
-            LocalizationUtility::translate('noteAdded', 'grevman') ?? 'Translation missing at 1639137866',
-            '',
-            FlashMessage::INFO
-        );
-        $this->redirect('detail', null, null, ['event' => $noteDTO->getEvent()]);
     }
 }
