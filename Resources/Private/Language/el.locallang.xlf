@@ -71,25 +71,53 @@
         <source>Send</source>
         <target state="needs-translation">Send</target>
       </trans-unit>
+      <trans-unit id="cancel" resname="cancel">
+        <source>Cancel</source>
+        <target state="needs-translation">Cancel</target>
+      </trans-unit>
       <trans-unit id="mailConfirmation" resname="mailConfirmation">
         <source>The mail has been sent.</source>
         <target state="needs-translation">The mail has been sent.</target>
       </trans-unit>
       <trans-unit id="mailError" resname="mailError">
-        <source>The mail couldn't be send.</source>
-        <target state="needs-translation">The mail couldn't be send.</target>
+        <source>The mail couldn't be sent. The mail configuration might not be complete. Please contact the system administrator.</source>
+        <target state="needs-translation">The mail couldn't be sent. The mail configuration might not be complete. Please contact the system administrator.</target>
       </trans-unit>
       <trans-unit id="createNote" resname="createNote">
         <source>Create note</source>
         <target state="needs-translation">Create note</target>
       </trans-unit>
+      <trans-unit id="changeNote" resname="changeNote">
+        <source>Change your note</source>
+        <target state="needs-translation">Change your note</target>
+      </trans-unit>
+      <trans-unit id="editNote" resname="editNote">
+        <source>Edit note</source>
+        <target state="needs-translation">Edit note</target>
+      </trans-unit>
+      <trans-unit id="deleteNote" resname="deleteNote">
+        <source>Delete note</source>
+        <target state="needs-translation">Delete note</target>
+      </trans-unit>
       <trans-unit id="add" resname="add">
         <source>Add</source>
         <target state="needs-translation">Add</target>
       </trans-unit>
+      <trans-unit id="save" resname="save">
+        <source>Save</source>
+        <target state="needs-translation">Save</target>
+      </trans-unit>
       <trans-unit id="noteAdded" resname="noteAdded">
         <source>The note has been added.</source>
         <target state="needs-translation">The note has been added.</target>
+      </trans-unit>
+      <trans-unit id="noteUpdated" resname="noteUpdated">
+        <source>The note has been updated.</source>
+        <target state="needs-translation">The note has been updated.</target>
+      </trans-unit>
+      <trans-unit id="noteDeleted" resname="noteDeleted">
+        <source>The note has been deleted.</source>
+        <target state="needs-translation">The note has been deleted.</target>
       </trans-unit>
       <trans-unit id="showTable" resname="showTable">
         <source>Show table</source>
