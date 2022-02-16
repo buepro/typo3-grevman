@@ -26,6 +26,7 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This file is part of the "Group event manager" Extension for TYPO3 CMS.
@@ -222,7 +223,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
         $registration->setState(Registration::REGISTRATION_CONFIRMED);
         $this->addFlashMessage(
-            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('registerConfirmation', 'grevman') ?? 'Translation missing at 1639137804',
+            LocalizationUtility::translate('registerConfirmation', 'grevman') ?? 'Translation missing at 1639137804',
             '',
             FlashMessage::INFO
         );
@@ -246,7 +247,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
         $registration->setState(Registration::REGISTRATION_CANCELED);
         $this->addFlashMessage(
-            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('unregisterConfirmation', 'grevman') ?? 'Translation missing at 1639137847',
+            LocalizationUtility::translate('unregisterConfirmation', 'grevman') ?? 'Translation missing at 1639137847',
             '',
             FlashMessage::INFO
         );
@@ -261,27 +262,32 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function sendMailAction(Mail $mailDTO): void
     {
-        /** @var MailMessage $mail */
-        $mail = GeneralUtility::makeInstance(MailMessage::class);
-        $mail->from(new \Symfony\Component\Mime\Address($GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'], $mailDTO->getSender()->getScreenName()));
-        $mail->replyTo(new \Symfony\Component\Mime\Address($mailDTO->getSender()->getEmail(), $mailDTO->getSender()->getScreenName()));
-        $mail->to(...$mailDTO->getReceivers());
-        $mail->subject($mailDTO->getSubject());
-        $mail->text($mailDTO->getMessage());
-        if ($mail->send()) {
+        try {
+            /** @var MailMessage $mail */
+            $mail = GeneralUtility::makeInstance(MailMessage::class);
+            $mail->from(new \Symfony\Component\Mime\Address($GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'], $mailDTO->getSender()->getScreenName()));
+            if (GeneralUtility::validEmail($mailDTO->getSender()->getEmail())) {
+                $mail->replyTo(new \Symfony\Component\Mime\Address($mailDTO->getSender()->getEmail(), $mailDTO->getSender()->getScreenName()));
+            }
+            $mail->bcc(...$mailDTO->getReceivers());
+            $mail->subject($mailDTO->getSubject());
+            $mail->text($mailDTO->getMessage());
+            if ($mail->send()) {
+                $this->addFlashMessage(
+                    LocalizationUtility::translate('mailConfirmation', 'grevman'),
+                    '',
+                    FlashMessage::INFO
+                );
+            } else {
+                throw new \DomainException('Email could not be sent. Check the mail configuration.', 1645015923);
+            }
+        } catch (\Exception $e) {
             $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailConfirmation', 'grevman') ?? 'Translation missing at 1639137855',
-                '',
-                FlashMessage::INFO
-            );
-        } else {
-            $this->addFlashMessage(
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailError', 'grevman') ?? 'Translation missing at 1639137860',
+                LocalizationUtility::translate('mailError', 'grevman'),
                 '',
                 FlashMessage::ERROR
             );
         }
-
         if ((bool)$mailDTO->getEvent()->getUid()) {
             $this->redirect('detail', null, null, ['event' => $mailDTO->getEvent()]);
         }

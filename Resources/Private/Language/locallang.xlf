@@ -58,7 +58,7 @@
 				<source>The mail has been sent.</source>
 			</trans-unit>
 			<trans-unit id="mailError" resname="mailError">
-				<source>The mail couldn't be send.</source>
+				<source>The mail couldn't be sent. The mail configuration might not be complete. Please contact the system administrator.</source>
 			</trans-unit>
 			<trans-unit id="createNote" resname="createNote">
 				<source>Create note</source>

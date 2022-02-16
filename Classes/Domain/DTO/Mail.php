@@ -16,6 +16,7 @@ use Buepro\Grevman\Domain\Model\Group;
 use Buepro\Grevman\Domain\Model\Guest;
 use Buepro\Grevman\Domain\Model\Member;
 use Buepro\Grevman\Domain\Model\Registration;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 class Mail
@@ -85,7 +86,7 @@ class Mail
         foreach ($this->event->getMemberGroups() as $memberGroup) {
             /** @var Member $member */
             foreach ($memberGroup->getMembers() as $member) {
-                if ($member->getEmail() !== '') {
+                if (GeneralUtility::validEmail($member->getEmail())) {
                     $receivers[] = new \Symfony\Component\Mime\Address($member->getEmail(), $member->getScreenName());
                 }
             }
@@ -93,14 +94,14 @@ class Mail
         // From spontaneous registrations
         /** @var Registration $registration */
         foreach ($this->event->getSpontaneousRegistrations() as $registration) {
-            if ($registration->getMember() !== null && $registration->getMember()->getEmail() !== '') {
+            if ($registration->getMember() !== null && GeneralUtility::validEmail($registration->getMember()->getEmail())) {
                 $receivers[] = new \Symfony\Component\Mime\Address($registration->getMember()->getEmail(), $registration->getMember()->getScreenName());
             }
         }
         // Visitors
         foreach ($this->event->getGuests() as $guest) {
             /** @var Guest $guest */
-            if ($guest->getEmail() !== '') {
+            if (GeneralUtility::validEmail($guest->getEmail())) {
                 $receivers[] = new \Symfony\Component\Mime\Address($guest->getEmail(), $guest->getScreenName());
             }
         }
