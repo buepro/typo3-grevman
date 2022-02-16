@@ -10,6 +10,17 @@
 }
 
 //
+// General
+//
+.tx-grevman {
+    footer {
+        .btn {
+            margin-right: var(--gem-gutter-small);
+        }
+    }
+}
+
+//
 // List, table and detail
 //
 .gem-event-list, .gem-event-table, .gem-event-detail {
@@ -168,9 +179,6 @@
         margin-top: calc(1.5 * var(--gem-gutter-large));
         border-top: rgba(0,0,0,0.4) 1px solid;
         padding-top: var(--gem-gutter-medium);
-        .btn {
-            margin-right: var(--gem-gutter-small);
-        }
     }
     .gem-event-facts {
         margin-bottom: var(--gem-gutter-medium);

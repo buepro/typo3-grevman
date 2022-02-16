@@ -54,6 +54,9 @@
 			<trans-unit id="send" resname="send">
 				<source>Send</source>
 			</trans-unit>
+			<trans-unit id="cancel" resname="cancel">
+				<source>Cancel</source>
+			</trans-unit>
 			<trans-unit id="mailConfirmation" resname="mailConfirmation">
 				<source>The mail has been sent.</source>
 			</trans-unit>

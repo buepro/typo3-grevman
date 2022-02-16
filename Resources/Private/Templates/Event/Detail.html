@@ -90,6 +90,7 @@
                             <f:form.hidden property="event" value="{event}" />
                             <f:form.hidden property="member" value="{identifiedMember}" />
                             <f:form.submit class="btn btn-primary" value="{f:translate(key: 'add')}" />
+                            <a id="gem-cancel-note" class="btn btn-default" href="javascript:void(0);">{f:translate(key: 'cancel')}</a>
                         </f:form>
                     </div>
                 </footer>
@@ -114,7 +115,10 @@
                 </div>
                 <f:form.hidden property="event" value="{event}" />
                 <f:form.hidden property="sender" value="{identifiedMember}" />
-                <f:form.submit class="btn btn-primary" value="{f:translate(key: 'send')}" />
+                <footer>
+                    <f:form.submit class="btn btn-primary" value="{f:translate(key: 'send')}" />
+                    <a id="gem-cancel-mail" class="btn btn-default" href="javascript:void(0);">{f:translate(key: 'cancel')}</a>
+                </footer>
             </f:form>
         </div>
     </f:if>

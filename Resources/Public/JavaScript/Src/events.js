@@ -1,7 +1,11 @@
 $(function () {
   (function detailView () {
     $('#gem-create-mail').click(function () {
-      $('#gem-create-mail').toggleClass('gemc-active');
+      $('#gem-create-mail').toggleClass('gemc-active').hide();
+      $('#gem-mail-message').toggleClass('gemc-show');
+    });
+    $('#gem-cancel-mail').click(function () {
+      $('#gem-create-mail').toggleClass('gemc-active').show();
       $('#gem-mail-message').toggleClass('gemc-show');
     });
     if ($('#gem-mail-message .f3-form-error').length) {
@@ -9,13 +13,13 @@ $(function () {
       $('#gem-mail-message').addClass('gemc-show');
     }
     $('#gem-create-note').click(function () {
-      $('#gem-create-note').toggleClass('gemc-active');
+      $('#gem-create-note').toggleClass('gemc-active').hide();
       $('#gem-note').toggleClass('gemc-show');
     });
-    if ($('#gem-mail-message .f3-form-error').length) {
-      $('#gem-create-note').addClass('gemc-active');
-      $('#gem-note').addClass('gemc-show');
-    }
+    $('#gem-cancel-note').click(function () {
+      $('#gem-create-note').toggleClass('gemc-active').show();
+      $('#gem-note').toggleClass('gemc-show');
+    });
   }) ();
 
   (function tableView () {

@@ -57,6 +57,10 @@
   margin: 0 var(--gem-gutter-small);
 }
 
+.tx-grevman footer .btn {
+  margin-right: var(--gem-gutter-small);
+}
+
 .gem-event-list > section, .gem-event-table > section, .gem-event-detail > section {
   margin-top: var(--gem-gutter-large);
   border-top: rgba(0, 0, 0, 0.2) 1px solid;
@@ -184,9 +188,6 @@
   margin-top: calc(1.5 * var(--gem-gutter-large));
   border-top: rgba(0, 0, 0, 0.4) 1px solid;
   padding-top: var(--gem-gutter-medium);
-}
-.gem-event-detail > footer .btn {
-  margin-right: var(--gem-gutter-small);
 }
 .gem-event-detail .gem-event-facts {
   margin-bottom: var(--gem-gutter-medium);
