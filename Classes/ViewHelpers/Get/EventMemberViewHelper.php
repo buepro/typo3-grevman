@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Buepro\Grevman\ViewHelpers\Get;
 
-use Buepro\Grevman\Domain\Dto\EventMember;
+use Buepro\Grevman\Domain\DTO\EventMember;
 use Buepro\Grevman\Domain\Model\Event;
 use Buepro\Grevman\Domain\Model\Member;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;

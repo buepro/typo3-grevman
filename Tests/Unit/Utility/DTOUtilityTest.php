@@ -9,12 +9,12 @@
 
 namespace Buepro\Grevman\Tests\Unit\Utility;
 
-use Buepro\Grevman\Domain\Dto\EventGroup;
+use Buepro\Grevman\Domain\DTO\EventGroup;
 use Buepro\Grevman\Domain\Model\Event;
 use Buepro\Grevman\Domain\Model\Group;
-use Buepro\Grevman\Utility\DtoUtility;
+use Buepro\Grevman\Utility\DTOUtility;
 
-class DtoUtilityTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
+class DTOUtilityTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
 {
     public function getEventGroupsReturnsEventGroupArrayDataProvider(): array
     {
@@ -36,7 +36,7 @@ class DtoUtilityTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
      */
     public function getEventGroupsReturnsEventGroupArray(Event $event, int $groupCount)
     {
-        $result = DtoUtility::getEventGroups($event);
+        $result = DTOUtility::getEventGroups($event);
         self::assertContainsOnlyInstancesOf(EventGroup::class, $result);
         self::assertCount($groupCount, $result);
     }

@@ -11,14 +11,14 @@ declare(strict_types=1);
 
 namespace Buepro\Grevman\Controller;
 
-use Buepro\Grevman\Domain\Dto\Mail;
-use Buepro\Grevman\Domain\Dto\Note;
+use Buepro\Grevman\Domain\DTO\Mail;
+use Buepro\Grevman\Domain\DTO\Note;
 use Buepro\Grevman\Domain\Model\Event;
 use Buepro\Grevman\Domain\Model\Member;
 use Buepro\Grevman\Domain\Model\Registration;
 use Buepro\Grevman\Domain\Repository\EventRepository;
 use Buepro\Grevman\Domain\Repository\MemberRepository;
-use Buepro\Grevman\Utility\DtoUtility;
+use Buepro\Grevman\Utility\DTOUtility;
 use Buepro\Grevman\Utility\EventUtility;
 use Buepro\Grevman\Utility\TableUtility;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -108,17 +108,17 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                     $actionArgumentMap = [
                         'register' => ['event' => $child->getUid()],
                         'unregister' => ['event' => $child->getUid()],
-                        'addNote' => ['noteDto' => ['event' => $child->getUid()]],
-                        'sendMail' => ['mailDto' => ['event' => $child->getUid()]],
+                        'addNote' => ['noteDTO' => ['event' => $child->getUid()]],
+                        'sendMail' => ['mailDTO' => ['event' => $child->getUid()]],
                     ];
                     $arguments = array_replace_recursive($arguments, $actionArgumentMap[$arguments['action']]);
                     $this->request->setArguments($arguments);
                 } else {
                     // Provide the non persisted event
                     if ($arguments['action'] === 'sendMail') {
-                        $arguments['mailDto']['event'] = EventUtility::getPropertyMappingArray($child);
+                        $arguments['mailDTO']['event'] = EventUtility::getPropertyMappingArray($child);
                         $this->request->setArguments($arguments);
-                        $configuration = $this->arguments['mailDto']->getPropertyMappingConfiguration();
+                        $configuration = $this->arguments['mailDTO']->getPropertyMappingConfiguration();
                         $configuration->forProperty('event')
                             ->allowAllProperties()
                             ->setTypeConverterOption(
@@ -203,7 +203,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         $this->view->assignMultiple([
             'event' => $event,
-            'eventGroups' => DtoUtility::getEventGroups($event),
+            'eventGroups' => DTOUtility::getEventGroups($event),
             'identifiedMember' =>  $this->memberRepository->getIdentified(),
         ]);
     }
@@ -256,18 +256,18 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     }
 
     /**
-     * @param Mail $mailDto
+     * @param Mail $mailDTO
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      */
-    public function sendMailAction(Mail $mailDto): void
+    public function sendMailAction(Mail $mailDTO): void
     {
         /** @var MailMessage $mail */
         $mail = GeneralUtility::makeInstance(MailMessage::class);
-        $mail->from(new \Symfony\Component\Mime\Address($GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'], $mailDto->getSender()->getScreenName()));
-        $mail->replyTo(new \Symfony\Component\Mime\Address($mailDto->getSender()->getEmail(), $mailDto->getSender()->getScreenName()));
-        $mail->to(...$mailDto->getReceivers());
-        $mail->subject($mailDto->getSubject());
-        $mail->text($mailDto->getMessage());
+        $mail->from(new \Symfony\Component\Mime\Address($GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'], $mailDTO->getSender()->getScreenName()));
+        $mail->replyTo(new \Symfony\Component\Mime\Address($mailDTO->getSender()->getEmail(), $mailDTO->getSender()->getScreenName()));
+        $mail->to(...$mailDTO->getReceivers());
+        $mail->subject($mailDTO->getSubject());
+        $mail->text($mailDTO->getMessage());
         if ($mail->send()) {
             $this->addFlashMessage(
                 \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('mailConfirmation', 'grevman') ?? 'Translation missing at 1639137855',
@@ -282,26 +282,26 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             );
         }
 
-        if ((bool)$mailDto->getEvent()->getUid()) {
-            $this->redirect('detail', null, null, ['event' => $mailDto->getEvent()]);
+        if ((bool)$mailDTO->getEvent()->getUid()) {
+            $this->redirect('detail', null, null, ['event' => $mailDTO->getEvent()]);
         }
-        $this->redirect('detail', null, null, ['eventId' => $mailDto->getEvent()->getId()]);
+        $this->redirect('detail', null, null, ['eventId' => $mailDTO->getEvent()->getId()]);
     }
 
     /**
-     * @param Note $noteDto
+     * @param Note $noteDTO
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      */
-    public function addNoteAction(Note $noteDto): void
+    public function addNoteAction(Note $noteDTO): void
     {
-        $noteDto->getEvent()->addNote($noteDto->createNote());
-        $this->eventRepository->update($noteDto->getEvent());
+        $noteDTO->getEvent()->addNote($noteDTO->createNote());
+        $this->eventRepository->update($noteDTO->getEvent());
         $this->persistenceManager->persistAll();
         $this->addFlashMessage(
-            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('noteAdded', 'grevman') ?? 'Translation missing at 1639137866',
+            LocalizationUtility::translate('noteAdded', 'grevman') ?? 'Translation missing at 1639137866',
             '',
             FlashMessage::INFO
         );
-        $this->redirect('detail', null, null, ['event' => $noteDto->getEvent()]);
+        $this->redirect('detail', null, null, ['event' => $noteDTO->getEvent()]);
     }
 }

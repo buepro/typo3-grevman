@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace Buepro\Grevman\Utility;
 
-use Buepro\Grevman\Domain\Dto\EventGroup;
+use Buepro\Grevman\Domain\DTO\EventGroup;
 use Buepro\Grevman\Domain\Model\Event;
 
-class DtoUtility
+class DTOUtility
 {
     public static function getEventGroups(Event $event): array
     {

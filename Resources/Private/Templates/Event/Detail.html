@@ -83,7 +83,7 @@
                 <footer>
                     <a id="gem-create-note" class="btn btn-primary" href="javascript:void(0);">{f:translate(key: 'createNote')}</a>
                     <div id="gem-note" class="gem-note gem-zebra">
-                        <f:form name="noteDto" object="{noteDto}" action="addNote" arguments="{eventId: event.id}">
+                        <f:form name="noteDTO" object="{noteDTO}" action="addNote" arguments="{eventId: event.id}">
                             <div class="form-group">
                                 <f:form.textarea property="text" class="form-control" placeholder="{f:translate(key: 'message')}*" />
                             </div>
@@ -105,7 +105,7 @@
     <f:if condition="{identifiedMember.isLeader} && {identifiedMember.email}">
         <div id="gem-mail-message" class="gem-mail-message gem-zebra">
             <p class="gemc-hint">{f:translate(key: 'mailReceipientsHint')}</p>
-            <f:form name="mailDto" object="{mailDto}" action="sendMail" arguments="{eventId: event.id}">
+            <f:form name="mailDTO" object="{mailDTO}" action="sendMail" arguments="{eventId: event.id}">
                 <div class="form-group">
                     <f:form.textfield property="subject" class="form-control" placeholder="{f:translate(key: 'subject')}*" />
                 </div>
