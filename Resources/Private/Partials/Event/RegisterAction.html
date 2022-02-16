@@ -3,6 +3,7 @@
       data-namespace-typo3-fluid="true">
 
 {gem:get.eventMember(event: event, member: member, as: '_identifiedEventMember')}
+<f:if condition="{targetAction}"><f:else>{f:variable(name: 'targetAction', value: 'detail')}</f:else></f:if>
 <f:if condition="{_identifiedEventMember} && ({_identifiedEventMember.eventGroupMember} || {settings.event.registration.open})">
     <div class="btn-group gemc-action{f:if(condition: 'btnGroupClass', then: ' {btnGroupClass}')}" role="group" aria-label="{f:translate(key: 'changeRegistration')}">
         <f:if condition="{_identifiedEventMember.registered}">
@@ -10,20 +11,20 @@
                 <gem:link.eventAction
                     class="btn btn-danger gemc-unregister"
                     action="unregister"
-                    arguments="{event: event, member: member}"
+                    arguments="{event: event, member: member, targetAction: targetAction}"
                 >{f:translate(key: 'unregister')}</gem:link.eventAction>
             </f:then>
             <f:else>
                 <gem:link.eventAction
                     class="btn btn-success gemc-register"
                     action="register"
-                    arguments="{event: event, member: member}"
+                    arguments="{event: event, member: member, targetAction: targetAction}"
                 >{f:translate(key: 'i_join')}</gem:link.eventAction>
                 <f:if condition="!{_identifiedEventMember.registrationState}">
                     <gem:link.eventAction
                         class="btn btn-danger gemc-unregister"
                         action="unregister"
-                        arguments="{event: event, member: member}"
+                        arguments="{event: event, member: member, targetAction: targetAction}"
                     >{f:translate(key: 'unregister')}</gem:link.eventAction>
                 </f:if>
             </f:else>

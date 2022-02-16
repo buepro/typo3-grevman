@@ -210,7 +210,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
     public function registerAction(
         Event $event,
-        \Buepro\Grevman\Domain\Model\Member $member
+        \Buepro\Grevman\Domain\Model\Member $member,
+        string $targetAction = 'detail'
     ): void {
         $registration = $event->getRegistrationForMember($member);
         if (null === $registration) {
@@ -228,12 +229,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         $this->eventRepository->update($event);
         $this->persistenceManager->persistAll();
-        $this->redirect('detail', null, null, ['event' => $event]);
+        $this->redirect($targetAction, null, null, ['event' => $event]);
     }
 
     public function unregisterAction(
         Event $event,
-        \Buepro\Grevman\Domain\Model\Member $member
+        \Buepro\Grevman\Domain\Model\Member $member,
+        string $targetAction = 'detail'
     ):void {
         $registration = $event->getRegistrationForMember($member);
         if (null === $registration) {
@@ -250,7 +252,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         );
         $this->eventRepository->update($event);
         $this->persistenceManager->persistAll();
-        $this->redirect('detail', null, null, ['event' => $event]);
+        $this->redirect($targetAction, null, null, ['event' => $event]);
     }
 
     /**
