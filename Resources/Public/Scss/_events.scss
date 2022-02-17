@@ -159,11 +159,11 @@
 // Event detail
 //
 .gem-event-detail {
-    > header {
-        .btn {
-            margin-right: var(--gem-gutter-small);
-        }
-    }
+    //> header {
+    //    .btn {
+    //        margin-right: var(--gem-gutter-small);
+    //    }
+    //}
     > footer {
         margin-top: calc(1.5 * var(--gem-gutter-large));
         border-top: rgba(0,0,0,0.4) 1px solid;

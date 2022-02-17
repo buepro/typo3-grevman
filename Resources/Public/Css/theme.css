@@ -57,8 +57,11 @@
   content: "✕";
 }
 
-.tx-grevman footer .btn {
+.tx-grevman footer .btn-group, .tx-grevman footer .btn {
   margin-right: var(--gem-gutter-small);
+}
+.tx-grevman footer .btn-group > .btn {
+  margin-right: initial;
 }
 
 .gem-event-facts {
@@ -190,9 +193,6 @@
   content: "💬";
 }
 
-.gem-event-detail > header .btn {
-  margin-right: var(--gem-gutter-small);
-}
 .gem-event-detail > footer {
   margin-top: calc(1.5 * var(--gem-gutter-large));
   border-top: rgba(0, 0, 0, 0.4) 1px solid;

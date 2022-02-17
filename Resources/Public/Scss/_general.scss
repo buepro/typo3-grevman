@@ -13,8 +13,11 @@
 }
 .tx-grevman {
     footer {
-        .btn {
+        .btn-group, .btn {
             margin-right: var(--gem-gutter-small);
+        }
+        .btn-group > .btn {
+            margin-right: initial;
         }
     }
 }
