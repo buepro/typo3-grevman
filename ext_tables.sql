@@ -13,7 +13,7 @@ CREATE TABLE tx_grevman_domain_model_event (
 	images int(11) unsigned NOT NULL DEFAULT '0',
 	files int(11) unsigned NOT NULL DEFAULT '0',
 	member_groups int(11) unsigned NOT NULL DEFAULT '0',
-	registrations int(11) unsigned NOT NULL DEFAULT '0',
+	registrations varchar(2000) NOT NULL DEFAULT '',
 	notes int(11) unsigned NOT NULL DEFAULT '0',
 	guests int(11) unsigned NOT NULL DEFAULT '0',
 	enable_recurrence smallint NOT NULL DEFAULT '0',
