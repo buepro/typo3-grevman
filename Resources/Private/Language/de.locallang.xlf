@@ -71,57 +71,57 @@
         <source>Send</source>
         <target state="final">Senden</target>
       </trans-unit>
-      <trans-unit id="cancel" resname="cancel">
+      <trans-unit id="cancel" resname="cancel" approved="yes">
         <source>Cancel</source>
-        <target state="needs-translation">Cancel</target>
+        <target state="final">Abbrechen</target>
       </trans-unit>
       <trans-unit id="mailConfirmation" resname="mailConfirmation" approved="yes">
         <source>The mail has been sent.</source>
         <target state="final">Die E-Mail wurde versendet.</target>
       </trans-unit>
-      <trans-unit id="mailError" resname="mailError">
+      <trans-unit id="mailError" resname="mailError" approved="yes">
         <source>The mail couldn't be sent. The mail configuration might not be complete. Please contact the system administrator.</source>
-        <target state="needs-translation">The mail couldn't be sent. The mail configuration might not be complete. Please contact the system administrator.</target>
+        <target state="final">Die E-Mail konnte nicht gesendet werden. Die Mail-Konfiguration ist möglicherweise nicht abgeschlossen. Bitte kontaktiere den Systemadministrator.</target>
       </trans-unit>
       <trans-unit id="createNote" resname="createNote" approved="yes">
         <source>Create note</source>
         <target state="final">Notiz erstellen</target>
       </trans-unit>
-      <trans-unit id="changeNote" resname="changeNote">
+      <trans-unit id="changeNote" resname="changeNote" approved="yes">
         <source>Change your note</source>
-        <target state="needs-translation">Change your note</target>
+        <target state="final">Ändern Deine Notiz</target>
       </trans-unit>
-      <trans-unit id="editNote" resname="editNote">
+      <trans-unit id="editNote" resname="editNote" approved="yes">
         <source>Edit note</source>
-        <target state="needs-translation">Edit note</target>
+        <target state="final">Notiz bearbeiten</target>
       </trans-unit>
-      <trans-unit id="deleteNote" resname="deleteNote">
+      <trans-unit id="deleteNote" resname="deleteNote" approved="yes">
         <source>Delete note</source>
-        <target state="needs-translation">Delete note</target>
+        <target state="final">Notiz löschen</target>
       </trans-unit>
       <trans-unit id="add" resname="add" approved="yes">
         <source>Add</source>
         <target state="final">Hinzufügen</target>
       </trans-unit>
-      <trans-unit id="save" resname="save">
+      <trans-unit id="save" resname="save" approved="yes">
         <source>Save</source>
-        <target state="needs-translation">Save</target>
+        <target state="final">Speichern</target>
       </trans-unit>
       <trans-unit id="noteAdded" resname="noteAdded" approved="yes">
         <source>The note has been added.</source>
         <target state="final">Die Notiz wurde hinzugefügt.</target>
       </trans-unit>
-      <trans-unit id="noteUpdated" resname="noteUpdated">
+      <trans-unit id="noteUpdated" resname="noteUpdated" approved="yes">
         <source>The note has been updated.</source>
-        <target state="needs-translation">The note has been updated.</target>
+        <target state="final">Die Notiz wurde aktualisiert.</target>
       </trans-unit>
-      <trans-unit id="noteDeleted" resname="noteDeleted">
+      <trans-unit id="noteDeleted" resname="noteDeleted" approved="yes">
         <source>The note has been deleted.</source>
-        <target state="needs-translation">The note has been deleted.</target>
+        <target state="final">Die Notiz wurde gelöscht.</target>
       </trans-unit>
-      <trans-unit id="showTable" resname="showTable">
+      <trans-unit id="showTable" resname="showTable" approved="yes">
         <source>Show table</source>
-        <target state="needs-translation">Show table</target>
+        <target state="final">Tabelle anzeigen</target>
       </trans-unit>
       <trans-unit id="showList" resname="showList" approved="yes">
         <source>Show list</source>
@@ -143,17 +143,17 @@
         <source>Recurrence</source>
         <target state="final">Wiederholung</target>
       </trans-unit>
-      <trans-unit id="notAssigned" resname="notAssigned">
+      <trans-unit id="notAssigned" resname="notAssigned" approved="yes">
         <source>Not assigned</source>
-        <target state="needs-translation">Not assigned</target>
+        <target state="final">Nicht zugewiesen</target>
       </trans-unit>
-      <trans-unit id="participationHint" resname="participationHint">
+      <trans-unit id="participationHint" resname="participationHint" approved="yes">
         <source>%s out of %d members join</source>
-        <target state="needs-translation">%s out of %d members join</target>
+        <target state="final">%s von %d Mitgliedern nehmen teil</target>
       </trans-unit>
-      <trans-unit id="changeRegistration" resname="changeRegistration">
+      <trans-unit id="changeRegistration" resname="changeRegistration" approved="yes">
         <source>Change your registration status</source>
-        <target state="needs-translation">Change your registration status</target>
+        <target state="final">Ändere Deinen Registrierungsstatus</target>
       </trans-unit>
       <trans-unit id="tx_grevman_domain_model_event" resname="tx_grevman_domain_model_event" approved="yes">
         <source>Event</source>
