@@ -28,6 +28,7 @@ defined('TYPO3') or die('Access denied.');
                         'collapseAll' => 1,
                         'expandSingle' => 1,
                     ],
+                    'disableMovingChildrenWithParent' => true,
                 ],
 
             ],
@@ -37,6 +38,7 @@ defined('TYPO3') or die('Access denied.');
                         'collapseAll' => 1,
                         'expandSingle' => 1,
                     ],
+                    'disableMovingChildrenWithParent' => true,
                 ],
             ],
         ],
