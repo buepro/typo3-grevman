@@ -55,4 +55,5 @@ Group event manager
    Introduction/Index
    Administration/Index
    User/Index
+   Changelog/Index
    Develop/Index
