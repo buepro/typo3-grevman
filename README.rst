@@ -56,4 +56,4 @@ Code quality
 Documentation
 =============
 
-Head over to `docs.typo3.org <https://docs.typo3.org/p/buepro/typo3-grevman/master/en-us/>`__.
+Head over to `docs.typo3.org <https://docs.typo3.org/p/buepro/typo3-grevman/main/en-us/>`__.
