@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Buepro\Grevman\Domain\Repository;
 
-use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
@@ -34,13 +34,7 @@ class EventRepository extends Repository
         'startdate' => QueryInterface::ORDER_ASCENDING
     ];
 
-    /**
-     * Returns all objects of this repository.
-     *
-     * @return QueryResultInterface|array
-     * @throws InvalidQueryException
-     */
-    public function findAll(int $displayDays = 0, \DateTime $startDate = null)
+    public function findAll(int $displayDays = 0, \DateTime $startDate = null, ?ObjectStorage $groups = null): QueryResultInterface
     {
         $startDate = $startDate ?? new \DateTime('midnight');
         $query = $this->createQuery();
@@ -49,6 +43,31 @@ class EventRepository extends Repository
         if ($displayDays > 0) {
             $maxStartDate = new \DateTime(sprintf('midnight + %d day', $displayDays));
             $constraints[] = $query->lessThanOrEqual('startdate', $maxStartDate->getTimestamp());
+        }
+        return $this->findAllForConstraints($query, $constraints, $groups);
+    }
+
+    public function findAllRecurrences(?ObjectStorage $groups = null): QueryResultInterface
+    {
+        $query = $this->createQuery();
+        $constraints = [];
+        $constraints[] = $query->equals('enableRecurrence', 1);
+        return $this->findAllForConstraints($query, $constraints, $groups);
+    }
+
+    protected function findAllForConstraints(QueryInterface $query, array $constraints, ?ObjectStorage $groups): QueryResultInterface
+    {
+        if ($groups !== null && $groups->count() === 0) {
+            // Return no events
+            // @phpstan-ignore-next-line
+            return $this->findByPid(-1);
+        }
+        if ($groups !== null) {
+            $groupConstraints = [];
+            foreach ($groups as $group) {
+                $groupConstraints[] = $query->contains('memberGroups', $group);
+            }
+            $constraints[] = $query->logicalOr($groupConstraints);
         }
         $query->matching(
             $query->logicalAnd($constraints)

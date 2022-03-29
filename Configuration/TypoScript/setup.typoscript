@@ -41,6 +41,7 @@ plugin.tx_grevman_events {
       list {
         displayDays = {$plugin.tx_grevman_events.settings.event.list.displayDays}
         startDatePastDays = {$plugin.tx_grevman_events.settings.event.list.startDatePastDays}
+        limitAssignedEvents = {$plugin.tx_grevman_events.settings.event.list.limitAssignedEvents}
       }
     }
   }

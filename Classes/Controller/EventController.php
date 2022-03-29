@@ -13,12 +13,14 @@ namespace Buepro\Grevman\Controller;
 
 use Buepro\Grevman\Domain\DTO\Mail;
 use Buepro\Grevman\Domain\Model\Event;
+use Buepro\Grevman\Domain\Model\Member;
 use Buepro\Grevman\Domain\Model\Registration;
 use Buepro\Grevman\Domain\Repository\EventRepository;
 use Buepro\Grevman\Domain\Repository\MemberRepository;
 use Buepro\Grevman\Utility\DTOUtility;
 use Buepro\Grevman\Utility\EventUtility;
 use Buepro\Grevman\Utility\TableUtility;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -29,34 +31,33 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class EventController extends ActionController
 {
-    /**
-     * @var PersistenceManager
-     */
+    /** @var ?Member $registeredMember */
+    protected $registeredMember = null;
+
+    /** @var PersistenceManager */
     protected $persistenceManager;
 
-    /**
-     * @var EventRepository
-     */
+    /** @var EventRepository */
     protected $eventRepository = null;
 
-    /**
-     * @var MemberRepository
-     */
+    /** @var MemberRepository */
     protected $memberRepository = null;
 
-    public function injectPersistenceManager(PersistenceManager $persistenceManager): void
-    {
+    public function __construct(
+        PersistenceManager $persistenceManager,
+        EventRepository $eventRepository,
+        MemberRepository $memberRepository
+    ) {
         $this->persistenceManager = $persistenceManager;
-    }
-
-    public function injectEventRepository(EventRepository $eventRepository): void
-    {
         $this->eventRepository = $eventRepository;
-    }
-
-    public function injectMemberRepository(MemberRepository $memberRepository): void
-    {
         $this->memberRepository = $memberRepository;
+        $context = GeneralUtility::makeInstance(Context::class);
+        if ((bool)$context->getPropertyFromAspect('frontend.user', 'isLoggedIn')) {
+            // @phpstan-ignore-next-line
+            $this->registeredMember = $this->memberRepository->findByUid(
+                (int)$context->getPropertyFromAspect('frontend.user', 'id')
+            );
+        }
     }
 
     /**
@@ -133,10 +134,17 @@ class EventController extends ActionController
             'midnight - %d day',
             (int)($this->settings['event']['list']['startDatePastDays'] ?? 0)
         ));
+        $constrainMemberGroups = null;
+        if (
+            isset($this->settings['event']['list']['limitAssignedEvents']) &&
+            (bool)$this->settings['event']['list']['limitAssignedEvents'] && $this->registeredMember !== null
+        ) {
+            $constrainMemberGroups = $this->registeredMember->getMemberGroups();
+        }
         /** @var Event[] $regularEvents */
-        $regularEvents = $this->eventRepository->findAll($displayDays, $startDate)->toArray();
+        $regularEvents = $this->eventRepository->findAll($displayDays, $startDate, $constrainMemberGroups)->toArray();
         /** @var Event[] $recurrenceParentEvents */
-        $recurrenceParentEvents = $this->eventRepository->findByEnableRecurrence(1)->toArray();
+        $recurrenceParentEvents = $this->eventRepository->findAllRecurrences($constrainMemberGroups)->toArray();
         $recurrenceEvents = EventUtility::getEventRecurrences(
             $recurrenceParentEvents,
             $displayDays,
