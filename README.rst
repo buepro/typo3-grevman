@@ -1,6 +1,19 @@
-=========================
-TYPO3 extension `grevman`
-=========================
+.. image:: https://img.shields.io/badge/TYPO3-11-orange.svg
+   :alt: TYPO3 11
+   :target: https://get.typo3.org/version/11
+
+.. image:: https://img.shields.io/badge/TYPO3-10-orange.svg
+   :alt: TYPO3 10
+   :target: https://get.typo3.org/version/10
+
+.. image:: https://github.com/buepro/typo3-pizpalue/workflows/CI/badge.svg
+   :alt: Continuous Integration Status
+   :target: https://github.com/buepro/typo3-grevman/actions?query=workflow%3ACI
+
+
+===========================
+TYPO3 extension ``grevman``
+===========================
 
 The extension allows to manage group events typically used in sport clubs
 where groups of members take part in events. Members might have different
@@ -18,6 +31,11 @@ easily see who registered for an event.
 
 Members with a leading role might send notifications to event
 participants by email.
+
+:Repository:  https://github.com/buepro/typo3-grevman
+:Read online: https://docs.typo3.org/p/buepro/typo3-grevman/main/en-us/
+:TER:         https://extensions.typo3.org/extension/grevman
+
 
 Screenshots
 ===========
@@ -45,15 +63,3 @@ Acknowledgement
 
 This extension has been sponsored by `SAC-Sektion Uto <https://www.sac-uto.ch>`__.
 
-Code quality
-============
-
-.. image:: https://github.com/buepro/typo3-grevman/workflows/CI/badge.svg
-   :alt: Continuous Integration Status
-   :target: https://github.com/buepro/typo3-grevman/actions?query=workflow%3ACI
-
-
-Documentation
-=============
-
-Head over to `docs.typo3.org <https://docs.typo3.org/p/buepro/typo3-grevman/main/en-us/>`__.
